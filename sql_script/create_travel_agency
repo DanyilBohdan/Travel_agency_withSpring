@@ -1,0 +1,44 @@
+create database travel_agency;
+use travel_agency;
+
+CREATE TABLE type_tour (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE info_tour (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  description VARCHAR(45)
+  );
+
+CREATE TABLE tour (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name_tour VARCHAR(45) NOT NULL,
+  price FLOAT NOT NULL,
+  count_people INT NOT NULL,
+  type_hotel VARCHAR(45) NOT NULL,
+  mark INT,
+  info_tour_id INT NOT NULL,
+  type_tour_id INT NOT NULL
+  );
+
+  CREATE TABLE role (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name_role VARCHAR(45) NOT NULL
+  );
+
+  CREATE TABLE user (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(24) NOT NULL,
+  password VARCHAR(24) NOT NULL,
+  email VARCHAR(225) NOT NULL,
+  status VARCHAR(45),
+  role_id INT REFERENCES role(id) ON DELETE CASCADE
+  );
+
+  CREATE TABLE order_tour (
+  id INT NOT NULL PRIMARY KEY,
+  status VARCHAR(24) NOT NULL,
+  tour_id INT REFERENCES tour(id) ON DELETE CASCADE,
+  user_id INT REFERENCES user(id) ON DELETE CASCADE
+  );
