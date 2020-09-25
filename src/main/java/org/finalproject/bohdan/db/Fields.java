@@ -1,4 +1,4 @@
-package db;
+package org.finalproject.bohdan.db;
 
 public final class Fields {
 

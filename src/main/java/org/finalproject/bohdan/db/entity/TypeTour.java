@@ -1,20 +1,20 @@
-package db.entity;
+package org.finalproject.bohdan.db.entity;
 
-public class Role {
-
+public class TypeTour {
+    
     private int id;
-
+    
     private String name;
 
-    public static Role createRole(String name){
-        Role role = new Role();
-        role.setName(name);
-        return role;
+    public static TypeTour createTypeTour(String name) {
+        TypeTour typeTour = new TypeTour();
+        typeTour.setName(name);
+        return typeTour;
     }
 
     @Override
     public String toString() {
-        return "Role{" +
+        return "TypeTour{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

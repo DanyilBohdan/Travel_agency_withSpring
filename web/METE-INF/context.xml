@@ -1,5 +1,6 @@
 <Context>
-    <Resource name="jdbc/travel_agency" auth="Container"
+    <Resource name="jdbc/travel_agency"
+              auth="Container"
               type="javax.sql.DataSource"
               maxActive="100" maxIdle="30" maxWait="10000"
               username="root"

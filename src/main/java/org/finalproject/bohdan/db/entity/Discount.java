@@ -1,4 +1,4 @@
-package db.entity;
+package org.finalproject.bohdan.db.entity;
 
 public class Discount {
 

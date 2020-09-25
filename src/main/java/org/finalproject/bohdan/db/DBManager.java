@@ -1,4 +1,4 @@
-package db;
+package org.finalproject.bohdan.db;
 
 import org.apache.log4j.Logger;
 
@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class DBManager {
 
-    private static final org.apache.log4j.Logger logger = Logger.getLogger(DBManager.class);
+    private static final Logger logger = Logger.getLogger(DBManager.class);
 
     private DBManager() {
     }
@@ -30,21 +30,23 @@ public class DBManager {
         return dbManager;
     }
 
-    public Connection getConnection() throws SQLException{
-        Connection con = null;
-        try {
-            Context initContext = new InitialContext();
-            Context envContext = (Context) initContext.lookup("java:/comp/env");
+//    public Connection getConnection() throws SQLException{
+//        Connection con = null;
+//        try {
+//            Context initContext = new InitialContext();
+//            Context envContext = (Context) initContext.lookup("java:comp/env");
+//
+//            DataSource dataSource = (DataSource) envContext.lookup("jdbc/travel_agency");
+//            con = dataSource.getConnection();
+//        } catch (NamingException ex){
+//            //logger.error("Cannot obtain a connection from the pool", ex);
+//            ex.printStackTrace();
+//        }
+//        return con;
+//    }
 
-            DataSource dataSource = (DataSource) envContext.lookup("jdbc/travel_agency");
-            con = dataSource.getConnection();
-        } catch (NamingException ex){
-        logger.error("Cannot obtain a connection from the pool", ex);
-        }
-        return con;
-    }
-
-    public Connection getConnectionWithDriverManager() throws SQLException {
+    //public Connection getConnectionWithDriverManager() throws SQLException {
+    public Connection getConnection() throws SQLException {
         Connection connection = null;
         String url = getConnectionUrl();
         if (url != null) {
