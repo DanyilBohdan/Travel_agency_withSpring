@@ -23,7 +23,4 @@ public final class Fields {
     public final static String DISCOUNT_ID = "discount_id";
     public final static String TOUR_ID = "tour_id";
     public final static String USER_ID = "user_id";
-
-
-
 }
