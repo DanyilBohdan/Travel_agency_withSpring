@@ -10,26 +10,29 @@ public class Tour {
 
     private int count_people;
 
+    private String description;
+
     private String mark_hotel;
 
     private String start_date;
 
     private int days;
 
-    private String description;
+    private float discount;
 
     private int type_tour_id;
 
     public static Tour createTour(String name, float price, int count_people, String mark_hotel,
-                                  String start_date, int days, String description, int type_tour_id) {
+                                  String start_date, int days, String description, int type_tour_id, float discount) {
         Tour tour = new Tour();
         tour.setName(name);
         tour.setPrice(price);
         tour.setCount_people(count_people);
+        tour.setDescription(description);
         tour.setMark_hotel(mark_hotel);
         tour.setStart_date(start_date);
         tour.setDays(days);
-        tour.setDescription(description);
+        tour.setDiscount(discount);
         tour.setType_tour_id(type_tour_id);
         return tour;
     }
@@ -119,5 +122,13 @@ public class Tour {
 
     public void setType_tour_id(int type_tour_id) {
         this.type_tour_id = type_tour_id;
+    }
+
+    public float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(float discount) {
+        this.discount = discount;
     }
 }

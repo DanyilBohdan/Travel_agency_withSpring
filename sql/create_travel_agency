@@ -13,10 +13,11 @@ CREATE TABLE IF NOT EXISTS travel_agency.tour
     name         VARCHAR(45) NOT NULL,
     price        FLOAT       NOT NULL,
     count_people INT         NOT NULL,
+    description  TEXT        NULL,
     mark_hotel   INT         NOT NULL,
     start_date   VARCHAR(45) NOT NULL,
     days         INT         NOT NULL,
-    description  TEXT        NULL,
+    discount     float       NULL,
     type_tour_id INT         NOT NULL REFERENCES type_tour (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
@@ -36,17 +37,10 @@ CREATE TABLE IF NOT EXISTS travel_agency.user
     role_id  INT          NOT NULL REFERENCES role (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
-CREATE TABLE IF NOT EXISTS travel_agency.discount
-(
-    id       INT   NOT NULL AUTO_INCREMENT primary key unique,
-    discount float NULL
-);
-
 CREATE TABLE IF NOT EXISTS travel_agency.order
 (
-    id          INT         NOT NULL AUTO_INCREMENT primary key unique,
-    status      varchar(24) NOT NULL,
-    tour_id     INT         NOT NULL REFERENCES tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
-    user_id     INT         NOT NULL REFERENCES user (id) ON DELETE CASCADE ON UPDATE RESTRICT,
-    discount_id INT         NOT NULL REFERENCES discount (id) ON DELETE CASCADE ON UPDATE RESTRICT
+    id      INT                                     NOT NULL AUTO_INCREMENT primary key unique,
+    status  ENUM ('registered', 'paid', 'canceled') NOT NULL,
+    tour_id INT                                     NOT NULL REFERENCES tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
+    user_id INT                                     NOT NULL REFERENCES user (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
