@@ -1,6 +1,6 @@
 package db.entity;
 
-public class OrderTour {
+public class Order {
 
     private int id;
 
@@ -10,8 +10,10 @@ public class OrderTour {
 
     private int user_id;
 
-    public static OrderTour createOrderTour(String status){
-        OrderTour orderTour = new OrderTour();
+    private int discount_id;
+
+    public static Order createOrderTour(String status) {
+        Order orderTour = new Order();
         orderTour.setStatus(status);
         return orderTour;
     }
@@ -56,5 +58,13 @@ public class OrderTour {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
+    }
+
+    public int getDiscount_id() {
+        return discount_id;
+    }
+
+    public void setDiscount_id(int discount_id) {
+        this.discount_id = discount_id;
     }
 }

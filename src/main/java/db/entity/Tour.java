@@ -10,23 +10,26 @@ public class Tour {
 
     private int count_people;
 
-    private String type_hotel;
+    private String mark_hotel;
 
-    private int mark;
+    private String start_date;
 
-    private int info_tour_id;
+    private int days;
+
+    private String description;
 
     private int type_tour_id;
 
-    public static Tour createTour(String name, float price, int count_people, String type_hotel,
-                                  int mark, int info_tour_id, int type_tour_id) {
+    public static Tour createTour(String name, float price, int count_people, String mark_hotel,
+                                  String start_date, int days, String description, int type_tour_id) {
         Tour tour = new Tour();
         tour.setName(name);
         tour.setPrice(price);
         tour.setCount_people(count_people);
-        tour.setType_hotel(type_hotel);
-        tour.setMark(mark);
-        tour.setInfo_tour_id(info_tour_id);
+        tour.setMark_hotel(mark_hotel);
+        tour.setStart_date(start_date);
+        tour.setDays(days);
+        tour.setDescription(description);
         tour.setType_tour_id(type_tour_id);
         return tour;
     }
@@ -38,11 +41,36 @@ public class Tour {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", count_people=" + count_people +
-                ", type_hotel='" + type_hotel + '\'' +
-                ", mark=" + mark +
-                ", info_tour_id=" + info_tour_id +
+                ", mark_hotel='" + mark_hotel + '\'' +
+                ", start_date='" + start_date + '\'' +
+                ", days=" + days +
+                ", description='" + description + '\'' +
                 ", type_tour_id=" + type_tour_id +
                 '}';
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getId() {
@@ -77,28 +105,12 @@ public class Tour {
         this.count_people = count_people;
     }
 
-    public String getType_hotel() {
-        return type_hotel;
+    public String getMark_hotel() {
+        return mark_hotel;
     }
 
-    public void setType_hotel(String type_hotel) {
-        this.type_hotel = type_hotel;
-    }
-
-    public int getMark() {
-        return mark;
-    }
-
-    public void setMark(int mark) {
-        this.mark = mark;
-    }
-
-    public int getInfo_tour_id() {
-        return info_tour_id;
-    }
-
-    public void setInfo_tour_id(int info_tour_id) {
-        this.info_tour_id = info_tour_id;
+    public void setMark_hotel(String mark_hotel) {
+        this.mark_hotel = mark_hotel;
     }
 
     public int getType_tour_id() {
