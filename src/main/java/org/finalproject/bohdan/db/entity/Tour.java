@@ -1,10 +1,14 @@
 package org.finalproject.bohdan.db.entity;
 
+import java.util.Date;
+
 public class Tour {
 
     private int id;
 
     private String name;
+
+    private String country;
 
     private float price;
 
@@ -12,9 +16,9 @@ public class Tour {
 
     private String description;
 
-    private String mark_hotel;
+    private int mark_hotel;
 
-    private String start_date;
+    private Date start_date;
 
     private int days;
 
@@ -22,10 +26,13 @@ public class Tour {
 
     private int type_tour_id;
 
-    public static Tour createTour(String name, float price, int count_people, String mark_hotel,
-                                  String start_date, int days, String description, int type_tour_id, float discount) {
+    public static Tour createTour(String name, String country, float price,
+                                  int count_people, int mark_hotel,
+                                  Date start_date, int days, String description,
+                                  int type_tour_id, float discount) {
         Tour tour = new Tour();
         tour.setName(name);
+        tour.setCountry(country);
         tour.setPrice(price);
         tour.setCount_people(count_people);
         tour.setDescription(description);
@@ -42,21 +49,23 @@ public class Tour {
         return "Tour{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
                 ", price=" + price +
                 ", count_people=" + count_people +
+                ", description='" + description + '\'' +
                 ", mark_hotel='" + mark_hotel + '\'' +
                 ", start_date='" + start_date + '\'' +
                 ", days=" + days +
-                ", description='" + description + '\'' +
+                ", discount=" + discount +
                 ", type_tour_id=" + type_tour_id +
                 '}';
     }
 
-    public String getStart_date() {
+    public Date getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(String start_date) {
+    public void setStart_date(Date start_date) {
         this.start_date = start_date;
     }
 
@@ -108,11 +117,11 @@ public class Tour {
         this.count_people = count_people;
     }
 
-    public String getMark_hotel() {
+    public int getMark_hotel() {
         return mark_hotel;
     }
 
-    public void setMark_hotel(String mark_hotel) {
+    public void setMark_hotel(int mark_hotel) {
         this.mark_hotel = mark_hotel;
     }
 
@@ -130,5 +139,13 @@ public class Tour {
 
     public void setDiscount(float discount) {
         this.discount = discount;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

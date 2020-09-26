@@ -5,6 +5,7 @@ public final class Fields {
     public final static String ID = "id";
 
     public final static String NAME = "name";
+    public final static String COUNTRY = "country";
     public final static String PRICE = "price";
     public final static String COUNT_PEOPLE = "count_people";
     public final static String MARK_HOTEL = "mark_hotel";

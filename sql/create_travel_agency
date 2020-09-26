@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS travel_agency.tour
 (
     id           INT         NOT NULL AUTO_INCREMENT primary key unique,
     name         VARCHAR(45) NOT NULL,
+    country      VARCHAR(40) NOT NULL,
     price        FLOAT       NOT NULL,
     count_people INT         NOT NULL,
     description  TEXT        NULL,
@@ -29,12 +30,13 @@ CREATE TABLE IF NOT EXISTS travel_agency.role
 
 CREATE TABLE IF NOT EXISTS travel_agency.user
 (
-    id       INT          NOT NULL AUTO_INCREMENT primary key unique,
-    username VARCHAR(45)  NOT NULL,
-    password VARCHAR(24)  NOT NULL,
-    email    VARCHAR(225) NOT NULL unique,
-    status   boolean      NOT NULL,
-    role_id  INT          NOT NULL REFERENCES role (id) ON DELETE CASCADE ON UPDATE RESTRICT
+    id           INT          NOT NULL AUTO_INCREMENT primary key unique,
+    username     VARCHAR(45)  NOT NULL,
+    password     VARCHAR(24)  NOT NULL,
+    email        VARCHAR(225) NOT NULL unique,
+    phone_number VARCHAR(13)  NOT NULL,
+    status       boolean      NOT NULL,
+    role_id      INT          NOT NULL REFERENCES role (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS travel_agency.order

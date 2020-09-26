@@ -1,0 +1,21 @@
+insert into type_tour (name) values
+('відпочинок'),
+('екскурсія'),
+('шопінг');
+
+insert into tour (name, country, price, count_people, description, mark_hotel, start_date, days, discount, type_tour_id) values
+('Kaya Belek Hotel', 'France', '350', '1', '', '3', '2020-10-01', '4', '0.1', '3'),
+('Канкун', 'Mexica', '1900', '4', '', '4', '2020-10-05', '3', '0', '1'),
+('Paradise Beach Resort', 'Tanzania', '1900', '1', '', '5', '2020-10-10', '10', '0.2', '1'),
+('Chairmen Hotel Doha', 'Doha', '1200', '2', '', '4', '2020-09-29', '4', '0', '2');
+
+insert into role (name) values
+('user'),
+('manager'),
+('admin');
+
+insert into user (username, password, email, phone_number, status, role_id) values
+('Georg', '1111', 'georg@gmail.com', '+380936436049', true, '3'),
+('Valentin', '1111', 'valentin@gmail.com', '+380123456712', true, '2'),
+('Daria', '1111', 'daria@gmail.com', '+380123456712', true, '1'),
+('Jon', '1111', 'jon_one@gmail.com', '380123456712', true, '1');

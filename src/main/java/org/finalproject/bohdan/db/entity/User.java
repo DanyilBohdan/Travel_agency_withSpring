@@ -10,16 +10,19 @@ public class User {
 
     private String email;
 
+    private String phone_number;
+
     private String status;
 
     private int role_id;
 
     public static User createUser(String username, String password, String email,
-                                  String status, int role_id) {
+                                  String phone_number, String status, int role_id) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
+        user.setPhone_number(phone_number);
         user.setStatus(status);
         user.setRole_id(role_id);
         return user;
@@ -83,5 +86,13 @@ public class User {
                 ", status='" + status + '\'' +
                 ", role_id=" + role_id +
                 '}';
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 }
