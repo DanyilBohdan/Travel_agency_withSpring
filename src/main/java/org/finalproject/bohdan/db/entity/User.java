@@ -2,7 +2,7 @@ package org.finalproject.bohdan.db.entity;
 
 public class User {
 
-    private int id;
+    private Integer id;
 
     private String username;
 
@@ -12,12 +12,12 @@ public class User {
 
     private String phone_number;
 
-    private String status;
+    private boolean status;
 
     private int role_id;
 
     public static User createUser(String username, String password, String email,
-                                  String phone_number, String status, int role_id) {
+                                  String phone_number, boolean status, int role_id) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
@@ -28,11 +28,11 @@ public class User {
         return user;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -60,11 +60,11 @@ public class User {
         this.email = email;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

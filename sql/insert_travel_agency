@@ -19,3 +19,10 @@ insert into user (username, password, email, phone_number, status, role_id) valu
 ('Valentin', '1111', 'valentin@gmail.com', '+380123456712', true, '2'),
 ('Daria', '1111', 'daria@gmail.com', '+380123456712', true, '1'),
 ('Jon', '1111', 'jon_one@gmail.com', '380123456712', true, '1');
+
+insert into order (status, tour_id, user_id) values
+('registered', '1', '3'),
+('paid', '2', '3'),
+('registered', '3', '4'),
+('paid', '4', '4'),
+('registered', '2', '3');
