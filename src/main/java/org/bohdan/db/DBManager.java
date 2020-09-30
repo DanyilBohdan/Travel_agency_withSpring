@@ -36,7 +36,7 @@ public class DBManager {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
 
-            DataSource dataSource = (DataSource) envContext.lookup("jdbc/travel_agencyDB");
+            DataSource dataSource = (DataSource) envContext.lookup("jdbc/travel_agencydb");
             con = dataSource.getConnection();
         } catch (NamingException ex){
             ex.printStackTrace();

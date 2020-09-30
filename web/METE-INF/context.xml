@@ -4,7 +4,7 @@
 <!-- see: http://tomcat.apache.org/tomcat-5.5-doc/jndi-datasource-examples-howto.html -->
 
 <Context>
-    <Resource name="jdbc/travel_agencyDB"
+    <Resource name="jdbc/travel_agencydb"
               auth="Container"
               type="javax.sql.DataSource"
               maxActive="100" maxIdle="30" maxWait="10000"
