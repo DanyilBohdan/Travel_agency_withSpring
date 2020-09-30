@@ -1,4 +1,4 @@
-package org.finalproject.bohdan.db;
+package org.bohdan.db;
 
 public final class Fields {
 
@@ -13,6 +13,7 @@ public final class Fields {
     public final static String DAYS = "days";
     public final static String DESCRIPTION = "description";
     public final static String TYPE_TOUR_ID = "type_tour_id";
+    public final static String COUNTRY_ID = "country_id";
 
     public final static String USERNAME = "username";
     public final static String PASSWORD = "password";
@@ -21,7 +22,6 @@ public final class Fields {
     public final static String ROLE_ID = "role_id";
 
     public final static String DISCOUNT = "discount";
-    public final static String DISCOUNT_ID = "discount_id";
     public final static String TOUR_ID = "tour_id";
     public final static String USER_ID = "user_id";
 }

@@ -1,6 +1,8 @@
-package org.finalproject.bohdan.db;
+package org.bohdan.db.DAO;
 
-import org.finalproject.bohdan.db.entity.User;
+import org.bohdan.db.DBManager;
+import org.bohdan.db.Fields;
+import org.bohdan.db.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,9 +21,6 @@ public class UserDao extends AbstractDAO<Integer, User> {
     public static final String SQL_INSERT_USER =
             "insert into user (username, password, email, phone_number, status, role_id) values " +
                     "(?, ?, ?, ?, ?, ?)";
-
-//    public static final String SQL_UPDATE_USER =
-//            "UPDATE user SET username = ?, password = ?, email = ?, phone_number = ? WHERE id = ?";
 
     public static final String SQL_UPDATE_USER =
             "UPDATE user SET username = ?, password = ?, email = ?, phone_number = ?, status = ?, role_id = ? WHERE id = ?";

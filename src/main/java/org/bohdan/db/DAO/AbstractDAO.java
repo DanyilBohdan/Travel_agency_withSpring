@@ -1,4 +1,4 @@
-package org.finalproject.bohdan.db;
+package org.bohdan.db.DAO;
 
 import java.sql.ResultSet;
 import java.util.List;

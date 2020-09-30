@@ -1,4 +1,4 @@
-package org.finalproject.bohdan.db.entity;
+package org.bohdan.db.entity;
 
 import java.util.Date;
 
@@ -7,8 +7,6 @@ public class Tour {
     private Integer id;
 
     private String name;
-
-    private String country;
 
     private float price;
 
@@ -26,13 +24,14 @@ public class Tour {
 
     private int type_tour_id;
 
-    public static Tour createTour(String name, String country, float price,
+    private int country_id;
+
+    public static Tour createTour(String name, float price,
                                   int count_people, int mark_hotel,
                                   Date start_date, int days, String description,
-                                  int type_tour_id, float discount) {
+                                  int type_tour_id, float discount, int country_id) {
         Tour tour = new Tour();
         tour.setName(name);
-        tour.setCountry(country);
         tour.setPrice(price);
         tour.setCount_people(count_people);
         tour.setDescription(description);
@@ -41,25 +40,10 @@ public class Tour {
         tour.setDays(days);
         tour.setDiscount(discount);
         tour.setType_tour_id(type_tour_id);
+        tour.setCountry_id(country_id);
         return tour;
     }
 
-    @Override
-    public String toString() {
-        return "Tour{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", country='" + country + '\'' +
-                ", price=" + price +
-                ", count_people=" + count_people +
-                ", description='" + description + '\'' +
-                ", mark_hotel='" + mark_hotel + '\'' +
-                ", start_date='" + start_date + '\'' +
-                ", days=" + days +
-                ", discount=" + discount +
-                ", type_tour_id=" + type_tour_id +
-                '}';
-    }
 
     public Date getStart_date() {
         return start_date;
@@ -141,11 +125,28 @@ public class Tour {
         this.discount = discount;
     }
 
-    public String getCountry() {
-        return country;
+    public int getCountry_id() {
+        return country_id;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountry_id(int country_id) {
+        this.country_id = country_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Tour{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", count_people=" + count_people +
+                ", description='" + description + '\'' +
+                ", mark_hotel=" + mark_hotel +
+                ", start_date=" + start_date +
+                ", days=" + days +
+                ", discount=" + discount +
+                ", type_tour_id=" + type_tour_id +
+                ", country_id=" + country_id +
+                '}';
     }
 }

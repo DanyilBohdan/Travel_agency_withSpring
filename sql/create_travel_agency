@@ -1,17 +1,22 @@
-create database travel_agency;
-use travel_agency;
+create database travelagencyDB;
+use travelagencyDB;
 
-CREATE TABLE IF NOT EXISTS travel_agency.type_tour
+CREATE TABLE IF NOT EXISTS travelagencyDB.type_tour
 (
     id   INT         NOT NULL AUTO_INCREMENT PRIMARY KEY unique,
     name VARCHAR(45) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS travel_agency.tour
+CREATE TABLE IF NOT EXISTS travelagencyDB.country
+(
+    id   INT         NOT NULL AUTO_INCREMENT PRIMARY KEY unique,
+    name VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS travelagencyDB.tour
 (
     id           INT         NOT NULL AUTO_INCREMENT primary key unique,
     name         VARCHAR(45) NOT NULL,
-    country      VARCHAR(40) NOT NULL,
     price        FLOAT       NOT NULL,
     count_people INT         NOT NULL,
     description  TEXT        NULL,
@@ -19,16 +24,17 @@ CREATE TABLE IF NOT EXISTS travel_agency.tour
     start_date   VARCHAR(45) NOT NULL,
     days         INT         NOT NULL,
     discount     float       NULL,
-    type_tour_id INT         NOT NULL REFERENCES type_tour (id) ON DELETE CASCADE ON UPDATE RESTRICT
+    type_tour_id INT         NOT NULL REFERENCES type_tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
+    country_id   INT         NOT NULL REFERENCES country (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
-CREATE TABLE IF NOT EXISTS travel_agency.role
+CREATE TABLE IF NOT EXISTS travelagencyDB.role
 (
     id   INT         NOT NULL AUTO_INCREMENT primary key unique,
     name VARCHAR(45) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS travel_agency.user
+CREATE TABLE IF NOT EXISTS travelagencyDB.user
 (
     id           INT          NOT NULL AUTO_INCREMENT primary key unique,
     username     VARCHAR(45)  NOT NULL,
@@ -39,7 +45,7 @@ CREATE TABLE IF NOT EXISTS travel_agency.user
     role_id      INT          NOT NULL REFERENCES role (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
-CREATE TABLE IF NOT EXISTS travel_agency.order
+CREATE TABLE IF NOT EXISTS travelagencyDB.order
 (
     id      INT                                     NOT NULL AUTO_INCREMENT primary key unique,
     status  ENUM ('registered', 'paid', 'canceled') NOT NULL,

@@ -1,6 +1,8 @@
-package org.finalproject.bohdan.db;
+package org.bohdan.db.DAO;
 
-import org.finalproject.bohdan.db.entity.TypeTour;
+import org.bohdan.db.DBManager;
+import org.bohdan.db.Fields;
+import org.bohdan.db.entity.TypeTour;
 
 import java.sql.*;
 import java.util.ArrayList;

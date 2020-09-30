@@ -5,10 +5,20 @@
          version="4.0">
 
     <display-name>Travel agency</display-name>
-    
+
     <resource-ref>
-        <res-ref-name>jdbc/travel_agency</res-ref-name>
+        <res-ref-name>jdbc/travel_agencyDB</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
+
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>org.bohdan.servlet.Controller</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/controller</url-pattern>
+    </servlet-mapping>
 </web-app>

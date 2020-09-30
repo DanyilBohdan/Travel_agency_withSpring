@@ -1,4 +1,4 @@
-package org.finalproject.bohdan.db.entity;
+package org.bohdan.db.entity;
 
 public class User {
 

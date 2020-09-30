@@ -1,6 +1,8 @@
-package org.finalproject.bohdan.db;
+package org.bohdan.db.DAO;
 
-import org.finalproject.bohdan.db.entity.Order;
+import org.bohdan.db.DBManager;
+import org.bohdan.db.Fields;
+import org.bohdan.db.entity.Order;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -104,7 +106,7 @@ public class OrderDao extends AbstractDAO<Integer, Order> {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            AbstractDAO.close(rs);
+            close(rs);
         }
         return res;
     }

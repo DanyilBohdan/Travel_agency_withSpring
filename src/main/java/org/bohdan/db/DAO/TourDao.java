@@ -1,6 +1,8 @@
-package org.finalproject.bohdan.db;
+package org.bohdan.db.DAO;
 
-import org.finalproject.bohdan.db.entity.Tour;
+import org.bohdan.db.DBManager;
+import org.bohdan.db.Fields;
+import org.bohdan.db.entity.Tour;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,22 +19,18 @@ public class TourDao extends AbstractDAO<Integer, Tour> {
             "DELETE FROM tour WHERE id = ?";
 
     public static final String SQL_INSERT_TOUR =
-            "insert into tour (name, country, price, count_people, description, mark_hotel, start_date, days, discount, type_tour_id) values " +
+            "insert into tour (name, price, count_people, description, mark_hotel, start_date, days, discount, type_tour_id, country_id) values " +
                     "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-//    public static final String SQL_UPDATE_USER =
-//            "UPDATE user SET username = ?, password = ?, email = ?, phone_number = ? WHERE id = ?";
-
     public static final String SQL_UPDATE_TOUR =
-            "UPDATE user SET name = ?, country = ?, price = ?, count_people = ?, description = ?, " +
-                    "mark_hotel = ?, start_date = ?, days = ?, discount = ?, type_tour_id = ? WHERE id = ?";
+            "UPDATE user SET name = ?, price = ?, count_people = ?, description = ?, " +
+                    "mark_hotel = ?, start_date = ?, days = ?, discount = ?, type_tour_id = ?, country_id = ?, WHERE id = ?";
 
 
     private Tour mapTour(ResultSet rs) throws SQLException {
         Tour tour = new Tour();
         tour.setId(rs.getInt(Fields.ID));
         tour.setName(rs.getString(Fields.NAME));
-        tour.setCountry(rs.getString(Fields.COUNTRY));
         tour.setPrice(rs.getFloat(Fields.PRICE));
         tour.setCount_people(rs.getInt(Fields.COUNT_PEOPLE));
         tour.setDescription(rs.getString(Fields.DESCRIPTION));
@@ -41,6 +39,7 @@ public class TourDao extends AbstractDAO<Integer, Tour> {
         tour.setDays(rs.getInt(Fields.DAYS));
         tour.setDiscount(rs.getInt(Fields.DISCOUNT));
         tour.setType_tour_id(rs.getInt(Fields.TYPE_TOUR_ID));
+        tour.setCountry_id(rs.getInt(Fields.COUNTRY_ID));
         return tour;
     }
 
@@ -112,7 +111,7 @@ public class TourDao extends AbstractDAO<Integer, Tour> {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            AbstractDAO.close(rs);
+            close(rs);
         }
         return res;
     }
@@ -138,7 +137,6 @@ public class TourDao extends AbstractDAO<Integer, Tour> {
     private void addStatement(Tour entity, PreparedStatement statement) throws SQLException {
         int k = 1;
         statement.setString(k++, entity.getName());
-        statement.setString(k++, entity.getCountry());
         statement.setFloat(k++, entity.getPrice());
         statement.setInt(k++, entity.getCount_people());
         statement.setString(k++, entity.getDescription());
@@ -147,5 +145,6 @@ public class TourDao extends AbstractDAO<Integer, Tour> {
         statement.setInt(k++, entity.getDays());
         statement.setFloat(k++, entity.getDiscount());
         statement.setInt(k++, entity.getType_tour_id());
+        statement.setInt(k++, entity.getCountry_id());
     }
 }
