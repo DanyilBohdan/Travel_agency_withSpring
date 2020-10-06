@@ -1,6 +1,4 @@
-package org.bohdan.db;
-
-import org.bohdan.db.entity.User;
+package org.bohdan.db.entity;
 
 public enum Role {
     USER, ADMIN, MANAGER;

@@ -8,7 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao extends AbstractDAO<Integer, User> {
+public class UserDao {
+
+
     private static final String SQL_FIND_ALL_USER =
             "SELECT * FROM user";
 
@@ -31,12 +33,12 @@ public class UserDao extends AbstractDAO<Integer, User> {
         user.setUsername(rs.getString(Fields.USERNAME));
         user.setPassword(rs.getString(Fields.PASSWORD));
         user.setEmail(rs.getString(Fields.EMAIL));
+        user.setPhone_number(rs.getString(Fields.PHONE_NUMBER));
         user.setStatus(rs.getBoolean(Fields.STATUS));
         user.setRole_id(rs.getInt(Fields.ROLE_ID));
         return user;
     }
 
-    @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
 
@@ -48,12 +50,11 @@ public class UserDao extends AbstractDAO<Integer, User> {
                 users.add(mapUser(rs));
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+
         }
         return users;
     }
 
-    @Override
     public User findEntityById(Integer id) {
         User user = null;
         try (Connection con = DBManager.getInstance().getConnection();
@@ -69,7 +70,6 @@ public class UserDao extends AbstractDAO<Integer, User> {
         return user;
     }
 
-    @Override
     public boolean delete(Integer id) {
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_USER_BY_ID);) {
@@ -81,12 +81,10 @@ public class UserDao extends AbstractDAO<Integer, User> {
         }
     }
 
-    @Override
     public boolean delete(User entity) {
         return delete(entity.getId());
     }
 
-    @Override
     public boolean create(User entity) {
         boolean res = false;
 
@@ -111,12 +109,11 @@ public class UserDao extends AbstractDAO<Integer, User> {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            AbstractDAO.close(rs);
+            DBManager.close(rs);
         }
         return res;
     }
 
-    @Override
     public User update(User entity) {
         User user = null;
 

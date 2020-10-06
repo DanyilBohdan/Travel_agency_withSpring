@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDao extends AbstractDAO<Integer, Order> {
+public class OrderDao {
 
     private static final String SQL_FIND_ALL_ORDER =
             "SELECT * FROM order";
@@ -35,7 +35,6 @@ public class OrderDao extends AbstractDAO<Integer, Order> {
         return order;
     }
 
-    @Override
     public List<Order> findAll() {
         List<Order> orders = new ArrayList<>();
 
@@ -51,7 +50,6 @@ public class OrderDao extends AbstractDAO<Integer, Order> {
         return orders;
     }
 
-    @Override
     public Order findEntityById(Integer id) {
         Order order = null;
         try (Connection con = DBManager.getInstance().getConnection();
@@ -67,7 +65,6 @@ public class OrderDao extends AbstractDAO<Integer, Order> {
         return order;
     }
 
-    @Override
     public boolean delete(Integer id) {
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_ORDER_BY_ID);) {
@@ -79,12 +76,10 @@ public class OrderDao extends AbstractDAO<Integer, Order> {
         }
     }
 
-    @Override
     public boolean delete(Order entity) {
         return delete(entity.getId());
     }
 
-    @Override
     public boolean create(Order entity) {
         boolean res = false;
 
@@ -106,12 +101,11 @@ public class OrderDao extends AbstractDAO<Integer, Order> {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            close(rs);
+            DBManager.close(rs);
         }
         return res;
     }
 
-    @Override
     public Order update(Order entity) {
         Order order = null;
 

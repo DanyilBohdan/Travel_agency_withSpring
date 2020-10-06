@@ -1,40 +1,55 @@
-create database travelagencyDB;
-use travelagencyDB;
+create database travel_agencyDB;
+use travel_agencyDB;
 
-CREATE TABLE IF NOT EXISTS travelagencyDB.type_tour
+CREATE TABLE IF NOT EXISTS travel_agencyDB.locale
 (
-    id   INT         NOT NULL AUTO_INCREMENT PRIMARY KEY unique,
-    name VARCHAR(45) NOT NULL
+    id   INT        NOT NULL AUTO_INCREMENT primary key unique,
+    name VARCHAR(2) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS travelagencyDB.country
+CREATE TABLE IF NOT EXISTS travel_agencyDB.type_tour
 (
-    id   INT         NOT NULL AUTO_INCREMENT PRIMARY KEY unique,
-    name VARCHAR(45) NOT NULL
+    id        INT         NOT NULL AUTO_INCREMENT primary key unique,
+    name      VARCHAR(40) NOT NULL,
+    locale_id INT         NOT NULL REFERENCES locale (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
-CREATE TABLE IF NOT EXISTS travelagencyDB.tour
+CREATE TABLE IF NOT EXISTS travel_agencyDB.country
 (
-    id           INT         NOT NULL AUTO_INCREMENT primary key unique,
-    name         VARCHAR(45) NOT NULL,
-    price        FLOAT       NOT NULL,
-    count_people INT         NOT NULL,
-    description  TEXT        NULL,
-    mark_hotel   INT         NOT NULL,
-    start_date   VARCHAR(45) NOT NULL,
-    days         INT         NOT NULL,
-    discount     float       NULL,
-    type_tour_id INT         NOT NULL REFERENCES type_tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
-    country_id   INT         NOT NULL REFERENCES country (id) ON DELETE CASCADE ON UPDATE RESTRICT
+    id        INT         NOT NULL AUTO_INCREMENT primary key unique,
+    name      VARCHAR(40) NOT NULL,
+    locale_id INT         NOT NULL REFERENCES locale (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
-CREATE TABLE IF NOT EXISTS travelagencyDB.role
+CREATE TABLE IF NOT EXISTS travel_agencyDB.tour_tr
+(
+    id             INT NOT NULL AUTO_INCREMENT primary key unique,
+    tour_name_tr   VARCHAR(45),
+    description_tr VARCHAR(45),
+    type_tour_id   INT NOT NULL REFERENCES type_tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
+    country_id     INT NOT NULL REFERENCES country (id) ON DELETE CASCADE ON UPDATE RESTRICT,
+    tour_id        INT NOT NULL REFERENCES tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
+    locale_id      INT NOT NULL REFERENCES locale (id) ON DELETE CASCADE ON UPDATE RESTRICT
+);
+
+CREATE TABLE IF NOT EXISTS travel_agencyDB.tour
+(
+    id           INT   NOT NULL AUTO_INCREMENT primary key unique,
+    price        FLOAT NOT NULL,
+    count_people INT   NOT NULL,
+    mark_hotel   INT   NOT NULL,
+    start_date   DATE  NOT NULL,
+    days         INT   NOT NULL,
+    discount     float NULL
+);
+
+CREATE TABLE IF NOT EXISTS travel_agencyDB.role
 (
     id   INT         NOT NULL AUTO_INCREMENT primary key unique,
     name VARCHAR(45) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS travelagencyDB.user
+CREATE TABLE IF NOT EXISTS travel_agencyDB.user
 (
     id           INT          NOT NULL AUTO_INCREMENT primary key unique,
     username     VARCHAR(45)  NOT NULL,
@@ -45,7 +60,7 @@ CREATE TABLE IF NOT EXISTS travelagencyDB.user
     role_id      INT          NOT NULL REFERENCES role (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
-CREATE TABLE IF NOT EXISTS travelagencyDB.order
+CREATE TABLE IF NOT EXISTS travel_agencyDB.order
 (
     id      INT                                     NOT NULL AUTO_INCREMENT primary key unique,
     status  ENUM ('registered', 'paid', 'canceled') NOT NULL,

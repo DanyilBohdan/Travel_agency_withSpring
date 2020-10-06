@@ -1,14 +1,10 @@
 package org.bohdan.db;
 
+import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
+import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.log4j.Logger;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.*;
 import java.util.Properties;
 
@@ -30,42 +26,22 @@ public class DBManager {
         return dbManager;
     }
 
-    public Connection getConnection() throws SQLException{
+    public Connection getConnection() {
         Connection con = null;
         try {
-            Context initContext = new InitialContext();
-            Context envContext = (Context) initContext.lookup("java:/comp/env");
-
-            DataSource dataSource = (DataSource) envContext.lookup("jdbc/travel_agencydb");
-            con = dataSource.getConnection();
-        } catch (NamingException ex){
-            ex.printStackTrace();
+            MysqlDataSource ds = new MysqlConnectionPoolDataSource();
+            ds.setURL(ContextDB.URL);
+            ds.setUser(ContextDB.USERNAME);
+            ds.setPassword(ContextDB.PASSWORD);
+            ds.setServerTimezone(ContextDB.SERVER_TIMEZONE);
+            con = ds.getConnection();
+        } catch (SQLException ex) {
+            logger.error("Cannot obtain a connection from the pool", ex);
         }
         return con;
     }
 
-    //public Connection getConnectionWithDriverManager() throws SQLException {
-//    public Connection getConnection() throws SQLException {
-//        Connection connection = null;
-//        String url = getConnectionUrl();
-//        if (url != null) {
-//            connection = DriverManager.getConnection(url);
-//        }
-//        return connection;
-//    }
-//
-//    private static String getConnectionUrl() {
-//        Properties prop = new Properties();
-//        try (InputStream inputStream = new FileInputStream("db_app.properties")) {
-//            prop.load(inputStream);
-//            return prop.getProperty("connection.url");
-//        } catch (IOException ex) {
-//            logger.error("Not connection URL", ex);
-//        }
-//        return null;
-//    }
-
-    public void commitAndClose(Connection con) {
+    public static void commitAndClose(Connection con) {
         try {
             con.commit();
             con.close();
@@ -74,12 +50,22 @@ public class DBManager {
         }
     }
 
-    public void rollbackAndClose(Connection con) {
+    public static void rollbackAndClose(Connection con) {
         try {
             con.rollback();
             con.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public static void close(ResultSet rs) {
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
