@@ -131,4 +131,21 @@ public class TourView {
     public void setDiscount(float discount) {
         this.discount = discount;
     }
+
+    @Override
+    public String toString() {
+        return "TourView{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", country='" + country + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", count_people=" + count_people +
+                ", mark_hotel=" + mark_hotel +
+                ", start_date=" + start_date +
+                ", days=" + days +
+                ", discount=" + discount +
+                '}';
+    }
 }

@@ -52,13 +52,13 @@
     <label>Mark HOTEL</label>
     <input name="mark_hotel" min="-1"/><br>
     <label>Start Date</label>
-    <input type="date" name="start_date"><br>
+    <input type="date" name="start_date"/><br>
     <label>Days</label>
-    <input name="days" min="0"><br>
+    <input name="days" min="0"/><br>
     <label>Discount</label>
-    <input name="discount" min="0" max="1">
+    <input name="discount" min="0" max="1"/>
     <br><br>
-    <input type="submit" value="Save">
+    <input type="submit" value="Save"/>
 </form>
 </body>
 </html>

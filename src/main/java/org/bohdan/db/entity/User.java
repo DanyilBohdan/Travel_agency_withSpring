@@ -8,7 +8,7 @@ public class User {
 
     private String password;
 
-    private String email;
+    private String login;
 
     private String phone_number;
 
@@ -16,12 +16,12 @@ public class User {
 
     private int role_id;
 
-    public static User createUser(String username, String password, String email,
+    public static User createUser(String username, String password, String login,
                                   String phone_number, boolean status, int role_id) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        user.setEmail(email);
+        user.setLogin(login);
         user.setPhone_number(phone_number);
         user.setStatus(status);
         user.setRole_id(role_id);
@@ -52,12 +52,12 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public boolean getStatus() {
@@ -82,7 +82,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
+                ", email='" + login + '\'' +
                 ", status='" + status + '\'' +
                 ", role_id=" + role_id +
                 '}';

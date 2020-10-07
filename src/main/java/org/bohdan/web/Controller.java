@@ -15,6 +15,8 @@ public class Controller extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(Controller.class);
 
+    private String commandName;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         process(req, resp);
@@ -30,7 +32,9 @@ public class Controller extends HttpServlet {
         logger.debug("Controller starts");
 
         String commandName = request.getParameter("command");
+        String test = request.getParameter("test");
         logger.trace("Request parameter : command --> " + commandName);
+        logger.trace("Request parameter : test --> " + test);
 
         Command command = CommandContainer.get(commandName);
         logger.trace("Obtained command --> " + command);

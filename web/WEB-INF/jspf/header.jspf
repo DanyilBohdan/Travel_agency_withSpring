@@ -1,2 +1,17 @@
-<nav><a href="#" style="right: 1px"><b>LogIn</b></a>
+<%@ page import="org.bohdan.web.Path" %>
+<nav>
+<%--    <a class="bottomNav" href="<c:url value="/controller?command=viewTours" />" ><b>Main</b></a>--%>
+    <form method="post" action='<c:url value="/controller" />' style="display:inline;">
+        <input type="hidden" name="command" value="viewTours">
+        <input class="submit" type="submit" value="MAIN">
+    </form>
+    |
+    <a class="sub_login" href="<c:url value="/login.jsp" />" ><b>LogIn</b></a>
+<%--    <form method="post" action='<c:url value="/controller" />' style="display:inline;">--%>
+<%--        <input type="hidden" name="command" value="viewTours">--%>
+<%--        <input type="submit" value="LOGIN">--%>
+<%--        |--%>
+<%--        <input type="hidden" name="command" value="viewTours">--%>
+<%--        <input type="submit" value="MAIN">--%>
+<%--    </form>--%>
 </nav>

@@ -13,6 +13,8 @@ public class CommandContainer {
 
     static {
         commandMap.put("viewTours", new ViewTours());
+        commandMap.put("login", new LoginCommand());
+        commandMap.put("account", new AccountUser());
         commandMap.put("errorPage", new NoCommand());
 
         logger.debug("Command container was successfully initialized");
@@ -22,12 +24,14 @@ public class CommandContainer {
     /**
      * Returns command object with the given name.
      *
-     * @param commandName
-     *            Name of the command.
+     * @param commandName Name of the command.
      * @return Command object.
      */
     public static Command get(String commandName) {
-        if (commandName == null || !commandMap.containsKey(commandName)) {
+        if (commandName == null) {
+            commandName = "main";
+        }
+        if (!commandMap.containsKey(commandName)) {
             logger.trace("Command not found, name --> " + commandName);
             return commandMap.get("noCommand");
         }

@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 
 public class ContextListener implements ServletContextListener {
 
-    private static final Logger log = Logger.getLogger(ContextListener.class);
+    private static final Logger logger = Logger.getLogger(ContextListener.class);
 
     public void contextDestroyed(ServletContextEvent event) {
         log("Servlet context destruction starts");
@@ -35,11 +35,11 @@ public class ContextListener implements ServletContextListener {
      * Initializes i18n subsystem.
      */
     private void initI18N(ServletContext servletContext) {
-        log.debug("I18N subsystem initialization started");
+        logger.debug("I18N subsystem initialization started");
 
         String localesValue = servletContext.getInitParameter("locales");
         if (localesValue == null || localesValue.isEmpty()) {
-            log.warn("'locales' init parameter is empty, the default encoding will be used");
+            logger.warn("'locales' init parameter is empty, the default encoding will be used");
         } else {
             List<String> locales = new ArrayList<String>();
             StringTokenizer st = new StringTokenizer(localesValue);
@@ -48,11 +48,11 @@ public class ContextListener implements ServletContextListener {
                 locales.add(localeName);
             }
 
-            log.debug("Application attribute set: locales --> " + locales);
+            logger.debug("Application attribute set: locales --> " + locales);
             servletContext.setAttribute("locales", locales);
         }
 
-        log.debug("I18N subsystem initialization finished");
+        logger.debug("I18N subsystem initialization finished");
     }
 
     /**
@@ -76,7 +76,7 @@ public class ContextListener implements ServletContextListener {
      * Initializes CommandContainer.
      */
     private void initCommandContainer() {
-        log.debug("Command container initialization started");
+        logger.debug("Command container initialization started");
 
         // initialize commands container
         // just load class to JVM
@@ -86,7 +86,7 @@ public class ContextListener implements ServletContextListener {
             throw new RuntimeException(ex);
         }
 
-        log.debug("Command container initialization finished");
+        logger.debug("Command container initialization finished");
     }
 
     private void log(String msg) {

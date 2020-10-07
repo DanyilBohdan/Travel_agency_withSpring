@@ -10,29 +10,31 @@ import java.util.List;
 
 public class UserDao {
 
-
     private static final String SQL_FIND_ALL_USER =
             "SELECT * FROM user";
 
     private static final String SQL_FIND_ENTITY_BY_ID_USER =
             "SELECT * FROM user WHERE id = ?";
 
+    private static final String SQL_FIND_ENTITY_BY_LOGIN_USER =
+            "SELECT * FROM user WHERE login = ?";
+
     public static final String SQL_DELETE_USER_BY_ID =
             "DELETE FROM user WHERE id = ?";
 
     public static final String SQL_INSERT_USER =
-            "insert into user (username, password, email, phone_number, status, role_id) values " +
+            "insert into user (username, password, login, phone_number, status, role_id) values " +
                     "(?, ?, ?, ?, ?, ?)";
 
     public static final String SQL_UPDATE_USER =
-            "UPDATE user SET username = ?, password = ?, email = ?, phone_number = ?, status = ?, role_id = ? WHERE id = ?";
+            "UPDATE user SET username = ?, password = ?, login = ?, phone_number = ?, status = ?, role_id = ? WHERE id = ?";
 
     private User mapUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt(Fields.ID));
         user.setUsername(rs.getString(Fields.USERNAME));
         user.setPassword(rs.getString(Fields.PASSWORD));
-        user.setEmail(rs.getString(Fields.EMAIL));
+        user.setLogin(rs.getString(Fields.LOGIN));
         user.setPhone_number(rs.getString(Fields.PHONE_NUMBER));
         user.setStatus(rs.getBoolean(Fields.STATUS));
         user.setRole_id(rs.getInt(Fields.ROLE_ID));
@@ -50,7 +52,7 @@ public class UserDao {
                 users.add(mapUser(rs));
             }
         } catch (SQLException ex) {
-
+            ex.printStackTrace();
         }
         return users;
     }
@@ -60,6 +62,21 @@ public class UserDao {
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_FIND_ENTITY_BY_ID_USER);) {
             statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                user = mapUser(rs);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return user;
+    }
+
+    public User findEntityByLogin(String login) {
+        User user = null;
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(SQL_FIND_ENTITY_BY_LOGIN_USER);) {
+            statement.setString(1, login);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 user = mapUser(rs);
@@ -94,7 +111,7 @@ public class UserDao {
             int k = 1;
             statement.setString(k++, entity.getUsername());
             statement.setString(k++, entity.getPassword());
-            statement.setString(k++, entity.getEmail());
+            statement.setString(k++, entity.getLogin());
             statement.setString(k++, entity.getPhone_number());
             statement.setBoolean(k++, entity.getStatus());
             statement.setInt(k++, entity.getRole_id());
@@ -121,7 +138,7 @@ public class UserDao {
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_USER)) {
             statement.setString(1, entity.getUsername());
             statement.setString(2, entity.getPassword());
-            statement.setString(3, entity.getEmail());
+            statement.setString(3, entity.getLogin());
             statement.setString(4, entity.getPhone_number());
             statement.setBoolean(5, entity.getStatus());
             statement.setInt(6, entity.getRole_id());

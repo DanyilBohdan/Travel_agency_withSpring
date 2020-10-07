@@ -26,7 +26,7 @@ public final class Fields {
 
     public final static String USERNAME = "username";
     public final static String PASSWORD = "password";
-    public final static String EMAIL = "email";
+    public final static String LOGIN = "login";
     public final static String PHONE_NUMBER = "phone_number";
     public final static String STATUS = "status";
     public final static String ROLE_ID = "role_id";

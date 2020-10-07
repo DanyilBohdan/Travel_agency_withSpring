@@ -1,46 +1,35 @@
 create database travel_agencyDB;
 use travel_agencyDB;
 
-CREATE TABLE IF NOT EXISTS travel_agencyDB.locale
-(
-    id   INT        NOT NULL AUTO_INCREMENT primary key unique,
-    name VARCHAR(2) NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS travel_agencyDB.type_tour
 (
-    id        INT         NOT NULL AUTO_INCREMENT primary key unique,
-    name      VARCHAR(40) NOT NULL,
-    locale_id INT         NOT NULL REFERENCES locale (id) ON DELETE CASCADE ON UPDATE RESTRICT
+    id      INT         NOT NULL AUTO_INCREMENT primary key unique,
+    name_en VARCHAR(40) NOT NULL,
+    name_ru VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS travel_agencyDB.country
 (
-    id        INT         NOT NULL AUTO_INCREMENT primary key unique,
-    name      VARCHAR(40) NOT NULL,
-    locale_id INT         NOT NULL REFERENCES locale (id) ON DELETE CASCADE ON UPDATE RESTRICT
-);
-
-CREATE TABLE IF NOT EXISTS travel_agencyDB.tour_tr
-(
-    id             INT NOT NULL AUTO_INCREMENT primary key unique,
-    tour_name_tr   VARCHAR(45),
-    description_tr VARCHAR(45),
-    type_tour_id   INT NOT NULL REFERENCES type_tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
-    country_id     INT NOT NULL REFERENCES country (id) ON DELETE CASCADE ON UPDATE RESTRICT,
-    tour_id        INT NOT NULL REFERENCES tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
-    locale_id      INT NOT NULL REFERENCES locale (id) ON DELETE CASCADE ON UPDATE RESTRICT
+    id      INT         NOT NULL AUTO_INCREMENT primary key unique,
+    name_en VARCHAR(40) NOT NULL,
+    name_ru VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS travel_agencyDB.tour
 (
-    id           INT   NOT NULL AUTO_INCREMENT primary key unique,
-    price        FLOAT NOT NULL,
-    count_people INT   NOT NULL,
-    mark_hotel   INT   NOT NULL,
-    start_date   DATE  NOT NULL,
-    days         INT   NOT NULL,
-    discount     float NULL
+    id           INT         NOT NULL AUTO_INCREMENT primary key unique,
+    name_en      VARCHAR(40) NOT NULL,
+    name_ru      VARCHAR(40) NOT NULL,
+    desc_en      VARCHAR(40) NOT NULL,
+    desc_ru      VARCHAR(40) NOT NULL,
+    price        FLOAT       NOT NULL,
+    count_people INT         NOT NULL,
+    mark_hotel   INT         NOT NULL,
+    start_date   DATE        NOT NULL,
+    days         INT         NOT NULL,
+    discount     float       NULL,
+    type_tour_id INT         NOT NULL REFERENCES type_tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
+    country_id   INT         NOT NULL REFERENCES country (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS travel_agencyDB.role

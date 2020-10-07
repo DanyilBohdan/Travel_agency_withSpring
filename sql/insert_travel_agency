@@ -1,0 +1,39 @@
+use travel_agencydb;
+
+insert into type_tour (name_en, name_ru)
+values ('rest', 'отдых'),
+       ('excursion', 'екскурсия'),
+       ('shopping', 'шопинг');
+
+insert into tour (name_en, name_ru, desc_en, desc_ru, price, count_people, mark_hotel,
+                  start_date, days, discount, type_tour_id, country_id)
+values ('Kaya Belek Hotel', 'Отель Kaya Belek', 'Best Tour', 'Лучший тур', '350', '5', '3', '2020-10-15', '4', '0.1',
+        '1', '1'),
+       ('Paradise Beach Resort', 'Курорт Райский остров', 'Best Tour', 'Лучший тур', '1900', '4', '4', '2020-10-05',
+        '3', '0', '2', '2'),
+       ('Kankuna', 'Канкуна', 'Best Tour', 'Лучший тур', '1900', '2', '5', '2020-10-25', '10', '0.2', '2', '3'),
+       ('Chairmen Hotel Doha', 'Отель Chairmen Доха', 'Best Tour', 'Лучший тур', '1200', '2', '4', '2020-09-29', '4',
+        '0', '3', '4');
+
+insert into role (name)
+values ('user'),
+       ('manager'),
+       ('admin');
+
+insert into user (username, password, email, phone_number, status, role_id)
+values ('Admin', 'admin', 'admin@gmail.com', '+380936436049', true, '3'),
+       ('Valentin', '1111', 'valentin@gmail.com', '+380123456712', true, '2'),
+       ('Daria', '1111', 'daria@gmail.com', '+380123456712', true, '1'),
+       ('Jon', '1111', 'jon_one@gmail.com', '+380123456712', true, '1');
+
+insert into travel_agencydb.order (status, tour_id, user_id)
+values ('registered', '1', '3'),
+       ('paid', '2', '3'),
+       ('registered', '3', '4'),
+       ('paid', '4', '4');
+
+insert into country (name_en, name_ru)
+values ('France', 'Франция'),
+       ('Mexico', 'Мексика'),
+       ('Tanzania', 'Танзания'),
+       ('Doha', 'Доха');

@@ -5,3 +5,24 @@
     border: 3px solid #fff; /* Белая рамка */
     border-radius: 10px; /* Радиус скругления */
 }
+
+.submit {
+    background-color: #8ec7ca;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.sub_login {
+    background-color: #8ec7ca;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin-left: auto;
+    margin-right: 0em;
+    cursor: pointer;
+}

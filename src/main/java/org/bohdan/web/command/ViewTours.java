@@ -25,7 +25,7 @@ public class ViewTours extends Command {
 
         List<TourView> tours = new TourDao().findAllByLocale("RU");
 
-        logger.trace("Found in DB: menuItemsList --> " + tours);
+        logger.trace("Found in DB: tours --> " + tours.toString());
 
 //        Collections.sort(tours, new Comparator<TourView>() {
 //            @Override
