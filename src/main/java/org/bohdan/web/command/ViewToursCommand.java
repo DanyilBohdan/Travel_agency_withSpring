@@ -8,22 +8,33 @@ import org.bohdan.web.Path;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-public class ViewTours extends Command {
+public class ViewToursCommand extends Command {
 
-    private final static Logger logger = Logger.getLogger(ViewTours.class);
+    private final static Logger logger = Logger.getLogger(ViewToursCommand.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-        logger.info("LOG: locale = " + request.getParameter("locale"));
+        String localeToSet = request.getParameter("localeToSet");
 
-        List<TourView> tours = new TourDao().findAllByLocale("RU");
+        if (localeToSet != null && !localeToSet.isEmpty()) {
+            HttpSession session = request.getSession();
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", localeToSet);
+            session.setAttribute("defaultLocale", localeToSet);
+            session.setAttribute("localeDef", localeToSet);
+        }
+        logger.info("LOG: locale = " + localeToSet);
+
+        List<TourView> tours = null;
+        if (localeToSet != null) {
+            tours = new TourDao().findAllByLocale(localeToSet);
+        }
 
         logger.trace("Found in DB: tours --> " + tours.toString());
 
@@ -36,6 +47,8 @@ public class ViewTours extends Command {
         tours.sort((o1, o2) -> (int) o1.getId() - o2.getId());
 
         request.setAttribute("tours", tours);
+
+        request.setAttribute("check_login", Path.LOGIN_CHECK);
 
         logger.debug("Command finished");
 

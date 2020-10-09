@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 
 public class LoginCommand extends Command {
@@ -50,15 +51,15 @@ public class LoginCommand extends Command {
             logger.trace("role --> " + role);
 
             if (role == Role.ADMIN) {
-                forward = Path.ACCOUNT_USER;
+                forward = Path.COMMAND_ACCOUNT;
             }
 
             if (role == Role.MANAGER) {
-                forward = Path.ACCOUNT_USER;
+                forward = Path.COMMAND_ACCOUNT;
             }
 
             if (role == Role.USER) {
-                forward = Path.ACCOUNT_USER;
+                forward = Path.COMMAND_ACCOUNT;
             }
 
             session.setAttribute("user", user);
@@ -68,6 +69,12 @@ public class LoginCommand extends Command {
             logger.trace("Set the session attribute: userRole --> " + role);
 
             logger.info("User " + user + " logged as " + role.toString().toLowerCase());
+            session.setAttribute("check_login", Path.LOGIN_CHECK = true);
+
+            String defLocale = (String) Config.get(session, "javax.servlet.jsp.jstl.fmt.locale");
+            logger.trace("LOG: defLocale = " + defLocale);
+
+            session.setAttribute("localeDef", defLocale);
         }
 
         logger.debug("Command finished");

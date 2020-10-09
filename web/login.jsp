@@ -5,7 +5,7 @@
     <%@include file="WEB-INF/jspf/head.jspf" %>
     <body>
     <table id="main-container">
-
+        <%@ include file="/WEB-INF/jspf/header.jspf" %>
         <tr>
             <td class="content center">
                 <form id="login_form" action="controller" method="post">

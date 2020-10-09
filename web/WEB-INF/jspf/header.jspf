@@ -1,17 +1,21 @@
-<%@ page import="org.bohdan.web.Path" %>
 <nav>
-<%--    <a class="bottomNav" href="<c:url value="/controller?command=viewTours" />" ><b>Main</b></a>--%>
-    <form method="post" action='<c:url value="/controller" />' style="display:inline;">
+    <form method="post" action="controller" style="display:inline;">
         <input type="hidden" name="command" value="viewTours">
+        <input type="hidden" name="localeToSet" value="${localeDef}">
         <input class="submit" type="submit" value="MAIN">
     </form>
     |
-    <a class="sub_login" href="<c:url value="/login.jsp" />" ><b>LogIn</b></a>
-<%--    <form method="post" action='<c:url value="/controller" />' style="display:inline;">--%>
-<%--        <input type="hidden" name="command" value="viewTours">--%>
-<%--        <input type="submit" value="LOGIN">--%>
-<%--        |--%>
-<%--        <input type="hidden" name="command" value="viewTours">--%>
-<%--        <input type="submit" value="MAIN">--%>
-<%--    </form>--%>
+    <c:choose>
+        <c:when test="${check_login == 'true'}">
+            <form method="post" action="controller" style="display:inline;">
+                <input type="hidden" name="command" value="logout">
+                <input class="submit" type="submit" value="LOGOUT">
+            </form>
+            <br/>
+        </c:when>
+        <c:otherwise>
+            <a class="sub_login" href="<c:url value="/login.jsp" />">LOGIN</a>
+            <br/>
+        </c:otherwise>
+    </c:choose>
 </nav>

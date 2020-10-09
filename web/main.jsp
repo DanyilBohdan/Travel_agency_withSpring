@@ -9,30 +9,26 @@
 <table id="main-container">
 
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
-
-
+    <%@ include file="/WEB-INF/jspf/locale.jspf" %>
     <tr>
         <td class="content">
 
-            <form id="main" action="controller" method="get">
-                <input type="hidden" name="command" value="viewTours">
+            <form id="main" action="controller" method="post">
+                <input type="hidden" name="command" value="viewTour">
 
-                <h1>Tour Agency</h1>
+                <h1><fmt:message key="main.name"/></h1>
                 <%-- <p><a href='<c:url value="/create" />'>Create new <b>TOUR</b></a></p>--%>
                 <table>
-                    <%--                    <tr>--%>
-                    <%--                        <th>Name</th>--%>
-                    <%--                        <th>Type</th>--%>
-                    <%--                        <th>Country</th>--%>
-                    <%--                        <th>Price</th>--%>
-                    <%--                    </tr>--%>
                     <c:forEach var="tour" items="${tours}">
                         <tr class="tour_view">
                             <td>
-                                Name: ${tour.name}<br>
-                                Type: ${tour.type}<br>
-                                Country: ${tour.country}<br>
-                                Price: ${tour.price}$
+                                <fmt:message key="list_tour_jsp.table.header.name"/>: ${tour.name}<br>
+                                <fmt:message key="list_tour_jsp.table.header.type"/>: ${tour.type}<br>
+                                <fmt:message key="list_tour_jsp.table.header.country"/>: ${tour.country}<br>
+                                <fmt:message key="list_tour_jsp.table.header.price"/>: ${tour.price}<br>
+                                <input type="hidden" name="command" value="viewTour">
+                                <input type="hidden" name="id" value="${tour.id}">
+                                <input type="submit" value="View">
                             </td>
                                 <%--                            <td>--%>
                                 <%--                                <a href='<c:url value="/edit?id=${tour.id}" />'>Edit</a> |--%>
@@ -41,6 +37,7 @@
                                 <%--                                    <input type="submit" value="Delete">--%>
                                 <%--                                </form>--%>
                                 <%--                            </td>--%>
+
                         </tr>
                     </c:forEach>
 

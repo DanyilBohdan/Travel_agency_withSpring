@@ -42,6 +42,18 @@ public class TourDao {
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id";
 
+    private static final String SQL_FIND_ID_EN =
+            "select tour.id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
+                    "tour.desc_en as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
+                    "from tour, type_tour, country\n" +
+                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id and tour.id = ?";
+
+    private static final String SQL_FIND_ID_RU =
+            "select tour.id, tour.name_ru as name, type_tour.name_ru as type, country.name_ru as country, tour.price, \n" +
+                    "tour.desc_ru as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
+                    "from tour, country, type_tour\n" +
+                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id and tour.id = ?";
+
     private static final String SQL_FIND_ID =
             "select * from tour WHERE tour.id = ?";
 
@@ -168,6 +180,31 @@ public class TourDao {
             ex.printStackTrace();
         }
         return tours;
+    }
+
+    public TourView findByIdLocale(String locale, Integer id) {
+        if (locale.equals("EN")) {
+            return findById(SQL_FIND_ID_EN, id);
+        }
+        if (locale.equals("RU")) {
+            return findById(SQL_FIND_ID_RU, id);
+        }
+        return null;
+    }
+
+    private TourView findById(String sql, Integer id) {
+        TourView tour = null;
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                tour = mapTourView(rs);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return tour;
     }
 
     public List<TourView> findAllByTypeLocale(String locale, String var) {

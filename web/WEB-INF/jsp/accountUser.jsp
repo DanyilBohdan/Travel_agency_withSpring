@@ -6,10 +6,10 @@
 <%@include file="/WEB-INF/jspf/head.jspf" %>
 <body>
     <table id="main-container">
+        <%@ include file="/WEB-INF/jspf/header.jspf" %>
         <tr>
             <td class="content center">
                 <form id="personalAcc" action="controller" method="post">
-
                     <input type="hidden" name="command" value="accountUser"/>
 
                     <fieldset >

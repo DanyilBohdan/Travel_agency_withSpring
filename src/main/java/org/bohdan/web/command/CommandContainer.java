@@ -12,9 +12,11 @@ public class CommandContainer {
     private static Map<String, Command> commandMap = new TreeMap<String, Command>();
 
     static {
-        commandMap.put("viewTours", new ViewTours());
+        commandMap.put("viewTours", new ViewToursCommand());
+        commandMap.put("viewTour", new ViewTourCommand());
         commandMap.put("login", new LoginCommand());
-        commandMap.put("account", new AccountUser());
+        commandMap.put("logout", new LogoutCommand());
+        commandMap.put("accountUser", new AccountUser());
         commandMap.put("errorPage", new NoCommand());
 
         logger.debug("Command container was successfully initialized");
