@@ -23,6 +23,8 @@ public class LogoutCommand extends Command{
             Path.LOGIN_CHECK = false;
         }
 
+        request.setAttribute("pageMain", Path.VIEW_TOURS);
+
         logger.debug("Command finished");
         return Path.PAGE_LOGIN;
     }

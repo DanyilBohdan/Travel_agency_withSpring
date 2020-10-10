@@ -45,7 +45,7 @@
                             <fmt:message key="account.label.status"/>
                         </legend>
                         <p>
-                            <c:if test="${user.status} == false">
+                            <c:if test="${user.status == false}">
                                 <fmt:message key="account.label.block"/>
                             </c:if>
                         </p>

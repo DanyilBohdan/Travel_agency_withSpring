@@ -16,26 +16,26 @@
     <label>TypeEN</label>
     <select name="typeEN">
         <c:forEach var="item" items="${typeTourOut}">
-            <option selected value="${typeDef.name_en}">${item.name_en}</option>
+            <option value="${typeDef.name_en}" ${typeDef.name_en == item.name_en ? 'selected' : ''}>${item.name_en}</option>
         </c:forEach>
     </select><br>
     <label>TypeRU</label>
     <select name="typeIn">
         <c:forEach var="item" items="${typeTourOut}">
-            <option selected value="${typeDef.name_ru}">${item.name_ru}</option>
+            <option value="${typeDef.name_ru}" ${typeDef.name_ru == item.name_ru ? 'selected' : ''}>${item.name_ru}</option>
         </c:forEach>
     </select><br>
 
     <label>CountryEN</label>
     <select name="countryEN" >
         <c:forEach var="item" items="${countryOut}">
-            <option selected value="${countryDef.name_en}">${item.name_en}</option>
+            <option value="${countryDef.name_en} ${countryDef.name_en == item.name_en ? 'selected' : ''}">${item.name_en}</option>
         </c:forEach>
     </select><br>
     <label>CountryRU</label>
     <select name="countryRU">
         <c:forEach var="item" items="${countryOut}">
-            <option selected value="${countryDef.name_ru}">${item.name_ru}</option>
+            <option value="${countryDef.name_ru} ${countryDef.name_ru == item.name_ru ? 'selected' : ''}">${item.name_ru}</option>
         </c:forEach>
     </select><br>
 
@@ -58,6 +58,7 @@
     <label>Discount</label>
     <input name="discount" value="${tour.discount}" min="0" max="1">
     <br><br>
+    <input type="hidden" name="command" value="editTour">
     <input type="submit" value="Save">
 </form>
 </body>

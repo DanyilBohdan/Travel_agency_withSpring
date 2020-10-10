@@ -1,7 +1,8 @@
-package org.bohdan.web.command;
+package org.bohdan.web.command.user;
 
 import org.apache.log4j.Logger;
 import org.bohdan.web.Path;
+import org.bohdan.web.command.Command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,8 @@ public class AccountUser extends Command {
         logger.trace("LOG: defLocale = " + defLocale);
 
         session.setAttribute("localeDef", defLocale);
+
+        request.setAttribute("pageMain", Path.VIEW_TOURS);
 
         return Path.ACCOUNT_USER;
     }

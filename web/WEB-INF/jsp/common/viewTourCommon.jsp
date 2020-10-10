@@ -5,6 +5,8 @@
 <%@include file="/WEB-INF/jspf/head.jspf" %>
 <body>
 
+<%@include file="/WEB-INF/jspf/header.jspf"%>
+
 <form method="post" action="controller">
     <fieldset>
         <legend>

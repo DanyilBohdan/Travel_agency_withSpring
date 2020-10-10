@@ -30,12 +30,12 @@
 
     <context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
-        <param-value>ru</param-value>
+        <param-value>en</param-value>
     </context-param>
 
     <context-param>
         <param-name>locales</param-name>
-        <param-value>ru en</param-value>
+        <param-value>en ru</param-value>
     </context-param>
 
     <!--    Encoding support filter-->
@@ -61,7 +61,9 @@
         <filter-class>org.bohdan.web.filter.CommandAccessFilter</filter-class>
         <init-param>
             <param-name>admin</param-name>
-            <param-value>viewTours</param-value>
+            <param-value>
+                viewTours accountAdmin listTours createTour editTour deleteTour listUsers searchUser updateStatus updateRole
+            </param-value>
         </init-param>
         <init-param>
             <param-name>manager</param-name>
@@ -69,15 +71,15 @@
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <param-value>viewTours</param-value>
+            <param-value>viewTours accountUser logout</param-value>
         </init-param>
         <init-param>
             <param-name>common</param-name>
-            <param-value>noCommand viewTours logout accountUser viewTour</param-value>
+            <param-value>noCommand viewTours viewTour</param-value>
         </init-param>
         <init-param>
             <param-name>out-of-control</param-name>
-            <param-value>login viewTours logout accountUser viewTour</param-value>
+            <param-value>noCommand login viewTours viewTour</param-value>
         </init-param>
     </filter>
 

@@ -9,7 +9,6 @@
 <table id="main-container">
 
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
-    <%@ include file="/WEB-INF/jspf/locale.jspf" %>
     <tr>
         <td class="content">
 
@@ -17,7 +16,6 @@
                 <input type="hidden" name="command" value="viewTour">
 
                 <h1><fmt:message key="main.name"/></h1>
-                <%-- <p><a href='<c:url value="/create" />'>Create new <b>TOUR</b></a></p>--%>
                 <table>
                     <c:forEach var="tour" items="${tours}">
                         <tr class="tour_view">
@@ -30,14 +28,6 @@
                                 <input type="hidden" name="id" value="${tour.id}">
                                 <input type="submit" value="View">
                             </td>
-                                <%--                            <td>--%>
-                                <%--                                <a href='<c:url value="/edit?id=${tour.id}" />'>Edit</a> |--%>
-                                <%--                                <form method="post" action='<c:url value="/delete" />' style="display:inline;">--%>
-                                <%--                                    <input type="hidden" name="id" value="${tour.id}">--%>
-                                <%--                                    <input type="submit" value="Delete">--%>
-                                <%--                                </form>--%>
-                                <%--                            </td>--%>
-
                         </tr>
                     </c:forEach>
 

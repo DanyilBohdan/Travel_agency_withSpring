@@ -51,15 +51,21 @@ public class LoginCommand extends Command {
             logger.trace("role --> " + role);
 
             if (role == Role.ADMIN) {
-                forward = Path.COMMAND_ACCOUNT;
+                forward = Path.COMMAND_ACCOUNT_ADMIN;
+                request.setAttribute("pageMain", Path.LIST_TOURS);
+                request.setAttribute("pageAcc", Path.AC_ADMIN);
             }
 
             if (role == Role.MANAGER) {
                 forward = Path.COMMAND_ACCOUNT;
+                request.setAttribute("pageMain", Path.VIEW_TOURS);
+                request.setAttribute("pageAcc", Path.AC_USER);
             }
 
             if (role == Role.USER) {
                 forward = Path.COMMAND_ACCOUNT;
+                request.setAttribute("pageMain", Path.VIEW_TOURS);
+                request.setAttribute("pageAcc", Path.AC_USER);
             }
 
             session.setAttribute("user", user);

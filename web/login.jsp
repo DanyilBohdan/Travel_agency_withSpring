@@ -27,7 +27,7 @@
 
                     <input type="submit" value='<fmt:message key="login_jsp.button.login"/>'><br>
 
-                    <<fmt:message key="login_jsp.label.registration"/>
+                    <fmt:message key="login_jsp.label.registration"/>
                 </form>
             </td>
         </tr>

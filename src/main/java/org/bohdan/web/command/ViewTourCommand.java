@@ -31,6 +31,10 @@ public class ViewTourCommand extends Command{
 
         request.setAttribute("tour", tour);
 
+        request.setAttribute("pageMain", Path.VIEW_TOURS);
+
+        request.setAttribute("pageAcc", Path.AC_USER);
+
         return Path.VIEW_TOUR_ID;
     }
 }

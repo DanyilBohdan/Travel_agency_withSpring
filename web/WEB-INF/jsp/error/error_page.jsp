@@ -6,7 +6,6 @@
     <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <body>
     <table id="main-content">
-        <%@ include file="/WEB-INF/jspf/header.jspf"%>
         <tr>
             <td class="content">
                 <h2 class="error">

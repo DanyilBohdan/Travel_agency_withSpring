@@ -1,30 +1,33 @@
-package org.bohdan.web.command;
+package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.web.Path;
+import org.bohdan.web.command.Command;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/delete")
-public class DeleteTour extends HttpServlet {
+public class DeleteTour extends Command {
 
     private static final Logger logger = Logger.getLogger(DeleteTour.class);
 
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+
         try {
-            int id = Integer.parseInt(req.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
             boolean check = new TourDao().delete(id);
             logger.info("log: delete Tour = " + check);
-            resp.sendRedirect(req.getContextPath() + "/");
+
+            return Path.COMMAND_TOURS_ADMIN;
+
         } catch (Exception ex) {
-            getServletContext().getRequestDispatcher(Path.ERROR_PAGE).forward(req, resp);
+            return Path.ERROR_PAGE;
         }
     }
 }

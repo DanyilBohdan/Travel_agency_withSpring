@@ -6,7 +6,7 @@
 <body>
 <%@include file="/WEB-INF/jspf/header.jspf" %>
 <h1>New Tour</h1>
-<form method="post">
+<form method="post" >
 
     <label>NameEN</label>
     <input name="nameEN"/><br>
@@ -58,6 +58,7 @@
     <label>Discount</label>
     <input name="discount" min="0" max="1"/>
     <br><br>
+    <input type="hidden" name="command" value="createTour">
     <input type="submit" value="Save"/>
 </form>
 </body>

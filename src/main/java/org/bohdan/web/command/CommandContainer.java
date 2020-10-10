@@ -1,6 +1,8 @@
 package org.bohdan.web.command;
 
 import org.apache.log4j.Logger;
+import org.bohdan.web.command.admin.*;
+import org.bohdan.web.command.user.AccountUser;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -12,11 +14,29 @@ public class CommandContainer {
     private static Map<String, Command> commandMap = new TreeMap<String, Command>();
 
     static {
+        //common
         commandMap.put("viewTours", new ViewToursCommand());
         commandMap.put("viewTour", new ViewTourCommand());
         commandMap.put("login", new LoginCommand());
+
         commandMap.put("logout", new LogoutCommand());
+
+        //user
         commandMap.put("accountUser", new AccountUser());
+
+        //admin
+        commandMap.put("accountAdmin", new AccountAdmin());
+        commandMap.put("listTours", new ListTours());
+        commandMap.put("createTour", new CreateTour());
+        commandMap.put("editTour", new EditTour());
+        commandMap.put("deleteTour", new DeleteTour());
+        commandMap.put("listOrders", new ListOrders());
+        commandMap.put("listUsers", new ListUsers());
+        commandMap.put("searchUser", new SearchUser());
+        commandMap.put("updateStatus", new UpdateStatusUser());
+        commandMap.put("updateRole", new UpdateRoleUser());
+
+        //error
         commandMap.put("errorPage", new NoCommand());
 
         logger.debug("Command container was successfully initialized");

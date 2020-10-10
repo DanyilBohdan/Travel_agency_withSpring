@@ -1,4 +1,4 @@
-package org.bohdan.web.command;
+package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.CountryDao;
@@ -8,47 +8,36 @@ import org.bohdan.db.entity.Country;
 import org.bohdan.db.entity.Tour;
 import org.bohdan.db.entity.TypeTour;
 import org.bohdan.web.Path;
+import org.bohdan.web.command.Command;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-@WebServlet("/edit")
-public class EditTour extends HttpServlet {
+public class EditTour extends Command {
 
     private static final Logger logger = Logger.getLogger(EditTour.class);
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
             int id = Integer.parseInt(req.getParameter("id"));
-            Tour tour = new TourDao().findIDTour(id);
-            TypeTour typeTour = new TypeTourDao().findEntityById(tour.getType_tour_id());
-            Country country = new CountryDao().findEntityById(tour.getCountry_id());
-            if (tour != null || typeTour != null || country != null) {
-                req.setAttribute("tour", tour);
+            Tour tourOld = new TourDao().findIDTour(id);
+            TypeTour typeTour = new TypeTourDao().findEntityById(tourOld.getType_tour_id());
+            Country country = new CountryDao().findEntityById(tourOld.getCountry_id());
+            if (tourOld != null || typeTour != null || country != null) {
+                req.setAttribute("tour", tourOld);
                 req.setAttribute("typeTourOut", new TypeTourDao().findAll());
                 req.setAttribute("typeDef", typeTour);
                 req.setAttribute("countryOut", new CountryDao().findAll());
                 req.setAttribute("countryDef", country);
-                getServletContext().getRequestDispatcher(Path.EDIT_TOUR).forward(req, resp);
             } else {
-                getServletContext().getRequestDispatcher(Path.ERROR_PAGE).forward(req, resp);
+                return Path.ERROR_PAGE;
             }
-        } catch (Exception ex) {
-            getServletContext().getRequestDispatcher(Path.ERROR_PAGE).forward(req, resp);
-        }
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
             String nameEN = req.getParameter("nameEN");
             String nameRU = req.getParameter("nameRU");
             logger.info("Log: name : " + nameEN +", " + nameRU);
@@ -75,8 +64,6 @@ public class EditTour extends HttpServlet {
             float discount = Float.parseFloat(req.getParameter("discount"));
             logger.info("Log: discount : " + discount);
 
-            int id = Integer.parseInt(req.getParameter("id"));
-
             Tour tour = Tour.createTour(nameEN, nameRU, descriptionEN, descriptionRU, price, count_people,
                     mark_hotel, start_date, days, discount, new TypeTourDao().findByName(typeEN).getId(), new CountryDao().findByName(countryEN).getId());
 
@@ -84,11 +71,10 @@ public class EditTour extends HttpServlet {
             boolean check = new TourDao().update(tour);
             logger.info("Log: update Tour  check : " + check);
 
-            resp.sendRedirect(req.getContextPath() + Path.MAIN);
+            return Path.COMMAND_TOURS_ADMIN;
 
         } catch (Exception ex) {
-            logger.error("Log: " + ex);
-            getServletContext().getRequestDispatcher(Path.EDIT_TOUR).forward(req, resp);
+            return Path.EDIT_TOUR;
         }
     }
 }

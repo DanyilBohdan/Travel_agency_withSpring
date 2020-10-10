@@ -1,9 +1,10 @@
-package org.bohdan.web.command;
+package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.bean.TourView;
 import org.bohdan.web.Path;
+import org.bohdan.web.command.Command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class ViewToursCommand extends Command {
+public class ListTours extends Command {
 
-    private final static Logger logger = Logger.getLogger(ViewToursCommand.class);
+    private final static Logger logger = Logger.getLogger(ListTours.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
@@ -28,7 +29,7 @@ public class ViewToursCommand extends Command {
 //            session.setAttribute("localeDef", localeToSet);
 //        }
 //        logger.info("LOG: locale = " + localeToSet);
-//
+
 //        List<TourView> tours = null;
 //        if (localeToSet != null) {
 //            tours = new TourDao().findAllByLocale(localeToSet);
@@ -36,26 +37,19 @@ public class ViewToursCommand extends Command {
 
         List<TourView> tours = new TourDao().findAllByLocale("EN");
 
-        logger.trace("Found in DB: tours --> " + tours.toString());
+        logger.trace("Found in DB: tours --> " + tours);
 
-//        Collections.sort(tours, new Comparator<TourView>() {
-//            @Override
-//            public int compare(TourView o1, TourView o2) {
-//                return (int) o1.getId() - o2.getId();
-//            }
-//        });
         tours.sort((o1, o2) -> (int) o1.getId() - o2.getId());
 
         request.setAttribute("tours", tours);
 
         request.setAttribute("check_login", Path.LOGIN_CHECK);
 
-        request.setAttribute("pageMain", Path.VIEW_TOURS);
-
-        request.setAttribute("pageAcc", Path.AC_USER);
+        request.setAttribute("pageMain", Path.LIST_TOURS);
+        request.setAttribute("pageAcc", Path.AC_ADMIN);
 
         logger.debug("Command finished");
 
-        return Path.PAGE_MAIN;
+        return Path.LIST_TOURS_ADMIN;
     }
 }
