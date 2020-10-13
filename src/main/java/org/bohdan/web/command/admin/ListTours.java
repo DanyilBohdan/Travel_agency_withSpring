@@ -43,11 +43,6 @@ public class ListTours extends Command {
 
         request.setAttribute("tours", tours);
 
-        request.setAttribute("check_login", Path.LOGIN_CHECK);
-
-        request.setAttribute("pageMain", Path.LIST_TOURS);
-        request.setAttribute("pageAcc", Path.AC_ADMIN);
-
         logger.debug("Command finished");
 
         return Path.LIST_TOURS_ADMIN;

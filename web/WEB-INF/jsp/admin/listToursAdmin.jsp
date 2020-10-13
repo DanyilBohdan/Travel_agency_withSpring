@@ -30,10 +30,9 @@
                                 <fmt:message key="list_tour_jsp.table.header.type"/>: ${tour.type}<br>
                                 <fmt:message key="list_tour_jsp.table.header.country"/>: ${tour.country}<br>
                                 <fmt:message key="list_tour_jsp.table.header.price"/>: ${tour.price}<br>
-
                             </td>
                             <td>
-                                <form action="controller" method="get">
+                                <form action="controller" method="post">
                                     <input type="hidden" name="command" value="editTour">
                                     <input type="hidden" name="id" value="${tour.id}">
                                     <input type="submit" value="Edit">

@@ -24,6 +24,9 @@ public class TourDao {
             "UPDATE tour SET name_en = ?, name_ru = ?, desc_en = ?, desc_ru =?, price = ?, count_people = ?, mark_hotel = ?, " +
                     "start_date = ?, days = ?, discount = ?, type_tour_id = ?, country_id = ? WHERE id = ?";
 
+    public static final String SQL_UPDATE_TOUR_DISCOUNT =
+            "UPDATE tour SET discount = ? WHERE id = ?";
+
     private static final String SQL_DELETE_TOUR_BY_ID =
             "DELETE FROM tour WHERE id = ?";
 
@@ -227,7 +230,7 @@ public class TourDao {
         return null;
     }
 
-    public List<TourView> findAllVarByType(String sql, String variable) {
+    private List<TourView> findAllVarByType(String sql, String variable) {
         List<TourView> tours = new ArrayList<>();
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(sql)) {
@@ -321,6 +324,18 @@ public class TourDao {
         }
     }
 
+    public boolean updateDiscount(float discount, Integer id) {
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TOUR_DISCOUNT)) {
+            statement.setFloat(1, discount);
+            statement.setInt(2, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     //============================================
     //      DELETE TOUR
     //============================================
@@ -347,12 +362,12 @@ public class TourDao {
         tour.setName_ru(rs.getString(Fields.NAME_RU));
         tour.setDesc_en(rs.getString(Fields.DESCRIPTION_EN));
         tour.setDesc_ru(rs.getString(Fields.DESCRIPTION_RU));
-        tour.setPrice(rs.getFloat(Fields.PRICE));
         tour.setCount_people(rs.getInt(Fields.COUNT_PEOPLE));
+        tour.setPrice(rs.getFloat(Fields.PRICE));
         tour.setMark_hotel(rs.getInt(Fields.MARK_HOTEL));
         tour.setStart_date(rs.getDate(Fields.START_DATE));
         tour.setDays(rs.getInt(Fields.DAYS));
-        tour.setDiscount(rs.getInt(Fields.DISCOUNT));
+        tour.setDiscount(rs.getFloat(Fields.DISCOUNT));
         tour.setType_tour_id(rs.getInt(Fields.TYPE_TOUR_ID));
         tour.setCountry_id(rs.getInt(Fields.COUNTRY_ID));
         return tour;
@@ -370,7 +385,7 @@ public class TourDao {
         tourView.setMark_hotel(rs.getInt(Fields.MARK_HOTEL));
         tourView.setStart_date(rs.getDate(Fields.START_DATE));
         tourView.setDays(rs.getInt(Fields.DAYS));
-        tourView.setDiscount(rs.getInt(Fields.DISCOUNT));
+        tourView.setDiscount(rs.getFloat(Fields.DISCOUNT));
         return tourView;
     }
 

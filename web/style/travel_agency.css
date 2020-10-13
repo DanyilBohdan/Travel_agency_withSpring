@@ -20,9 +20,21 @@
     background-color: #8ec7ca;
     border: none;
     color: white;
-    padding: 16px 32px;
+    padding: 20px 32px;
     text-decoration: none;
     margin-left: auto;
-    margin-right: 0em;
+    margin-right: auto;
     cursor: pointer;
+}
+
+/*details*/
+details summary {
+    width: -moz-fit-content;
+    width: fit-content;
+    transition: color .3s;
+    cursor: pointer;
+}
+details summary:hover,
+details[open] summary {
+    color: FireBrick;
 }

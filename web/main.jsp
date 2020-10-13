@@ -5,33 +5,34 @@
 <c:set var="title" value="Main" scope="page"/>
 <%@include file="WEB-INF/jspf/head.jspf" %>
 <body>
-
-<table id="main-container">
-
+<table>
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
+    <%@ include file="/WEB-INF/jspf/locale.jspf" %>
     <tr>
-        <td class="content">
-
+        <td>
             <form id="main" action="controller" method="post">
-                <input type="hidden" name="command" value="viewTour">
-
                 <h1><fmt:message key="main.name"/></h1>
-                <table>
+                <div class="card-deck">
                     <c:forEach var="tour" items="${tours}">
-                        <tr class="tour_view">
-                            <td>
-                                <fmt:message key="list_tour_jsp.table.header.name"/>: ${tour.name}<br>
-                                <fmt:message key="list_tour_jsp.table.header.type"/>: ${tour.type}<br>
-                                <fmt:message key="list_tour_jsp.table.header.country"/>: ${tour.country}<br>
-                                <fmt:message key="list_tour_jsp.table.header.price"/>: ${tour.price}<br>
+                        <div class="card border-dark mb-3" style="max-width: 25rem;">
+                            <div class="card-header">${tour.name}</div>
+                            <div class="card-body text-dark">
+                                <p class="card-text">
+                                    <fmt:message key="list_tour_jsp.table.header.country"/>: ${tour.country}<br>
+                                    <fmt:message key="list_tour_jsp.table.header.type"/>: ${tour.type}<br>
+                                    <fmt:message key="list_tour_jsp.table.header.price"/>: ${tour.price}<br>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent border-success">
                                 <input type="hidden" name="command" value="viewTour">
                                 <input type="hidden" name="id" value="${tour.id}">
-                                <input type="submit" value="View">
-                            </td>
-                        </tr>
+                                <button type="submit" class="btn btn-outline-dark">
+                                    <fmt:message key="list_tour_jsp.table.view"/>
+                                </button>
+                            </div>
+                        </div>
                     </c:forEach>
-
-                </table>
+                </div>
             </form>
         </td>
     </tr>

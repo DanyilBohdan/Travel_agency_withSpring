@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 
 public class LogoutCommand extends Command{
@@ -17,13 +18,17 @@ public class LogoutCommand extends Command{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         logger.debug("Command starts");
 
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-            Path.LOGIN_CHECK = false;
+        HttpSession sessionOld = request.getSession(false);
+        String lang = (String) sessionOld.getAttribute("defLocale");
+        if (sessionOld != null) {
+            sessionOld.invalidate();
         }
 
-        request.setAttribute("pageMain", Path.VIEW_TOURS);
+        HttpSession session = request.getSession();
+        session.setAttribute("defLocale", lang);
+        logger.info("log: lang ----------------> " + lang);
+
+        Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
 
         logger.debug("Command finished");
         return Path.PAGE_LOGIN;

@@ -33,7 +33,7 @@
                     <td>
                         <label>Status:</label>
                         <form action="controller" method="post">
-                            <input type="hidden" name="command" value="updateStatus">
+                            <input type="hidden" name="command" value="updateStatusUser">
                             <input type="hidden" name="id" value="${user.id}">
                             <input type="submit" value="${user.status}">
                         </form><br>

@@ -25,8 +25,6 @@ public class SearchUser extends Command {
 
             request.setAttribute("users", users);
 
-            request.setAttribute("pageAcc", Path.AC_ADMIN);
-
             return Path.LIST_USERS_ADMIN;
         } catch (Exception ex){
             return Path.ERROR_PAGE;

@@ -1,26 +1,12 @@
 <%@include file="/WEB-INF/jspf/directive/taglib.jspf" %>
-<form method="get" action="controller">
-        <select name="localeToSet" onchange="submit()">
-                <c:choose>
-                        <c:when test="${not empty defaultLocale}">
-                                <option value="">${defaultLocale}[Default]</option>
-                        </c:when>
-                        <c:otherwise>
-                                <option value=""/>
-                        </c:otherwise>
-                </c:choose>
-                <option value="EN">EN</option>
-                <option value="RU">RU</option>
-        </select>
-        <input type="hidden" name="command" value="${page}">
-</form>
 
-<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
-<fmt:setLocale value="${language}" />
+<label><fmt:message key="locale_jspf.language"/></label>
+
 <form action="controller" method="post">
         <input type="hidden" name="command" value="viewTours">
-        <select id="language" name="language" onchange="submit()">
-                <option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
-                <option value="ru" ${language == 'ru' ? 'selected' : ''}>RU</option>
-        </select>
+        <select id="language" name="lang" onchange="submit()" class="form-control form-control-sm" style="width: 100px">
+                <c:forEach var="locale" items="${locales}">
+                        <option ${defLocale == locale ? 'selected' : ''}>${locale}</option>
+                </c:forEach>
+        </select><br>
 </form>

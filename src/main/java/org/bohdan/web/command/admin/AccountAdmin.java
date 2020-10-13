@@ -24,9 +24,6 @@ public class AccountAdmin extends Command {
 
         session.setAttribute("localeDef", defLocale);
 
-        request.setAttribute("pageMain", Path.LIST_TOURS);
-        request.setAttribute("pageAcc", Path.AC_ADMIN);
-
         return Path.ACCOUNT_ADMIN;
     }
 }

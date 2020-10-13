@@ -1,24 +1,111 @@
-<nav>
-    <form method="post" action="controller" style="display:inline;">
-        <input type="hidden" name="command" value="${pageMain}">
-        <input class="submit" type="submit" value="MAIN">
-    </form>
-    |
-    <c:choose>
-        <c:when test="${check_login == 'true'}">
-            <form method="post" action="controller" style="display:inline;">
-                <input type="hidden" name="command" value="logout">
-                <input class="submit" type="submit" value="LOGOUT">
-            </form>
-            <form method="post" action="controller" style="display:inline;">
-                <input type="hidden" name="command" value="${pageAcc}">
-                <input class="submit" type="submit" value="ACCOUNT">
-            </form>
-            <br/>
-        </c:when>
-        <c:otherwise>
-            <a class="sub_login" href="<c:url value="/login.jsp" />">LOGIN</a>
-            <br/>
-        </c:otherwise>
-    </c:choose>
+<%@ page import="org.bohdan.db.entity.Role" %>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><fmt:message key="main.name"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <c:choose>
+                <%--===========================================================================
+                This way we define the ADMIN MENU.
+                ===========================================================================--%>
+                <c:when test="${userRole.name == 'admin' }">
+                    <li class="nav-item">
+                        <form id="mainAdmin" method="post" action="controller">
+                            <input type="hidden" name="command" value="listTours">
+                            <a class="nav-link" href="#" onclick="document.getElementById('mainAdmin').submit()">
+                                <b><fmt:message key="header.main"/></b>
+                            </a>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form id="acAdmin" method="post" action="controller">
+                            <input type="hidden" name="command" value="accountAdmin">
+                            <a class="nav-link" href="#" onclick="document.getElementById('acAdmin').submit()">
+                                <b><fmt:message key="header.account"/></b>
+                            </a>
+                        </form>
+                    </li>
+                </c:when>
+                <%--===========================================================================
+                This way we define the MANAGER MENU.
+                ===========================================================================--%>
+                <c:when test="${userRole.name == 'manager' }">
+                    <li class="nav-item">
+                        <form id="mainManager" method="post" action="controller">
+                            <input type="hidden" name="command" value="listOrders">
+                            <a class="nav-link" href="#" onclick="document.getElementById('mainManager').submit()">
+                                <b><fmt:message key="header.main"/></b>
+                            </a>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form id="acManager" method="post" action="controller">
+                            <input type="hidden" name="command" value="accountManager">
+                            <a class="nav-link" href="#" onclick="document.getElementById('acManager').submit()">
+                                <b><fmt:message key="header.account"/></b>
+                            </a>
+                        </form>
+                    </li>
+                </c:when>
+                <%--===========================================================================
+                This way we define the USER MENU.
+                ===========================================================================--%>
+                <c:when test="${userRole.name == 'user'}">
+                    <li class="nav-item">
+                        <form id="mainUser" method="post" action="controller">
+                            <input type="hidden" name="command" value="viewTours">
+                            <a class="nav-link" href="#" onclick="document.getElementById('mainUser').submit()">
+                                <b><fmt:message key="header.main"/></b>
+                            </a>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form id="acUser" method="post" action="controller">
+                            <input type="hidden" name="command" value="accountUser">
+                            <a class="nav-link" href="#" onclick="document.getElementById('acUser').submit()">
+                                <b><fmt:message key="header.account"/></b>
+                            </a>
+                        </form>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="nav-item">
+                        <form id="mainCommon" method="post" action="controller">
+                            <input type="hidden" name="command" value="viewTours">
+                                <%--                            <button type="submit" class="btn btn-primary">MAIN</button>--%>
+                            <a class="nav-link" href="#" onclick="document.getElementById('mainCommon').submit()">
+                                <b><fmt:message key="header.main"/></b>
+                            </a>
+                        </form>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <c:choose>
+                    <c:when test="${not empty user}">
+                        <form id="logout" method="post" action="controller">
+                            <input type="hidden" name="command" value="logout">
+                            <a class="nav-link" href="#" onclick="document.getElementById('logout').submit()">
+                                <span class="glyphicon glyphicon-log-out"></span>
+                                <b><fmt:message key="header.logout"/></b>
+                            </a>
+                                <%--                            <input type="submit" class="btn btn-default btn-sm" value="LOGOUT">--%>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="nav-link" href="<c:url value="/login.jsp" />">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                            <b><fmt:message key="header.signIn"/></b>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
+        </ul>
+    </div>
 </nav>

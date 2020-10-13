@@ -1,7 +1,9 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
+import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.db.DAO.UserDao;
+import org.bohdan.db.entity.Order;
 import org.bohdan.db.entity.Role;
 import org.bohdan.db.entity.User;
 import org.bohdan.web.Path;
@@ -12,21 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UpdateRoleUser extends Command {
+public class UpdateStatusOrder extends Command {
 
-    private final static Logger logger = Logger.getLogger(SearchUser.class);
+    private static final Logger logger = Logger.getLogger(UpdateStatusOrder.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            logger.info("Log: id = " + id);
-            //User user = new UserDao().findEntityById(id);
-            String role = request.getParameter("selectRole");
-            boolean check = new UserDao().updateRole(Role.getId(role), id);
-            logger.info("Log: check update user role --> " + check);
+            logger.info("Log: id --> " + id);
+            String status = request.getParameter("selectStatus");
+            logger.info("Log: status --> " + status);
+            boolean check = new OrderDao().updateStatus(status, id);
+            logger.info("Log: check update status order --> " + check);
 
-            return Path.COMMAND_LIST_USER;
+            return Path.COMMAND_LIST_ORDERS;
         } catch (Exception ex) {
             return Path.ERROR_PAGE;
         }

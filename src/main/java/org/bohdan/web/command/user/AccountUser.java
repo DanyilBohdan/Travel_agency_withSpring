@@ -1,6 +1,9 @@
 package org.bohdan.web.command.user;
 
 import org.apache.log4j.Logger;
+import org.bohdan.db.DAO.OrderDao;
+import org.bohdan.db.bean.OrderTours;
+import org.bohdan.db.entity.User;
 import org.bohdan.web.Path;
 import org.bohdan.web.command.Command;
 
@@ -8,8 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
+import java.util.List;
 
 public class AccountUser extends Command {
 
@@ -18,15 +21,17 @@ public class AccountUser extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+        logger.debug("Command starts");
+
         HttpSession session = request.getSession();
 
-        String defLocale = (String) Config.get(session, "javax.servlet.jsp.jstl.fmt.locale");
-        logger.trace("LOG: defLocale = " + defLocale);
+        User user = (User) session.getAttribute("user");
 
-        session.setAttribute("localeDef", defLocale);
+        List<OrderTours> ordersUser = new OrderDao().findAllOrdersUsersLocale((String) session.getAttribute("defLocale"), user.getId());
 
-        request.setAttribute("pageMain", Path.VIEW_TOURS);
+        request.setAttribute("orders", ordersUser);
 
+        logger.debug("Command finished");
         return Path.ACCOUNT_USER;
     }
 }

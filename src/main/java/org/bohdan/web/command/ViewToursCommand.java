@@ -8,6 +8,8 @@ import org.bohdan.web.Path;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,24 +21,25 @@ public class ViewToursCommand extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-//        String localeToSet = request.getParameter("localeToSet");
-//
-//        if (localeToSet != null && !localeToSet.isEmpty()) {
-//            HttpSession session = request.getSession();
-//            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", localeToSet);
-//            session.setAttribute("defaultLocale", localeToSet);
-//            session.setAttribute("localeDef", localeToSet);
-//        }
-//        logger.info("LOG: locale = " + localeToSet);
-//
-//        List<TourView> tours = null;
-//        if (localeToSet != null) {
-//            tours = new TourDao().findAllByLocale(localeToSet);
-//        }
+        String lang = request.getParameter("lang");
+        logger.info("LOG: localeParam = " + lang);
 
-        List<TourView> tours = new TourDao().findAllByLocale("EN");
+        HttpSession session = request.getSession();
+        if (lang != null && !lang.isEmpty()) {
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+            session.setAttribute("defLocale", lang);
+        } else {
+            lang = (String) session.getAttribute("defLocale");
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+        }
+        logger.info("LOG: localeFinal = " + lang);
 
-        logger.trace("Found in DB: tours --> " + tours.toString());
+        List<TourView> tours = null;
+        if (lang != null) {
+            tours = new TourDao().findAllByLocale(lang);
+        }
+
+        logger.trace("Found in DB: tours --> " + tours);
 
 //        Collections.sort(tours, new Comparator<TourView>() {
 //            @Override
@@ -47,12 +50,6 @@ public class ViewToursCommand extends Command {
         tours.sort((o1, o2) -> (int) o1.getId() - o2.getId());
 
         request.setAttribute("tours", tours);
-
-        request.setAttribute("check_login", Path.LOGIN_CHECK);
-
-        request.setAttribute("pageMain", Path.VIEW_TOURS);
-
-        request.setAttribute("pageAcc", Path.AC_USER);
 
         logger.debug("Command finished");
 

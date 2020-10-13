@@ -30,10 +30,6 @@ public class ListUsers extends Command {
 
         logger.debug("Command finished");
 
-        request.setAttribute("pageMain", Path.LIST_USERS);
-
-        request.setAttribute("pageAcc", Path.AC_ADMIN);
-
         return Path.LIST_USERS_ADMIN;
     }
 }

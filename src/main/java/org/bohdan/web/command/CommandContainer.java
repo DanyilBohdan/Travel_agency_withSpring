@@ -3,6 +3,8 @@ package org.bohdan.web.command;
 import org.apache.log4j.Logger;
 import org.bohdan.web.command.admin.*;
 import org.bohdan.web.command.user.AccountUser;
+import org.bohdan.web.command.user.RegisterTour;
+import org.bohdan.web.command.user.RegisterTourView;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -23,6 +25,8 @@ public class CommandContainer {
 
         //user
         commandMap.put("accountUser", new AccountUser());
+        commandMap.put("registerTourView", new RegisterTourView());
+        commandMap.put("registerTour", new RegisterTour());
 
         //admin
         commandMap.put("accountAdmin", new AccountAdmin());
@@ -33,8 +37,10 @@ public class CommandContainer {
         commandMap.put("listOrders", new ListOrders());
         commandMap.put("listUsers", new ListUsers());
         commandMap.put("searchUser", new SearchUser());
-        commandMap.put("updateStatus", new UpdateStatusUser());
+        commandMap.put("updateStatusUser", new UpdateStatusUser());
         commandMap.put("updateRole", new UpdateRoleUser());
+        commandMap.put("updateStatusOrder", new UpdateStatusOrder());
+        commandMap.put("updateDiscount", new UpdateDiscountOrder());
 
         //error
         commandMap.put("errorPage", new NoCommand());

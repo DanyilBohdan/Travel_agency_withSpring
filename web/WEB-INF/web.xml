@@ -35,7 +35,7 @@
 
     <context-param>
         <param-name>locales</param-name>
-        <param-value>en ru</param-value>
+        <param-value>EN RU</param-value>
     </context-param>
 
     <!--    Encoding support filter-->
@@ -62,24 +62,25 @@
         <init-param>
             <param-name>admin</param-name>
             <param-value>
-                viewTours accountAdmin listTours createTour editTour deleteTour listUsers searchUser updateStatus updateRole
+                accountAdmin listTours createTour editTour deleteTour listUsers searchUser
+                updateStatusUser updateRole listOrders updateStatusOrder updateDiscount
             </param-value>
         </init-param>
         <init-param>
             <param-name>manager</param-name>
-            <param-value>viewTours</param-value>
+            <param-value>listOrders updateStatusOrder updateDiscount</param-value>
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <param-value>viewTours accountUser logout</param-value>
+            <param-value>accountUser registerTourView registerTour</param-value>
         </init-param>
         <init-param>
             <param-name>common</param-name>
-            <param-value>noCommand viewTours viewTour</param-value>
+            <param-value>noCommand viewTours viewTour logout</param-value>
         </init-param>
         <init-param>
             <param-name>out-of-control</param-name>
-            <param-value>noCommand login viewTours viewTour</param-value>
+            <param-value>noCommand login viewTours viewTour </param-value>
         </init-param>
     </filter>
 

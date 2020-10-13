@@ -4,48 +4,53 @@
 <c:set var="title" value="View Tour"/>
 <%@include file="/WEB-INF/jspf/head.jspf" %>
 <body>
+<table id="main-container">
+    <%@include file="/WEB-INF/jspf/header.jspf" %>
+    <tr>
+        <td class="content center">
+            <form method="post" action="controller">
+                <fieldset>
+                    <legend>
+                        Tour
+                    </legend>
+                    <label>Name: </label>
+                    <label>${tour.name}</label><br>
 
-<%@include file="/WEB-INF/jspf/header.jspf"%>
+                    <label>Type: </label>
+                    <label>${tour.type}</label><br>
 
-<form method="post" action="controller">
-    <fieldset>
-        <legend>
-            Tour
-        </legend>
-        <label>Name: </label>
-        <label>${tour.name}</label><br>
+                    <label>Country: </label>
+                    <label>${tour.country}</label><br>
 
-        <label>Type: </label>
-        <label>${tour.type}</label><br>
+                    <label>Price: </label>
+                    <label>${tour.price}</label><br>
 
-        <label>Country: </label>
-        <label>${tour.country}</label><br>
+                    <label>Description: </label>
+                    <label>${tour.description}</label><br>
 
-        <label>Price: </label>
-        <label>${tour.price}</label><br>
+                    <label>Number of person: </label>
+                    <label>${tour.count_people}</label><br>
 
-        <label>Description: </label>
-        <label>${tour.description}</label><br>
+                    <label>Mark HOTEL: </label>
+                    <label>${tour.mark_hotel}</label><br>
 
-        <label>Number of person: </label>
-        <label>${tour.count_people}</label><br>
+                    <label>Start Date: </label>
+                    <label>${tour.start_date}</label><br>
 
-        <label>Mark HOTEL: </label>
-        <label>${tour.mark_hotel}</label><br>
+                    <label>Days: </label>
+                    <label>${tour.days}</label><br>
 
-        <label>Start Date: </label>
-        <label>${tour.start_date}</label><br>
+                    <label>Discount: </label>
+                    <label>${tour.discount}</label><br>
+                </fieldset>
+                <br/>
 
-        <label>Days: </label>
-        <label>${tour.days}</label><br>
-
-        <label>Discount: </label>
-        <label>${tour.discount}</label><br>
-    </fieldset>
-    <br/>
-
-    <input type="hidden" name="command" value="register">
-    <input class="submit" type="submit" value="Register">
-</form>
+                <input type="hidden" name="command" value="registerTourView">
+                <input type="hidden" name="id" value="${tour.id}">
+                <input class="submit" type="submit" value="Register">
+            </form>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

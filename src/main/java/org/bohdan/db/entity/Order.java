@@ -1,18 +1,25 @@
 package org.bohdan.db.entity;
 
+import java.util.Date;
+
 public class Order {
 
     private Integer id;
 
     private String status;
 
+    private Object date_reg;
+
     private int tour_id;
 
     private int user_id;
 
-    public static Order createOrderTour(String status) {
+    public static Order createOrderTour(String status, Object date_reg, int tour_id, int user_id) {
         Order orderTour = new Order();
         orderTour.setStatus(status);
+        orderTour.setDate_reg(date_reg);
+        orderTour.setTour_id(tour_id);
+        orderTour.setUser_id(user_id);
         return orderTour;
     }
 
@@ -40,6 +47,14 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Object getDate_reg() {
+        return date_reg;
+    }
+
+    public void setDate_reg(Object date_reg) {
+        this.date_reg = date_reg;
     }
 
     public int getTour_id() {

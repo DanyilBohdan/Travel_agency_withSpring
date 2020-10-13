@@ -15,8 +15,6 @@ public class Controller extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(Controller.class);
 
-    private String commandName;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         process(req, resp);
@@ -45,6 +43,9 @@ public class Controller extends HttpServlet {
         if (forward != null) {
             RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
             dispatcher.forward(request, response);
+
+//            String path = request.getContextPath() + forward;
+//            response.sendRedirect(path);
         }
     }
 }

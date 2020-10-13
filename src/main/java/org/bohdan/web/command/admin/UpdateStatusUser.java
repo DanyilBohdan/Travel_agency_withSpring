@@ -1,7 +1,6 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.UserDao;
 import org.bohdan.db.entity.User;
 import org.bohdan.web.Path;
@@ -20,14 +19,10 @@ public class UpdateStatusUser extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            logger.info("Log: id = " + id);
+            logger.info("Log: id --> " + id);
             User user = new UserDao().findEntityById(id);
             boolean status;
-            if (user.getStatus()){
-                status = false;
-            } else {
-                status = true;
-            }
+            status = !user.getStatus();
             boolean check = new UserDao().updateStatus(status, id);
             logger.info("Log: check update user --> " + check);
 
