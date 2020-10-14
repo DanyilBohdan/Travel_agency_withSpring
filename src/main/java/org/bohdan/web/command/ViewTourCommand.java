@@ -21,16 +21,16 @@ public class ViewTourCommand extends Command{
             throws IOException, ServletException {
 
         HttpSession session = request.getSession();
-        String defLocale = (String) Config.get(session, "javax.servlet.jsp.jstl.fmt.locale");
+        String defLocale = (String) session.getAttribute("defLocale");
         logger.trace("LOG: defLocale = " + defLocale);
 
         int id = Integer.parseInt(request.getParameter("id"));
-        logger.trace("LOG: id = " + id);
+        logger.trace("LOG: id_tour = " + id);
 
-        TourView tour = new TourDao().findByIdLocale("EN", id);
+        TourView tour = new TourDao().findByIdLocale(defLocale, id);
 
         request.setAttribute("tour", tour);
 
-        return Path.VIEW_TOUR_ID;
+        return Path.PAGE_VIEW_TOUR;
     }
 }

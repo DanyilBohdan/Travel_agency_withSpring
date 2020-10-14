@@ -18,7 +18,7 @@
                 <h1><fmt:message key="main.name"/></h1>
 
                 <form action="controller" method="get">
-                    <input type="hidden" name="command" value="createTour"/>
+                    <input type="hidden" name="command" value="getCreateTour"/>
                     <input type="submit" value="Create New Tour"/>
                 </form>
 
@@ -26,21 +26,25 @@
                     <c:forEach var="tour" items="${tours}">
                         <tr class="tour_view">
                             <td>
-                                <fmt:message key="list_tour_jsp.table.header.name"/>: ${tour.name}<br>
-                                <fmt:message key="list_tour_jsp.table.header.type"/>: ${tour.type}<br>
-                                <fmt:message key="list_tour_jsp.table.header.country"/>: ${tour.country}<br>
-                                <fmt:message key="list_tour_jsp.table.header.price"/>: ${tour.price}<br>
+                                <fmt:message key="tour.name"/>: ${tour.name}<br>
+                                <fmt:message key="tour.type"/>: ${tour.type}<br>
+                                <fmt:message key="tour.country"/>: ${tour.country}<br>
+                                <fmt:message key="tour.price"/>: ${tour.price}<br>
                             </td>
                             <td>
                                 <form action="controller" method="post">
-                                    <input type="hidden" name="command" value="editTour">
+                                    <input type="hidden" name="command" value="getEditTour">
                                     <input type="hidden" name="id" value="${tour.id}">
-                                    <input type="submit" value="Edit">
+                                    <button type="submit" class="btn btn-outline-dark">
+                                        Edit
+                                    </button>
                                 </form>
                                 <form action="controller" method="post">
                                     <input type="hidden" name="command" value="deleteTour">
                                     <input type="hidden" name="id" value="${tour.id}">
-                                    <input type="submit" value="Delete">
+                                    <button type="submit" class="btn btn-outline-red">
+                                        Delete
+                                    </button>
                                 </form>
                             </td>
 

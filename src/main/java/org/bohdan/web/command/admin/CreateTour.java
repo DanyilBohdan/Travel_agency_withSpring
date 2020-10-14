@@ -22,10 +22,6 @@ public class CreateTour extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-
-        request.setAttribute("typeTourOut", new TypeTourDao().findAll());
-        request.setAttribute("countryOut", new CountryDao().findAll());
-
         try {
             String nameEN = request.getParameter("nameEN");
             String nameRU = request.getParameter("nameRU");
@@ -60,7 +56,7 @@ public class CreateTour extends Command {
 
         } catch (Exception ex) {
             logger.error("Log: " + ex);
-            return Path.CREATE_TOUR;
+            return Path.COMMAND_CREATE_TOUR_ADMIN;
         }
     }
 }

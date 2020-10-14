@@ -24,27 +24,8 @@ public class EditTour extends Command {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-        int id = Integer.parseInt(req.getParameter("id"));
-        Tour tourOld = new TourDao().findIDTour(id);
-        if (tourOld == null) {
-            return Path.ERROR_PAGE;
-        }
-        TypeTour typeTour = new TypeTourDao().findEntityById(tourOld.getType_tour_id());
-        Country country = new CountryDao().findEntityById(tourOld.getCountry_id());
-        if (typeTour == null || country == null) {
-            return Path.ERROR_PAGE;
-        }
-
-        req.setAttribute("tour", tourOld);
-        req.setAttribute("typeTourOut", new TypeTourDao().findAll());
-        req.setAttribute("typeDef", typeTour);
-        logger.debug("Log: typeDef --> " + typeTour);
-
-        req.setAttribute("countryOut", new CountryDao().findAll());
-        req.setAttribute("countryDef", country);
-        logger.debug("Log: country --> " + country);
-
         try {
+            int id = Integer.parseInt(req.getParameter("id"));
             String nameEN = req.getParameter("nameEN");
             String nameRU = req.getParameter("nameRU");
             logger.debug("Log: name : " + nameEN + ", " + nameRU);
@@ -75,7 +56,6 @@ public class EditTour extends Command {
                     mark_hotel, start_date, days, discount, new TypeTourDao().findByName(typeEN).getId(), new CountryDao().findByName(countryEN).getId());
 
             logger.info("Log: tour : " + tour);
-
             tour.setId(id);
             boolean check = new TourDao().update(tour);
             logger.info("Log: update Tour  check : " + check);

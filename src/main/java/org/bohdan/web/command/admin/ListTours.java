@@ -20,22 +20,15 @@ public class ListTours extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-//        String localeToSet = request.getParameter("localeToSet");
-//
-//        if (localeToSet != null && !localeToSet.isEmpty()) {
-//            HttpSession session = request.getSession();
-//            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", localeToSet);
-//            session.setAttribute("defaultLocale", localeToSet);
-//            session.setAttribute("localeDef", localeToSet);
-//        }
-//        logger.info("LOG: locale = " + localeToSet);
 
 //        List<TourView> tours = null;
 //        if (localeToSet != null) {
 //            tours = new TourDao().findAllByLocale(localeToSet);
 //        }
 
-        List<TourView> tours = new TourDao().findAllByLocale("EN");
+        String lang = (String) request.getSession().getAttribute("defLocale");
+
+        List<TourView> tours = new TourDao().findAllByLocale(lang,1,6);
 
         logger.trace("Found in DB: tours --> " + tours);
 

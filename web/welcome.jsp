@@ -5,13 +5,14 @@
 <c:set var="title" value="Welcome" scope="page"/>
 <%@include file="WEB-INF/jspf/head.jspf" %>
 <body>
-<table>
-    <%@ include file="/WEB-INF/jspf/header.jspf" %>
+<div class="container p-3 my-3 border">
     <form method="post" action="controller">
         <input type="hidden" name="command" value="viewTours">
         <input type="hidden" name="lang" value="EN">
-        <input class="submit" type="submit" value="Welcome">
+        <button type="submit" class="btn btn-outline-dark btn-lg btn-block">
+            WELCOME
+        </button>
     </form>
-</table>
+</div>
 </body>
 </html>

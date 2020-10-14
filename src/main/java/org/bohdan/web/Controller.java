@@ -30,8 +30,11 @@ public class Controller extends HttpServlet {
         logger.debug("Controller starts");
 
         String commandName = request.getParameter("command");
-        logger.trace("Request parameter : command --> " + commandName);
 
+        if (commandName == null) {
+            commandName = cleanPath(request.getRequestURI());
+            logger.trace("Request parameter : command --> " + commandName);
+        }
         Command command = CommandContainer.get(commandName);
         logger.trace("Obtained command --> " + command);
 
@@ -40,12 +43,19 @@ public class Controller extends HttpServlet {
 
         logger.debug("Controller finished, now go to forward address --> " + forward);
 
-        if (forward != null) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
-            dispatcher.forward(request, response);
-
-//            String path = request.getContextPath() + forward;
-//            response.sendRedirect(path);
+        if (forward.contains("redirect:")) {
+            response.sendRedirect(forward.replace("redirect:", ""));
+            logger.debug("Redirect --> " + forward);
+        } else {
+            request.getRequestDispatcher(forward).forward(request, response);
         }
+//        if (forward != null) {
+//            RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+//            dispatcher.forward(request, response);
+//        }
+    }
+
+    private String cleanPath(String path) {
+        return path.replaceAll(".*/controller/", "");
     }
 }

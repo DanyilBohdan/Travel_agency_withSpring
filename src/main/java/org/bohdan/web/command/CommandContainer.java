@@ -20,6 +20,8 @@ public class CommandContainer {
         commandMap.put("viewTours", new ViewToursCommand());
         commandMap.put("viewTour", new ViewTourCommand());
         commandMap.put("login", new LoginCommand());
+        commandMap.put("registerUser", new RegisterUser());
+        commandMap.put("register", new Register());
 
         commandMap.put("logout", new LogoutCommand());
 
@@ -32,7 +34,9 @@ public class CommandContainer {
         commandMap.put("accountAdmin", new AccountAdmin());
         commandMap.put("listTours", new ListTours());
         commandMap.put("createTour", new CreateTour());
+        commandMap.put("getCreateTour", new GetCreateTourPage());
         commandMap.put("editTour", new EditTour());
+        commandMap.put("getEditTour", new GetEditTourPage());
         commandMap.put("deleteTour", new DeleteTour());
         commandMap.put("listOrders", new ListOrders());
         commandMap.put("listUsers", new ListUsers());
@@ -44,6 +48,7 @@ public class CommandContainer {
 
         //error
         commandMap.put("errorPage", new NoCommand());
+        commandMap.put("registerCheck", new RegisterCheck());
 
         logger.debug("Command container was successfully initialized");
         logger.trace("Number of commands --> " + commandMap.size());

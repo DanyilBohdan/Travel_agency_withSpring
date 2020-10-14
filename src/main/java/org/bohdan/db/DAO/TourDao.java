@@ -33,17 +33,22 @@ public class TourDao {
     private static final String SQL_FIND_ALL_TOUR =
             "select * from tour";
 
+    private static final String SQL_FIND_COUNT_TOURS =
+            "SELECT count(*) as count FROM tour";
+
     private static final String SQL_FIND_ALL_EN =
             "select tour.id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
                     "tour.desc_en as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, type_tour, country\n" +
-                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id;";
+                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id\n" +
+                    "limit ?, ?";
 
     private static final String SQL_FIND_ALL_RU =
             "select tour.id, tour.name_ru as name, type_tour.name_ru as type, country.name_ru as country, tour.price, \n" +
                     "tour.desc_ru as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, country, type_tour\n" +
-                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id";
+                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id\n" +
+                    "limit ?, ?";
 
     private static final String SQL_FIND_ID_EN =
             "select tour.id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
@@ -131,6 +136,22 @@ public class TourDao {
                     "and (tour.start_date - curdate()) < ?";
 
 
+    public Integer findCountTours() {
+
+        Integer count = null;
+
+        try (Connection con = DBManager.getInstance().getConnection();
+             Statement statement = con.createStatement();
+             ResultSet rs = statement.executeQuery(SQL_FIND_COUNT_TOURS)) {
+            if (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
     public List<Tour> findAllTour() {
         List<Tour> tours = new ArrayList<>();
 
@@ -161,21 +182,23 @@ public class TourDao {
         return tour;
     }
 
-    public List<TourView> findAllByLocale(String locale) {
+    public List<TourView> findAllByLocale(String locale, int start, int total) {
         if (locale.equals("EN")) {
-            return findAll(SQL_FIND_ALL_EN);
+            return findAll(SQL_FIND_ALL_EN, start, total);
         }
         if (locale.equals("RU")) {
-            return findAll(SQL_FIND_ALL_RU);
+            return findAll(SQL_FIND_ALL_RU, start, total);
         }
         return null;
     }
 
-    private List<TourView> findAll(String sql) {
+    private List<TourView> findAll(String sql, int start, int total) {
         List<TourView> tours = new ArrayList<>();
         try (Connection con = DBManager.getInstance().getConnection();
-             Statement statement = con.createStatement();
-             ResultSet rs = statement.executeQuery(sql)) {
+             PreparedStatement statement = con.prepareStatement(sql);) {
+            statement.setInt(1, start-1);
+            statement.setInt(2, total);
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 tours.add(mapTourView(rs));
             }

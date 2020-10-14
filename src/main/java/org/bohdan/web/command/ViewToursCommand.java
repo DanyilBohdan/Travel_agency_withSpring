@@ -17,14 +17,17 @@ public class ViewToursCommand extends Command {
 
     private final static Logger logger = Logger.getLogger(ViewToursCommand.class);
 
+
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
+        HttpSession session = request.getSession();
+
         String lang = request.getParameter("lang");
         logger.info("LOG: localeParam = " + lang);
 
-        HttpSession session = request.getSession();
         if (lang != null && !lang.isEmpty()) {
             Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
             session.setAttribute("defLocale", lang);
@@ -34,9 +37,29 @@ public class ViewToursCommand extends Command {
         }
         logger.info("LOG: localeFinal = " + lang);
 
+        Integer count = new TourDao().findCountTours();
+        int countPage = (count/4) + 1;
+        logger.info("Log: count --> " + count);
+        logger.info("Log: countPage --> " + countPage);
+
+        request.setAttribute("countPage", countPage);
+
+        String page = request.getParameter("page");
+        if(page == null){
+            page = "1";
+        }
+
+        int pageId = Integer.parseInt(page);
+        int total = 4;
+        if (pageId == 1) {
+        } else {
+            pageId = pageId - 1;
+            pageId = pageId * total + 1;
+        }
+
         List<TourView> tours = null;
         if (lang != null) {
-            tours = new TourDao().findAllByLocale(lang);
+            tours = new TourDao().findAllByLocale(lang, pageId, total);
         }
 
         logger.trace("Found in DB: tours --> " + tours);
@@ -47,7 +70,7 @@ public class ViewToursCommand extends Command {
 //                return (int) o1.getId() - o2.getId();
 //            }
 //        });
-        tours.sort((o1, o2) -> (int) o1.getId() - o2.getId());
+        //tours.sort((o1, o2) -> (int) o1.getId() - o2.getId());
 
         request.setAttribute("tours", tours);
 
