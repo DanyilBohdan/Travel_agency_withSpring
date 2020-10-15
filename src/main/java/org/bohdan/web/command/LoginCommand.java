@@ -41,8 +41,16 @@ public class LoginCommand extends Command {
         User user = new UserDao().findEntityByLogin(login);
         logger.trace("Found in DB: user --> " + user);
 
+        logger.trace("Found in DB: user --> " + user);
+
         if (user == null || !password.equals(user.getPassword())) {
             errorMessage = "Cannot find user with such login/password";
+            request.setAttribute("errorMessage", errorMessage);
+            logger.error("errorMessage --> " + errorMessage);
+            return forward;
+        }
+        if (!user.getStatus()) {
+            errorMessage = "Your account has been blocked!";
             request.setAttribute("errorMessage", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
             return forward;

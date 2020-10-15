@@ -10,22 +10,22 @@
         <div class="border border-secondary">
             <label>
                 <fmt:message key="account.label.username"/>:
-            </label>${user.username}
+            </label>    ${user.username}
         </div>
         <div class="border border-secondary">
             <label>
                 <fmt:message key="account.label.login"/>:
-            </label>${user.login}
+            </label>    ${user.login}
         </div>
         <div class="border border-secondary">
             <label>
                 <fmt:message key="account.label.password"/>:
-            </label>${user.password}
+            </label>    ${user.password}
         </div>
         <div class="border border-secondary">
             <label>
                 <fmt:message key="account.label.phone_number"/>:
-            </label>${user.phone_number}
+            </label>    ${user.phone_number}
         </div>
         <c:if test="${user.status} == false">
         <div class="border border-secondary">
@@ -37,8 +37,9 @@
         <div class="border border-secondary">
             <label>
                 <fmt:message key="account.label.role"/>:
-            </label>${userRole}
+            </label>    ${userRole}
         </div>
+
         <fieldset>
             <legend>
                 <fmt:message key="account.legend.myListTours"/>
