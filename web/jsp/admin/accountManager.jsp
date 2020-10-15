@@ -42,20 +42,10 @@
                 </label>${userRole}
             </div>
         </form>
-        <div class="row">
-            <form action="controller" method="post">
-                <input type="hidden" name="command" value="listTours"/>
-                <button type="submit" class="btn btn-outline-dark" ><fmt:message key="account.admin.listTours"/></button>
-            </form>
-            <form action="controller" method="post">
-                <input type="hidden" name="command" value="listOrders"/>
-                <button type="submit" class="btn btn-outline-dark"><fmt:message key="account.admin.listOrders"/></button>
-            </form>
-            <form action="controller" method="post">
-                <input type="hidden" name="command" value="listUsers"/>
-                <button type="submit" class="btn btn-outline-dark"><fmt:message key="account.admin.listUsers"/></button>
-            </form>
-        </div>
+        <form action="controller" method="post">
+            <input type="hidden" name="command" value="listOrders"/>
+            <button type="submit" class="btn btn-outline-dark"><fmt:message key="account.admin.listOrders"/></button>
+        </form>
     </div>
     <%@ include file="/WEB-INF/jspf/footer.jspf" %>
 </div>

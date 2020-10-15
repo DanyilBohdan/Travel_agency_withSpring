@@ -1,10 +1,12 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.DAO.TourDao;
+import org.bohdan.db.DAO.CountryDao;
+import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.db.bean.TourView;
 import org.bohdan.web.Path;
 import org.bohdan.web.command.Command;
+import org.bohdan.web.command.SearchTour;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,15 +22,12 @@ public class ListTours extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-
-//        List<TourView> tours = null;
-//        if (localeToSet != null) {
-//            tours = new TourDao().findAllByLocale(localeToSet);
-//        }
-
         String lang = (String) request.getSession().getAttribute("defLocale");
 
-        List<TourView> tours = new TourDao().findAllByLocale(lang,1,6);
+        request.setAttribute("typeTourOut", new TypeTourDao().findByLocale(lang));
+        request.setAttribute("countryOut", new CountryDao().findByLocale(lang));
+
+        List<TourView> tours = SearchTour.execute(request, response);
 
         logger.trace("Found in DB: tours --> " + tours);
 

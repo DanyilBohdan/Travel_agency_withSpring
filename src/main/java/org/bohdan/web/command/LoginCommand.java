@@ -55,7 +55,7 @@ public class LoginCommand extends Command {
             }
 
             if (role == Role.MANAGER) {
-                forward = Path.COMMAND_ACCOUNT;
+                forward = Path.COMMAND_ACCOUNT_MANAGER;
             }
 
             if (role == Role.USER) {

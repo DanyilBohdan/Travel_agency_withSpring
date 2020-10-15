@@ -63,12 +63,12 @@
             <param-name>admin</param-name>
             <param-value>
                 accountAdmin listTours createTour getCreateTour editTour getEditTour deleteTour listUsers
-                searchUser updateStatusUser updateRole listOrders updateStatusOrder updateDiscount
+                searchUser updateStatusUser updateRole listOrders updateStatusOrder updateDiscount deleteOrder
             </param-value>
         </init-param>
         <init-param>
             <param-name>manager</param-name>
-            <param-value>listOrders updateStatusOrder updateDiscount</param-value>
+            <param-value>listOrders updateStatusOrder deleteOrder updateDiscount accountManager</param-value>
         </init-param>
         <init-param>
             <param-name>user</param-name>

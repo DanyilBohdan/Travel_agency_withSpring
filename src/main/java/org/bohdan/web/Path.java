@@ -16,9 +16,11 @@ public final class Path {
     public static final String CREATE_TOUR = "/jsp/admin/createTour.jsp";
     public static final String EDIT_TOUR = "/jsp/admin/editTour.jsp";
     public static final String ACCOUNT_ADMIN = "/jsp/admin/accountAdmin.jsp";
+    public static final String ACCOUNT_MANAGER = "/jsp/admin/accountManager.jsp";
 
     public static final String COMMAND_LIST_ORDERS = "redirect:/controller?command=listOrders";
     public static final String COMMAND_ACCOUNT_ADMIN = "redirect:/controller?command=accountAdmin";
+    public static final String COMMAND_ACCOUNT_MANAGER = "redirect:/controller?command=accountManager";
     public static final String COMMAND_TOURS_ADMIN = "redirect:/controller?command=listTours";
     public static final String COMMAND_LIST_USER = "redirect:/controller?command=listUsers";
     public static final String COMMAND_EDIT_TOUR_ADMIN = "redirect:/controller?command=editTour";

@@ -12,12 +12,13 @@ import java.util.List;
 public class OrderDao {
 
     private static final String SQL_FIND_ALL_ORDER =
-            "SELECT * FROM order";
+            "SELECT * FROM travel_agencyDB.order";
+
     private static final String SQL_FIND_ENTITY_BY_ID_ORDER =
-            "SELECT * FROM order WHERE id=?";
+            "SELECT * FROM travel_agencyDB.order WHERE id=?";
 
     public static final String SQL_DELETE_ORDER_BY_ID =
-            "DELETE FROM order WHERE id = ?";
+            "DELETE FROM travel_agencyDB.order WHERE id = ?";
 
     public static final String SQL_INSERT_ORDER =
             "insert into travel_agencyDB.order (status, date_reg, tour_id, user_id) values" +

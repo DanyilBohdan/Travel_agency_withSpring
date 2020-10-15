@@ -34,7 +34,7 @@
                 <input type="hidden" name="method" value="nameTour">
                 <input type="text" name="searchText" class="form-control" value="${searchName}"
                        placeholder="<fmt:message key="search.placeholder"/>">
-                <button type="submit" class="btn-outline-dark"><fmt:message key="search.button"/></button>
+                <button type="submit" class="btn btn-outline-dark"><fmt:message key="search.button"/></button>
             </form>
         </div>
         <div class="container">
@@ -43,7 +43,7 @@
                 <input type="hidden" name="method" value="rangeTour">
                 <input type="text" name="searchBegin" placeholder="begin" value="${beginDef}">
                 <input type="text" name="searchEnd" placeholder="end" value="${endDef}">
-                <button type="submit" class="btn-outline-dark"><fmt:message key="search.button"/></button>
+                <button type="submit" class="btn btn-outline-dark"><fmt:message key="search.button"/></button>
                 <select id="search" name="searchSelect">
                     <option value="price" ${selectDef == "price" ? 'selected' : ''}><fmt:message
                             key="tour.price"/></option>
@@ -77,7 +77,7 @@
                         <form id="main" action="controller" method="post">
                             <input type="hidden" name="command" value="viewTour">
                             <input type="hidden" name="id" value="${tour.id}">
-                            <button type="submit" class="btn btn-outline-dark">
+                            <button type="submit" class="btn btn-outline-dark" style="horiz-align: center">
                                 <fmt:message key="tour.view"/>
                             </button>
                         </form>
