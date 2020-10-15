@@ -2,6 +2,7 @@ package org.bohdan.db.DAO;
 
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
+import org.bohdan.db.bean.ListBean;
 import org.bohdan.db.entity.TypeTour;
 
 import javax.naming.NamingException;
@@ -13,6 +14,12 @@ public class TypeTourDao {
 
     private static final String SQL_FIND_ALL_TYPE_TOUR =
             "SELECT * FROM type_tour";
+
+    private static final String SQL_FIND_ALL_TYPE_TOUR_EN =
+            "SELECT type_tour.id, type_tour.name_en AS name FROM type_tour";
+
+    private static final String SQL_FIND_ALL_TYPE_TOUR_RU =
+            "SELECT type_tour.id, type_tour.name_ru AS name FROM type_tour";
 
     private static final String SQL_FIND_ENTITY_BY_ID_TYPE_TOUR =
             "SELECT * FROM type_tour WHERE id = ?";
@@ -35,6 +42,37 @@ public class TypeTourDao {
         typeTour.setName_en(rs.getString(Fields.NAME_EN));
         typeTour.setName_ru(rs.getString(Fields.NAME_RU));
         return typeTour;
+    }
+
+    private ListBean mapListBean(ResultSet rs) throws SQLException {
+        ListBean typeTour = new ListBean();
+        typeTour.setId(rs.getInt(Fields.ID));
+        typeTour.setName(rs.getString(Fields.NAME));
+        return typeTour;
+    }
+
+    public List<ListBean> findByLocale(String locale){
+        if (locale.equals("EN")){
+            return findAllLocale(SQL_FIND_ALL_TYPE_TOUR_EN);
+        }
+        if (locale.equals("RU")){
+            return findAllLocale(SQL_FIND_ALL_TYPE_TOUR_RU);
+        }
+        return null;
+    }
+
+    private List<ListBean> findAllLocale(String sql) {
+        List<ListBean> typeTours = new ArrayList<>();
+        try (Connection con = DBManager.getInstance().getConnection();
+             Statement statement = con.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            while (rs.next()) {
+                typeTours.add(mapListBean(rs));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return typeTours;
     }
 
     public List<TypeTour> findAll() {

@@ -2,6 +2,7 @@ package org.bohdan.db.DAO;
 
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
+import org.bohdan.db.bean.ListBean;
 import org.bohdan.db.entity.Country;
 import org.bohdan.db.entity.TypeTour;
 
@@ -13,6 +14,12 @@ public class CountryDao {
 
     private static final String SQL_FIND_ALL_COUNTRY_TOUR =
             "SELECT * FROM country";
+
+    private static final String SQL_FIND_ALL_COUNTRY_TOUR_EN =
+            "SELECT country.id, country.name_en AS name FROM country";
+
+    private static final String SQL_FIND_ALL_COUNTRY_TOUR_RU =
+            "SELECT country.id, country.name_ru AS name FROM country";
 
     private static final String SQL_FIND_ENTITY_BY_ID_COUNTRY_TOUR =
             "SELECT * FROM country WHERE id = ?";
@@ -35,6 +42,37 @@ public class CountryDao {
         country.setName_en(rs.getString(Fields.NAME_EN));
         country.setName_ru(rs.getString(Fields.NAME_RU));
         return country;
+    }
+
+    private ListBean mapListBean(ResultSet rs) throws SQLException {
+        ListBean typeTour = new ListBean();
+        typeTour.setId(rs.getInt(Fields.ID));
+        typeTour.setName(rs.getString(Fields.NAME));
+        return typeTour;
+    }
+
+    public List<ListBean> findByLocale(String locale){
+        if (locale.equals("EN")){
+            return findAllLocale(SQL_FIND_ALL_COUNTRY_TOUR_EN);
+        }
+        if (locale.equals("RU")){
+            return findAllLocale(SQL_FIND_ALL_COUNTRY_TOUR_RU);
+        }
+        return null;
+    }
+
+    private List<ListBean> findAllLocale(String sql) {
+        List<ListBean> typeTours = new ArrayList<>();
+        try (Connection con = DBManager.getInstance().getConnection();
+             Statement statement = con.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            while (rs.next()) {
+                typeTours.add(mapListBean(rs));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return typeTours;
     }
 
     public List<Country> findAll() {

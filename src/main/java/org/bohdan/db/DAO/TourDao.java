@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.db.bean.TourView;
+import org.bohdan.db.bean.UserRole;
 import org.bohdan.db.entity.Order;
 import org.bohdan.db.entity.Tour;
 
@@ -65,75 +66,117 @@ public class TourDao {
     private static final String SQL_FIND_ID =
             "select * from tour WHERE tour.id = ?";
 
+    private static final String SQL_FIND_BY_NAME_EN =
+            "select tour.id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
+                    "tour.desc_en as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
+                    "from tour, country, type_tour\n" +
+                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
+                    "and tour.name_en LIKE ?\n" +
+                    "limit ?, ?";
+
+    private static final String SQL_FIND_BY_NAME_RU =
+            "select tour.id, tour.name_ru as name, type_tour.name_ru as type, country.name_ru as country, tour.price, \n" +
+                    "tour.desc_ru as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
+                    "from tour, country, type_tour\n" +
+                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
+                    "and tour.name_ru LIKE ?\n" +
+                    "limit ?, ?";
+
     private static final String SQL_FIND_BY_TYPE_EN =
             "select tour.id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
                     "tour.desc_en as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
-                    "and type_tour.name_en = ?";
+                    "and type_tour.name_en = ?\n" +
+                    "limit ?, ?";
 
     private static final String SQL_FIND_BY_TYPE_RU =
             "select tour.id, tour.name_ru as name, type_tour.name_ru as type, country.name_ru as country, tour.price, \n" +
                     "tour.desc_ru as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
-                    "and type_tour.name_ru = ?";
+                    "and type_tour.name_ru = ?\n" +
+                    "limit ?, ?";
+
+    private static final String SQL_FIND_BY_COUNTRY_EN =
+            "select tour.id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
+                    "tour.desc_en as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
+                    "from tour, country, type_tour\n" +
+                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
+                    "and country.name_en = ?\n" +
+                    "limit ?, ?";
+
+    private static final String SQL_FIND_BY_COUNTRY_RU =
+            "select tour.id, tour.name_ru as name, type_tour.name_ru as type, country.name_ru as country, tour.price, \n" +
+                    "tour.desc_ru as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
+                    "from tour, country, type_tour\n" +
+                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
+                    "and country.name_ru = ?\n" +
+                    "limit ?, ?";
 
     private static final String SQL_FIND_BY_PRICE_EN =
             "select tour.id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
                     "tour.desc_en as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
-                    "and price > ? and price < ?";
+                    "and price > ? and price < ?\n" +
+                    "limit ?, ?";
 
     private static final String SQL_FIND_BY_PRICE_RU =
             "select tour.id, tour.name_ru as name, type_tour.name_ru as type, country.name_ru as country, tour.price, \n" +
                     "tour.desc_ru as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
-                    "and price > ? and price < ?";
+                    "and price > ? and price < ?\n" +
+                    "limit ?, ?";
 
     private static final String SQL_FIND_BY_COUNT_EN =
             "select tour.id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
                     "tour.desc_en as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
-                    "and tour.count_people > ? and tour.count_people < ?";
+                    "and tour.count_people > ? and tour.count_people < ?\n" +
+                    "limit ?, ?";
 
     private static final String SQL_FIND_BY_COUNT_RU =
             "select tour.id, tour.name_ru as name, type_tour.name_ru as type, country.name_ru as country, tour.price, \n" +
                     "tour.desc_ru as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
-                    "and tour.count_people > ? and tour.count_people < ?";
+                    "and tour.count_people > ? and tour.count_people < ?\n" +
+                    "limit ?, ?";
 
     private static final String SQL_FIND_BY_MARK_EN =
             "select tour.id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
                     "tour.desc_en as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
-                    "and tour.mark_hotel > ? and tour.mark_hotel < ?";
+                    "and tour.mark_hotel > ? and tour.mark_hotel < ?\n" +
+                    "limit ?, ?";
 
     private static final String SQL_FIND_BY_MARK_RU =
             "select tour.id, tour.name_ru as name, type_tour.name_ru as type, country.name_ru as country, tour.price, \n" +
                     "tour.desc_ru as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
-                    "and tour.mark_hotel > ? and tour.mark_hotel < ?";
+                    "and tour.mark_hotel > ? and tour.mark_hotel < ?\n" +
+                    "limit ?, ?";
 
     private static final String SQL_FIND_BY_DATE_EN =
             "select tour.id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
                     "tour.desc_en as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
-                    "and (tour.start_date - curdate()) < ?";
+                    "and (tour.start_date - curdate()) < ?\n" +
+                    "limit ?, ?";
 
     private static final String SQL_FIND_BY_DATE_RU =
             "select tour.id, tour.name_ru as name, type_tour.name_ru as type, country.name_ru as country, tour.price, \n" +
                     "tour.desc_ru as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
-                    "and (tour.start_date - curdate()) < ?";
+                    "and (tour.start_date - curdate()) < ?\n" +
+                    "limit ?, ?";
 
 
     public Integer findCountTours() {
@@ -233,33 +276,25 @@ public class TourDao {
         return tour;
     }
 
-    public List<TourView> findAllByTypeLocale(String locale, String var) {
+    public List<TourView> searchEntity(String locale, String var, int start, int total) {
         if (locale.equals("EN")) {
-            return findAllVarByType(SQL_FIND_BY_TYPE_EN, var);
+            return searchEntityByVar(SQL_FIND_BY_NAME_EN, var, start, total);
         }
         if (locale.equals("RU")) {
-            return findAllVarByType(SQL_FIND_BY_TYPE_RU, var);
+            return searchEntityByVar(SQL_FIND_BY_NAME_RU, var, start, total);
         }
         return null;
     }
 
-    public List<TourView> findAllByDateLocale(String locale, String var) {
-        if (locale.equals("EN")) {
-            return findAllVarByType(SQL_FIND_BY_DATE_EN, var);
-        }
-        if (locale.equals("RU")) {
-            return findAllVarByType(SQL_FIND_BY_DATE_RU, var);
-        }
-        return null;
-    }
-
-    private List<TourView> findAllVarByType(String sql, String variable) {
+    private List<TourView> searchEntityByVar(String sql, String var, int start, int total) {
         List<TourView> tours = new ArrayList<>();
         try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement statement = con.prepareStatement(sql)) {
-            statement.setString(1, variable);
+             PreparedStatement statement = con.prepareStatement(sql);) {
+            statement.setString(1, "%" + var + "%");
+            statement.setInt(2, start-1);
+            statement.setInt(3, total);
             ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tours.add(mapTourView(rs));
             }
         } catch (SQLException ex) {
@@ -268,44 +303,106 @@ public class TourDao {
         return tours;
     }
 
-    public List<TourView> findAllByPriceLocale(String locale, String varFirst, String varLast) {
+    public List<TourView> findAllByTypeLocale(String locale, String var, int start, int total) {
         if (locale.equals("EN")) {
-            return findAllByRange(SQL_FIND_BY_PRICE_EN, varFirst, varLast);
+            return findAllVarBy(SQL_FIND_BY_TYPE_EN, var, start, total);
         }
         if (locale.equals("RU")) {
-            return findAllByRange(SQL_FIND_BY_PRICE_RU, varFirst, varLast);
+            return findAllVarBy(SQL_FIND_BY_TYPE_RU, var, start, total);
         }
         return null;
     }
 
-    public List<TourView> findAllByCountLocale(String locale, String varFirst, String varLast) {
+    public List<TourView> findAllByCountryLocale(String locale, String var, int start, int total) {
         if (locale.equals("EN")) {
-            return findAllByRange(SQL_FIND_BY_COUNT_EN, varFirst, varLast);
+            return findAllVarBy(SQL_FIND_BY_COUNTRY_EN, var, start, total);
         }
         if (locale.equals("RU")) {
-            return findAllByRange(SQL_FIND_BY_COUNT_RU, varFirst, varLast);
+            return findAllVarBy(SQL_FIND_BY_COUNTRY_RU, var, start, total);
         }
         return null;
     }
 
-    public List<TourView> findAllByMarkLocale(String locale, String varFirst, String varLast) {
+    public List<TourView> findAllByDateLocale(String locale, String var, int start, int total) {
         if (locale.equals("EN")) {
-            return findAllByRange(SQL_FIND_BY_MARK_EN, varFirst, varLast);
+            return findAllVarBy(SQL_FIND_BY_DATE_EN, var, start, total);
         }
         if (locale.equals("RU")) {
-            return findAllByRange(SQL_FIND_BY_MARK_RU, varFirst, varLast);
+            return findAllVarBy(SQL_FIND_BY_DATE_RU, var, start, total);
         }
         return null;
     }
 
-    public List<TourView> findAllByRange(String sql, String varFirst, String varLast) {
+    private List<TourView> findAllVarBy(String sql, String variable, int start, int total) {
+        List<TourView> tours = new ArrayList<>();
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, variable);
+            statement.setInt(2, start-1);
+            statement.setInt(3, total);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                tours.add(mapTourView(rs));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return tours;
+    }
+
+    public List<TourView> searchByRange(String by, String locale, String varFirst, String varLast, int start, int total) {
+        if (by.equals("price")) {
+            return findAllByPriceLocale(locale, varFirst, varLast, start, total);
+        }
+        if (by.equals("count_people")) {
+            return findAllByCountLocale(locale, varFirst, varLast, start, total);
+        }
+        if (by.equals("mark_hotel")) {
+            return findAllByMarkLocale(locale, varFirst, varLast, start, total);
+        }
+        return null;
+    }
+
+    private List<TourView> findAllByPriceLocale(String locale, String varFirst, String varLast, int start, int total) {
+        if (locale.equals("EN")) {
+            return findAllByRange(SQL_FIND_BY_PRICE_EN, varFirst, varLast, start, total);
+        }
+        if (locale.equals("RU")) {
+            return findAllByRange(SQL_FIND_BY_PRICE_RU, varFirst, varLast, start, total);
+        }
+        return null;
+    }
+
+    private List<TourView> findAllByCountLocale(String locale, String varFirst, String varLast, int start, int total) {
+        if (locale.equals("EN")) {
+            return findAllByRange(SQL_FIND_BY_COUNT_EN, varFirst, varLast, start, total);
+        }
+        if (locale.equals("RU")) {
+            return findAllByRange(SQL_FIND_BY_COUNT_RU, varFirst, varLast, start, total);
+        }
+        return null;
+    }
+
+    private List<TourView> findAllByMarkLocale(String locale, String varFirst, String varLast, int start, int total) {
+        if (locale.equals("EN")) {
+            return findAllByRange(SQL_FIND_BY_MARK_EN, varFirst, varLast, start, total);
+        }
+        if (locale.equals("RU")) {
+            return findAllByRange(SQL_FIND_BY_MARK_RU, varFirst, varLast, start, total);
+        }
+        return null;
+    }
+
+    public List<TourView> findAllByRange(String sql, String varFirst, String varLast, int start, int total) {
         List<TourView> tours = new ArrayList<>();
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setString(1, varFirst);
             statement.setString(2, varLast);
+            statement.setInt(3, start-1);
+            statement.setInt(4, total);
             ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tours.add(mapTourView(rs));
             }
         } catch (SQLException ex) {
