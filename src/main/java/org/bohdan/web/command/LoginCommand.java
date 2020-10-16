@@ -5,6 +5,7 @@ import org.bohdan.db.DAO.UserDao;
 import org.bohdan.db.entity.Role;
 import org.bohdan.db.entity.User;
 import org.bohdan.web.Path;
+import org.bohdan.web.Validation;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,22 @@ public class LoginCommand extends Command {
 
         String errorMessage;
         String forward = Path.ERROR_PAGE;
+
+        boolean val = Validation.validateLogin(login);
+        if (!val) {
+            errorMessage = "Login must be: example@example.com";
+            request.setAttribute("errorMessage", errorMessage);
+            logger.error("errorMessage --> " + errorMessage);
+            return forward;
+        }
+
+        val = Validation.validatePassword(password);
+        if (!val) {
+            errorMessage = "Password must be: latin/number";
+            request.setAttribute("errorMessage", errorMessage);
+            logger.error("errorMessage --> " + errorMessage);
+            return Path.ERROR_PAGE;
+        }
 
         if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
             errorMessage = "Login/password cannot be empty";

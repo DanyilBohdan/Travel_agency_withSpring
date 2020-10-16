@@ -13,10 +13,7 @@
                 <label>
                     <fmt:message key="login_jsp.label.login"/>
                 </label>
-                <input class="form-control" type="text" name="login" aria-describedby="basic-login">
-                <div class="input-group-append">
-                    <span class="input-group-text" id="basic-login">@example.com</span>
-                </div><br/>
+                <input type="text" name="login" placeholder="">
             </div>
             <br/>
             <div class="input-group mb-3">

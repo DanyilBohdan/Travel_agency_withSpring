@@ -9,55 +9,54 @@
     <div class="container register-form">
         <form class="form-horizontal" action="controller" method="post">
             <input type="hidden" name="command" value="registerUser">
-
-            <fieldset>
+            <div class="container p-3 my-3 border">
                 <div id="legend">
-                    <legend class="">Register</legend>
+                    <label class=""><fmt:message key="account.register.registration"/></label>
                 </div>
 
                 <div class="control-group">
                     <!-- Username -->
-                    <label class="control-label" for="username">Username</label>
+                    <label class="control-label" for="username"><fmt:message key="account.register.username"/></label>
                     <div class="controls">
                         <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-                        <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                        <p class="help-block"><fmt:message key="account.register.username.help"/></p>
                     </div>
                 </div>
 
                 <div class="control-group">
                     <!-- E-mail -->
-                    <label class="control-label" for="login">Login</label>
+                    <label class="control-label" for="login"><fmt:message key="account.register.login"/></label>
                     <div class="controls">
-                        <input type="text" id="login" name="login" placeholder="" class="input-xlarge">
-                        <p class="help-block">Please provide your login</p>
+                        <input type="text" id="login" name="login" placeholder="example@example.com" class="input-xlarge">
+                        <p class="help-block"><fmt:message key="account.register.login.help"/></p>
                     </div>
                 </div>
 
                 <div class="control-group">
                     <!-- E-mail -->
-                    <label class="control-label" for="phone">Phone</label>
+                    <label class="control-label" for="phone"><fmt:message key="account.register.phone"/></label>
                     <div class="controls">
-                        <input type="text" id="phone" name="phone" placeholder="" class="input-xlarge">
-                        <p class="help-block">Please provide your login</p>
+                        <input type="text" id="phone" name="phone" placeholder="(123) 456-7890" class="input-xlarge">
+                        <p class="help-block"><fmt:message key="account.register.phone.help"/></p>
                     </div>
                 </div>
 
                 <div class="control-group">
                     <!-- Password-->
-                    <label class="control-label" for="password">Password</label>
+                    <label class="control-label" for="password"><fmt:message key="account.register.password"/></label>
                     <div class="controls">
                         <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-                        <p class="help-block">Password should be at least 4 characters</p>
+                        <p class="help-block"><fmt:message key="account.register.password.help"/></p>
                     </div>
                 </div>
 
                 <div class="control-group">
                     <!-- Password -->
-                    <label class="control-label" for="password_confirm">Password (Confirm)</label>
+                    <label class="control-label" for="password_confirm"><fmt:message key="account.register.passwordConfirm"/></label>
                     <div class="controls">
                         <input type="password" id="password_confirm" name="password_confirm" placeholder=""
                                class="input-xlarge">
-                        <p class="help-block">Please confirm password</p>
+                        <p class="help-block"><fmt:message key="account.register.passwordConfirm.help"/></p>
                     </div>
                 </div>
 
@@ -69,7 +68,7 @@
                         </button>
                     </div>
                 </div>
-            </fieldset>
+            </div>
         </form>
     </div>
     <%@ include file="/WEB-INF/jspf/footer.jspf" %>
