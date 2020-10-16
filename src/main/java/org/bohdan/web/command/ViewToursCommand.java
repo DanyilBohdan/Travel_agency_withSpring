@@ -2,7 +2,6 @@ package org.bohdan.web.command;
 
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.CountryDao;
-import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.db.bean.TourView;
 import org.bohdan.web.Path;
@@ -13,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ViewToursCommand extends Command {
@@ -42,19 +43,11 @@ public class ViewToursCommand extends Command {
         request.setAttribute("typeTourOut", new TypeTourDao().findByLocale(lang));
         request.setAttribute("countryOut", new CountryDao().findByLocale(lang));
 
-
-        List<TourView> tours = SearchTour.execute(request, response);
-        //List<TourView> tours = new TourDao().findAllByLocale(lang, pageId, total);
+        List<TourView> tours = SearchTour.execute(request, response, 0);
 
         logger.trace("Found in DB: tours --> " + tours);
 
-//        Collections.sort(tours, new Comparator<TourView>() {
-//            @Override
-//            public int compare(TourView o1, TourView o2) {
-//                return (int) o1.getId() - o2.getId();
-//            }
-//        });
-        //tours.sort((o1, o2) -> (int) o1.getId() - o2.getId());
+        tours.sort((o1, o2) -> (int) (o1.getDiscount() - o2.getDiscount()));
 
         request.setAttribute("tours", tours);
 

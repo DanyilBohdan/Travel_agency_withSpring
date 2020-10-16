@@ -64,7 +64,7 @@
             <param-value>
                 accountAdmin listTours createTour getCreateTour editTour getEditTour deleteTour listUsers
                 searchUser updateStatusUser updateRole listOrders updateStatusOrder updateDiscount deleteOrder
-                listType editType createType deleteType
+                listType editType createType deleteType listCountry createCountry editCountry deleteCountry
             </param-value>
         </init-param>
         <init-param>

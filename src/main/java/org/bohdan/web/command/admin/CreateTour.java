@@ -25,18 +25,18 @@ public class CreateTour extends Command {
         try {
             String nameEN = request.getParameter("nameEN");
             String nameRU = request.getParameter("nameRU");
-            logger.info("Log: name : " + nameEN +", " + nameRU);
+            logger.info("Log: name : " + nameEN + ", " + nameRU);
             String typeEN = request.getParameter("typeEN");
             String typeRU = request.getParameter("typeRU");
-            logger.info("Log: type : " + typeEN +", " + typeRU);
+            logger.info("Log: type : " + typeEN + ", " + typeRU);
             String countryEN = request.getParameter("countryEN");
             String countryRU = request.getParameter("countryRU");
-            logger.info("Log: country : " + countryEN +", " + countryRU);
+            logger.info("Log: country : " + countryEN + ", " + countryRU);
             float price = Float.parseFloat(request.getParameter("price"));
             logger.info("Log: price : " + price);
             String descriptionEN = request.getParameter("descriptionEN");
             String descriptionRU = request.getParameter("descriptionRU");
-            logger.info("Log: description : " + descriptionEN +", " + descriptionRU);
+            logger.info("Log: description : " + descriptionEN + ", " + descriptionRU);
             int count_people = Integer.parseInt(request.getParameter("count_people"));
             logger.info("Log: count_people : " + count_people);
             int mark_hotel = Integer.parseInt(request.getParameter("mark_hotel"));
@@ -47,6 +47,8 @@ public class CreateTour extends Command {
             logger.info("Log: days : " + days);
             float discount = Float.parseFloat(request.getParameter("discount"));
             logger.info("Log: discount : " + discount);
+
+            price = TourDao.changePrice(price, discount);
 
             boolean check = new TourDao().create(Tour.createTour(nameEN, nameRU, descriptionEN, descriptionRU, price, count_people,
                     mark_hotel, start_date, days, discount, new TypeTourDao().findByName(typeEN).getId(), new CountryDao().findByName(countryEN).getId()));

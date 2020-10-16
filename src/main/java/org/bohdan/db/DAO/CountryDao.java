@@ -51,11 +51,11 @@ public class CountryDao {
         return typeTour;
     }
 
-    public List<ListBean> findByLocale(String locale){
-        if (locale.equals("EN")){
+    public List<ListBean> findByLocale(String locale) {
+        if (locale.equals("EN")) {
             return findAllLocale(SQL_FIND_ALL_COUNTRY_TOUR_EN);
         }
-        if (locale.equals("RU")){
+        if (locale.equals("RU")) {
             return findAllLocale(SQL_FIND_ALL_COUNTRY_TOUR_RU);
         }
         return null;
@@ -137,7 +137,6 @@ public class CountryDao {
     }
 
     public boolean create(Country entity) {
-        //boolean res = false;
         ResultSet rs;
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_INSERT_COUNTRY, Statement.RETURN_GENERATED_KEYS)) {
@@ -156,21 +155,16 @@ public class CountryDao {
         return false;
     }
 
-    public Country update(Country entity) {
-        Country country = null;
-
+    public boolean update(Country entity) {
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_COUNTRY)) {
             statement.setString(1, entity.getName_en());
             statement.setString(2, entity.getName_ru());
             statement.setInt(3, entity.getId());
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                country = mapCountry(rs);
-            }
+            return statement.executeUpdate() > 0;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
-        return country;
     }
 }

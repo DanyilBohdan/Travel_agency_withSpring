@@ -18,7 +18,7 @@ public class SearchTour {
 
     private static final Logger logger = Logger.getLogger(SearchTour.class);
 
-    public static List<TourView> execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public static List<TourView> execute(HttpServletRequest request, HttpServletResponse response, int check) throws IOException, ServletException {
         try {
 
             List<TourView> tours = null;
@@ -47,6 +47,8 @@ public class SearchTour {
 
             String method = request.getParameter("method");
             logger.debug("Log: method -->" + method);
+
+            TourDao.setFilter(check);
 
             if (method == null || method.equals("")) {
                 tours = new TourDao().findAllByLocale(lang, pageId, total);

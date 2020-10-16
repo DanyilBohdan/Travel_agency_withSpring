@@ -9,19 +9,22 @@
     <div class="container p-3 my-3 border">
         <form id="login_form" action="controller" method="post">
             <input type="hidden" name="command" value="login"/>
-            <fieldset>
-                <legend>
+            <div class="input-group mb-3">
+                <label>
                     <fmt:message key="login_jsp.label.login"/>
-                </legend>
-                <input name="login"/><br/>
-            </fieldset>
+                </label>
+                <input class="form-control" type="text" name="login" aria-describedby="basic-login">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-login">@example.com</span>
+                </div><br/>
+            </div>
             <br/>
-            <fieldset>
-                <legend>
+            <div class="input-group mb-3">
+                <label>
                     <fmt:message key="login_jsp.label.password"/>
-                </legend>
+                </label>
                 <input type="password" name="password"/>
-            </fieldset>
+            </div>
             <button type="submit" class="btn btn-outline-dark"><fmt:message key="login_jsp.button.login"/></button>
         </form>
         <form id="register" action="controller" method="post">

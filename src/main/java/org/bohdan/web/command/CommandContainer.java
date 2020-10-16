@@ -38,6 +38,10 @@ public class CommandContainer {
         commandMap.put("listType", new ListType());
         commandMap.put("editType", new EditType());
         commandMap.put("deleteType", new DeleteType());
+        commandMap.put("listCountry", new ListCountry());
+        commandMap.put("createCountry", new CreateCountry());
+        commandMap.put("editCountry", new EditCountry());
+        commandMap.put("deleteCountry", new DeleteCountry());
         commandMap.put("createTour", new CreateTour());
         commandMap.put("createType", new CreateType());
         commandMap.put("getCreateTour", new GetCreateTourPage());

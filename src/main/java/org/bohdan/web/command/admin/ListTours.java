@@ -27,7 +27,7 @@ public class ListTours extends Command {
         request.setAttribute("typeTourOut", new TypeTourDao().findByLocale(lang));
         request.setAttribute("countryOut", new CountryDao().findByLocale(lang));
 
-        List<TourView> tours = SearchTour.execute(request, response);
+        List<TourView> tours = SearchTour.execute(request, response, 1);
 
         logger.trace("Found in DB: tours --> " + tours);
 

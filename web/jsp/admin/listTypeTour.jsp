@@ -2,15 +2,15 @@
 <%@include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 <%@include file="/WEB-INF/jspf/directive/page.jspf" %>
 <html>
-<c:set var="title" value="Main" scope="page"/>
+<c:set var="title" value="List Type" scope="page"/>
 <%@include file="/WEB-INF/jspf/head.jspf" %>
 <body>
 <div class="mainContainer">
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <%@ include file="/WEB-INF/jspf/locale.jspf" %>
     <div class="container p-3 my-3 border">
-        <h1><fmt:message key="account.admin.listTours"/></h1>
-        <div class="border border-secondary">
+        <h1><fmt:message key="account.admin.listTypeTour"/></h1>
+        <div class="container p-3 my-3 border border-secondary">
             <form action="controller" method="get">
                 <input type="hidden" name="command" value="createType"/>
                 <label><fmt:message key="tour.create.nameEN"/>:</label>

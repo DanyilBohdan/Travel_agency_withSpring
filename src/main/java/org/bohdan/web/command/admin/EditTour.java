@@ -52,6 +52,8 @@ public class EditTour extends Command {
             float discount = Float.parseFloat(req.getParameter("discount"));
             logger.debug("Log: discount : " + discount);
 
+            price = TourDao.changePrice(price, discount);
+
             Tour tour = Tour.createTour(nameEN, nameRU, descriptionEN, descriptionRU, price, count_people,
                     mark_hotel, start_date, days, discount, new TypeTourDao().findByName(typeEN).getId(), new CountryDao().findByName(countryEN).getId());
 
