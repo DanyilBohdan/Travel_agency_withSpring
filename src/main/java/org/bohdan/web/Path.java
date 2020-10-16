@@ -13,6 +13,8 @@ public final class Path {
     public static final String LIST_TOURS_ADMIN = "/jsp/admin/listToursAdmin.jsp";
     public static final String LIST_USERS_ADMIN = "/jsp/admin/listUsersAdmin.jsp";
     public static final String LIST_ORDERS_ADMIN = "/jsp/admin/listOrdersAdmin.jsp";
+    public static final String LIST_COUNTRY_ADMIN = "/jsp/admin/listCountry.jsp";
+    public static final String LIST_TYPE_ADMIN = "/jsp/admin/listTypeTour.jsp";
     public static final String CREATE_TOUR = "/jsp/admin/createTour.jsp";
     public static final String EDIT_TOUR = "/jsp/admin/editTour.jsp";
     public static final String ACCOUNT_ADMIN = "/jsp/admin/accountAdmin.jsp";
@@ -23,6 +25,8 @@ public final class Path {
     public static final String COMMAND_ACCOUNT_MANAGER = "redirect:/controller?command=accountManager";
     public static final String COMMAND_TOURS_ADMIN = "redirect:/controller?command=listTours";
     public static final String COMMAND_LIST_USER = "redirect:/controller?command=listUsers";
+    public static final String COMMAND_LIST_TYPE = "redirect:/controller?command=listType";
+    public static final String COMMAND_LIST_COUNTRY = "redirect:/controller?command=listCountry";
     public static final String COMMAND_EDIT_TOUR_ADMIN = "redirect:/controller?command=editTour";
     public static final String COMMAND_CREATE_TOUR_ADMIN = "redirect:/controller?command=createTour";
 

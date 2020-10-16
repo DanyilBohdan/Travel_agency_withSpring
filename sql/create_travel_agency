@@ -28,8 +28,10 @@ CREATE TABLE IF NOT EXISTS travel_agencyDB.tour
     start_date   DATE        NOT NULL,
     days         INT         NOT NULL,
     discount     float       NULL,
-    type_tour_id INT         NOT NULL REFERENCES type_tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
-    country_id   INT         NOT NULL REFERENCES country (id) ON DELETE CASCADE ON UPDATE RESTRICT
+    type_tour_id INT         NOT NULL,
+    country_id   INT         NOT NULL,
+    FOREIGN KEY (type_tour_id) REFERENCES type_tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
+    FOREIGN KEY (country_id) REFERENCES country (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS travel_agencyDB.role
@@ -40,19 +42,23 @@ CREATE TABLE IF NOT EXISTS travel_agencyDB.role
 
 CREATE TABLE IF NOT EXISTS travel_agencyDB.user
 (
-    id           INT          NOT NULL AUTO_INCREMENT primary key unique,
-    username     VARCHAR(45)  NOT NULL,
-    password     VARCHAR(24)  NOT NULL,
-    email        VARCHAR(225) NOT NULL unique,
-    phone_number VARCHAR(13)  NOT NULL,
-    status       boolean      NOT NULL,
-    role_id      INT          NOT NULL REFERENCES role (id) ON DELETE CASCADE ON UPDATE RESTRICT
+    id           INT         NOT NULL AUTO_INCREMENT primary key unique,
+    username     VARCHAR(45) NOT NULL,
+    login        VARCHAR(40) NOT NULL unique,
+    password     VARCHAR(24) NOT NULL,
+    phone_number VARCHAR(13) NOT NULL,
+    status       boolean     NOT NULL,
+    role_id      INT         NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES role (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS travel_agencyDB.order
 (
-    id      INT                                     NOT NULL AUTO_INCREMENT primary key unique,
-    status  ENUM ('registered', 'paid', 'canceled') NOT NULL,
-    tour_id INT                                     NOT NULL REFERENCES tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
-    user_id INT                                     NOT NULL REFERENCES user (id) ON DELETE CASCADE ON UPDATE RESTRICT
+    id       INT                                     NOT NULL AUTO_INCREMENT primary key unique,
+    status   ENUM ('registered', 'paid', 'canceled') NOT NULL,
+    date_reg DATETIME                                NOT NULL,
+    tour_id  INT                                     NOT NULL,
+    user_id  INT                                     NOT NULL,
+    FOREIGN KEY (tour_id) REFERENCES tour (id) ON DELETE CASCADE ON UPDATE RESTRICT,
+    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );

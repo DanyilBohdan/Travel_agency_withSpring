@@ -18,6 +18,20 @@
             </button>
         </form>
         <div class="row">
+            <form action="controller" method="get">
+                <input type="hidden" name="command" value="listType"/>
+                <button type="submit" class="btn btn-outline-dark">
+                    List Type Tour
+                </button>
+            </form>
+            <form action="controller" method="get">
+                <input type="hidden" name="command" value="listCountry"/>
+                <button type="submit" class="btn btn-outline-dark">
+                    List Country
+                </button>
+            </form>
+        </div>
+        <div class="row">
             <form class="form-inline" method="post" action="controller">
                 <input type="hidden" name="command" value="listTours">
                 <input type="hidden" name="method" value="typeTour">

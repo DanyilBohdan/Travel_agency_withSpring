@@ -157,20 +157,16 @@ public class TypeTourDao {
         return res;
     }
 
-    public TypeTour update(TypeTour entity) {
-        TypeTour typeTour = null;
+    public boolean update(TypeTour entity) {
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TYPE_TOUR)) {
             statement.setString(1, entity.getName_en());
             statement.setString(2, entity.getName_ru());
             statement.setInt(3, entity.getId());
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                typeTour = mapTypeTour(rs);
-            }
+            return statement.executeUpdate() > 0;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
-        return typeTour;
     }
 }
