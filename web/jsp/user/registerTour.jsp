@@ -9,56 +9,60 @@
     <%@include file="/WEB-INF/jspf/header.jspf" %>
 
     <form action="controller" method="post">
+        <div class="container p-3 my-3 border">
+                <h5>
+                    <fmt:message key="tour.title"/>
+                </h5>
+                <label><fmt:message key="tour.name"/>: </label>
+                <label>${tour.name}</label><br>
 
-        <fieldset>
-            <legend>
-                <fmt:message key="tour.title"/>
-            </legend>
-            <label><fmt:message key="tour.name"/>: </label>
-            <label>${tour.name}</label><br>
+                <label><fmt:message key="tour.type"/> : </label>
+                <label>${tour.type}</label><br>
 
-            <label><fmt:message key="tour.type"/> : </label>
-            <label>${tour.type}</label><br>
+                <label><fmt:message key="tour.country"/>: </label>
+                <label>${tour.country}</label><br>
 
-            <label><fmt:message key="tour.country"/>: </label>
-            <label>${tour.country}</label><br>
+                <label><fmt:message key="tour.price"/>: </label>
+                <label>${tour.price}$</label><br>
 
-            <label><fmt:message key="tour.price"/>: </label>
-            <label>${tour.price}</label><br>
+                <label><fmt:message key="tour.description"/>: </label>
+                <label>${tour.description}</label><br>
 
-            <label><fmt:message key="tour.description"/>: </label>
-            <label>${tour.description}</label><br>
+                <label><fmt:message key="tour.count_people"/>: </label>
+                <label>${tour.count_people}</label><br>
 
-            <label><fmt:message key="tour.count_people"/>: </label>
-            <label>${tour.count_people}</label><br>
+                <label><fmt:message key="tour.mark_hotel"/>: </label>
+                <label>${tour.mark_hotel}</label><br>
 
-            <label><fmt:message key="tour.mark_hotel"/>: </label>
-            <label>${tour.mark_hotel}</label><br>
+                <label><fmt:message key="tour.start_date"/>: </label>
+                <label>${tour.start_date}</label><br>
 
-            <label><fmt:message key="tour.start_date"/>: </label>
-            <label>${tour.start_date}</label><br>
+                <label><fmt:message key="tour.days"/>: </label>
+                <label>${tour.days}</label><br>
 
-            <label><fmt:message key="tour.days"/>: </label>
-            <label>${tour.days}</label><br>
-
-            <label><fmt:message key="tour.discount"/>: </label>
-            <label>${tour.discount}</label><br>
-        </fieldset>
-
-        <fieldset>
-            <legend><fmt:message key="registrationTour.yourAc"/></legend>
-            <label><fmt:message key="account.label.username"/>: </label>
-            ${user.username}<br>
-            <label><fmt:message key="account.label.login"/>: </label>
-            ${user.login}<br>
-            <label><fmt:message key="account.label.phone_number"/>: </label>
-            ${user.phone_number}<br>
-        </fieldset>
-        <input type="hidden" name="command" value="registerTour"/>
-        <input type="hidden" name="id" value="${tour.id}">
-        <input type="submit" value="<fmt:message key="registrationTour.confirm"/>"/>
+                <label><fmt:message key="tour.discount"/>: </label>
+                <label>${tour.discount}</label><br>
+            <c:choose>
+                <c:when test="${not empty noAvailable}">
+                    <h5 class="text-light bg-danger">${noAvailable}</h5>
+                </c:when>
+                <c:otherwise>
+                    <div>
+                        <h6><fmt:message key="registrationTour.yourAc"/></h6>
+                        <label><fmt:message key="account.label.username"/>: </label>
+                            ${user.username}<br>
+                        <label><fmt:message key="account.label.login"/>: </label>
+                            ${user.login}<br>
+                        <label><fmt:message key="account.label.phone_number"/>: </label>
+                            ${user.phone_number}<br>
+                    </div>
+                    <input type="hidden" name="command" value="registerTour"/>
+                    <input type="hidden" name="id" value="${tour.id}">
+                    <button type="submit" class="btn btn-outline-dark"><fmt:message key="registrationTour.confirm"/></button>
+                </c:otherwise>
+            </c:choose>
+        </div>
     </form>
-
     <br/>
 </div>
 </body>

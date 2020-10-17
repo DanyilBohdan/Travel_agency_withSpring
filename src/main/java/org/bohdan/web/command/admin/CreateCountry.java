@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.entity.Country;
 import org.bohdan.web.Path;
+import org.bohdan.web.Validation;
 import org.bohdan.web.command.Command;
 
 import javax.servlet.ServletException;
@@ -21,6 +22,20 @@ public class CreateCountry extends Command {
             String nameEN = request.getParameter("createNameEN");
             String nameRU = request.getParameter("createNameRU");
             logger.info("Log: name country -->" + nameEN + ", " + nameRU);
+            boolean val = Validation.validateLatin(nameEN);
+            if (!val) {
+                String errorMessage = "Country (EN) must be: only latin";
+                request.setAttribute("errorMessage", errorMessage);
+                logger.error("errorMessage --> " + errorMessage);
+                return Path.ERROR_PAGE;
+            }
+            val = Validation.validateCyrillic(nameEN);
+            if (!val) {
+                String errorMessage = "Country (RU) must be: only cyrillic";
+                request.setAttribute("errorMessage", errorMessage);
+                logger.error("errorMessage --> " + errorMessage);
+                return Path.ERROR_PAGE;
+            }
 
             Country country = Country.create(nameEN, nameRU);
 

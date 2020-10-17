@@ -183,7 +183,6 @@ public class TourDao {
     }
 
     public Integer findCountTours() {
-
         Integer count = null;
 
         try (Connection con = DBManager.getInstance().getConnection();
@@ -452,7 +451,7 @@ public class TourDao {
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TOUR_DISCOUNT)) {
             statement.setFloat(1, changePrice(price, discount));
-            statement.setFloat(2, discount);
+            statement.setFloat(2, price);
             statement.setInt(3, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException ex) {

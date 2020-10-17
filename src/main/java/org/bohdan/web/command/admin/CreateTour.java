@@ -6,6 +6,7 @@ import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.db.entity.*;
 import org.bohdan.web.Path;
+import org.bohdan.web.Validation;
 import org.bohdan.web.command.Command;
 
 import javax.servlet.ServletException;
@@ -26,6 +27,7 @@ public class CreateTour extends Command {
             String nameEN = request.getParameter("nameEN");
             String nameRU = request.getParameter("nameRU");
             logger.info("Log: name : " + nameEN + ", " + nameRU);
+
             String typeEN = request.getParameter("typeEN");
             String typeRU = request.getParameter("typeRU");
             logger.info("Log: type : " + typeEN + ", " + typeRU);
@@ -48,6 +50,14 @@ public class CreateTour extends Command {
             float discount = Float.parseFloat(request.getParameter("discount"));
             logger.info("Log: discount : " + discount);
 
+            String checkVal = Validation.validateTour(nameEN, nameRU, typeEN, typeRU, countryEN, countryRU, descriptionEN, descriptionRU,
+                    price, count_people, mark_hotel, start_date, days, discount);
+            if (!checkVal.equals("null")) {
+                request.setAttribute("errorMessage", checkVal);
+                logger.error("errorMessage --> " + checkVal);
+                return Path.ERROR_PAGE;
+            }
+
             price = TourDao.changePrice(price, discount);
 
             boolean check = new TourDao().create(Tour.createTour(nameEN, nameRU, descriptionEN, descriptionRU, price, count_people,
@@ -58,7 +68,7 @@ public class CreateTour extends Command {
 
         } catch (Exception ex) {
             logger.error("Log: " + ex);
-            return Path.COMMAND_CREATE_TOUR_ADMIN;
+            return Path.CREATE_TOUR;
         }
     }
 }

@@ -8,6 +8,7 @@ import org.bohdan.db.entity.Country;
 import org.bohdan.db.entity.Tour;
 import org.bohdan.db.entity.TypeTour;
 import org.bohdan.web.Path;
+import org.bohdan.web.Validation;
 import org.bohdan.web.command.Command;
 
 import javax.servlet.ServletException;
@@ -29,6 +30,7 @@ public class EditTour extends Command {
             String nameEN = req.getParameter("nameEN");
             String nameRU = req.getParameter("nameRU");
             logger.debug("Log: name : " + nameEN + ", " + nameRU);
+
             String typeEN = req.getParameter("typeEN");
             String typeRU = req.getParameter("typeRU");
             logger.debug("Log: type : " + typeEN + ", " + typeRU);
@@ -46,11 +48,18 @@ public class EditTour extends Command {
             logger.debug("Log: mark_hotel : " + mark_hotel);
             Date start_date = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("start_date")).getTime());
             logger.debug("Log: start_date : " + start_date);
-            //Date start_date = Date.valueOf("2020-4-5");
             int days = Integer.parseInt(req.getParameter("days"));
             logger.debug("Log: days : " + days);
             float discount = Float.parseFloat(req.getParameter("discount"));
             logger.debug("Log: discount : " + discount);
+
+            String checkVal = Validation.validateTour(nameEN, nameRU, typeEN, typeRU, countryEN, countryRU, descriptionEN, descriptionRU,
+                    price, count_people, mark_hotel, start_date, days, discount);
+            if (!checkVal.equals("null")) {
+                req.setAttribute("errorMessage", checkVal);
+                logger.error("errorMessage --> " + checkVal);
+                return Path.ERROR_PAGE;
+            }
 
             price = TourDao.changePrice(price, discount);
 

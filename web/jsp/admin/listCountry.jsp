@@ -18,7 +18,7 @@
                 <label><fmt:message key="tour.create.nameRU"/>:</label>
                 <input type="text" name="createNameRU" /><br>
                 <button type="submit" class="btn btn-outline-dark">
-                    Create New Country
+                    <fmt:message key="account.admin.createNewCountry"/>
                 </button>
             </form>
         </div>

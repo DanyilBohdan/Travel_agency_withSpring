@@ -25,6 +25,7 @@ public class UpdateStatusOrder extends Command {
             logger.info("Log: id --> " + id);
             String status = request.getParameter("selectStatus");
             logger.info("Log: status --> " + status);
+
             boolean check = new OrderDao().updateStatus(status, id);
             logger.info("Log: check update status order --> " + check);
 

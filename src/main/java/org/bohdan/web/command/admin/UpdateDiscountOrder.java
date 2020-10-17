@@ -6,6 +6,7 @@ import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.bean.TourView;
 import org.bohdan.db.entity.Tour;
 import org.bohdan.web.Path;
+import org.bohdan.web.Validation;
 import org.bohdan.web.command.Command;
 
 import javax.servlet.ServletException;
@@ -24,6 +25,14 @@ public class UpdateDiscountOrder extends Command {
             logger.info("Log: id --> " + id);
             float discount = Float.parseFloat(request.getParameter("discount"));
             logger.info("Log: discount : " + discount);
+            if (!Validation.validateFloat(discount, 0, 1)) {
+                String checkVal = "Discount must be: only numbers from 0 - 1";
+                request.setAttribute("errorMessage", checkVal);
+                logger.error("errorMessage --> " + checkVal);
+                return Path.ERROR_PAGE;
+
+            }
+
             Tour tour = new TourDao().findIDTour(id);
 
             boolean check = new TourDao().updateDiscount(discount, tour.getPrice(), id);

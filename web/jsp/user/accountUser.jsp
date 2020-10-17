@@ -10,61 +10,60 @@
         <div class="border border-secondary">
             <label>
                 <fmt:message key="account.label.username"/>:
-            </label>    ${user.username}
+            </label> ${user.username}
         </div>
         <div class="border border-secondary">
             <label>
                 <fmt:message key="account.label.login"/>:
-            </label>    ${user.login}
+            </label> ${user.login}
         </div>
         <div class="border border-secondary">
             <label>
                 <fmt:message key="account.label.password"/>:
-            </label>    ${user.password}
+            </label> ${user.password}
         </div>
         <div class="border border-secondary">
             <label>
                 <fmt:message key="account.label.phone_number"/>:
-            </label>    ${user.phone_number}
+            </label> ${user.phone_number}
         </div>
         <c:if test="${user.status} == false">
-        <div class="border border-secondary">
-            <label>
-                <fmt:message key="account.label.status"/>:
-            </label><fmt:message key="account.label.block"/>
-        </div>
+            <div class="border border-secondary">
+                <label>
+                    <fmt:message key="account.label.status"/>:
+                </label><fmt:message key="account.label.block"/>
+            </div>
         </c:if>
         <div class="border border-secondary">
             <label>
                 <fmt:message key="account.label.role"/>:
-            </label>    ${userRole}
+            </label> ${userRole}
         </div>
 
-        <fieldset>
-            <legend>
+        <div class="border border-secondary">
+            <label>
                 <fmt:message key="account.legend.myListTours"/>
-            </legend>
+            </label>
             <c:forEach var="order" items="${orders}">
                 <div class="border border-secondary">
-                    Name tour: ${order.name}<br>
-                    Price: ${order.price}<br>
-                    Status: ${order.status}<br>
+                    <fmt:message key="tour.name"/>: ${order.name}<br>
+                    <fmt:message key="tour.price"/>: ${order.price}<br>
+                    <fmt:message key="account.label.status"/>: ${order.status}<br>
                     <details>
                         <summary>
-                            More>>
+                            <fmt:message key="order.more"/>>>
                         </summary>
                         <fieldset>
-                            Count people: ${order.count_people}<br>
-                            Mark hotel: ${order.start_date}<br>
-                            Days: ${order.days}<br>
-                            Discount: ${order.discount}<br>
+                            <fmt:message key="tour.count_people"/>: ${order.count_people}<br>
+                            <fmt:message key="tour.mark_hotel"/>: ${order.start_date}<br>
+                            <fmt:message key="tour.days"/>: ${order.days}<br>
+                            <fmt:message key="tour.discount"/>: ${order.discount}<br>
                         </fieldset>
                     </details>
                 </div>
             </c:forEach>
-        </fieldset>
-        <div class="container p-3 my-3 border">
-            <%@ include file="/WEB-INF/jspf/footer.jspf" %>
         </div>
+        <%@ include file="/WEB-INF/jspf/footer.jspf" %>
+    </div>
 </body>
 </html>

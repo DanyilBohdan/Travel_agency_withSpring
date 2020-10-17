@@ -14,20 +14,20 @@
         <form action="controller" method="get">
             <input type="hidden" name="command" value="getCreateTour"/>
             <button type="submit" class="btn btn-outline-dark">
-                Create New Tour
+                <fmt:message key="account.admin.createNewTour"/>
             </button>
         </form>
         <div class="row">
             <form action="controller" method="get">
                 <input type="hidden" name="command" value="listType"/>
                 <button type="submit" class="btn btn-outline-dark">
-                    List Type Tour
+                    <fmt:message key="account.admin.listTypeTour"/>
                 </button>
             </form>
             <form action="controller" method="get">
                 <input type="hidden" name="command" value="listCountry"/>
                 <button type="submit" class="btn btn-outline-dark">
-                    List Country
+                    <fmt:message key="account.admin.listCountry"/>
                 </button>
             </form>
         </div>
@@ -81,7 +81,7 @@
                 <button type="submit" class="btn-outline-dark"><fmt:message key="search.reset"/></button>
             </form>
         </div>
-        <div class="row row-cols-1 row-cols-md-2">
+        <div class="row row-cols-2 row-cols-md-2">
             <c:forEach var="tour" items="${tours}">
                 <div class="card border-dark mb-4 h-100">
                     <div class="card-header">${tour.name}</div>

@@ -47,7 +47,7 @@ public class ViewToursCommand extends Command {
 
         logger.trace("Found in DB: tours --> " + tours);
 
-        tours.sort((o1, o2) -> (int) (o1.getDiscount() - o2.getDiscount()));
+        tours.sort((o1, o2) -> Float.compare(o1.getDiscount(), o2.getDiscount()));
 
         request.setAttribute("tours", tours);
 

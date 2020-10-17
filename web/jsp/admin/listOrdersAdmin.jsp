@@ -12,19 +12,19 @@
         <div class="container p-3 my-3 border">
             <c:forEach var="order" items="${orders}">
             <div class="border border-secondary">
-                Name tour: ${order.name}<br>
-                Login: ${order.login}<br>
-                Status: ${order.status}<br>
+                <fmt:message key="tour.name"/>: ${order.name}<br>
+                <fmt:message key="account.label.login"/>: ${order.login}<br>
+                <fmt:message key="account.label.status"/>: ${order.status}<br>
                 <details>
                     <summary>
-                        More>>
+                        <fmt:message key="order.more"/>>>
                     </summary>
                     <fieldset>
-                        Price: ${order.price}<br>
-                        Count people: ${order.count_people}<br>
-                        Mark hotel: ${order.start_date}<br>
-                        Days: ${order.days}<br>
-                        Discount: ${order.discount}
+                        <fmt:message key="tour.price"/>: ${order.price}<br>
+                        <fmt:message key="tour.count_people"/>: ${order.count_people}<br>
+                        <fmt:message key="tour.mark_hotel"/>: ${order.start_date}<br>
+                        <fmt:message key="tour.days"/>: ${order.days}<br>
+                        <fmt:message key="tour.discount"/>:
                         <form action="controller" method="post">
                             <input type="hidden" name="command" value="updateDiscount">
                             <input type="hidden" name="id" value="${order.tour_id}">
@@ -39,13 +39,13 @@
                         <input type="hidden" name="id" value="${order.order_id}">
                         <select name="selectStatus" onchange="submit()">
                             <option value="registered" ${order.status == 'registered' ? 'selected' : ''}>
-                                registered
+                                <fmt:message key="order.status.registered"/>
                             </option>
                             <option value="paid" ${order.status == 'paid' ? 'selected' : ''}>
-                                paid
+                                <fmt:message key="order.status.paid"/>
                             </option>
                             <option value="canceled" ${order.status == 'canceled' ? 'selected' : ''}>
-                                canceled
+                                <fmt:message key="order.status.canceled"/>
                             </option>
                         </select>
                     </form>

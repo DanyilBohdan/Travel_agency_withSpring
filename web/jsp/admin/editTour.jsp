@@ -8,62 +8,62 @@
     <%@include file="/WEB-INF/jspf/header.jspf" %>
     <tr>
         <td class="content center">
-            <h1>Edit Tour</h1>
+            <h1><fmt:message key="tour.create.editTour"/></h1>
             <form action="controller" method="post">
 
-                <label>NameEN</label>
+                <label><fmt:message key="tour.create.nameEN"/></label>
                 <input name="nameEN" value="${tour.name_en}"/><br>
-                <label>NameRU</label>
+                <label><fmt:message key="tour.create.nameRU"/></label>
                 <input name="nameRU" value="${tour.name_ru}"/><br>
 
-                <label>TypeEN</label>
+                <label><fmt:message key="tour.create.typeEN"/></label>
                 <select name="typeEN">
                     <c:forEach var="item" items="${typeTourOut}">
                         <option  ${typeDef.name_en == item.name_en ? 'selected' : ''}>${item.name_en}</option>
                     </c:forEach>
                 </select><br>
-                <label>TypeRU</label>
+                <label><fmt:message key="tour.create.typeRU"/></label>
                 <select name="typeRU">
                     <c:forEach var="item" items="${typeTourOut}">
                         <option  ${typeDef.name_ru == item.name_ru ? 'selected' : ''}>${item.name_ru}</option>
                     </c:forEach>
                 </select><br>
 
-                <label>CountryEN</label>
+                <label><fmt:message key="tour.create.countryEN"/></label>
                 <select name="countryEN">
                     <c:forEach var="item" items="${countryOut}">
                         <option ${countryDef.name_en == item.name_en ? 'selected' : ''}>${item.name_en}</option>
                     </c:forEach>
                 </select><br>
-                <label>CountryRU</label>
+                <label><fmt:message key="tour.create.countryEN"/></label>
                 <select name="countryRU">
                     <c:forEach var="item" items="${countryOut}">
                         <option ${countryDef.name_ru == item.name_ru ? 'selected' : ''}>${item.name_ru}</option>
                     </c:forEach>
                 </select><br>
 
-                <label>Price</label>
+                <label><fmt:message key="tour.price"/></label>
                 <input name="price" value="${tour.price}" min="100"/><br>
 
-                <label>DescriptionEN</label>
+                <label><fmt:message key="tour.create.descriptionEN"/></label>
                 <input name="descriptionEN" value="${tour.desc_en}"/><br>
-                <label>DescriptionRU</label>
+                <label><fmt:message key="tour.create.descriptionRU"/></label>
                 <input name="descriptionRU" value="${tour.desc_ru}"/><br>
 
-                <label>Number of person</label>
+                <label><fmt:message key="tour.count_people"/></label>
                 <input name="count_people" value="${tour.count_people}" min="-1"/><br>
-                <label>Mark HOTEL</label>
+                <label><fmt:message key="tour.mark_hotel"/></label>
                 <input name="mark_hotel" value="${tour.mark_hotel}" min="-1"/><br>
-                <label>Start Date</label>
+                <label><fmt:message key="tour.start_date"/></label>
                 <input type="date" name="start_date" value="${tour.start_date}"><br>
-                <label>Days</label>
+                <label><fmt:message key="tour.days"/></label>
                 <input name="days" value="${tour.days}" min="0"><br>
-                <label>Discount</label>
+                <label><fmt:message key="tour.discount"/></label>
                 <input name="discount" value="${tour.discount}" min="0" max="1">
                 <br><br>
                 <input type="hidden" name="command" value="editTour">
                 <input type="hidden" name="id" value="${tour.id}">
-                <input type="submit" value="Save">
+                <input type="submit" value="<fmt:message key="save"/>">
             </form>
         </td>
     </tr>

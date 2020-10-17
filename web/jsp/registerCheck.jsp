@@ -6,11 +6,12 @@
 <body>
 <div id="main-container">
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
+    <br>
     <label>
         <b>
             ${checkRegistration}
         </b>
-    </label>
+    </label><br>
     <form action="controller" method="post">
         <input type="hidden" name="command" value="viewTours">
         <button type="submit" class="btn btn-outline-dark">

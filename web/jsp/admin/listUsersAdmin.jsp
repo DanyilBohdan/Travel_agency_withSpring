@@ -7,55 +7,56 @@
 <body>
 
 <%@include file="/WEB-INF/jspf/header.jspf" %>
+<div class="container p-3 my-3 border">
+    <div class="container p-3 my-3 border">
+        <form class="form-inline" method="post" action="controller">
+            <input type="hidden" name="command" value="searchUser">
+            <input type="text" name="searchText" class="form-control"
+                   placeholder="<fmt:message key="search.placeholder"/>">
+            <button type="submit" class="btn btn-outline-dark"><fmt:message key="search.button"/></button>
+            <select id="search" name="searchSelect">
+                <option value="username" selected><fmt:message key="account.label.username"/></option>
+                <option value="login"><fmt:message key="login_jsp.button.login"/></option>
+                <option value="phone_number"><fmt:message key="account.label.phone_number"/></option>
+            </select>
+        </form>
+    </div>
 
-<div class="container">
-    <form class="form-inline" method="post" action="controller">
-        <input type="hidden" name="command" value="searchUser">
-        <input type="text" name="searchText" class="form-control" placeholder="Search roll no..">
-        <button type="submit" class="btn-primary">Search</button>
-        <select id="search" name="searchSelect">
-            <option value="username" selected>username</option>
-            <option value="login">login</option>
-            <option value="phone_number">phone number</option>
-        </select>
-    </form>
-</div>
-
-<form id="main" action="controller" method="post">
-    <table>
+    <div class="container p-3 my-3 border">
         <c:forEach var="user" items="${users}">
-            <tr class="tour_view">
-                <td>
-                    Username: ${user.username}<br>
-                    Login: ${user.login}<br>
-                    Phone: ${user.phone_number}<br>
-                </td>
-                <td>
-                    <label>Status:</label>
+            <div class="row">
+                <div class="container">
+                    <fmt:message key="account.label.username"/>: ${user.username}<br>
+                    <fmt:message key="account.label.login"/>: ${user.login}<br>
+                    <fmt:message key="account.label.phone_number"/>: ${user.phone_number}<br>
+                    <label><fmt:message key="account.label.status"/>:</label>
                     <form action="controller" method="post">
                         <input type="hidden" name="command" value="updateStatusUser">
                         <input type="hidden" name="id" value="${user.id}">
                         <input type="submit" value="${user.status}">
                     </form>
-                    <br>
-                    <label>Role:</label>
+                </div>
+                <div class="container">
                     <form action="controller" method="post">
                         <input type="hidden" name="command" value="updateRole">
                         <input type="hidden" name="id" value="${user.id}">
+                        <label><fmt:message key="role"/> :</label>
                         <c:if test="${user.role != 'admin'}">
                             <select name="selectRole" onchange="submit()">
-                                <option value="user" ${user.role == 'user' ? 'selected' : ''}>user</option>
-                                <option value="manager" ${user.role == 'manager' ? 'selected' : ''}>manager</option>
+                                <option value="user" ${user.role == 'user' ? 'selected' : ''}><fmt:message
+                                        key="user"/></option>
+                                <option value="manager" ${user.role == 'manager' ? 'selected' : ''}><fmt:message
+                                        key="manager"/></option>
                             </select>
                         </c:if>
-                        <label>${user.role == 'admin' ? 'admin' : ''}</label>
+                        <c:if test="${user.role == 'admin'}">
+                            <label><fmt:message key="admin"/></label>
+                        </c:if>
                     </form>
-                </td>
-
-            </tr>
+                </div>
+            </div>
         </c:forEach>
-
-    </table>
-</form>
+    </div>
+</div>
 </body>
 </html>

@@ -24,7 +24,7 @@ public class SearchTour {
             List<TourView> tours = null;
 
             Integer count = new TourDao().findCountTours();
-            int countPage = (count / 2) + 1;
+            int countPage = (count / 4) + 1;
             logger.info("Log: count --> " + count);
             logger.info("Log: countPage --> " + countPage);
 
@@ -36,7 +36,7 @@ public class SearchTour {
             }
 
             int pageId = Integer.parseInt(page);
-            int total = 2;
+            int total = 4;
             if (pageId == 1) {
             } else {
                 pageId = pageId - 1;

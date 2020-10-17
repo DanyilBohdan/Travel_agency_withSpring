@@ -17,6 +17,11 @@ public class OrderDao {
     private static final String SQL_FIND_ENTITY_BY_ID_ORDER =
             "SELECT * FROM travel_agencyDB.order WHERE id=?";
 
+    private static final String SQL_FIND_ENTITY_BY_ID_TOUR =
+            "SELECT count(*) as count FROM travel_agencyDB.order\n" +
+                    "where (travel_agencyDB.order.status = 'registered' or travel_agencyDB.order.status = 'paid')\n" +
+                    "and travel_agencyDB.order.tour_id = ?";
+
     public static final String SQL_DELETE_ORDER_BY_ID =
             "DELETE FROM travel_agencyDB.order WHERE id = ?";
 
@@ -96,6 +101,21 @@ public class OrderDao {
         return order;
     }
 
+    public Integer findCountOrderByIdTour(Integer id) {
+        Integer count = null;
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(SQL_FIND_ENTITY_BY_ID_TOUR);) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
     public List<Order> findAll() {
         List<Order> orders = new ArrayList<>();
 
@@ -127,10 +147,10 @@ public class OrderDao {
     }
 
     public List<OrderTours> findAllOrdersLocale(String locale) {
-        if (locale.equals("EN") || locale.equals("en")){
+        if (locale.equals("EN") || locale.equals("en")) {
             return findAllOrders(SQL_FIND_ALL_ORDERS_EN);
         }
-        if (locale.equals("RU") || locale.equals("ru")){
+        if (locale.equals("RU") || locale.equals("ru")) {
             return findAllOrders(SQL_FIND_ALL_ORDERS_RU);
         }
         return null;
@@ -151,10 +171,10 @@ public class OrderDao {
     }
 
     public List<OrderTours> findAllOrdersUsersLocale(String locale, Integer id) {
-        if (locale.equals("EN") || locale.equals("en")){
+        if (locale.equals("EN") || locale.equals("en")) {
             return findAllOrdersUsers(SQL_FIND_ALL_ORDERS_USER_EN, id);
         }
-        if (locale.equals("RU") || locale.equals("ru")){
+        if (locale.equals("RU") || locale.equals("ru")) {
             return findAllOrdersUsers(SQL_FIND_ALL_ORDERS_USER_RU, id);
         }
         return null;

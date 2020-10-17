@@ -60,7 +60,7 @@
                 <button type="submit" class="btn-outline-dark"><fmt:message key="search.reset"/></button>
             </form>
         </div>
-        <div class="row row-cols-1 row-cols-md-2">
+        <div class="row row-cols-2 row-cols-md-2">
             <c:forEach var="tour" items="${tours}">
                 <div class="card border-dark mb-4 h-100">
                     <div class="card-header">${tour.name}</div>

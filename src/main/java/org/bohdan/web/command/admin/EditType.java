@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.db.entity.TypeTour;
 import org.bohdan.web.Path;
+import org.bohdan.web.Validation;
 import org.bohdan.web.command.Command;
 
 import javax.servlet.ServletException;
@@ -24,6 +25,20 @@ public class EditType extends Command {
         String nameEN = request.getParameter("nameEN");
         String nameRU = request.getParameter("nameRU");
         logger.debug("Log: name --> " + nameEN + ", " + nameRU);
+        boolean val = Validation.validateLatin(nameEN);
+        if (!val) {
+            String errorMessage = "Type (EN) must be: only latin";
+            request.setAttribute("errorMessage", errorMessage);
+            logger.error("errorMessage --> " + errorMessage);
+            return Path.ERROR_PAGE;
+        }
+        val = Validation.validateCyrillic(nameEN);
+        if (!val) {
+            String errorMessage = "Type (RU) must be: only cyrillic";
+            request.setAttribute("errorMessage", errorMessage);
+            logger.error("errorMessage --> " + errorMessage);
+            return Path.ERROR_PAGE;
+        }
 
         TypeTour typeTour = TypeTour.create(nameEN, nameRU);
         typeTour.setId(id);

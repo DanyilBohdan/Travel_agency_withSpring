@@ -41,14 +41,9 @@
             </select><br>
 
             <label><fmt:message key="tour.price"/></label>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">$</span>
-                </div>
+            <div class="input-group">
+                <span class="input-group-text">$</span>
                 <input name="price" min="100"/><br>
-                <div class="input-group-append">
-                    <span class="input-group-text">.00</span>
-                </div>
             </div>
 
             <div class="input-group">
