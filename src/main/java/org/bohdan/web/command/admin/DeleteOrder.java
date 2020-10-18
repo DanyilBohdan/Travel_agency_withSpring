@@ -19,6 +19,7 @@ public class DeleteOrder extends Command {
             throws IOException, ServletException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
+            logger.info("log: delete Tour by ID = " + id);
             boolean check = new OrderDao().delete(id);
             logger.info("log: delete Tour = " + check);
 

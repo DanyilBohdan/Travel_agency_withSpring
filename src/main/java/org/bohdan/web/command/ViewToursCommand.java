@@ -21,7 +21,6 @@ public class ViewToursCommand extends Command {
     private final static Logger logger = Logger.getLogger(ViewToursCommand.class);
 
 
-
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
@@ -50,6 +49,7 @@ public class ViewToursCommand extends Command {
         tours.sort((o1, o2) -> Float.compare(o1.getDiscount(), o2.getDiscount()));
 
         request.setAttribute("tours", tours);
+        request.setAttribute("commandPage", "viewTours");
 
         logger.debug("Command finished");
 

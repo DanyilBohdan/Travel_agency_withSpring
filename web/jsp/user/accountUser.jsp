@@ -6,6 +6,7 @@
 <body>
 <div id="main-container">
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
+    <%@ include file="/WEB-INF/jspf/locale.jspf" %>
     <div class="container p-3 my-3 border">
         <div class="border border-secondary">
             <label>

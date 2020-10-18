@@ -26,20 +26,24 @@ public class DBManager {
         return dbManager;
     }
 
-    public Connection getConnection() {
-        Connection con = null;
-        try {
-            MysqlDataSource ds = new MysqlConnectionPoolDataSource();
-            ds.setURL(ContextDB.URL);
-            ds.setUser(ContextDB.USERNAME);
-            ds.setPassword(ContextDB.PASSWORD);
-            ds.setServerTimezone(ContextDB.SERVER_TIMEZONE);
-            con = ds.getConnection();
-        } catch (SQLException ex) {
-            logger.error("Cannot obtain a connection from the pool", ex);
-        }
-        return con;
+    public Connection getConnection() throws SQLException {
+        return ConnectionPool.getConnection();
     }
+
+//    public Connection getConnection() {
+//        Connection con = null;
+//        try {
+//            MysqlDataSource ds = new MysqlConnectionPoolDataSource();
+//            ds.setURL(ContextDB.URL);
+//            ds.setUser(ContextDB.USERNAME);
+//            ds.setPassword(ContextDB.PASSWORD);
+//            ds.setServerTimezone(ContextDB.SERVER_TIMEZONE);
+//            con = ds.getConnection();
+//        } catch (SQLException ex) {
+//            logger.error("Cannot obtain a connection from the pool", ex);
+//        }
+//        return con;
+//    }
 
     public static void commitAndClose(Connection con) {
         try {

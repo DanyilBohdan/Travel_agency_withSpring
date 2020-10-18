@@ -3,6 +3,7 @@ package org.bohdan.db.DAO;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.db.bean.OrderTours;
+import org.bohdan.db.bean.OrderToursByIdUser;
 import org.bohdan.db.entity.Order;
 
 import java.sql.*;
@@ -21,6 +22,15 @@ public class OrderDao {
             "SELECT count(*) as count FROM travel_agencyDB.order\n" +
                     "where (travel_agencyDB.order.status = 'registered' or travel_agencyDB.order.status = 'paid')\n" +
                     "and travel_agencyDB.order.tour_id = ?";
+
+    private static final String SQL_FIND_TOURS_BY_ID_USER =
+            "SELECT travel_agencyDB.order.id, tour.id as tour_id, \n" +
+                    "tour.start_date, tour.days, travel_agencyDB.order.status\n" +
+                    "FROM user, tour, travel_agencyDB.order \n" +
+                    "WHERE (travel_agencyDB.order.status = 'registered' or travel_agencyDB.order.status = 'paid')\n" +
+                    "and tour.id = travel_agencyDB.order.tour_id \n" +
+                    "and user.id = travel_agencyDB.order.user_id \n" +
+                    "and travel_agencyDB.order.user_id = ?";
 
     public static final String SQL_DELETE_ORDER_BY_ID =
             "DELETE FROM travel_agencyDB.order WHERE id = ?";
@@ -101,6 +111,16 @@ public class OrderDao {
         return order;
     }
 
+    private OrderToursByIdUser mapOrderToursByIdUser(ResultSet rs) throws SQLException {
+        OrderToursByIdUser order = new OrderToursByIdUser();
+        order.setOrder_id(rs.getInt(Fields.ID));
+        order.setTour_id(rs.getInt(Fields.TOUR_ID));
+        order.setStart_date(rs.getDate(Fields.START_DATE));
+        order.setDays(rs.getInt(Fields.DAYS));
+        order.setStatus(rs.getString(Fields.STATUS));
+        return order;
+    }
+
     public Integer findCountOrderByIdTour(Integer id) {
         Integer count = null;
         try (Connection con = DBManager.getInstance().getConnection();
@@ -144,6 +164,21 @@ public class OrderDao {
             ex.printStackTrace();
         }
         return order;
+    }
+
+    public List<OrderToursByIdUser> findToursByIdUser(Integer id) {
+        List<OrderToursByIdUser> orders = new ArrayList<>();
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(SQL_FIND_TOURS_BY_ID_USER)) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                orders.add(mapOrderToursByIdUser(rs));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return orders;
     }
 
     public List<OrderTours> findAllOrdersLocale(String locale) {

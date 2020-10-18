@@ -17,12 +17,21 @@ public class AccountAdmin extends Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
         HttpSession session = request.getSession();
+        String lang = request.getParameter("lang");
+        logger.info("LOG: localeParam = " + lang);
 
-        String defLocale = (String) Config.get(session, "javax.servlet.jsp.jstl.fmt.locale");
-        logger.trace("LOG: defLocale = " + defLocale);
+        if (lang != null && !lang.isEmpty()) {
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+            session.setAttribute("defLocale", lang);
+        } else {
+            lang = (String) session.getAttribute("defLocale");
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+        }
+        logger.info("LOG: localeFinal = " + lang);
 
-        session.setAttribute("localeDef", defLocale);
+        request.setAttribute("commandPage", "accountAdmin");
 
         return Path.ACCOUNT_ADMIN;
     }

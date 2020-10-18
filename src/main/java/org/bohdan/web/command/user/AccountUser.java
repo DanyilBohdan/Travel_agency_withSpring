@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,12 +25,25 @@ public class AccountUser extends Command {
         logger.debug("Command starts");
 
         HttpSession session = request.getSession();
+        String lang = request.getParameter("lang");
+        logger.info("LOG: localeParam = " + lang);
+
+        if (lang != null && !lang.isEmpty()) {
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+            session.setAttribute("defLocale", lang);
+        } else {
+            lang = (String) session.getAttribute("defLocale");
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+        }
+        logger.info("LOG: localeFinal = " + lang);
 
         User user = (User) session.getAttribute("user");
 
         List<OrderTours> ordersUser = new OrderDao().findAllOrdersUsersLocale((String) session.getAttribute("defLocale"), user.getId());
 
         request.setAttribute("orders", ordersUser);
+
+        request.setAttribute("commandPage", "accountUser");
 
         logger.debug("Command finished");
         return Path.ACCOUNT_USER;

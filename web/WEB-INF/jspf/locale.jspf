@@ -3,7 +3,7 @@
 <label><fmt:message key="locale_jspf.language"/></label>
 
 <form action="controller" method="post">
-        <input type="hidden" name="command" value="viewTours">
+        <input type="hidden" name="command" value="${commandPage}">
         <select id="language" name="lang" onchange="submit()" class="form-control form-control-sm" style="width: 100px">
                 <c:forEach var="locale" items="${locales}">
                         <option ${defLocale == locale ? 'selected' : ''}>${locale}</option>

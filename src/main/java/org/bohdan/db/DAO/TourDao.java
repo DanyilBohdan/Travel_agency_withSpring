@@ -16,10 +16,10 @@ public class TourDao {
 
     private static final Logger logger = Logger.getLogger(TourDao.class);
 
-    private static final String FILTER_DATE_ADMIN = "and (tour.start_date - curdate()) > 5\n" +
+    private static final String FILTER_LIMIT_DATE = "and (tour.start_date - curdate()) > 5\n" +
             "limit ?, ?";
 
-    private static final String FILTER_LIMIT_DATE = "limit ?, ?";
+    private static final String  FILTER_DATE_ADMIN= "limit ?, ?";
 
     public static final String SQL_INSERT_TOUR =
             "insert into tour (name_en, name_ru, desc_en, desc_ru, price, count_people, mark_hotel, \n" +
@@ -450,8 +450,8 @@ public class TourDao {
     public boolean updateDiscount(float discount, float price, Integer id) {
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TOUR_DISCOUNT)) {
-            statement.setFloat(1, changePrice(price, discount));
-            statement.setFloat(2, price);
+            statement.setFloat(1, discount);
+            statement.setFloat(2, changePrice(price, discount));
             statement.setInt(3, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException ex) {
