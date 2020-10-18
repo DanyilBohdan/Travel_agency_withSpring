@@ -8,6 +8,7 @@ public final class Path {
     public static final String PAGE_REGISTER_USER = "/jsp/common/register.jsp";
     public static final String PAGE_REGISTER_USER_REDIRECT = "redirect:/controller?command=registerUser";
     public static final String PAGE_VIEW_TOUR = "/jsp/common/viewTourCommon.jsp";
+    public static final String PAGE_EDIT_ACCOUNT = "/jsp/common/accountEdit.jsp";
 
     //admin
     public static final String LIST_TOURS_ADMIN = "/jsp/admin/listToursAdmin.jsp";
@@ -27,10 +28,7 @@ public final class Path {
     public static final String COMMAND_LIST_USER = "redirect:/controller?command=listUsers";
     public static final String COMMAND_LIST_TYPE = "redirect:/controller?command=listType";
     public static final String COMMAND_LIST_COUNTRY = "redirect:/controller?command=listCountry";
-    public static final String COMMAND_EDIT_TOUR_ADMIN = "redirect:/controller?command=editTour";
-    public static final String COMMAND_CREATE_TOUR_ADMIN = "redirect:/controller?command=createTour";
 
-    public static final String COMMAND_VIEW_TOURS = "redirect:/controller?command=viewTours";
     public static final String COMMAND_ACCOUNT = "redirect:/controller?command=accountUser";
     public static final String ACCOUNT_USER = "/jsp/user/accountUser.jsp";
     public static final String REGISTER_TOUR = "/jsp/user/registerTour.jsp";

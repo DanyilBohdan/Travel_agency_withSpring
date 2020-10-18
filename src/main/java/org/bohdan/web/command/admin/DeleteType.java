@@ -1,6 +1,7 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
+import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.web.Path;
@@ -20,7 +21,7 @@ public class DeleteType extends Command {
 
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            boolean check = new TypeTourDao().delete(id);
+            boolean check = new TypeTourDao(dataSource).delete(id);
             logger.info("log: delete Type = " + check);
 
             return Path.COMMAND_LIST_TYPE;

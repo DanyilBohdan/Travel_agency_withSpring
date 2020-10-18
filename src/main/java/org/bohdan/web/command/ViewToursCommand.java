@@ -1,6 +1,7 @@
 package org.bohdan.web.command;
 
 import org.apache.log4j.Logger;
+import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.db.bean.TourView;
@@ -39,8 +40,8 @@ public class ViewToursCommand extends Command {
         }
         logger.info("LOG: localeFinal = " + lang);
 
-        request.setAttribute("typeTourOut", new TypeTourDao().findByLocale(lang));
-        request.setAttribute("countryOut", new CountryDao().findByLocale(lang));
+        request.setAttribute("typeTourOut", new TypeTourDao(dataSource).findByLocale(lang));
+        request.setAttribute("countryOut", new CountryDao(dataSource).findByLocale(lang));
 
         List<TourView> tours = SearchTour.execute(request, response, 0);
 

@@ -1,6 +1,7 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
+import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.db.bean.OrderTours;
 import org.bohdan.web.Path;
@@ -23,7 +24,7 @@ public class ListOrders extends Command {
 
         String lang = (String) request.getSession().getAttribute("defLocale");
 
-        List<OrderTours> orders = new OrderDao().findAllOrdersLocale(lang);
+        List<OrderTours> orders = new OrderDao(dataSource).findAllOrdersLocale(lang);
 
         logger.trace("Found in DB: orders --> " + orders);
 

@@ -26,6 +26,9 @@ public class CommandContainer {
 
         commandMap.put("logout", new LogoutCommand());
 
+        commandMap.put("getEditAccount", new GetEditAccount());
+        commandMap.put("editAccount", new EditAccount());
+
         //user
         commandMap.put("accountUser", new AccountUser());
         commandMap.put("registerTourView", new RegisterTourView());

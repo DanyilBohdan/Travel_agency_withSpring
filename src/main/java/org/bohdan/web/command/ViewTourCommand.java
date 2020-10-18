@@ -27,7 +27,7 @@ public class ViewTourCommand extends Command{
         int id = Integer.parseInt(request.getParameter("id"));
         logger.trace("LOG: id_tour = " + id);
 
-        TourView tour = new TourDao().findByIdLocale(defLocale, id);
+        TourView tour = new TourDao(dataSource).findByIdLocale(defLocale, id);
 
         request.setAttribute("tour", tour);
 

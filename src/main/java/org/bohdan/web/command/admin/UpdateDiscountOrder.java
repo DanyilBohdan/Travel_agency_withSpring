@@ -33,9 +33,9 @@ public class UpdateDiscountOrder extends Command {
 
             }
 
-            Tour tour = new TourDao().findIDTour(id);
+            Tour tour = new TourDao(dataSource).findIDTour(id);
 
-            boolean check = new TourDao().updateDiscount(discount, tour.getPrice(), id);
+            boolean check = new TourDao(dataSource).updateDiscount(discount, tour.getPrice(), id);
             logger.info("Log: check update discount order --> " + check);
 
             return Path.COMMAND_LIST_ORDERS;

@@ -23,7 +23,7 @@ public class ListUsers extends Command {
 
         logger.debug("Command start");
 
-        List<UserRole> users = new UserDao().findUsersRole();
+        List<UserRole> users = new UserDao(dataSource).findUsersRole();
         logger.trace("Log: users --> " + users);
 
         request.setAttribute("users", users);

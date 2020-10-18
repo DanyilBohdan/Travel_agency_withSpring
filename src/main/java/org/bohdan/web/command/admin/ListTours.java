@@ -1,6 +1,8 @@
 package org.bohdan.web.command.admin;
 
+import org.apache.log4j.DailyRollingFileAppender;
 import org.apache.log4j.Logger;
+import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.db.bean.TourView;
@@ -11,6 +13,7 @@ import org.bohdan.web.command.SearchTour;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,8 +27,9 @@ public class ListTours extends Command {
 
         String lang = (String) request.getSession().getAttribute("defLocale");
 
-        request.setAttribute("typeTourOut", new TypeTourDao().findByLocale(lang));
-        request.setAttribute("countryOut", new CountryDao().findByLocale(lang));
+
+        request.setAttribute("typeTourOut", new TypeTourDao(dataSource).findByLocale(lang));
+        request.setAttribute("countryOut", new CountryDao(dataSource).findByLocale(lang));
 
         List<TourView> tours = SearchTour.execute(request, response, 1);
 

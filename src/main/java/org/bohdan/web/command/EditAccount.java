@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class RegisterUser extends Command {
+public class EditAccount extends Command {
 
-    private static final Logger logger = Logger.getLogger(RegisterUser.class);
+    private static final Logger logger = Logger.getLogger(EditAccount.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -70,23 +70,36 @@ public class RegisterUser extends Command {
             return Path.ERROR_PAGE;
         }
 
-        User user = User.createUser(username, password, login, phone, true, Role.getId("user"));
-        logger.debug("Log: user --> " + user);
-
-        boolean check = new UserDao(dataSource).create(user);
-        logger.debug("Log: check create user --> " + check);
-
-        if (!check) {
-            String errorMessage = "Error registration";
-            request.setAttribute("errorMessage", errorMessage);
-            logger.error("errorMessage --> " + errorMessage);
-            return Path.ERROR_PAGE;
-        }
-
         HttpSession session = request.getSession();
 
-        session.setAttribute("check", "true");
+        User userOld = (User) session.getAttribute("user");
 
-        return Path.REGISTER_CHECK_REDIRECT;
+        User user = User.createUser(username, password, login, phone, userOld.getStatus(), userOld.getRole_id());
+        user.setId(userOld.getId());
+        logger.info("Log: New User --> " + user);
+
+        boolean check = new UserDao(dataSource).update(user);
+        logger.info("Log: check update User --> " + check);
+        if (check){
+            session.setAttribute("user", user);
+        }
+
+        Role role = Role.getRole(user);
+        logger.trace("role --> " + role);
+
+        String forward = null;
+
+        if (role == Role.ADMIN) {
+            forward = Path.COMMAND_ACCOUNT_ADMIN;
+        }
+
+        if (role == Role.MANAGER) {
+            forward = Path.COMMAND_ACCOUNT_MANAGER;
+        }
+
+        if (role == Role.USER) {
+            forward = Path.COMMAND_ACCOUNT;
+        }
+        return forward;
     }
 }

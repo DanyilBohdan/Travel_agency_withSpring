@@ -6,6 +6,7 @@ import org.bohdan.db.bean.ListBean;
 import org.bohdan.db.entity.TypeTour;
 
 import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,12 @@ public class TypeTourDao {
     private static final String SQL_UPDATE_TYPE_TOUR =
             "UPDATE type_tour SET name_en = ?, name_ru = ? WHERE id = ?";
 
+    private DataSource dataSource;
+
+    public TypeTourDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     private TypeTour mapTypeTour(ResultSet rs) throws SQLException {
         TypeTour typeTour = new TypeTour();
         typeTour.setId(rs.getInt(Fields.ID));
@@ -63,7 +70,7 @@ public class TypeTourDao {
 
     private List<ListBean> findAllLocale(String sql) {
         List<ListBean> typeTours = new ArrayList<>();
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {
@@ -78,7 +85,7 @@ public class TypeTourDao {
     public List<TypeTour> findAll() {
         List<TypeTour> typeTours = new ArrayList<>();
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(SQL_FIND_ALL_TYPE_TOUR)) {
 
@@ -93,7 +100,7 @@ public class TypeTourDao {
 
     public TypeTour findEntityById(Integer id) {
         TypeTour typeTour = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_FIND_ENTITY_BY_ID_TYPE_TOUR)) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -108,7 +115,7 @@ public class TypeTourDao {
 
     public TypeTour findByName(String name) {
         TypeTour typeTour = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_FIND_ENTITY_BY_NAME)) {
             statement.setString(1, name);
             statement.setString(2, name);
@@ -123,7 +130,7 @@ public class TypeTourDao {
     }
 
     public boolean delete(Integer id) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_TYPE_TOUR_BY_ID);) {
             statement.setInt(1, id);
             return statement.executeUpdate() > 0;
@@ -140,7 +147,7 @@ public class TypeTourDao {
     public boolean create(TypeTour entity) {
         boolean res = false;
         ResultSet rs;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_INSERT_TYPE_TOUR, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, entity.getName_en());
             statement.setString(2, entity.getName_ru());
@@ -158,7 +165,7 @@ public class TypeTourDao {
     }
 
     public boolean update(TypeTour entity) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TYPE_TOUR)) {
             statement.setString(1, entity.getName_en());
             statement.setString(2, entity.getName_ru());

@@ -40,7 +40,7 @@ public class RegisterTour extends Command {
 
         Order order = Order.createOrderTour("registered", date, tour_id, user.getId());
 
-        boolean check = new OrderDao().create(order);
+        boolean check = new OrderDao(dataSource).create(order);
         logger.debug("Log: check create --> " + check);
         if (check) {
             session.setAttribute("check", "true");

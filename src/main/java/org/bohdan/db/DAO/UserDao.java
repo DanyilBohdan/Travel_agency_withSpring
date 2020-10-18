@@ -3,8 +3,10 @@ package org.bohdan.db.DAO;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.db.bean.UserRole;
+import org.bohdan.db.entity.Tour;
 import org.bohdan.db.entity.User;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,12 @@ public class UserDao {
     public static final String SQL_UPDATE_ROLE =
             "UPDATE user SET role_id = ? WHERE id = ?";
 
+    private DataSource dataSource;
+
+    public UserDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     private User mapUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt(Fields.ID));
@@ -75,7 +83,7 @@ public class UserDao {
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(SQL_FIND_ALL_USER)) {
 
@@ -91,7 +99,7 @@ public class UserDao {
     public List<UserRole> findUsersRole() {
         List<UserRole> users = new ArrayList<>();
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(SQL_FIND_ALL_USER_ROLE)) {
 
@@ -106,7 +114,7 @@ public class UserDao {
 
     public User findEntityById(Integer id) {
         User user = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_FIND_ENTITY_BY_ID_USER);) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -121,7 +129,7 @@ public class UserDao {
 
     public User findEntityByLogin(String login) {
         User user = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_FIND_ENTITY_BY_LOGIN_USER);) {
             statement.setString(1, login);
             ResultSet rs = statement.executeQuery();
@@ -149,7 +157,7 @@ public class UserDao {
 
     private List<UserRole> searchEntityByVar(String sql, String var) {
         List<UserRole> users = new ArrayList<>();
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(sql);) {
             statement.setString(1, "%" + var + "%");
             ResultSet rs = statement.executeQuery();
@@ -163,7 +171,7 @@ public class UserDao {
     }
 
     public boolean delete(Integer id) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_USER_BY_ID);) {
             statement.setInt(1, id);
             return statement.executeUpdate() > 0;
@@ -181,7 +189,7 @@ public class UserDao {
         boolean res = false;
 
         ResultSet rs = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
             int k = 1;
             statement.setString(k++, entity.getUsername());
@@ -207,7 +215,7 @@ public class UserDao {
     }
 
     public boolean updateRole(Integer role, Integer id) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_ROLE)) {
             statement.setInt(1, role);
             statement.setInt(2, id);
@@ -219,10 +227,27 @@ public class UserDao {
     }
 
     public boolean updateStatus(boolean status, Integer id) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_STATUS)) {
             statement.setBoolean(1, status);
             statement.setInt(2, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean update(User entity) {
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement statement = con.prepareStatement(SQL_UPDATE_USER)) {
+            statement.setString(1, entity.getUsername());
+            statement.setString(2, entity.getPassword());
+            statement.setString(3, entity.getLogin());
+            statement.setString(4, entity.getPhone_number());
+            statement.setBoolean(5, entity.getStatus());
+            statement.setInt(6, entity.getRole_id());
+            statement.setInt(7, entity.getId());
             return statement.executeUpdate() > 0;
         } catch (SQLException ex) {
             ex.printStackTrace();

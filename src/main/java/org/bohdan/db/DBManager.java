@@ -26,9 +26,9 @@ public class DBManager {
         return dbManager;
     }
 
-    public Connection getConnection() throws SQLException {
-        return ConnectionPool.getConnection();
-    }
+//    public Connection getConnection() throws SQLException {
+//        return ConnectionPool.getConnection();
+//    }
 
 //    public Connection getConnection() {
 //        Connection con = null;

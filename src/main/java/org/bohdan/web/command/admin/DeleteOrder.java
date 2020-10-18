@@ -1,6 +1,7 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
+import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.web.Path;
 import org.bohdan.web.command.Command;
@@ -20,7 +21,7 @@ public class DeleteOrder extends Command {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             logger.info("log: delete Tour by ID = " + id);
-            boolean check = new OrderDao().delete(id);
+            boolean check = new OrderDao(dataSource).delete(id);
             logger.info("log: delete Tour = " + check);
 
             return Path.COMMAND_LIST_ORDERS;

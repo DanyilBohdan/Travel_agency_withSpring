@@ -55,7 +55,7 @@ public class LoginCommand extends Command {
             return forward;
         }
 
-        User user = new UserDao().findEntityByLogin(login);
+        User user = new UserDao(dataSource).findEntityByLogin(login);
         logger.trace("Found in DB: user --> " + user);
 
         logger.trace("Found in DB: user --> " + user);

@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class RegisterTourView extends Command {
@@ -33,10 +35,10 @@ public class RegisterTourView extends Command {
             String errorMessage;
 
             int id = Integer.parseInt(request.getParameter("id"));
-            TourView tour = new TourDao().findByIdLocale(lang, id);
+            TourView tour = new TourDao(dataSource).findByIdLocale(lang, id);
 
             //check on count people
-            Integer count_peopleForTour = new OrderDao().findCountOrderByIdTour(id);
+            Integer count_peopleForTour = new OrderDao(dataSource).findCountOrderByIdTour(id);
             if (count_peopleForTour >= tour.getCount_people()) {
                 errorMessage = ResourceBundle.getBundle("resources", current).getString("registrationTour.noAvailable");
                 request.setAttribute("noAvailable", errorMessage);
@@ -45,7 +47,7 @@ public class RegisterTourView extends Command {
 
                 //check on date
                 User user = (User) request.getSession().getAttribute("user");
-                List<OrderToursByIdUser> ordersUser = new OrderDao().findToursByIdUser(user.getId());
+                List<OrderToursByIdUser> ordersUser = new OrderDao(dataSource).findToursByIdUser(user.getId());
 
                 if (!checkDate(ordersUser, tour)) {
                     errorMessage = ResourceBundle.getBundle("resources", current).getString("registrationTour.errorDate");
@@ -89,8 +91,14 @@ public class RegisterTourView extends Command {
             logger.info("Log: Order ==> startDate --> " + startOrder + " -> days --> " +
                     daysOrder + " -> lastDate --> " + lastDateOrder);
 
-            if (startTour.before(lastDateOrder) || startOrder.before(lastDateTour) || startOrder.equals(startTour)) {
+            if (startTour.before(startOrder) && lastDateTour.after(startOrder)) {
                 res = false;
+                logger.info("Log: first");
+                break;
+            }
+            if (startOrder.before(lastDateTour) && lastDateOrder.after(lastDateTour)) {
+                res = false;
+                logger.info("Log: second");
                 break;
             }
         }

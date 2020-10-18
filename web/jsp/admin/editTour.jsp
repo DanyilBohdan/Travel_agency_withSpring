@@ -63,7 +63,9 @@
                 <br><br>
                 <input type="hidden" name="command" value="editTour">
                 <input type="hidden" name="id" value="${tour.id}">
-                <input type="submit" value="<fmt:message key="save"/>">
+                <button type="submit" class="btn btn-outline-dark">
+                    <fmt:message key="save"/>
+                </button>
             </form>
         </td>
     </tr>

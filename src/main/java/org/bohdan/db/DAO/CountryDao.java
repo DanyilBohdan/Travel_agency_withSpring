@@ -6,6 +6,7 @@ import org.bohdan.db.bean.ListBean;
 import org.bohdan.db.entity.Country;
 import org.bohdan.db.entity.TypeTour;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,12 @@ public class CountryDao {
     private static final String SQL_UPDATE_COUNTRY =
             "UPDATE country SET name_en = ?, name_ru = ? WHERE id = ?";
 
+    private DataSource dataSource;
+
+    public CountryDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     private Country mapCountry(ResultSet rs) throws SQLException {
         Country country = new Country();
         country.setId(rs.getInt(Fields.ID));
@@ -63,7 +70,7 @@ public class CountryDao {
 
     private List<ListBean> findAllLocale(String sql) {
         List<ListBean> typeTours = new ArrayList<>();
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {
@@ -78,7 +85,7 @@ public class CountryDao {
     public List<Country> findAll() {
         List<Country> countries = new ArrayList<>();
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement stmt = con.prepareStatement(SQL_FIND_ALL_COUNTRY_TOUR);) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -92,7 +99,7 @@ public class CountryDao {
 
     public Country findEntityById(Integer id) {
         Country country = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_FIND_ENTITY_BY_ID_COUNTRY_TOUR)) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -107,7 +114,7 @@ public class CountryDao {
 
     public Country findByName(String name) {
         Country country = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_FIND_ENTITY_BY_NAME)) {
             statement.setString(1, name);
             statement.setString(2, name);
@@ -122,7 +129,7 @@ public class CountryDao {
     }
 
     public boolean delete(Integer id) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_COUNTRY_BY_ID);) {
             statement.setInt(1, id);
             return statement.executeUpdate() > 0;
@@ -138,7 +145,7 @@ public class CountryDao {
 
     public boolean create(Country entity) {
         ResultSet rs;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_INSERT_COUNTRY, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, entity.getName_en());
             statement.setString(2, entity.getName_ru());
@@ -156,7 +163,7 @@ public class CountryDao {
     }
 
     public boolean update(Country entity) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_COUNTRY)) {
             statement.setString(1, entity.getName_en());
             statement.setString(2, entity.getName_ru());

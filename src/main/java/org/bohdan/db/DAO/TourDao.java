@@ -8,6 +8,7 @@ import org.bohdan.db.bean.UserRole;
 import org.bohdan.db.entity.Order;
 import org.bohdan.db.entity.Tour;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -170,6 +171,12 @@ public class TourDao {
 
     private static String filter;
 
+    private DataSource dataSource;
+
+    public TourDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     public static float changePrice(float price, float discount) {
         return price - ((discount * price) / 100);
     }
@@ -185,7 +192,7 @@ public class TourDao {
     public Integer findCountTours() {
         Integer count = null;
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(SQL_FIND_COUNT_TOURS)) {
             if (rs.next()) {
@@ -200,7 +207,7 @@ public class TourDao {
     public List<Tour> findAllTour() {
         List<Tour> tours = new ArrayList<>();
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(SQL_FIND_ALL_TOUR)) {
             while (rs.next()) {
@@ -214,7 +221,7 @@ public class TourDao {
 
     public Tour findIDTour(Integer id) {
         Tour tour = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_FIND_ID)) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -239,7 +246,7 @@ public class TourDao {
 
     private List<TourView> findAll(String sql, int start, int total) {
         List<TourView> tours = new ArrayList<>();
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(sql);) {
             statement.setInt(1, start - 1);
             statement.setInt(2, total);
@@ -265,7 +272,7 @@ public class TourDao {
 
     private TourView findById(String sql, Integer id) {
         TourView tour = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -290,7 +297,7 @@ public class TourDao {
 
     private List<TourView> searchEntityByVar(String sql, String var, int start, int total) {
         List<TourView> tours = new ArrayList<>();
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(sql);) {
             statement.setString(1, "%" + var + "%");
             statement.setInt(2, start - 1);
@@ -337,7 +344,7 @@ public class TourDao {
 
     private List<TourView> findAllVarBy(String sql, String variable, int start, int total) {
         List<TourView> tours = new ArrayList<>();
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setString(1, variable);
             statement.setInt(2, start - 1);
@@ -398,7 +405,7 @@ public class TourDao {
 
     public List<TourView> findAllByRange(String sql, String varFirst, String varLast, int start, int total) {
         List<TourView> tours = new ArrayList<>();
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setString(1, varFirst);
             statement.setString(2, varLast);
@@ -417,7 +424,7 @@ public class TourDao {
     public boolean create(Tour entity) {
         boolean res = false;
         ResultSet rs = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_INSERT_TOUR, Statement.RETURN_GENERATED_KEYS)) {
             setStmtTour(entity, statement);
             if (statement.executeUpdate() > 0) {
@@ -436,10 +443,10 @@ public class TourDao {
     }
 
     public boolean update(Tour entity) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TOUR)) {
             setStmtTour(entity, statement);
-            statement.setFloat(13, entity.getId());
+            statement.setInt(13, entity.getId());
             return statement.executeUpdate() > 0;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -448,7 +455,7 @@ public class TourDao {
     }
 
     public boolean updateDiscount(float discount, float price, Integer id) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TOUR_DISCOUNT)) {
             statement.setFloat(1, discount);
             statement.setFloat(2, changePrice(price, discount));
@@ -468,7 +475,7 @@ public class TourDao {
     }
 
     public boolean delete(Integer id) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_TOUR_BY_ID)) {
             statement.setInt(1, id);
             return statement.executeUpdate() > 0;

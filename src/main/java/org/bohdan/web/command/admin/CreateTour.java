@@ -1,6 +1,7 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
+import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.TypeTourDao;
@@ -12,7 +13,9 @@ import org.bohdan.web.command.Command;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -60,8 +63,9 @@ public class CreateTour extends Command {
 
             price = TourDao.changePrice(price, discount);
 
-            boolean check = new TourDao().create(Tour.createTour(nameEN, nameRU, descriptionEN, descriptionRU, price, count_people,
-                    mark_hotel, start_date, days, discount, new TypeTourDao().findByName(typeEN).getId(), new CountryDao().findByName(countryEN).getId()));
+            boolean check = new TourDao(dataSource).create(Tour.createTour(nameEN, nameRU, descriptionEN, descriptionRU, price, count_people,
+                    mark_hotel, start_date, days, discount, new TypeTourDao(dataSource).findByName(typeEN).getId(),
+                    new CountryDao(dataSource).findByName(countryEN).getId()));
             logger.info("Log: create Tour  check : " + check);
 
             return Path.COMMAND_TOURS_ADMIN;

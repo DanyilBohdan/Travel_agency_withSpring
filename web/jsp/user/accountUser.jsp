@@ -8,6 +8,13 @@
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <%@ include file="/WEB-INF/jspf/locale.jspf" %>
     <div class="container p-3 my-3 border">
+        <div class="float-right ">
+            <form id="editAcc" action="controller" method="post">
+                <input type="hidden" name="command" value="getEditAccount"/>
+                <button type="submit" class="btn btn-outline-dark"><fmt:message
+                        key="account.label.EditAccount"/></button>
+            </form>
+        </div>
         <div class="border border-secondary">
             <label>
                 <fmt:message key="account.label.username"/>:

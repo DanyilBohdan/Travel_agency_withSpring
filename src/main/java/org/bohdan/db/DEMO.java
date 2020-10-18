@@ -6,6 +6,6 @@ public class DEMO {
 
     public static void main(String[] args) {
         TourDao.setFilter(0);
-        System.out.println(new TourDao().findAllByLocale("EN", 1, 5));
+        System.out.println(new TourDao(ConnectionPool.getDataSource()).findAllByLocale("EN", 1, 5));
     }
 }

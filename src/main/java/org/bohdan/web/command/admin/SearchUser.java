@@ -21,7 +21,7 @@ public class SearchUser extends Command {
         try{
             String searchText = request.getParameter("searchText");
             String searchSelect = request.getParameter("searchSelect");
-            List<UserRole> users = new UserDao().searchEntity(searchSelect, searchText);
+            List<UserRole> users = new UserDao(dataSource).searchEntity(searchSelect, searchText);
 
             request.setAttribute("users", users);
 

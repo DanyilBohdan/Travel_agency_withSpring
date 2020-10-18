@@ -20,10 +20,10 @@ public class UpdateStatusUser extends Command {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             logger.info("Log: id --> " + id);
-            User user = new UserDao().findEntityById(id);
+            User user = new UserDao(dataSource).findEntityById(id);
             boolean status;
             status = !user.getStatus();
-            boolean check = new UserDao().updateStatus(status, id);
+            boolean check = new UserDao(dataSource).updateStatus(status, id);
             logger.info("Log: check update user --> " + check);
 
             return Path.COMMAND_LIST_USER;

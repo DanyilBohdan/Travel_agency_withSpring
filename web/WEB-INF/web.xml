@@ -84,7 +84,7 @@
         </init-param>
         <init-param>
             <param-name>common</param-name>
-            <param-value>noCommand viewTours viewTour logout </param-value>
+            <param-value>noCommand viewTours viewTour logout getEditAccount editAccount</param-value>
         </init-param>
         <init-param>
             <param-name>out-of-control</param-name>

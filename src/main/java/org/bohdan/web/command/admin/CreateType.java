@@ -1,6 +1,7 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
+import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.db.entity.TypeTour;
 import org.bohdan.web.Path;
@@ -39,7 +40,7 @@ public class CreateType extends Command {
 
             TypeTour typeTour = TypeTour.create(nameEN, nameRU);
 
-            boolean check = new TypeTourDao().create(typeTour);
+            boolean check = new TypeTourDao(dataSource).create(typeTour);
             logger.info("Log: check create type --> " + check);
 
             return Path.COMMAND_LIST_TYPE;

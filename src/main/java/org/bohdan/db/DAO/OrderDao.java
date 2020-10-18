@@ -6,6 +6,7 @@ import org.bohdan.db.bean.OrderTours;
 import org.bohdan.db.bean.OrderToursByIdUser;
 import org.bohdan.db.entity.Order;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,11 @@ public class OrderDao {
                     "and user.id = ?\n" +
                     "order by travel_agencyDB.order.date_reg DESC";
 
+    private DataSource dataSource;
+
+    public OrderDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     private Order mapOrder(ResultSet rs) throws SQLException {
         Order order = new Order();
@@ -123,7 +129,7 @@ public class OrderDao {
 
     public Integer findCountOrderByIdTour(Integer id) {
         Integer count = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_FIND_ENTITY_BY_ID_TOUR);) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -139,7 +145,7 @@ public class OrderDao {
     public List<Order> findAll() {
         List<Order> orders = new ArrayList<>();
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(SQL_FIND_ALL_ORDER)) {
             while (rs.next()) {
@@ -153,7 +159,7 @@ public class OrderDao {
 
     public Order findEntityById(Integer id) {
         Order order = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_FIND_ENTITY_BY_ID_ORDER)) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -168,7 +174,7 @@ public class OrderDao {
 
     public List<OrderToursByIdUser> findToursByIdUser(Integer id) {
         List<OrderToursByIdUser> orders = new ArrayList<>();
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_FIND_TOURS_BY_ID_USER)) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -193,7 +199,7 @@ public class OrderDao {
 
     private List<OrderTours> findAllOrders(String sql) {
         List<OrderTours> orders = new ArrayList<>();
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {
@@ -217,7 +223,7 @@ public class OrderDao {
 
     private List<OrderTours> findAllOrdersUsers(String sql, Integer id) {
         List<OrderTours> orders = new ArrayList<>();
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -231,7 +237,7 @@ public class OrderDao {
     }
 
     public boolean delete(Integer id) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_ORDER_BY_ID);) {
             statement.setInt(1, id);
             return statement.executeUpdate() > 0;
@@ -249,7 +255,7 @@ public class OrderDao {
         boolean res = false;
 
         ResultSet rs = null;
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_INSERT_ORDER, Statement.RETURN_GENERATED_KEYS)) {
             int k = 1;
             statement.setString(k++, entity.getStatus());
@@ -275,7 +281,7 @@ public class OrderDao {
     public Order update(Order entity) {
         Order order = null;
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_ORDER)) {
             int k = 1;
             statement.setString(k++, entity.getStatus());
@@ -294,7 +300,7 @@ public class OrderDao {
     }
 
     public boolean updateStatus(String status, Integer id) {
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_STATUS_ORDER)) {
             statement.setString(1, status);
             statement.setInt(2, id);

@@ -22,7 +22,7 @@ public class UpdateRoleUser extends Command {
             int id = Integer.parseInt(request.getParameter("id"));
             logger.info("Log: id = " + id);
             String role = request.getParameter("selectRole");
-            boolean check = new UserDao().updateRole(Role.getId(role), id);
+            boolean check = new UserDao(dataSource).updateRole(Role.getId(role), id);
             logger.info("Log: check update user role --> " + check);
 
             return Path.COMMAND_LIST_USER;

@@ -21,16 +21,19 @@ public class ConnectionPool {
         try {
             Context envContext = (Context) new InitialContext().lookup(JNDI);
             dataSource = (DataSource) envContext.lookup(DATASOURCE_NAME);
-//            logger.debug("Log: --> connection to DB - OK");
+            logger.debug("Log: --> connection to DB - OK");
         } catch (NamingException e) {
-//            logger.error("Cannot obtain a connection from the pool", e);
+            logger.error("Cannot obtain a connection from the pool", e);
         }
     }
 
     private ConnectionPool() {
     }
 
-    public static Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
+//    public static Connection getConnection() throws SQLException {
+//        return dataSource.getConnection();
+//    }
+    public static DataSource getDataSource() {
+        return dataSource;
     }
 }
