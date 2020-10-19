@@ -50,13 +50,15 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><fmt:message key="tour.create.descriptionEN"/></span>
                 </div>
-                <textarea name="descriptionEN" class="form-control" aria-label="<fmt:message key="tour.create.descriptionEN"/>"></textarea>
+                <textarea name="descriptionEN" class="form-control"
+                          aria-label="<fmt:message key="tour.create.descriptionEN"/>"></textarea>
             </div>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><fmt:message key="tour.create.descriptionRU"/></span>
                 </div>
-                <textarea name="descriptionRU" class="form-control" aria-label="<fmt:message key="tour.create.descriptionRU"/>"></textarea>
+                <textarea name="descriptionRU" class="form-control"
+                          aria-label="<fmt:message key="tour.create.descriptionRU"/>"></textarea>
             </div>
 
             <label><fmt:message key="tour.count_people"/></label>
@@ -68,11 +70,14 @@
             <label><fmt:message key="tour.days"/></label>
             <input name="days" min="0"/><br>
             <label><fmt:message key="tour.discount"/></label>
-            <input name="discount" min="0" max="1" />
+            <input name="discount" min="0" max="1"/>
             <br><br>
 
             <input type="hidden" name="command" value="createTour">
             <button type="submit" class="btn btn-outline-dark"><fmt:message key="tour.create.button"/></button>
+            <c:if test="${not empty errorVal}">
+                <h5 class="text-light bg-danger">${errorVal}</h5>
+            </c:if>
         </form>
     </div>
     <%@ include file="/WEB-INF/jspf/footer.jspf" %>

@@ -39,6 +39,8 @@ public class ListTours extends Command {
 
         request.setAttribute("tours", tours);
 
+        request.setAttribute("commandPage", "listTours");
+
         logger.debug("Command finished");
 
         return Path.LIST_TOURS_ADMIN;

@@ -58,9 +58,9 @@ public class EditTour extends Command {
             String checkVal = Validation.validateTour(nameEN, nameRU, typeEN, typeRU, countryEN, countryRU, descriptionEN, descriptionRU,
                     price, count_people, mark_hotel, start_date, days, discount);
             if (!checkVal.equals("null")) {
-                req.setAttribute("errorMessage", checkVal);
+                req.setAttribute("errorVal", checkVal);
                 logger.error("errorMessage --> " + checkVal);
-                return Path.ERROR_PAGE;
+                return Path.EDIT_TOUR;
             }
 
             price = TourDao.changePrice(price, discount);

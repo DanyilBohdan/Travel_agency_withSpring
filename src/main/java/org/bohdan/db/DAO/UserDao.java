@@ -1,5 +1,7 @@
 package org.bohdan.db.DAO;
 
+import org.bohdan.db.ConnectionFactory;
+import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.db.bean.UserRole;
@@ -52,8 +54,13 @@ public class UserDao {
 
     private DataSource dataSource;
 
-    public UserDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public UserDao(ConnectionFactory connectionFactory) {
+        if (connectionFactory.getClass() == ConnectionPool.class) {
+            this.dataSource = ConnectionPool.getDataSource();
+        }
+        if (connectionFactory.getClass() == DBManager.class) {
+            this.dataSource = DBManager.getDataSource();
+        }
     }
 
     private User mapUser(ResultSet rs) throws SQLException {

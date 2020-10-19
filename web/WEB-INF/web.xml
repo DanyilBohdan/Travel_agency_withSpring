@@ -80,7 +80,7 @@
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <param-value>accountUser registerTourView registerTour registerCheck</param-value>
+            <param-value>accountUser registerTourView registerTour</param-value>
         </init-param>
         <init-param>
             <param-name>common</param-name>
@@ -88,7 +88,7 @@
         </init-param>
         <init-param>
             <param-name>out-of-control</param-name>
-            <param-value>noCommand login viewTours viewTour register registerUser</param-value>
+            <param-value>noCommand login viewTours viewTour register registerUser registerCheck</param-value>
         </init-param>
     </filter>
 

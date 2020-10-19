@@ -1,6 +1,8 @@
 package org.bohdan.db.DAO;
 
 import org.apache.log4j.Logger;
+import org.bohdan.db.ConnectionFactory;
+import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.db.bean.TourView;
@@ -20,7 +22,7 @@ public class TourDao {
     private static final String FILTER_LIMIT_DATE = "and (tour.start_date - curdate()) > 5\n" +
             "limit ?, ?";
 
-    private static final String  FILTER_DATE_ADMIN= "limit ?, ?";
+    private static final String FILTER_DATE_ADMIN = "limit ?, ?";
 
     public static final String SQL_INSERT_TOUR =
             "insert into tour (name_en, name_ru, desc_en, desc_ru, price, count_people, mark_hotel, \n" +
@@ -173,8 +175,15 @@ public class TourDao {
 
     private DataSource dataSource;
 
-    public TourDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public TourDao(ConnectionFactory connectionFactory) {
+        if (connectionFactory.getClass() == ConnectionPool.class) {
+            this.dataSource = ConnectionPool.getDataSource();
+            logger.debug("Log: --> connection ========== ConnectionPool");
+        }
+        if (connectionFactory.getClass() == DBManager.class) {
+            this.dataSource = DBManager.getDataSource();
+            logger.debug("Log: --> connection ========== DBManager");
+        }
     }
 
     public static float changePrice(float price, float discount) {

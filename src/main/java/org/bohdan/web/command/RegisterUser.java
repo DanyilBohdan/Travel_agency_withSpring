@@ -25,9 +25,9 @@ public class RegisterUser extends Command {
         boolean val = Validation.validateAllVar(username);
         if (!val) {
             String errorMessage = "Username must be: only latin";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
-            return Path.ERROR_PAGE;
+            return Path.PAGE_REGISTER_USER;
         }
 
         String login = request.getParameter("login");
@@ -35,9 +35,17 @@ public class RegisterUser extends Command {
         val = Validation.validateLogin(login);
         if (!val) {
             String errorMessage = "Login must be: example@example.com";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
-            return Path.ERROR_PAGE;
+            return Path.PAGE_REGISTER_USER;
+        }
+        User user = new UserDao(dataSource).findEntityByLogin(login);
+        logger.trace("user by login --> " + user);
+        if (user == null) {
+            String errorMessage = "This login is busy";
+            request.setAttribute("errorVal", errorMessage);
+            logger.error("errorMessage --> " + errorMessage);
+            return Path.PAGE_REGISTER_USER;
         }
 
         String phone = request.getParameter("phone");
@@ -45,42 +53,42 @@ public class RegisterUser extends Command {
         val = Validation.validatePhone(phone);
         if (!val) {
             String errorMessage = "Phone must be:(123) 456-7890";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
-            return Path.ERROR_PAGE;
+            return Path.PAGE_REGISTER_USER;
         }
 
         String password = request.getParameter("password");
         val = Validation.validatePassword(password);
         if (!val) {
             String errorMessage = "Password must be: latin/number";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
-            return Path.ERROR_PAGE;
+            return Path.PAGE_REGISTER_USER;
         }
 
         String password_confirm = request.getParameter("password_confirm");
 
         if (!password.equals(password_confirm)) {
             String errorMessage = "Password and password confirm must be exactly the same";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
             request.setAttribute("password", "");
             request.setAttribute("password_confirm", "");
-            return Path.ERROR_PAGE;
+            return Path.PAGE_REGISTER_USER;
         }
 
-        User user = User.createUser(username, password, login, phone, true, Role.getId("user"));
-        logger.debug("Log: user --> " + user);
+        User userCreate = User.createUser(username, password, login, phone, true, Role.getId("user"));
+        logger.debug("Log: user --> " + userCreate);
 
-        boolean check = new UserDao(dataSource).create(user);
+        boolean check = new UserDao(dataSource).create(userCreate);
         logger.debug("Log: check create user --> " + check);
 
         if (!check) {
             String errorMessage = "Error registration";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
-            return Path.ERROR_PAGE;
+            return Path.PAGE_REGISTER_USER;
         }
 
         HttpSession session = request.getSession();

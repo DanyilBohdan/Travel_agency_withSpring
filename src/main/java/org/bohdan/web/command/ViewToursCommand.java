@@ -1,7 +1,6 @@
 package org.bohdan.web.command;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.db.bean.TourView;
@@ -13,14 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class ViewToursCommand extends Command {
 
     private final static Logger logger = Logger.getLogger(ViewToursCommand.class);
-
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
@@ -50,6 +46,7 @@ public class ViewToursCommand extends Command {
         tours.sort((o1, o2) -> Float.compare(o2.getDiscount(), o1.getDiscount()));
 
         request.setAttribute("tours", tours);
+
         request.setAttribute("commandPage", "viewTours");
 
         logger.debug("Command finished");

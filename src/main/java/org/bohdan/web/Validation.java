@@ -13,16 +13,16 @@ public class Validation {
             Pattern.compile("^((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$");
 
     public static final Pattern VALID_VAR_REGEX =
-            Pattern.compile("[A-Za-z0-9]+");
+            Pattern.compile("[A-Za-z0-9 ]+");
 
     public static final Pattern VALID_PASSWORD_REGEX =
             Pattern.compile("^[A-Za-z0-9]{4,20}$");
 
     public static final Pattern VALID_LATIN_REGEX =
-            Pattern.compile("^[a-zA-Z ]{4,40}$");
+            Pattern.compile("^[a-zA-Z ]{4,}$");
 
     public static final Pattern VALID_CYRILLIC_REGEX =
-            Pattern.compile("^[а-яА-Я ]{4,40}$");
+            Pattern.compile("^[а-яА-Я ]{4,}$");
 
     public static final Pattern VALID_FLOAT_REGEX =
             Pattern.compile("^\\d+(,\\d{3})*(\\.\\d{1,2})?$");

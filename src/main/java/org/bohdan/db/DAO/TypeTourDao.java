@@ -1,5 +1,7 @@
 package org.bohdan.db.DAO;
 
+import org.bohdan.db.ConnectionFactory;
+import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.db.bean.ListBean;
@@ -39,8 +41,13 @@ public class TypeTourDao {
 
     private DataSource dataSource;
 
-    public TypeTourDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public TypeTourDao(ConnectionFactory connectionFactory) {
+        if (connectionFactory.getClass() == ConnectionPool.class) {
+            this.dataSource = ConnectionPool.getDataSource();
+        }
+        if (connectionFactory.getClass() == DBManager.class) {
+            this.dataSource = DBManager.getDataSource();
+        }
     }
 
     private TypeTour mapTypeTour(ResultSet rs) throws SQLException {

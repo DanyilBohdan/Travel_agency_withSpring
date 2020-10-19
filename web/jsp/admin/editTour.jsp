@@ -66,6 +66,9 @@
                 <button type="submit" class="btn btn-outline-dark">
                     <fmt:message key="save"/>
                 </button>
+                <c:if test="${not empty errorVal}">
+                    <h5 class="text-light bg-danger">${errorVal}</h5>
+                </c:if>
             </form>
         </td>
     </tr>

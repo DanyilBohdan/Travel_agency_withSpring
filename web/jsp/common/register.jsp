@@ -68,6 +68,10 @@
                         </button>
                     </div>
                 </div>
+
+                <c:if test="${not empty errorVal}">
+                    <h5 class="text-light bg-danger">${errorVal}</h5>
+                </c:if>
             </div>
         </form>
     </div>

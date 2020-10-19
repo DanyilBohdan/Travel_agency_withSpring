@@ -11,8 +11,7 @@ import java.io.Serializable;
 
 public abstract class Command implements Serializable {
 
-
-    protected DataSource dataSource = ConnectionPool.getDataSource();
+    protected ConnectionPool dataSource = new ConnectionPool();
 
     public abstract String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException;

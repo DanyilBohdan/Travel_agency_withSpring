@@ -28,6 +28,10 @@
             <input type="hidden" name="command" value="register">
             <button type="submit" class="btn btn-outline-dark"><fmt:message key="login_jsp.button.registration"/></button>
         </form>
+
+        <c:if test="${not empty errorVal}">
+            <h5 class="text-light bg-danger">${errorVal}</h5>
+        </c:if>
     </div>
     <%@ include file="/WEB-INF/jspf/footer.jspf" %>
 </div>

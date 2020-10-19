@@ -6,10 +6,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
 
-public class ConnectionPool {
+public class ConnectionPool implements ConnectionFactory{
 
     private static final Logger logger = Logger.getLogger(ConnectionPool.class);
     private static final String DATASOURCE_NAME = "jdbc/travel_agencyDB";
@@ -27,12 +25,9 @@ public class ConnectionPool {
         }
     }
 
-    private ConnectionPool() {
+    public ConnectionPool() {
     }
 
-//    public static Connection getConnection() throws SQLException {
-//        return dataSource.getConnection();
-//    }
     public static DataSource getDataSource() {
         return dataSource;
     }

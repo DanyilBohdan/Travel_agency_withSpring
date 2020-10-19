@@ -30,12 +30,12 @@ public class LoginCommand extends Command {
         String password = request.getParameter("password");
 
         String errorMessage;
-        String forward = Path.ERROR_PAGE;
+        String forward = Path.PAGE_LOGIN;
 
         boolean val = Validation.validateLogin(login);
         if (!val) {
             errorMessage = "Login must be: example@example.com";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
             return forward;
         }
@@ -43,14 +43,14 @@ public class LoginCommand extends Command {
         val = Validation.validatePassword(password);
         if (!val) {
             errorMessage = "Password must be: latin/number";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
             return Path.ERROR_PAGE;
         }
 
         if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
             errorMessage = "Login/password cannot be empty";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
             return forward;
         }
@@ -58,17 +58,15 @@ public class LoginCommand extends Command {
         User user = new UserDao(dataSource).findEntityByLogin(login);
         logger.trace("Found in DB: user --> " + user);
 
-        logger.trace("Found in DB: user --> " + user);
-
         if (user == null || !password.equals(user.getPassword())) {
             errorMessage = "Cannot find user with such login/password";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
             return forward;
         }
         if (!user.getStatus()) {
             errorMessage = "Your account has been blocked!";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
             return forward;
         } else {

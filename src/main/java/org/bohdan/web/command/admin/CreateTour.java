@@ -56,9 +56,9 @@ public class CreateTour extends Command {
             String checkVal = Validation.validateTour(nameEN, nameRU, typeEN, typeRU, countryEN, countryRU, descriptionEN, descriptionRU,
                     price, count_people, mark_hotel, start_date, days, discount);
             if (!checkVal.equals("null")) {
-                request.setAttribute("errorMessage", checkVal);
+                request.setAttribute("errorVal", checkVal);
                 logger.error("errorMessage --> " + checkVal);
-                return Path.ERROR_PAGE;
+                return Path.CREATE_TOUR;
             }
 
             price = TourDao.changePrice(price, discount);

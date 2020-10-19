@@ -4,64 +4,59 @@ import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.log4j.Logger;
 
-import java.io.*;
+import javax.sql.DataSource;
 import java.sql.*;
-import java.util.Properties;
 
-public class DBManager {
+public class DBManager implements ConnectionFactory{
 
     private static final Logger logger = Logger.getLogger(DBManager.class);
 
-    private DBManager() {
-    }
+    private static DataSource dataSource;
 
-    //   singleton
-
-    private static DBManager dbManager;
-
-    public static synchronized DBManager getInstance() {
-        if (dbManager == null) {
-            dbManager = new DBManager();
+    static {
+        try {
+            MysqlDataSource ds = new MysqlConnectionPoolDataSource();
+            ds.setURL(ContextDB.URL);
+            ds.setUser(ContextDB.USERNAME);
+            ds.setPassword(ContextDB.PASSWORD);
+            ds.setServerTimezone(ContextDB.SERVER_TIMEZONE);
+            dataSource = ds;
+        } catch (SQLException ex) {
+            logger.error("Cannot obtain a connection from the pool", ex);
         }
-        return dbManager;
     }
+
+    public static DataSource getDataSource() {
+        return dataSource;
+    }
+
+    public DBManager() {
+    }
+
+//    public static Connection getConnection() throws SQLException {
+//        return dataSource.getConnection();
+//    }
 
 //    public Connection getConnection() throws SQLException {
 //        return ConnectionPool.getConnection();
 //    }
 
+//    @Override
 //    public Connection getConnection() {
-//        Connection con = null;
+//        java.sql.Connection con = null;
 //        try {
 //            MysqlDataSource ds = new MysqlConnectionPoolDataSource();
 //            ds.setURL(ContextDB.URL);
 //            ds.setUser(ContextDB.USERNAME);
 //            ds.setPassword(ContextDB.PASSWORD);
 //            ds.setServerTimezone(ContextDB.SERVER_TIMEZONE);
+//            DataSource dataSource = ds;
 //            con = ds.getConnection();
 //        } catch (SQLException ex) {
 //            logger.error("Cannot obtain a connection from the pool", ex);
 //        }
 //        return con;
 //    }
-
-    public static void commitAndClose(Connection con) {
-        try {
-            con.commit();
-            con.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public static void rollbackAndClose(Connection con) {
-        try {
-            con.rollback();
-            con.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     public static void close(ResultSet rs) {
         if (rs != null) {
