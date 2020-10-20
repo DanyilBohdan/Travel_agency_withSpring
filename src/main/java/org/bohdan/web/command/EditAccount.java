@@ -22,7 +22,7 @@ public class EditAccount extends Command {
 
         String username = request.getParameter("username");
         logger.info("Log: username --> " + username);
-        boolean val = Validation.validateAllVar(username);
+        boolean val = Validation.validateLatin(username);
         if (!val) {
             String errorMessage = "Username must be: only latin";
             request.setAttribute("errorMessage", errorMessage);

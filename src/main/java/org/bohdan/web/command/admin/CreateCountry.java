@@ -30,7 +30,7 @@ public class CreateCountry extends Command {
                 logger.error("errorMessage --> " + errorMessage);
                 return Path.ERROR_PAGE;
             }
-            val = Validation.validateCyrillic(nameEN);
+            val = Validation.validateCyrillic(nameRU);
             if (!val) {
                 String errorMessage = "Country (RU) must be: only cyrillic";
                 request.setAttribute("errorMessage", errorMessage);

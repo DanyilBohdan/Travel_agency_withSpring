@@ -27,31 +27,54 @@ public class CreateTour extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         try {
+            Tour tourView = new Tour();
             String nameEN = request.getParameter("nameEN");
             String nameRU = request.getParameter("nameRU");
-            logger.info("Log: name : " + nameEN + ", " + nameRU);
+            tourView.setName_en(nameEN);
+            tourView.setName_ru(nameRU);
+            logger.debug("Log: name : " + nameEN + ", " + nameRU);
 
             String typeEN = request.getParameter("typeEN");
             String typeRU = request.getParameter("typeRU");
-            logger.info("Log: type : " + typeEN + ", " + typeRU);
+            logger.debug("Log: type : " + typeEN + ", " + typeRU);
+            request.setAttribute("typeDef", TypeTour.create(typeEN, typeRU));
+
             String countryEN = request.getParameter("countryEN");
             String countryRU = request.getParameter("countryRU");
-            logger.info("Log: country : " + countryEN + ", " + countryRU);
+            logger.debug("Log: country : " + countryEN + ", " + countryRU);
+            request.setAttribute("countryDef", Country.create(countryEN, countryRU));
+
             float price = Float.parseFloat(request.getParameter("price"));
-            logger.info("Log: price : " + price);
+            logger.debug("Log: price : " + price);
+            tourView.setPrice(price);
+
             String descriptionEN = request.getParameter("descriptionEN");
             String descriptionRU = request.getParameter("descriptionRU");
-            logger.info("Log: description : " + descriptionEN + ", " + descriptionRU);
+            logger.debug("Log: description : " + descriptionEN + ", " + descriptionRU);
+            tourView.setDesc_en(descriptionEN);
+            tourView.setDesc_ru(descriptionRU);
+
             int count_people = Integer.parseInt(request.getParameter("count_people"));
-            logger.info("Log: count_people : " + count_people);
+            logger.debug("Log: count_people : " + count_people);
+            tourView.setCount_people(count_people);
+
             int mark_hotel = Integer.parseInt(request.getParameter("mark_hotel"));
-            logger.info("Log: mark_hotel : " + mark_hotel);
+            logger.debug("Log: mark_hotel : " + mark_hotel);
+            tourView.setMark_hotel(mark_hotel);
+
             Date start_date = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("start_date")).getTime());
-            logger.info("Log: start_date : " + start_date);
+            logger.debug("Log: start_date : " + start_date);
+            tourView.setStart_date(start_date);
+
             int days = Integer.parseInt(request.getParameter("days"));
-            logger.info("Log: days : " + days);
+            logger.debug("Log: days : " + days);
+            tourView.setDays(days);
+
             float discount = Float.parseFloat(request.getParameter("discount"));
-            logger.info("Log: discount : " + discount);
+            logger.debug("Log: discount : " + discount);
+            tourView.setDiscount(discount);
+
+            request.setAttribute("tour", tourView);
 
             String checkVal = Validation.validateTour(nameEN, nameRU, typeEN, typeRU, countryEN, countryRU, descriptionEN, descriptionRU,
                     price, count_people, mark_hotel, start_date, days, discount);
@@ -72,7 +95,9 @@ public class CreateTour extends Command {
 
         } catch (Exception ex) {
             logger.error("Log: " + ex);
-            return Path.CREATE_TOUR;
+            request.setAttribute("errorMessage", "Incorrect data entered");
+            logger.error("errorMessage --> " + "Incorrect data entered");
+            return Path.ERROR_PAGE;
         }
     }
 }

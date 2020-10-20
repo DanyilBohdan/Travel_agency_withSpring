@@ -4,10 +4,9 @@
 <c:set var="title" value="Edit Tour"/>
 <%@include file="/WEB-INF/jspf/head.jspf" %>
 <body>
-<table id="main-container">
+<div id="main-container">
     <%@include file="/WEB-INF/jspf/header.jspf" %>
-    <tr>
-        <td class="content center">
+        <div class="container p-3 my-3 border">
             <h1><fmt:message key="tour.create.editTour"/></h1>
             <form action="controller" method="post">
 
@@ -70,9 +69,8 @@
                     <h5 class="text-light bg-danger">${errorVal}</h5>
                 </c:if>
             </form>
-        </td>
-    </tr>
+        </div>
     <%@ include file="/WEB-INF/jspf/footer.jspf" %>
-</table>
+</div>
 </body>
 </html>

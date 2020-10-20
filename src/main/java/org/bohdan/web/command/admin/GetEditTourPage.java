@@ -14,6 +14,7 @@ import org.bohdan.web.command.Command;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 
@@ -36,16 +37,16 @@ public class GetEditTourPage extends Command {
             return Path.ERROR_PAGE;
         }
 
+        HttpSession session = request.getSession();
+
         request.setAttribute("tour", tourOld);
-        request.setAttribute("typeTourOut", new TypeTourDao(dataSource).findAll());
+        session.setAttribute("typeTourOut", new TypeTourDao(dataSource).findAll());
         request.setAttribute("typeDef", typeTour);
         logger.debug("Log: typeDef --> " + typeTour);
 
-        request.setAttribute("countryOut", new CountryDao(dataSource).findAll());
+        session.setAttribute("countryOut", new CountryDao(dataSource).findAll());
         request.setAttribute("countryDef", country);
         logger.debug("Log: country --> " + country);
-
-        request.getSession().setAttribute("idTour", id);
 
         return Path.EDIT_TOUR;
     }
