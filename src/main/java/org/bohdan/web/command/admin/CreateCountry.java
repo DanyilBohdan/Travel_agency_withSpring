@@ -1,7 +1,6 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.entity.Country;
 import org.bohdan.web.Path;
@@ -40,7 +39,7 @@ public class CreateCountry extends Command {
 
             Country country = Country.create(nameEN, nameRU);
 
-            boolean check = new CountryDao(dataSource).create(country);
+            boolean check = new CountryDao(connectionPool).create(country);
             logger.info("Log: check create country --> " + check);
 
             return Path.COMMAND_LIST_COUNTRY;

@@ -1,7 +1,6 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.db.bean.OrderTours;
 import org.bohdan.web.Path;
@@ -10,7 +9,6 @@ import org.bohdan.web.command.Command;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class ListOrders extends Command {
 
         String lang = (String) request.getSession().getAttribute("defLocale");
 
-        List<OrderTours> orders = new OrderDao(dataSource).findAllOrdersLocale(lang);
+        List<OrderTours> orders = new OrderDao(connectionPool).findAllOrdersLocale(lang);
 
         logger.trace("Found in DB: orders --> " + orders);
 

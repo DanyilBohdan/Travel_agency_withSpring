@@ -120,8 +120,6 @@
             <input type="date" name="start_date" value="${tour.start_date}"><br>
             <label><fmt:message key="tour.days"/></label>
             <input name="days" value="${tour.days}" min="0"><br>
-            <label><fmt:message key="tour.discount"/></label>
-            <input name="discount" value="${tour.discount}" min="0" max="1">
             <br><br>
 
             <input type="hidden" name="command" value="createTour">

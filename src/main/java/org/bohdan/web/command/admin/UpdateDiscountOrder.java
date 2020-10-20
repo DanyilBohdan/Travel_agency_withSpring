@@ -1,9 +1,7 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.db.DAO.TourDao;
-import org.bohdan.db.bean.TourView;
 import org.bohdan.db.entity.Tour;
 import org.bohdan.web.Path;
 import org.bohdan.web.Validation;
@@ -33,9 +31,7 @@ public class UpdateDiscountOrder extends Command {
 
             }
 
-            Tour tour = new TourDao(dataSource).findIDTour(id);
-
-            boolean check = new TourDao(dataSource).updateDiscount(discount, tour.getPrice(), id);
+            boolean check = new TourDao(connectionPool).updateDiscount(discount, id);
             logger.info("Log: check update discount order --> " + check);
 
             return Path.COMMAND_LIST_ORDERS;

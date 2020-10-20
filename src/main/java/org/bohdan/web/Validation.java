@@ -103,7 +103,7 @@ public class Validation {
         if(!validateCyrillic(descRU)){
             check = "Description (RU) must be: only cyrillic";
         }
-        if(!validateFloat(price, 30, 10000)){
+        if(!validateFloat(price, 300, 10000)){
             check = "Price must be: xxx.xx";
         }
         if(!validateInt(count_people, 1, 20)){

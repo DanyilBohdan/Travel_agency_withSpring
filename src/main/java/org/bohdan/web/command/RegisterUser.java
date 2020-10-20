@@ -39,7 +39,7 @@ public class RegisterUser extends Command {
             logger.error("errorMessage --> " + errorMessage);
             return Path.PAGE_REGISTER_USER;
         }
-        User user = new UserDao(dataSource).findEntityByLogin(login);
+        User user = new UserDao(connectionPool).findEntityByLogin(login);
         logger.trace("user by login --> " + user);
         if (user == null) {
             String errorMessage = "This login is busy";
@@ -81,7 +81,7 @@ public class RegisterUser extends Command {
         User userCreate = User.createUser(username, password, login, phone, true, Role.getId("user"));
         logger.debug("Log: user --> " + userCreate);
 
-        boolean check = new UserDao(dataSource).create(userCreate);
+        boolean check = new UserDao(connectionPool).create(userCreate);
         logger.debug("Log: check create user --> " + check);
 
         if (!check) {

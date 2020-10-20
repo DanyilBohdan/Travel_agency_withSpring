@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 
 public class ViewTourCommand extends Command{
@@ -27,7 +26,7 @@ public class ViewTourCommand extends Command{
         int id = Integer.parseInt(request.getParameter("id"));
         logger.trace("LOG: id_tour = " + id);
 
-        TourView tour = new TourDao(dataSource).findByIdLocale(defLocale, id);
+        TourView tour = new TourDao(connectionPool).findByIdLocale(defLocale, id);
 
         request.setAttribute("tour", tour);
 

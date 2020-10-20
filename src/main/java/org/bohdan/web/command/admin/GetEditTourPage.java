@@ -1,7 +1,6 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.TypeTourDao;
@@ -15,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 import java.io.IOException;
 
 public class GetEditTourPage extends Command {
@@ -27,12 +25,12 @@ public class GetEditTourPage extends Command {
             throws IOException, ServletException {
 
         int id = Integer.parseInt(request.getParameter("id"));
-        Tour tourOld = new TourDao(dataSource).findIDTour(id);
+        Tour tourOld = new TourDao(connectionPool).findIDTour(id);
         if (tourOld == null) {
             return Path.ERROR_PAGE;
         }
-        TypeTour typeTour = new TypeTourDao(dataSource).findEntityById(tourOld.getType_tour_id());
-        Country country = new CountryDao(dataSource).findEntityById(tourOld.getCountry_id());
+        TypeTour typeTour = new TypeTourDao(connectionPool).findEntityById(tourOld.getType_tour_id());
+        Country country = new CountryDao(connectionPool).findEntityById(tourOld.getCountry_id());
         if (typeTour == null || country == null) {
             return Path.ERROR_PAGE;
         }
@@ -40,11 +38,11 @@ public class GetEditTourPage extends Command {
         HttpSession session = request.getSession();
 
         request.setAttribute("tour", tourOld);
-        session.setAttribute("typeTourOut", new TypeTourDao(dataSource).findAll());
+        session.setAttribute("typeTourOut", new TypeTourDao(connectionPool).findAll());
         request.setAttribute("typeDef", typeTour);
         logger.debug("Log: typeDef --> " + typeTour);
 
-        session.setAttribute("countryOut", new CountryDao(dataSource).findAll());
+        session.setAttribute("countryOut", new CountryDao(connectionPool).findAll());
         request.setAttribute("countryDef", country);
         logger.debug("Log: country --> " + country);
 

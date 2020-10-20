@@ -1,7 +1,6 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.web.Path;
 import org.bohdan.web.command.Command;
@@ -19,7 +18,7 @@ public class DeleteCountry extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            boolean check = new CountryDao(dataSource).delete(id);
+            boolean check = new CountryDao(connectionPool).delete(id);
             logger.info("log: delete country = " + check);
 
             return Path.COMMAND_LIST_COUNTRY;

@@ -36,8 +36,8 @@ public class ViewToursCommand extends Command {
         }
         logger.info("LOG: localeFinal = " + lang);
 
-        request.setAttribute("typeTourOut", new TypeTourDao(dataSource).findByLocale(lang));
-        request.setAttribute("countryOut", new CountryDao(dataSource).findByLocale(lang));
+        request.setAttribute("typeTourOut", new TypeTourDao(connectionPool).findByLocale(lang));
+        request.setAttribute("countryOut", new CountryDao(connectionPool).findByLocale(lang));
 
         List<TourView> tours = SearchTour.execute(request, response, 0);
 

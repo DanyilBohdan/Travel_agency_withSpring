@@ -78,7 +78,7 @@ public class EditAccount extends Command {
         user.setId(userOld.getId());
         logger.info("Log: New User --> " + user);
 
-        boolean check = new UserDao(dataSource).update(user);
+        boolean check = new UserDao(connectionPool).update(user);
         logger.info("Log: check update User --> " + check);
         if (check){
             session.setAttribute("user", user);

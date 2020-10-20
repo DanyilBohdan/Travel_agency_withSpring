@@ -2,9 +2,7 @@ package org.bohdan.web.command.user;
 
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.OrderDao;
-import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.entity.Order;
-import org.bohdan.db.entity.Tour;
 import org.bohdan.db.entity.User;
 import org.bohdan.web.Path;
 import org.bohdan.web.command.Command;
@@ -14,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class RegisterTour extends Command {
 
@@ -40,7 +36,7 @@ public class RegisterTour extends Command {
 
         Order order = Order.createOrderTour("registered", date, tour_id, user.getId());
 
-        boolean check = new OrderDao(dataSource).create(order);
+        boolean check = new OrderDao(connectionPool).create(order);
         logger.debug("Log: check create --> " + check);
         if (check) {
             session.setAttribute("check", "true");

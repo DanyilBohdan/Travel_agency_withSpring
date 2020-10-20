@@ -34,7 +34,7 @@ public class TourDao {
                     "start_date = ?, days = ?, discount = ?, type_tour_id = ?, country_id = ? WHERE id = ?";
 
     public static final String SQL_UPDATE_TOUR_DISCOUNT =
-            "UPDATE tour SET discount = ?, price = ? WHERE id = ?";
+            "UPDATE tour SET discount = ? WHERE id = ?";
 
     private static final String SQL_DELETE_TOUR_BY_ID =
             "DELETE FROM tour WHERE id = ?";
@@ -155,20 +155,6 @@ public class TourDao {
                     "from tour, country, type_tour\n" +
                     "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
                     "and tour.mark_hotel > ? and tour.mark_hotel < ?\n";
-
-    private static final String SQL_FIND_BY_DATE_EN =
-            "select tour.id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
-                    "tour.desc_en as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
-                    "from tour, country, type_tour\n" +
-                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id " +
-                    "and (tour.start_date - curdate()) < ?\n";
-
-    private static final String SQL_FIND_BY_DATE_RU =
-            "select tour.id, tour.name_ru as name, type_tour.name_ru as type, country.name_ru as country, tour.price, \n" +
-                    "tour.desc_ru as description, tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount\n" +
-                    "from tour, country, type_tour\n" +
-                    "where type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
-                    "and (tour.start_date - curdate()) > ?\n";
 
 
     private static String filter;
@@ -341,16 +327,6 @@ public class TourDao {
         return null;
     }
 
-    public List<TourView> findAllByDateLocale(String locale, String var, int start, int total) {
-        if (locale.equals("EN")) {
-            return findAllVarBy(SQL_FIND_BY_DATE_EN + filter, var, start, total);
-        }
-        if (locale.equals("RU")) {
-            return findAllVarBy(SQL_FIND_BY_DATE_RU + filter, var, start, total);
-        }
-        return null;
-    }
-
     private List<TourView> findAllVarBy(String sql, String variable, int start, int total) {
         List<TourView> tours = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
@@ -463,12 +439,11 @@ public class TourDao {
         }
     }
 
-    public boolean updateDiscount(float discount, float price, Integer id) {
+    public boolean updateDiscount(float discount, Integer id) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TOUR_DISCOUNT)) {
             statement.setFloat(1, discount);
-            statement.setFloat(2, changePrice(price, discount));
-            statement.setInt(3, id);
+            statement.setInt(2, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -503,7 +478,7 @@ public class TourDao {
         tour.setDesc_en(rs.getString(Fields.DESCRIPTION_EN));
         tour.setDesc_ru(rs.getString(Fields.DESCRIPTION_RU));
         tour.setCount_people(rs.getInt(Fields.COUNT_PEOPLE));
-        tour.setPrice(rs.getFloat(Fields.PRICE));
+        tour.setPrice(changePrice(rs.getFloat(Fields.PRICE), rs.getFloat(Fields.DISCOUNT)));
         tour.setMark_hotel(rs.getInt(Fields.MARK_HOTEL));
         tour.setStart_date(rs.getDate(Fields.START_DATE));
         tour.setDays(rs.getInt(Fields.DAYS));
@@ -519,7 +494,7 @@ public class TourDao {
         tourView.setName(rs.getString(Fields.NAME));
         tourView.setType(rs.getString(Fields.TYPE));
         tourView.setCountry(rs.getString(Fields.COUNTRY));
-        tourView.setPrice(rs.getFloat(Fields.PRICE));
+        tourView.setPrice(changePrice(rs.getFloat(Fields.PRICE), rs.getFloat(Fields.DISCOUNT)));
         tourView.setDescription(rs.getString(Fields.DESCRIPTION));
         tourView.setCount_people(rs.getInt(Fields.COUNT_PEOPLE));
         tourView.setMark_hotel(rs.getInt(Fields.MARK_HOTEL));

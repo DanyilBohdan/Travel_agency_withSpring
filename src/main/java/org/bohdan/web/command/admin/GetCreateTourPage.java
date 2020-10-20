@@ -1,7 +1,6 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.db.entity.Country;
@@ -13,8 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.List;
 
 public class GetCreateTourPage extends Command {
 
@@ -23,21 +22,21 @@ public class GetCreateTourPage extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-//        TypeTour typeTour = new TypeTourDao(dataSource).findEntityById(1);
-//        Country country = new CountryDao(dataSource).findEntityById(1);
-//        if (typeTour == null || country == null) {
-//            return Path.ERROR_PAGE;
-//        }
+        List<TypeTour> typeTours = new TypeTourDao(connectionPool).findAll();
+        List<Country> countries = new CountryDao(connectionPool).findAll();
+        if (typeTours == null || countries == null) {
+            return Path.ERROR_PAGE;
+        }
 
         HttpSession session = request.getSession();
 
-        session.setAttribute("typeTourOut", new TypeTourDao(dataSource).findAll());
-//        request.setAttribute("typeDef", typeTour);
-//        logger.debug("Log: typeDef --> " + typeTour);
+        session.setAttribute("typeTourOut", new TypeTourDao(connectionPool).findAll());
+        request.setAttribute("typeDef", typeTours.get(0));
+        logger.debug("Log: typeDef --> " + typeTours.get(0));
 
-        session.setAttribute("countryOut", new CountryDao(dataSource).findAll());
-//        request.setAttribute("countryDef", country);
-//        logger.debug("Log: country --> " + country);
+        session.setAttribute("countryOut", new CountryDao(connectionPool).findAll());
+        request.setAttribute("countryDef", countries.get(0));
+        logger.debug("Log: country --> " + countries.get(0));
 
         return Path.CREATE_TOUR;
     }

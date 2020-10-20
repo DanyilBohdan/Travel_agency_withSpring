@@ -113,7 +113,7 @@ public class OrderDao {
         order.setName(rs.getString(Fields.NAME));
         order.setType(rs.getString(Fields.TYPE));
         order.setCountry(rs.getString(Fields.COUNTRY));
-        order.setPrice(rs.getFloat(Fields.PRICE));
+        order.setPrice(TourDao.changePrice(rs.getFloat(Fields.PRICE), rs.getFloat(Fields.DISCOUNT)));
         order.setMark_hotel(rs.getInt(Fields.MARK_HOTEL));
         order.setCount_people(rs.getInt(Fields.COUNT_PEOPLE));
         order.setStart_date(rs.getDate(Fields.START_DATE));

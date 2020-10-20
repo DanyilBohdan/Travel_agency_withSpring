@@ -1,7 +1,6 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.web.Path;
 import org.bohdan.web.command.Command;
@@ -20,7 +19,7 @@ public class DeleteTour extends Command {
             throws IOException, ServletException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            boolean check = new TourDao(dataSource).delete(id);
+            boolean check = new TourDao(connectionPool).delete(id);
             logger.info("log: delete Tour = " + check);
 
             return Path.COMMAND_TOURS_ADMIN;

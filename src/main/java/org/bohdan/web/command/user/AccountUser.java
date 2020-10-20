@@ -39,7 +39,7 @@ public class AccountUser extends Command {
 
         User user = (User) session.getAttribute("user");
 
-        List<OrderTours> ordersUser = new OrderDao(dataSource).findAllOrdersUsersLocale((String) session.getAttribute("defLocale"), user.getId());
+        List<OrderTours> ordersUser = new OrderDao(connectionPool).findAllOrdersUsersLocale((String) session.getAttribute("defLocale"), user.getId());
 
         request.setAttribute("orders", ordersUser);
 

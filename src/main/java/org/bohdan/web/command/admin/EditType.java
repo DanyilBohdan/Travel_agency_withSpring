@@ -1,7 +1,6 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.db.entity.TypeTour;
 import org.bohdan.web.Path;
@@ -44,7 +43,7 @@ public class EditType extends Command {
         TypeTour typeTour = TypeTour.create(nameEN, nameRU);
         typeTour.setId(id);
 
-        boolean check = new TypeTourDao(dataSource).update(typeTour);
+        boolean check = new TypeTourDao(connectionPool).update(typeTour);
         logger.debug("Log: check update type --> " + check);
 
         return Path.COMMAND_LIST_TYPE;

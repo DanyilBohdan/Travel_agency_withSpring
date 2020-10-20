@@ -1,7 +1,6 @@
 package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.entity.Country;
 import org.bohdan.web.Path;
@@ -19,7 +18,7 @@ public class ListCountry extends Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        List<Country> countries = new CountryDao(dataSource).findAll();
+        List<Country> countries = new CountryDao(connectionPool).findAll();
 
         request.setAttribute("countries", countries);
 

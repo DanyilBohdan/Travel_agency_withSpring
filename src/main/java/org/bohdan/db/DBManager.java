@@ -10,9 +10,7 @@ import java.sql.*;
 public class DBManager implements ConnectionFactory{
 
     private static final Logger logger = Logger.getLogger(DBManager.class);
-
     private static DataSource dataSource;
-
     static {
         try {
             MysqlDataSource ds = new MysqlConnectionPoolDataSource();
@@ -25,12 +23,20 @@ public class DBManager implements ConnectionFactory{
             logger.error("Cannot obtain a connection from the pool", ex);
         }
     }
-
     public static DataSource getDataSource() {
         return dataSource;
     }
 
-    public DBManager() {
+    private static DBManager dbManager;
+
+    private DBManager() {
+    }
+
+    public static synchronized DBManager getInstance() {
+        if (dbManager == null) {
+            dbManager = new DBManager();
+        }
+        return dbManager;
     }
 
 //    public static Connection getConnection() throws SQLException {

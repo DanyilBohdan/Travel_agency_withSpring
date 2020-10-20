@@ -5,7 +5,6 @@ import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.bean.OrderToursByIdUser;
 import org.bohdan.db.bean.TourView;
-import org.bohdan.db.entity.Tour;
 import org.bohdan.db.entity.User;
 import org.bohdan.web.Path;
 import org.bohdan.web.command.Command;
@@ -13,10 +12,7 @@ import org.bohdan.web.command.Command;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class RegisterTourView extends Command {
@@ -35,10 +31,10 @@ public class RegisterTourView extends Command {
             String errorMessage;
 
             int id = Integer.parseInt(request.getParameter("id"));
-            TourView tour = new TourDao(dataSource).findByIdLocale(lang, id);
+            TourView tour = new TourDao(connectionPool).findByIdLocale(lang, id);
 
             //check on count people
-            Integer count_peopleForTour = new OrderDao(dataSource).findCountOrderByIdTour(id);
+            Integer count_peopleForTour = new OrderDao(connectionPool).findCountOrderByIdTour(id);
             if (count_peopleForTour >= tour.getCount_people()) {
                 errorMessage = ResourceBundle.getBundle("resources", current).getString("registrationTour.noAvailable");
                 request.setAttribute("noAvailable", errorMessage);
@@ -47,7 +43,7 @@ public class RegisterTourView extends Command {
 
                 //check on date
                 User user = (User) request.getSession().getAttribute("user");
-                List<OrderToursByIdUser> ordersUser = new OrderDao(dataSource).findToursByIdUser(user.getId());
+                List<OrderToursByIdUser> ordersUser = new OrderDao(connectionPool).findToursByIdUser(user.getId());
 
                 if (!checkDate(ordersUser, tour)) {
                     errorMessage = ResourceBundle.getBundle("resources", current).getString("registrationTour.errorDate");

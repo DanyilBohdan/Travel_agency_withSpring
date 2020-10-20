@@ -3,7 +3,6 @@ package org.bohdan.web.command.admin;
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.UserDao;
 import org.bohdan.db.entity.Role;
-import org.bohdan.db.entity.User;
 import org.bohdan.web.Path;
 import org.bohdan.web.command.Command;
 
@@ -22,7 +21,7 @@ public class UpdateRoleUser extends Command {
             int id = Integer.parseInt(request.getParameter("id"));
             logger.info("Log: id = " + id);
             String role = request.getParameter("selectRole");
-            boolean check = new UserDao(dataSource).updateRole(Role.getId(role), id);
+            boolean check = new UserDao(connectionPool).updateRole(Role.getId(role), id);
             logger.info("Log: check update user role --> " + check);
 
             return Path.COMMAND_LIST_USER;

@@ -3,8 +3,6 @@ package org.bohdan.web.command.admin;
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.UserDao;
 import org.bohdan.db.bean.UserRole;
-import org.bohdan.db.entity.Role;
-import org.bohdan.db.entity.User;
 import org.bohdan.web.Path;
 import org.bohdan.web.command.Command;
 
@@ -23,7 +21,7 @@ public class ListUsers extends Command {
 
         logger.debug("Command start");
 
-        List<UserRole> users = new UserDao(dataSource).findUsersRole();
+        List<UserRole> users = new UserDao(connectionPool).findUsersRole();
         logger.trace("Log: users --> " + users);
 
         request.setAttribute("users", users);

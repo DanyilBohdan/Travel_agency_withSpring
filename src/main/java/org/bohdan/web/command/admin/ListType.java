@@ -19,7 +19,7 @@ public class ListType extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        List<TypeTour> typeTours = new TypeTourDao(dataSource).findAll();
+        List<TypeTour> typeTours = new TypeTourDao(connectionPool).findAll();
 
         request.setAttribute("types", typeTours);
 

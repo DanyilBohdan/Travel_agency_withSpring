@@ -24,7 +24,7 @@ public class SearchTour {
     public static List<TourView> execute(HttpServletRequest request, HttpServletResponse response, int check) throws IOException, ServletException {
         try {
 
-            ConnectionPool dataSource = new ConnectionPool();
+            ConnectionPool dataSource = ConnectionPool.getInstance();
 
             List<TourView> tours = null;
 

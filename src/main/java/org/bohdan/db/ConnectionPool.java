@@ -25,7 +25,17 @@ public class ConnectionPool implements ConnectionFactory{
         }
     }
 
-    public ConnectionPool() {
+
+    private static ConnectionPool connectionPool;
+
+    public static synchronized ConnectionPool getInstance() {
+        if (connectionPool == null) {
+            connectionPool = new ConnectionPool();
+        }
+        return connectionPool;
+    }
+
+    private ConnectionPool() {
     }
 
     public static DataSource getDataSource() {

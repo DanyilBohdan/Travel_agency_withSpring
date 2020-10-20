@@ -2,10 +2,6 @@ package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.OrderDao;
-import org.bohdan.db.DAO.UserDao;
-import org.bohdan.db.entity.Order;
-import org.bohdan.db.entity.Role;
-import org.bohdan.db.entity.User;
 import org.bohdan.web.Path;
 import org.bohdan.web.command.Command;
 
@@ -26,7 +22,7 @@ public class UpdateStatusOrder extends Command {
             String status = request.getParameter("selectStatus");
             logger.info("Log: status --> " + status);
 
-            boolean check = new OrderDao(dataSource).updateStatus(status, id);
+            boolean check = new OrderDao(connectionPool).updateStatus(status, id);
             logger.info("Log: check update status order --> " + check);
 
             return Path.COMMAND_LIST_ORDERS;
