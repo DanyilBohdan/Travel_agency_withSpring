@@ -21,7 +21,7 @@ public class    RegisterCheck extends Command{
         HttpSession session = request.getSession();
 
         String check = (String) session.getAttribute("check");
-        String lang = (String) session.getAttribute("defLang");
+        String lang = (String) session.getAttribute("defLocale");
         logger.debug("Log: check ----> " + check);
 
         if (check.equals("true")) {

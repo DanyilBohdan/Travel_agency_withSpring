@@ -114,13 +114,4 @@
         <location>/jsp/error/error_page.jsp</location>
     </error-page>
 
-<!--    <taglib>-->
-<!--        <taglib-uri>-->
-<!--            http://www.java2s.com/custom-->
-<!--        </taglib-uri>-->
-<!--        <taglib-location>-->
-<!--            /WEB-INF/tags/simple.tld-->
-<!--        </taglib-location>-->
-<!--    </taglib>-->
-
 </web-app>

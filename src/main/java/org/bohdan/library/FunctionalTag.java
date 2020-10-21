@@ -1,15 +1,13 @@
 package org.bohdan.library;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FunctionalTag {
     FunctionalTag() {}
 
-    public static String getResultRegistration(String result, String lang){
-        if (result.equals("Successful registration")){
-            return ResourceBundle.getBundle("resources", new Locale(lang)).getString("registrationTour.successful");
-        }
-            return ResourceBundle.getBundle("resources", new Locale(lang)).getString("registrationTour.unsuccessful");
+    public static String getDate(){
+        Date d = new Date();
+        return new SimpleDateFormat("yyyy-MM-dd").format(d.getTime());
     }
 }

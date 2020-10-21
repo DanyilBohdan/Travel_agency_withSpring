@@ -72,14 +72,10 @@ public class EditTour extends Command {
             logger.debug("Log: days : " + days);
             tourView.setDays(days);
 
-            float discount = Float.parseFloat(req.getParameter("discount"));
-            logger.debug("Log: discount : " + discount);
-            tourView.setDiscount(discount);
-
             req.setAttribute("tour", tourView);
 
             String checkVal = Validation.validateTour(nameEN, nameRU, typeEN, typeRU, countryEN, countryRU, descriptionEN, descriptionRU,
-                    price, count_people, mark_hotel, start_date, days, discount);
+                    price, count_people, mark_hotel, start_date, days, 0);
 
             if (!checkVal.equals("null")) {
                 req.setAttribute("errorVal", checkVal);
@@ -88,7 +84,7 @@ public class EditTour extends Command {
             }
 
             Tour tour = Tour.createTour(nameEN, nameRU, descriptionEN, descriptionRU, price, count_people,
-                    mark_hotel, start_date, days, discount, new TypeTourDao(connectionPool).findByName(typeEN).getId(),
+                    mark_hotel, start_date, days, 0, new TypeTourDao(connectionPool).findByName(typeEN).getId(),
                     new CountryDao(connectionPool).findByName(countryEN).getId());
 
             tour.setId(id);

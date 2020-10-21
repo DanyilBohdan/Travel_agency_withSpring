@@ -10,7 +10,7 @@
     <%@ include file="/WEB-INF/jspf/locale.jspf" %>
     <div class="container p-3 my-3 border">
         <h1><fmt:message key="main.name"/></h1>
-        <div class="row">
+        <div class="container row">
             <form class="form-inline" method="post" action="controller">
                 <input type="hidden" name="command" value="viewTours">
                 <input type="hidden" name="method" value="typeTour">
@@ -60,7 +60,7 @@
                 <button type="submit" class="btn-outline-dark"><fmt:message key="search.reset"/></button>
             </form>
         </div>
-        <div class="row row-cols-2 row-cols-md-2">
+        <div class="row row-cols-3 row-cols-md-2">
             <c:forEach var="tour" items="${tours}">
                 <div class="card border-dark mb-4 h-100">
                     <div class="card-header">${tour.name}</div>
