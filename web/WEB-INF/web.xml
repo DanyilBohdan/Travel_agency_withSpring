@@ -72,7 +72,6 @@
                 accountAdmin listTours createTour getCreateTour editTour getEditTour deleteTour listUsers
                 searchUser updateStatusUser updateRole listOrders updateStatusOrder updateDiscount deleteOrder
                 listType editType createType deleteType listCountry createCountry editCountry deleteCountry
-                searchByStatusOrder
             </param-value>
         </init-param>
         <init-param>
@@ -85,7 +84,7 @@
         </init-param>
         <init-param>
             <param-name>common</param-name>
-            <param-value>noCommand viewTours viewTour logout getEditAccount editAccount</param-value>
+            <param-value>noCommand viewTours viewTour logout getEditAccount editAccount searchByStatusOrder</param-value>
         </init-param>
         <init-param>
             <param-name>out-of-control</param-name>
@@ -114,4 +113,14 @@
         <error-code>404</error-code>
         <location>/jsp/error/error_page.jsp</location>
     </error-page>
+
+<!--    <taglib>-->
+<!--        <taglib-uri>-->
+<!--            http://www.java2s.com/custom-->
+<!--        </taglib-uri>-->
+<!--        <taglib-location>-->
+<!--            /WEB-INF/tags/simple.tld-->
+<!--        </taglib-location>-->
+<!--    </taglib>-->
+
 </web-app>

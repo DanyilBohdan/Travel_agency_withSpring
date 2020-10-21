@@ -6,7 +6,10 @@ import org.bohdan.web.Path;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class    RegisterCheck extends Command{
 
@@ -15,13 +18,16 @@ public class    RegisterCheck extends Command{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        String check = (String) request.getSession().getAttribute("check");
+        HttpSession session = request.getSession();
+
+        String check = (String) session.getAttribute("check");
+        String lang = (String) session.getAttribute("defLang");
         logger.debug("Log: check ----> " + check);
 
         if (check.equals("true")) {
-            request.setAttribute("checkRegistration", "Successful registration");
+            request.setAttribute("checkRegistration", ResourceBundle.getBundle("resources", new Locale(lang)).getString("registrationTour.successful"));
         } else {
-            request.setAttribute("checkRegistration", "Unsuccessful registration");
+            request.setAttribute("checkRegistration", ResourceBundle.getBundle("resources", new Locale(lang)).getString("registrationTour.unsuccessful"));
         }
 
         return Path.PAGE_REGISTER_CHECK;

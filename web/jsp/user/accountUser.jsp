@@ -48,26 +48,12 @@
             </label> ${userRole}
         </div>
 
-        <div class="border border-secondary">
+        <div class="container p-3 my-3 border">
             <label>
                 <fmt:message key="account.legend.myListTours"/>
             </label>
             <c:forEach var="order" items="${orders}">
                 <div class="border border-secondary">
-                    <fmt:message key="tour.name"/>: ${order.name}<br>
-                    <fmt:message key="tour.price"/>: ${order.price}<br>
-                    <fmt:message key="account.label.status"/>: ${order.status}<br>
-                    <details>
-                        <summary>
-                            <fmt:message key="order.more"/>
-                        </summary>
-                        <fieldset>
-                            <fmt:message key="tour.count_people"/>: ${order.count_people}<br>
-                            <fmt:message key="tour.mark_hotel"/>: ${order.start_date}<br>
-                            <fmt:message key="tour.days"/>: ${order.days}<br>
-                            <fmt:message key="tour.discount"/>: ${order.discount}<br>
-                        </fieldset>
-                    </details>
                     <div class="float-right ">
                         <form id="statusCanceled" action="controller" method="post">
                             <input type="hidden" name="command" value="statusCanceled"/>
@@ -76,6 +62,20 @@
                                 <fmt:message key="account.label.canceled"/></button>
                         </form>
                     </div>
+                    <fmt:message key="tour.name"/>: ${order.name}<br>
+                    <fmt:message key="tour.price"/>: ${order.price}<br>
+                    <fmt:message key="tour.start_date"/>: ${order.start_date}<br>
+                    <fmt:message key="account.label.status"/>: ${order.status}<br>
+                    <details>
+                        <summary>
+                            <fmt:message key="order.more"/>
+                        </summary>
+                        <fieldset>
+                            <fmt:message key="tour.count_people"/>: ${order.count_people}<br>
+                            <fmt:message key="tour.days"/>: ${order.days}<br>
+                            <fmt:message key="tour.discount"/>: ${order.discount}<br>
+                        </fieldset>
+                    </details>
                 </div>
             </c:forEach>
         </div>

@@ -1,5 +1,6 @@
 <%@include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 <%@include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@taglib prefix="f" uri="http://library.web.bohdan.org/functionalTag" %>
 <html>
 <c:set var="title" value="${checkRegistration}"/>
 <%@include file="/WEB-INF/jspf/head.jspf" %>
@@ -11,7 +12,7 @@
         <b>
             ${checkRegistration}
         </b>
-    </label><br>
+    </label><br><br>
     <form action="controller" method="post">
         <input type="hidden" name="command" value="viewTours">
         <button type="submit" class="btn btn-outline-dark">
