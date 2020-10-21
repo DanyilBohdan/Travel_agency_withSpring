@@ -21,7 +21,6 @@ public final class Path {
     public static final String ACCOUNT_ADMIN = "/jsp/admin/accountAdmin.jsp";
     public static final String ACCOUNT_MANAGER = "/jsp/admin/accountManager.jsp";
 
-    public static final String COMMAND_CREATE_TOUR= "redirect:/controller?command=getCreateTour";
     public static final String COMMAND_LIST_ORDERS = "redirect:/controller?command=listOrders";
     public static final String COMMAND_ACCOUNT_ADMIN = "redirect:/controller?command=accountAdmin";
     public static final String COMMAND_ACCOUNT_MANAGER = "redirect:/controller?command=accountManager";

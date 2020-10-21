@@ -41,7 +41,7 @@ public class RegisterUser extends Command {
         }
         User user = new UserDao(connectionPool).findEntityByLogin(login);
         logger.trace("user by login --> " + user);
-        if (user == null) {
+        if (user != null) {
             String errorMessage = "This login is busy";
             request.setAttribute("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);

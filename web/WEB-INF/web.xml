@@ -72,6 +72,7 @@
                 accountAdmin listTours createTour getCreateTour editTour getEditTour deleteTour listUsers
                 searchUser updateStatusUser updateRole listOrders updateStatusOrder updateDiscount deleteOrder
                 listType editType createType deleteType listCountry createCountry editCountry deleteCountry
+                searchByStatusOrder
             </param-value>
         </init-param>
         <init-param>
@@ -80,7 +81,7 @@
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <param-value>accountUser registerTourView registerTour</param-value>
+            <param-value>accountUser registerTourView registerTour statusCanceled</param-value>
         </init-param>
         <init-param>
             <param-name>common</param-name>

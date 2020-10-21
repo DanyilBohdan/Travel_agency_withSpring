@@ -59,7 +59,7 @@
                     <fmt:message key="account.label.status"/>: ${order.status}<br>
                     <details>
                         <summary>
-                            <fmt:message key="order.more"/>>>
+                            <fmt:message key="order.more"/>
                         </summary>
                         <fieldset>
                             <fmt:message key="tour.count_people"/>: ${order.count_people}<br>
@@ -68,6 +68,14 @@
                             <fmt:message key="tour.discount"/>: ${order.discount}<br>
                         </fieldset>
                     </details>
+                    <div class="float-right ">
+                        <form id="statusCanceled" action="controller" method="post">
+                            <input type="hidden" name="command" value="statusCanceled"/>
+                            <input type="hidden" name="id" value="${order.order_id}"/>
+                            <button type="submit" class="btn btn-outline-dark" name="canceled" value="canceled">
+                                <fmt:message key="account.label.canceled"/></button>
+                        </form>
+                    </div>
                 </div>
             </c:forEach>
         </div>

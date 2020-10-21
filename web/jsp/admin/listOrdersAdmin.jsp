@@ -10,6 +10,24 @@
     <form id="main" action="controller" method="post">
         <h1><fmt:message key="account.admin.listOrders"/></h1>
         <div class="container p-3 my-3 border">
+            <div class="row">
+                <form class="form-inline" method="post" action="controller">
+                    <input type="hidden" name="command" value="searchByStatusOrder">
+                    <select name="searchStatus" onchange="submit()">
+                        <option value="registered" ${selectDef == "registered" ? 'selected' : ''}><fmt:message
+                                key="order.status.registered"/></option>
+                        <option value="paid" ${selectDef == "paid" ? 'selected' : ''}><fmt:message
+                                key="order.status.paid"/></option>
+                        <option value="canceled" ${selectDef == "canceled" ? 'selected' : ''}><fmt:message
+                                key="order.status.canceled"/></option>
+                    </select>
+                </form>
+                <form action="controller" method="post">
+                    <input type="hidden" name="command" value="listOrders"/>
+                    <button type="submit" class="btn btn-outline-dark"><fmt:message
+                            key="search.reset"/></button>
+                </form>
+            </div>
             <c:forEach var="order" items="${orders}">
             <div class="border border-secondary">
                 <fmt:message key="tour.name"/>: ${order.name}<br>

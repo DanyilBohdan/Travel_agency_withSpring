@@ -86,6 +86,26 @@ public class OrderDao {
                     "and user.id = ?\n" +
                     "order by travel_agencyDB.order.date_reg DESC";
 
+    public static final String SQL_FIND_BY_STATUS_ORDERS_USER_EN =
+            "SELECT travel_agencyDB.order.id, tour.id as tour_id, tour.name_en as name, type_tour.name_en as type, country.name_en as country, tour.price, \n" +
+                    "tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount, travel_agencyDB.order.status, user.login\n" +
+                    "FROM user, tour, travel_agencyDB.order, type_tour, country\n" +
+                    "WHERE type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
+                    "and tour.id = travel_agencyDB.order.tour_id \n" +
+                    "and user.id = travel_agencyDB.order.user_id\n" +
+                    "and travel_agencyDB.order.status = ?\n" +
+                    "order by travel_agencyDB.order.date_reg DESC";
+
+    public static final String SQL_FIND_BY_STATUS_ORDERS_USER_RU =
+            "SELECT travel_agencyDB.order.id, tour.id as tour_id, tour.name_ru as name, type_tour.name_ru as type, country.name_ru as country, tour.price, \n" +
+                    "tour.count_people, tour.mark_hotel, tour.start_date, tour.days, tour.discount, travel_agencyDB.order.status, user.login\n" +
+                    "FROM user, tour, travel_agencyDB.order, type_tour, country\n" +
+                    "WHERE type_tour.id = tour.type_tour_id and country.id = tour.country_id \n" +
+                    "and tour.id = travel_agencyDB.order.tour_id\n" +
+                    "and user.id = travel_agencyDB.order.user_id\n" +
+                    "and travel_agencyDB.order.status = ?\n" +
+                    "order by travel_agencyDB.order.date_reg DESC";
+
     private DataSource dataSource;
 
     public OrderDao(ConnectionFactory connectionFactory) {
@@ -233,6 +253,31 @@ public class OrderDao {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                orders.add(mapOrderTours(rs));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return orders;
+    }
+
+    public List<OrderTours> findFindByStatusOrdersUsersLocale(String locale, String status) {
+        if (locale.equals("EN") || locale.equals("en")) {
+            return findFindByStatusOrdersUsers(SQL_FIND_BY_STATUS_ORDERS_USER_EN, status);
+        }
+        if (locale.equals("RU") || locale.equals("ru")) {
+            return findFindByStatusOrdersUsers(SQL_FIND_BY_STATUS_ORDERS_USER_RU, status);
+        }
+        return null;
+    }
+
+    private List<OrderTours> findFindByStatusOrdersUsers(String sql, String status) {
+        List<OrderTours> orders = new ArrayList<>();
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, status);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 orders.add(mapOrderTours(rs));

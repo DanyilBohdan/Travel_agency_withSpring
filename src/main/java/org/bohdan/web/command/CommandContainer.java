@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.bohdan.web.command.admin.*;
 import org.bohdan.web.command.manager.AccountManager;
 import org.bohdan.web.command.user.AccountUser;
+import org.bohdan.web.command.user.CanceledOrder;
 import org.bohdan.web.command.user.RegisterTour;
 import org.bohdan.web.command.user.RegisterTourView;
 
@@ -33,6 +34,7 @@ public class CommandContainer {
         commandMap.put("accountUser", new AccountUser());
         commandMap.put("registerTourView", new RegisterTourView());
         commandMap.put("registerTour", new RegisterTour());
+        commandMap.put("statusCanceled", new CanceledOrder());
 
         //admin
         commandMap.put("accountAdmin", new AccountAdmin());
@@ -54,6 +56,7 @@ public class CommandContainer {
         commandMap.put("listOrders", new ListOrders());
         commandMap.put("listUsers", new ListUsers());
         commandMap.put("searchUser", new SearchUser());
+        commandMap.put("searchByStatusOrder", new SearchByStatusOrder());
         commandMap.put("updateStatusUser", new UpdateStatusUser());
         commandMap.put("updateRole", new UpdateRoleUser());
         commandMap.put("updateStatusOrder", new UpdateStatusOrder());

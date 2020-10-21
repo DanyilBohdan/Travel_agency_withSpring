@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.naming.NamingException;
 import java.util.List;
 
 public class UserDaoTest {
@@ -18,7 +17,7 @@ public class UserDaoTest {
     private UserDao userDao;
 
     @Before
-    public void setUp() throws NamingException {
+    public void setUp() {
         connectionFactory = DBManager.getInstance();
         userDao = new UserDao(connectionFactory);
     }
@@ -83,7 +82,7 @@ public class UserDaoTest {
         String by = "username";
         List<UserRole> expectedUser = userDao.searchEntity(by, "userTest");
 
-        Assert.assertEquals(expectedUser.get(expectedUser.size()-1).getId(), user.getId());
+        Assert.assertEquals(expectedUser.get(expectedUser.size() - 1).getId(), user.getId());
 
         deleteUser(user.getId());
     }
@@ -95,7 +94,7 @@ public class UserDaoTest {
         String by = "login";
         List<UserRole> expectedUser = userDao.searchEntity(by, "userTest@test.com");
 
-        Assert.assertEquals(expectedUser.get(expectedUser.size()-1).getId(), user.getId());
+        Assert.assertEquals(expectedUser.get(expectedUser.size() - 1).getId(), user.getId());
 
         deleteUser(user.getId());
     }
@@ -107,7 +106,7 @@ public class UserDaoTest {
         String by = "phone_number";
         List<UserRole> expectedUser = userDao.searchEntity(by, "(123) 123-4567");
 
-        Assert.assertEquals(expectedUser.get(expectedUser.size()-1).getId(), user.getId());
+        Assert.assertEquals(expectedUser.get(expectedUser.size() - 1).getId(), user.getId());
 
         deleteUser(user.getId());
     }
