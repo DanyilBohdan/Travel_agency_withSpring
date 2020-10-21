@@ -3,16 +3,11 @@ package org.bohdan.web.command;
 import org.apache.log4j.Logger;
 import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.TourDao;
-import org.bohdan.db.DAO.UserDao;
-import org.bohdan.db.DBManager;
 import org.bohdan.db.bean.TourView;
-import org.bohdan.db.bean.UserRole;
-import org.bohdan.web.Path;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -27,8 +22,9 @@ public class SearchTour {
             ConnectionPool dataSource = ConnectionPool.getInstance();
 
             List<TourView> tours = null;
+            TourDao tourDao = new TourDao(dataSource);
 
-            Integer count = new TourDao(dataSource).findCountTours();
+            Integer count = tourDao.findCountTours();
             int countPage = (count / 4) + 1;
             logger.info("Log: count --> " + count);
             logger.info("Log: countPage --> " + countPage);
@@ -53,10 +49,10 @@ public class SearchTour {
             String method = request.getParameter("method");
             logger.debug("Log: method -->" + method);
 
-            TourDao.setFilter(check);
+            tourDao.setFilter(check);
 
             if (method == null || method.equals("")) {
-                tours = new TourDao(dataSource).findAllByLocale(lang, pageId, total);
+                tours = tourDao.findAllByLocale(lang, pageId, total);
                 logger.trace("Found in DB: tours --> " + tours);
                 request.setAttribute("methodDef", "");
                 request.getSession().setAttribute("beginDef", "");
@@ -76,7 +72,7 @@ public class SearchTour {
                     }
                     logger.debug("Log: type -->" + type);
 
-                    tours = new TourDao(dataSource).findAllByTypeLocale(lang, type, pageId, total);
+                    tours = tourDao.findAllByTypeLocale(lang, type, pageId, total);
 
                     request.getSession().setAttribute("methodDef", "typeTour");
                     request.getSession().setAttribute("typeDef", type);
@@ -90,7 +86,7 @@ public class SearchTour {
                     }
                     logger.debug("Log: country -->" + country);
 
-                    tours = new TourDao(dataSource).findAllByCountryLocale(lang, country, pageId, total);
+                    tours = tourDao.findAllByCountryLocale(lang, country, pageId, total);
 
                     request.getSession().setAttribute("methodDef", "countryTour");
                     request.getSession().setAttribute("countryDef", country);
@@ -104,7 +100,7 @@ public class SearchTour {
                     }
                     logger.debug("Log: country -->" + text);
 
-                    tours = new TourDao(dataSource).searchEntity(lang, text, pageId, total);
+                    tours = tourDao.searchEntity(lang, text, pageId, total);
 
                     request.getSession().setAttribute("methodDef", "nameTour");
                     request.getSession().setAttribute("searchName", text);
@@ -129,7 +125,7 @@ public class SearchTour {
                     }
                     logger.debug("Log: select -->" + select);
 
-                    tours = new TourDao(dataSource).searchByRange(select, lang, begin, end, pageId, total);
+                    tours = tourDao.searchByRange(select, lang, begin, end, pageId, total);
 
                     request.getSession().setAttribute("methodDef", "rangeTour");
                     request.getSession().setAttribute("beginDef", begin);

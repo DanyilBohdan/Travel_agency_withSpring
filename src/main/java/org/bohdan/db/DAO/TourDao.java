@@ -176,7 +176,7 @@ public class TourDao {
         return price - ((discount * price) / 100);
     }
 
-    public static void setFilter(int check) {
+    public void setFilter(int check) {
         filter = FILTER_DATE_ADMIN;
         if (check == 1) {
             filter = FILTER_LIMIT_DATE;
@@ -388,7 +388,7 @@ public class TourDao {
         return null;
     }
 
-    public List<TourView> findAllByRange(String sql, String varFirst, String varLast, int start, int total) {
+    private List<TourView> findAllByRange(String sql, String varFirst, String varLast, int start, int total) {
         List<TourView> tours = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(sql)) {

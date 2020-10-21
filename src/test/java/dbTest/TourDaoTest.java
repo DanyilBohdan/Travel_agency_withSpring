@@ -5,10 +5,8 @@ import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.db.DBManager;
-import org.bohdan.db.bean.ListBean;
 import org.bohdan.db.bean.TourView;
 import org.bohdan.db.entity.Tour;
-import org.bohdan.db.entity.TypeTour;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +27,8 @@ public class TourDaoTest {
     @Before
     public void setUp() throws NamingException {
         connectionFactory = DBManager.getInstance();
-        TourDao.setFilter(0);
         tourDao = new TourDao(connectionFactory);
+        tourDao.setFilter(0);
         start = 1;
         total = tourDao.findCountTours();
     }
@@ -81,4 +79,101 @@ public class TourDaoTest {
         deleteTour(tour.getId());
     }
 
+    @Test
+    public void tourUpdateAndSearchNameTest() throws ParseException {
+
+        Tour tour = createTour();
+
+        Tour tourUpdate = Tour.createTour("TourUpdate Test", "Тур Тест", "descriptionUpdateTest", "описание", 900, 3,
+                3, new Date(new SimpleDateFormat("yyyy-MM-dd").parse("2020-11-15").getTime()), 5, 0, new TypeTourDao(connectionFactory).findAll().get(0).getId(),
+                new CountryDao(connectionFactory).findAll().get(0).getId());
+        List<Tour> listToursExpected = tourDao.findAllTour();
+        tourUpdate.setId(listToursExpected.get(listToursExpected.size() - 1).getId());
+        tourDao.update(tourUpdate);
+        Assert.assertEquals(tour.getId(), tourUpdate.getId());
+        Assert.assertEquals(tour.getId(), tourDao.searchEntity("EN", "TourUpdate Test", start, total).get(0).getId());
+        deleteTour(tourUpdate.getId());
+    }
+
+    @Test
+    public void findAllByTypeLocaleTest() throws ParseException {
+
+        Tour tour = createTour();
+
+        List<TourView> listToursExpected = tourDao.findAllByTypeLocale("EN", new TypeTourDao(connectionFactory).findAll().get(0).getName_en(), start, total);
+        TourView tourExpected = listToursExpected.get(listToursExpected.size() - 1);
+        Assert.assertEquals(tour.getId(), tourExpected.getId());
+
+        deleteTour(tourExpected.getId());
+    }
+
+    @Test
+    public void findAllByCountryLocaleTest() throws ParseException {
+
+        Tour tour = createTour();
+
+        List<TourView> listToursExpected = tourDao.findAllByCountryLocale("EN", new CountryDao(connectionFactory).findAll().get(0).getName_en(), start, total);
+        TourView tourExpected = listToursExpected.get(listToursExpected.size() - 1);
+        Assert.assertEquals(tour.getId(), tourExpected.getId());
+
+        deleteTour(tourExpected.getId());
+    }
+
+    @Test
+    public void findAllByRangePriceLocaleTest() throws ParseException {
+
+        Tour tour = createTour();
+
+        String range = "price";
+
+        List<TourView> listToursExpected = tourDao.searchByRange(range, "EN", "1290", "1310", start, total);
+        TourView tourExpected = listToursExpected.get(listToursExpected.size() - 1);
+        Assert.assertEquals(tour.getId(), tourExpected.getId());
+
+        deleteTour(tourExpected.getId());
+    }
+
+    @Test
+    public void findAllByRangeCountPeopleLocaleTest() throws ParseException {
+
+        Tour tour = createTour();
+
+        String range = "count_people";
+
+        List<TourView> listToursExpected = tourDao.searchByRange(range, "EN", "5", "7", start, total);
+        TourView tourExpected = listToursExpected.get(listToursExpected.size() - 1);
+        Assert.assertEquals(tour.getId(), tourExpected.getId());
+
+        deleteTour(tourExpected.getId());
+    }
+
+    @Test
+    public void findAllByRangeMarkHotelLocaleTest() throws ParseException {
+
+        Tour tour = createTour();
+
+        String range = "mark_hotel";
+
+        List<TourView> listToursExpected = tourDao.searchByRange(range, "EN", "3", "5", start, total);
+        TourView tourExpected = listToursExpected.get(listToursExpected.size() - 1);
+        Assert.assertEquals(tour.getId(), tourExpected.getId());
+
+        deleteTour(tourExpected.getId());
+    }
+
+    @Test
+    public void updateDiscountTest() throws ParseException {
+
+        Tour tour = createTour();
+
+        float updateDiscount = 0.3f;
+
+        boolean check = tourDao.updateDiscount(updateDiscount, tour.getId());
+        Assert.assertTrue(check);
+        List<Tour> listToursExpected = tourDao.findAllTour();
+        Tour tourExpected = listToursExpected.get(listToursExpected.size() - 1);
+        Assert.assertEquals(tourDao.findIDTour(tour.getId()).getDiscount(), tourExpected.getDiscount(), 0.0);
+
+        deleteTour(tourExpected.getId());
+    }
 }
