@@ -11,6 +11,11 @@ import org.bohdan.web.command.user.RegisterTourView;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Holder for all commands
+ *
+ * @author Bogdan Daniel
+ */
 public class CommandContainer {
 
     private static final Logger logger = Logger.getLogger(CommandContainer.class);

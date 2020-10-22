@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Edit one country
+ *
+ * @author Bohdan Daniel
+ */
 public class EditCountry extends Command {
 
     private static final Logger logger = Logger.getLogger(EditCountry.class);

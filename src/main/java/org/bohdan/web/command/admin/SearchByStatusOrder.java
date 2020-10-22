@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Search orders by status order
+ *
+ * @author Bohdan Daniel
+ */
 public class SearchByStatusOrder extends Command {
 
     private static final Logger logger = Logger.getLogger(SearchByStatusOrder.class);

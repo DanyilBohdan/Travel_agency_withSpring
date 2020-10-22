@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Update status order by id
+ *
+ * @author Bohdan Daniel
+ */
 public class UpdateStatusOrder extends Command {
 
     private static final Logger logger = Logger.getLogger(UpdateStatusOrder.class);

@@ -2,7 +2,6 @@ package org.bohdan.web.command.admin;
 
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.TourDao;
-import org.bohdan.db.entity.Tour;
 import org.bohdan.web.Path;
 import org.bohdan.web.Validation;
 import org.bohdan.web.command.Command;
@@ -12,6 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Update discount order by id order
+ *
+ * @author Bohdan Daniel
+ */
 public class UpdateDiscountOrder extends Command {
 
     private final static Logger logger = Logger.getLogger(UpdateDiscountOrder.class);

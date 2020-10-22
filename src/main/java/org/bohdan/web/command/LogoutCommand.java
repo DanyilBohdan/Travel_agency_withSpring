@@ -10,6 +10,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 
+/**
+ * LogOut command
+ *
+ * @author Bohdan Daniel
+ */
 public class LogoutCommand extends Command{
 
     private final static Logger logger = Logger.getLogger(LogoutCommand.class);

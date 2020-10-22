@@ -18,6 +18,11 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+/**
+ * Edit one tour by id
+ *
+ * @author Bohdan Daniel
+ */
 public class EditTour extends Command {
 
     private static final Logger logger = Logger.getLogger(EditTour.class);

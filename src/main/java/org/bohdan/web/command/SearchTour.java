@@ -12,6 +12,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Impl search by method tour
+ *
+ * @author Bohdan Daniel
+ */
 public class SearchTour {
 
     private static final Logger logger = Logger.getLogger(SearchTour.class);

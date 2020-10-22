@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * View register page and check logic validation
+ *
+ * @author Bohdan Daniel
+ */
 public class RegisterTourView extends Command {
 
     private final static Logger logger = Logger.getLogger(RegisterTourView.class);

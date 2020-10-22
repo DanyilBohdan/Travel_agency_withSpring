@@ -16,6 +16,11 @@ import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * View list tours page
+ *
+ * @author Bohdan Daniel
+ */
 public class ListTours extends Command {
 
     private final static Logger logger = Logger.getLogger(ListTours.class);

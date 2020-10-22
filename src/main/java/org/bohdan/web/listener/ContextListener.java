@@ -10,6 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/**
+ * Context listener.
+ *
+ * @author Bohdan Daniel
+ *
+ */
 public class ContextListener implements ServletContextListener {
 
     private static final Logger logger = Logger.getLogger(ContextListener.class);
@@ -32,7 +38,7 @@ public class ContextListener implements ServletContextListener {
     }
 
     /**
-     * Initializes i18n subsystem.
+     * Initializes i18n sub system.
      */
     private void initI18N(ServletContext servletContext) {
         logger.debug("I18N subsystem initialization started");

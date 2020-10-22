@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Delete order
+ *
+ * @author Bohdan Daniel
+ */
 public class DeleteOrder extends Command {
 
     private static final Logger logger = Logger.getLogger(DeleteOrder.class);

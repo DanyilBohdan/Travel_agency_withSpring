@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * View list orders page
+ *
+ * @author Bohdan Daniel
+ */
 public class ListOrders extends Command {
 
     private static final Logger logger = Logger.getLogger(ListOrders.class);

@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Command canceled order
+ *
+ * @author Bohdan Daniel
+ */
 public class CanceledOrder extends Command {
 
     private final static Logger logger = Logger.getLogger(CanceledOrder.class);

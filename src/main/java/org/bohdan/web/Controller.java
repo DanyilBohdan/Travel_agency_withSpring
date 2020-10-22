@@ -1,16 +1,19 @@
 package org.bohdan.web;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.DAO.TourDao;
 import org.bohdan.web.command.Command;
 import org.bohdan.web.command.CommandContainer;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
+/**
+ * Main servlet controller.
+ *
+ * @author Bohdan Daniel
+ *
+ */
 public class Controller extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(Controller.class);
@@ -25,6 +28,9 @@ public class Controller extends HttpServlet {
         process(req, resp);
     }
 
+    /**
+     * Main method of this controller.
+     */
     private void process(HttpServletRequest request, HttpServletResponse response)
             throws IOException, SecurityException, ServletException {
         logger.debug("Controller starts");
@@ -49,10 +55,6 @@ public class Controller extends HttpServlet {
         } else {
             request.getRequestDispatcher(forward).forward(request, response);
         }
-//        if (forward != null) {
-//            RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
-//            dispatcher.forward(request, response);
-//        }
     }
 
     private String cleanPath(String path) {

@@ -1,7 +1,13 @@
 package org.bohdan.web;
 
-public final class Path {
+/**
+ * Path holder (jsp pages, redirect commands).
+ *
+ * @author Bohdan Daniel
+ *
+ */
 
+public final class Path {
 
     public static final String PAGE_MAIN = "/main.jsp";
     public static final String PAGE_LOGIN = "/login.jsp";

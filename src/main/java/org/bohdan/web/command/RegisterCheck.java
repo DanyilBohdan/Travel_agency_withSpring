@@ -11,7 +11,12 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class    RegisterCheck extends Command{
+/**
+ * View register check
+ *
+ * @author Bohdan Daniel
+ */
+public class RegisterCheck extends Command{
 
     private static final Logger logger = Logger.getLogger(RegisterCheck.class);
 

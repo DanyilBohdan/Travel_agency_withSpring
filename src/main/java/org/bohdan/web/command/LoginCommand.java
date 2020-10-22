@@ -14,6 +14,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 
+/**
+ * Login command
+ *
+ * @author Bohdan Daniel
+ */
 public class LoginCommand extends Command {
 
     private static final Logger logger = Logger.getLogger(LoginCommand.class);

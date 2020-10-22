@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Search users by attribute user
+ *
+ * @author Bohdan Daniel
+ */
 public class SearchUser extends Command {
 
     private final static Logger logger = Logger.getLogger(SearchUser.class);

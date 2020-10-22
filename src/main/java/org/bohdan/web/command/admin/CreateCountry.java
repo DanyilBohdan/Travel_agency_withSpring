@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Create country
+ *
+ * @author Bohdan Daniel
+ */
 public class CreateCountry extends Command {
 
     private static final Logger logger = Logger.getLogger(CreateCountry.class);

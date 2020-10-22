@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Update role user by id
+ *
+ * @author Bohdan Daniel
+ */
 public class UpdateRoleUser extends Command {
 
     private final static Logger logger = Logger.getLogger(SearchUser.class);

@@ -11,6 +11,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 
+/**
+ * View account admin
+ *
+ * @author Bohdan Daniel
+ */
 public class AccountAdmin extends Command {
 
     private final static Logger logger = Logger.getLogger(AccountAdmin.class);

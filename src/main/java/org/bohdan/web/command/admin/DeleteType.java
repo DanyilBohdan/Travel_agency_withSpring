@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Delete type tour
+ *
+ * @author Bohdan Daniel
+ */
 public class DeleteType extends Command {
 
     private static final Logger logger = Logger.getLogger(DeleteType.class);

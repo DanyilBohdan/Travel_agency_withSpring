@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * View page register user
+ *
+ * @author Bohdan Daniel
+ */
 public class Register extends Command{
 
     private static final Logger logger = Logger.getLogger(Register.class);

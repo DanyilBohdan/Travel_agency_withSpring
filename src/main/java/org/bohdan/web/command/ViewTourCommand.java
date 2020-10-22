@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * View one tour by id
+ *
+ * @author Bohdan Daniel
+ */
 public class ViewTourCommand extends Command{
 
     private static final Logger logger = Logger.getLogger(ViewTourCommand.class);

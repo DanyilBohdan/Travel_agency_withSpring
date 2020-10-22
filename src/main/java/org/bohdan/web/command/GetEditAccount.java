@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * View page Edit account command
+ *
+ * @author Bohdan Daniel
+ */
 public class GetEditAccount extends Command{
 
     @Override

@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Register User
+ *
+ * @author Bohdan Daniel
+ */
 public class RegisterUser extends Command {
 
     private static final Logger logger = Logger.getLogger(RegisterUser.class);

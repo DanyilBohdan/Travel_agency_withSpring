@@ -15,6 +15,11 @@ import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * View account user
+ *
+ * @author Bohdan Daniel
+ */
 public class AccountUser extends Command {
 
     private static final Logger logger = Logger.getLogger(AccountUser.class);

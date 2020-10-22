@@ -16,6 +16,11 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+/**
+ * Create tour
+ *
+ * @author Bohdan Daniel
+ */
 public class CreateTour extends Command {
 
     private static final Logger logger = Logger.getLogger(CreateTour.class);

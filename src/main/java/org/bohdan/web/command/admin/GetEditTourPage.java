@@ -16,6 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * View edit tour page
+ *
+ * @author Bohdan Daniel
+ */
 public class GetEditTourPage extends Command {
 
     private static final Logger logger = Logger.getLogger(GetEditTourPage.class);

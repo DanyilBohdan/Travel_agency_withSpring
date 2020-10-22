@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Edit one type by id
+ *
+ * @author Bohdan Daniel
+ */
 public class EditType extends Command {
 
     private static final Logger logger = Logger.getLogger(EditType.class);

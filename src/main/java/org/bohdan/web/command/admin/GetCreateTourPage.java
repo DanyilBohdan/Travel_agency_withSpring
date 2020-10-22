@@ -15,6 +15,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * View create tour page
+ *
+ * @author Bohdan Daniel
+ */
 public class GetCreateTourPage extends Command {
 
     private static final Logger logger = Logger.getLogger(GetCreateTourPage.class);

@@ -3,7 +3,6 @@ package org.bohdan.web.command.manager;
 import org.apache.log4j.Logger;
 import org.bohdan.web.Path;
 import org.bohdan.web.command.Command;
-import org.bohdan.web.command.admin.AccountAdmin;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +11,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 
+/**
+ * View account manager
+ *
+ * @author Bohdan Daniel
+ */
 public class AccountManager extends Command {
 
     private final static Logger logger = Logger.getLogger(AccountManager.class);

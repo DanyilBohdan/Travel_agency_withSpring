@@ -11,6 +11,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Security filter.
+ *
+ * @author Bohdan Daniel
+ *
+ */
 public class CommandAccessFilter implements Filter {
 
     private static final Logger logger = Logger.getLogger(CommandAccessFilter.class);

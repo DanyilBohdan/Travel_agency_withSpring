@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * View list users page
+ *
+ * @author Bohdan Daniel
+ */
 public class ListUsers extends Command {
 
     private final static Logger logger = Logger.getLogger(ListUsers.class);

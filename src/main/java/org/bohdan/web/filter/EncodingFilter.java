@@ -6,6 +6,12 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * Encoding filter.
+ *
+ * @author Bohdan Daniel
+ *
+ */
 public class EncodingFilter implements Filter {
 
     private static final Logger logger = Logger.getLogger(EncodingFilter.class);

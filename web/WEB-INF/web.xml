@@ -10,6 +10,7 @@
         <welcome-file>welcome.jsp</welcome-file>
     </welcome-file-list>
 
+<!--          Init Data Source    -->
     <resource-ref>
         <description>MySQL DB Connection Pool</description>
         <res-ref-name>jdbc/travel_agencyDB</res-ref-name>

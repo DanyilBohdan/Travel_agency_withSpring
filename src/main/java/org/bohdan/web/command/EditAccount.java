@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Edit account command
+ *
+ * @author Bohdan Daniel
+ */
 public class EditAccount extends Command {
 
     private static final Logger logger = Logger.getLogger(EditAccount.class);
