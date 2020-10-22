@@ -2,6 +2,11 @@ package org.bohdan.db.bean;
 
 import java.util.Date;
 
+/**
+ * Bean for displaying only one locale
+ *
+ * @author Bohdan Daniel
+ */
 public class TourView {
 
     private Integer id;

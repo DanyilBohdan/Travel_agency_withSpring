@@ -2,6 +2,11 @@ package org.bohdan.db.bean;
 
 import java.util.Date;
 
+/**
+ * Bean for find tours by id user
+ *
+ * @author Bohdan Daniel
+ */
 public class OrderToursByIdUser {
 
     private Integer order_id;

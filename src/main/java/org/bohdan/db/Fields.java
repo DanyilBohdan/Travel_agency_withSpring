@@ -1,5 +1,10 @@
 package org.bohdan.db;
 
+/**
+ * Holder for fields names of DB tables and beans.
+ *
+ * @author Bohdan Daniel
+ */
 public final class Fields {
 
     public final static String ID = "id";

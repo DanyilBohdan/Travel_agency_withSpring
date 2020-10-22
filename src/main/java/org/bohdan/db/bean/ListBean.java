@@ -2,6 +2,12 @@ package org.bohdan.db.bean;
 
 import org.bohdan.db.entity.TypeTour;
 
+/**
+ * General class for displaying tables:
+ * Country and TypeTour
+ *
+ * @author Bohdan Daniel
+ */
 public class ListBean {
 
     private Integer id;

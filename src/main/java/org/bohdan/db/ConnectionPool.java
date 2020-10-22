@@ -7,6 +7,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+/**
+ * Connection Pool. Works with Apache Derby DB.
+ *
+ * @author Bohdan Daniel
+ *
+ */
+
 public class ConnectionPool implements ConnectionFactory{
 
     private static final Logger logger = Logger.getLogger(ConnectionPool.class);
@@ -25,7 +32,9 @@ public class ConnectionPool implements ConnectionFactory{
         }
     }
 
-
+    /**
+     * singleton
+     */
     private static ConnectionPool connectionPool;
 
     public static synchronized ConnectionPool getInstance() {
@@ -38,6 +47,9 @@ public class ConnectionPool implements ConnectionFactory{
     private ConnectionPool() {
     }
 
+    /**
+     * @return Data Source
+     */
     public static DataSource getDataSource() {
         return dataSource;
     }

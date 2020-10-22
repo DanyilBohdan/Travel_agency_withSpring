@@ -13,6 +13,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data access object for Order entity, OrderTours bean and OrderToursByIdUser bean
+ */
 public class OrderDao {
 
     private static final String SQL_FIND_ALL_ORDER =
@@ -154,6 +157,12 @@ public class OrderDao {
         return order;
     }
 
+    /**
+     * Return count Orders bby id tour
+     *
+     * @param id - id tour
+     * @return count orders
+     */
     public Integer findCountOrderByIdTour(Integer id) {
         Integer count = null;
         try (Connection con = dataSource.getConnection();
@@ -169,6 +178,11 @@ public class OrderDao {
         return count;
     }
 
+    /**
+     * Return all orders
+     *
+     * @return list orders
+     */
     public List<Order> findAll() {
         List<Order> orders = new ArrayList<>();
 
@@ -184,6 +198,12 @@ public class OrderDao {
         return orders;
     }
 
+    /**
+     * Return entity order by id
+     *
+     * @param id - id order
+     * @return order entity
+     */
     public Order findEntityById(Integer id) {
         Order order = null;
         try (Connection con = dataSource.getConnection();
@@ -199,6 +219,12 @@ public class OrderDao {
         return order;
     }
 
+    /**
+     * Return orders tours by id user
+     *
+     * @param id - id user
+     * @return list orders
+     */
     public List<OrderToursByIdUser> findToursByIdUser(Integer id) {
         List<OrderToursByIdUser> orders = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
@@ -214,6 +240,12 @@ public class OrderDao {
         return orders;
     }
 
+    /**
+     * Return all orders by locale
+     *
+     * @param locale - locale
+     * @return list orders tours
+     */
     public List<OrderTours> findAllOrdersLocale(String locale) {
         if (locale.equals("EN") || locale.equals("en")) {
             return findAllOrders(SQL_FIND_ALL_ORDERS_EN);
@@ -224,6 +256,12 @@ public class OrderDao {
         return null;
     }
 
+    /**
+     * Return all orders by sql
+     *
+     * @param sql - SQL code
+     * @return list orders tours
+     */
     private List<OrderTours> findAllOrders(String sql) {
         List<OrderTours> orders = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
@@ -238,6 +276,13 @@ public class OrderDao {
         return orders;
     }
 
+    /**
+     * Return list orders by id user
+     *
+     * @param locale - locale
+     * @param id - id user
+     * @return list orders
+     */
     public List<OrderTours> findAllOrdersUsersLocale(String locale, Integer id) {
         if (locale.equals("EN") || locale.equals("en")) {
             return findAllOrdersUsers(SQL_FIND_ALL_ORDERS_USER_EN, id);
@@ -248,6 +293,13 @@ public class OrderDao {
         return null;
     }
 
+    /**
+     * Return list orders by id user
+     *
+     * @param sql - SQL code
+     * @param id - id user
+     * @return list orders
+     */
     private List<OrderTours> findAllOrdersUsers(String sql, Integer id) {
         List<OrderTours> orders = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
@@ -263,6 +315,13 @@ public class OrderDao {
         return orders;
     }
 
+    /**
+     * Find orders by status
+     *
+     * @param locale - locale
+     * @param status - status order
+     * @return list orders
+     */
     public List<OrderTours> findFindByStatusOrdersUsersLocale(String locale, String status) {
         if (locale.equals("EN") || locale.equals("en")) {
             return findFindByStatusOrdersUsers(SQL_FIND_BY_STATUS_ORDERS_USER_EN, status);
@@ -273,6 +332,13 @@ public class OrderDao {
         return null;
     }
 
+    /**
+     * Find orders by status
+     *
+     * @param sql - SQL code
+     * @param status - status order
+     * @return list orders
+     */
     private List<OrderTours> findFindByStatusOrdersUsers(String sql, String status) {
         List<OrderTours> orders = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
@@ -288,6 +354,14 @@ public class OrderDao {
         return orders;
     }
 
+    /**
+     * Delete order by id
+     *
+     * @param id - id Order for deletion
+     *
+     * @return true - if the deletion order was successful,
+     *         false - if the deletion order was unsuccessful
+     */
     public boolean delete(Integer id) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_ORDER_BY_ID);) {
@@ -303,6 +377,13 @@ public class OrderDao {
         return delete(entity.getId());
     }
 
+    /**
+     * Create order
+     *
+     * @param entity - order entity for create
+     * @return true - if the creation order was successful,
+     *         false - if the creation order was unsuccessful
+     */
     public boolean create(Order entity) {
         boolean res = false;
 
@@ -330,6 +411,13 @@ public class OrderDao {
         return res;
     }
 
+    /**
+     * Update order
+     *
+     * @param entity - update entity
+     * @return true - if the update entity was successful,
+     *         false - if the update entity was unsuccessful
+     */
     public Order update(Order entity) {
         Order order = null;
 
@@ -351,6 +439,14 @@ public class OrderDao {
         return order;
     }
 
+    /**
+     * Update status order
+     *
+     * @param id - id order entity
+     * @param status - status order entity
+     * @return true - if the update status order was successful,
+     *         false - if the update status order was unsuccessful
+     */
     public boolean updateStatus(String status, Integer id) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_STATUS_ORDER)) {

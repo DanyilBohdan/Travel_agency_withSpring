@@ -6,7 +6,6 @@ import org.apache.log4j.PropertyConfigurator;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.jsp.jstl.core.Config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;

@@ -7,12 +7,14 @@ import org.bohdan.db.Fields;
 import org.bohdan.db.bean.ListBean;
 import org.bohdan.db.entity.TypeTour;
 
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data access object for TypeTour entity, ListBean
+ */
 public class TypeTourDao {
 
     private static final String SQL_FIND_ALL_TYPE_TOUR =
@@ -65,6 +67,12 @@ public class TypeTourDao {
         return typeTour;
     }
 
+    /**
+     * Return all typeis tours by locale
+     *
+     * @param locale - locale (EN/RU)
+     * @return list listBean entity
+     */
     public List<ListBean> findByLocale(String locale){
         if (locale.equals("EN")){
             return findAllLocale(SQL_FIND_ALL_TYPE_TOUR_EN);
@@ -75,6 +83,12 @@ public class TypeTourDao {
         return null;
     }
 
+    /**
+     * Return all typeis tours by locale
+     *
+     * @param sql - SQL code
+     * @return list listBean entity
+     */
     private List<ListBean> findAllLocale(String sql) {
         List<ListBean> typeTours = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
@@ -89,6 +103,11 @@ public class TypeTourDao {
         return typeTours;
     }
 
+    /**
+     * Return all typeis tours by locale
+     *
+     * @return list TypeTour entity
+     */
     public List<TypeTour> findAll() {
         List<TypeTour> typeTours = new ArrayList<>();
 
@@ -105,6 +124,12 @@ public class TypeTourDao {
         return typeTours;
     }
 
+    /**
+     * Return type tour by id
+     *
+     * @param id - id type tour
+     * @return type tour
+     */
     public TypeTour findEntityById(Integer id) {
         TypeTour typeTour = null;
         try (Connection con = dataSource.getConnection();
@@ -120,6 +145,12 @@ public class TypeTourDao {
         return typeTour;
     }
 
+    /**
+     * Return type tour by name
+     *
+     * @param name - name type tour
+     * @return type tour
+     */
     public TypeTour findByName(String name) {
         TypeTour typeTour = null;
         try (Connection con = dataSource.getConnection();
@@ -136,6 +167,14 @@ public class TypeTourDao {
         return typeTour;
     }
 
+    /**
+     * Delete type tour by id
+     *
+     * @param id - id Type Tour for deletion
+     *
+     * @return true - if the deletion was successful,
+     *         false - if the deletion was unsuccessful
+     */
     public boolean delete(Integer id) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_TYPE_TOUR_BY_ID);) {
@@ -151,6 +190,13 @@ public class TypeTourDao {
         return delete(entity.getId());
     }
 
+    /**
+     * Create type tour
+     *
+     * @param entity - type tour entity for create
+     * @return true - if the creation was successful,
+     *         false - if the creation was unsuccessful
+     */
     public boolean create(TypeTour entity) {
         boolean res = false;
         ResultSet rs;
@@ -171,6 +217,13 @@ public class TypeTourDao {
         return res;
     }
 
+    /**
+     * Update type tour
+     *
+     * @param entity - update entity
+     * @return true - if the update entity was successful,
+     *         false - if the update entity was unsuccessful
+     */
     public boolean update(TypeTour entity) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TYPE_TOUR)) {

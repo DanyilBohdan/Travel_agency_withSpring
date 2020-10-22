@@ -1,5 +1,11 @@
 package org.bohdan.db.entity;
 
+/**
+ * TypeTour entity.
+ *
+ * @author Bohdan Daniel
+ *
+ */
 public class TypeTour {
     
     private Integer id;

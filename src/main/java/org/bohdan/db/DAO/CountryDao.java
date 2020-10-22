@@ -6,13 +6,16 @@ import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.db.bean.ListBean;
 import org.bohdan.db.entity.Country;
-import org.bohdan.db.entity.TypeTour;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Data access object for Country entity and ListBean
+ */
 public class CountryDao {
 
     private static final String SQL_FIND_ALL_COUNTRY_TOUR =
@@ -65,6 +68,12 @@ public class CountryDao {
         return typeTour;
     }
 
+    /**
+     * Return all countries by locale
+     *
+     * @param locale - locale (EN/RU)
+     * @return list listBean entity
+     */
     public List<ListBean> findByLocale(String locale) {
         if (locale.equals("EN")) {
             return findAllLocale(SQL_FIND_ALL_COUNTRY_TOUR_EN);
@@ -75,20 +84,31 @@ public class CountryDao {
         return null;
     }
 
+    /**
+     * Return all countries by locale
+     *
+     * @param sql - SQL code
+     * @return list listBean entity
+     */
     private List<ListBean> findAllLocale(String sql) {
-        List<ListBean> typeTours = new ArrayList<>();
+        List<ListBean> countries = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {
-                typeTours.add(mapListBean(rs));
+                countries.add(mapListBean(rs));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return typeTours;
+        return countries;
     }
 
+    /**
+     * Return all countries by locale
+     *
+     * @return list countries entity
+     */
     public List<Country> findAll() {
         List<Country> countries = new ArrayList<>();
 
@@ -104,6 +124,12 @@ public class CountryDao {
         return countries;
     }
 
+    /**
+     * Return country by id
+     *
+     * @param id - id country
+     * @return country
+     */
     public Country findEntityById(Integer id) {
         Country country = null;
         try (Connection con = dataSource.getConnection();
@@ -119,6 +145,12 @@ public class CountryDao {
         return country;
     }
 
+    /**
+     * Return country by name
+     *
+     * @param name - name country
+     * @return country
+     */
     public Country findByName(String name) {
         Country country = null;
         try (Connection con = dataSource.getConnection();
@@ -135,6 +167,14 @@ public class CountryDao {
         return country;
     }
 
+    /**
+     * Delete country by id
+     *
+     * @param id - id country for deletion
+     *
+     * @return true - if the deletion was successful,
+     *         false - if the deletion was unsuccessful
+     */
     public boolean delete(Integer id) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_COUNTRY_BY_ID);) {
@@ -150,6 +190,13 @@ public class CountryDao {
         return delete(entity.getId());
     }
 
+    /**
+     * Create country
+     *
+     * @param entity - country entity for create
+     * @return true - if the creation was successful,
+     *         false - if the creation was unsuccessful
+     */
     public boolean create(Country entity) {
         ResultSet rs;
         try (Connection con = dataSource.getConnection();
@@ -169,6 +216,13 @@ public class CountryDao {
         return false;
     }
 
+    /**
+     * Update country
+     *
+     * @param entity - update entity
+     * @return true - if the update entity was successful,
+     *         false - if the update entity was unsuccessful
+     */
     public boolean update(Country entity) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_COUNTRY)) {

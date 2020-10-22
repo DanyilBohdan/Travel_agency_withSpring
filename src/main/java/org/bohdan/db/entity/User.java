@@ -1,5 +1,11 @@
 package org.bohdan.db.entity;
 
+/**
+ * User entity.
+ *
+ * @author Bohdan Daniel
+ *
+ */
 public class User {
 
     private Integer id;

@@ -2,6 +2,11 @@ package org.bohdan.db.bean;
 
 import java.util.Date;
 
+/**
+ * Locale class for table Order
+ *
+ * @author Bohdan Daniel
+ */
 public class OrderTours {
 
     private Integer order_id;

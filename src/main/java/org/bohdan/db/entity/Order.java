@@ -1,7 +1,11 @@
 package org.bohdan.db.entity;
 
-import java.util.Date;
-
+/**
+ * Order entity.
+ *
+ * @author Bohdan Daniel
+ *
+ */
 public class Order {
 
     private Integer id;

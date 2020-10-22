@@ -1,5 +1,11 @@
 package org.bohdan.db.entity;
 
+/**
+ * Role entity.
+ *
+ * @author Bohdan Daniel
+ *
+ */
 public enum Role {
     USER, MANAGER, ADMIN;
 

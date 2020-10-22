@@ -5,7 +5,6 @@ import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.db.bean.UserRole;
-import org.bohdan.db.entity.Tour;
 import org.bohdan.db.entity.User;
 
 import javax.sql.DataSource;
@@ -13,6 +12,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data access object for User entity, UserRole bean
+ */
 public class UserDao {
 
     private static final String SQL_FIND_ALL_USER =
@@ -87,6 +89,11 @@ public class UserDao {
         return user;
     }
 
+    /**
+     * Returns all users.
+     *
+     * @return List of users entities.
+     */
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
 
@@ -103,6 +110,11 @@ public class UserDao {
         return users;
     }
 
+    /**
+     * Returns all users.
+     *
+     * @return List of usersRole entities.
+     */
     public List<UserRole> findUsersRole() {
         List<UserRole> users = new ArrayList<>();
 
@@ -119,6 +131,13 @@ public class UserDao {
         return users;
     }
 
+    /**
+     * Return one user by id.
+     *
+     * @param id
+     *
+     * @return User entity.
+     */
     public User findEntityById(Integer id) {
         User user = null;
         try (Connection con = dataSource.getConnection();
@@ -134,6 +153,13 @@ public class UserDao {
         return user;
     }
 
+    /**
+     * Return one user by login.
+     *
+     * @param login
+     *
+     * @return User entity.
+     */
     public User findEntityByLogin(String login) {
         User user = null;
         try (Connection con = dataSource.getConnection();
@@ -149,6 +175,14 @@ public class UserDao {
         return user;
     }
 
+    /**
+     * Search all users by username, login and phone number.
+     *
+     * @param by - by what principle to search
+     * @param var - search variable
+     *
+     * @return List of usersRole entities.
+     */
     public List<UserRole> searchEntity(String by, String var) {
         if (by.equals("username")) {
             return searchEntityByVar(SQL_SEARCH_USERS_BY_USERNAME, var);
@@ -162,6 +196,14 @@ public class UserDao {
         return null;
     }
 
+    /**
+     * Search all users by username, login and phone number.
+     *
+     * @param sql - SQL code
+     * @param var - search variable
+     *
+     * @return List of usersRole entities.
+     */
     private List<UserRole> searchEntityByVar(String sql, String var) {
         List<UserRole> users = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
@@ -177,6 +219,14 @@ public class UserDao {
         return users;
     }
 
+    /**
+     * Delete user by id
+     *
+     * @param id - id User for deletion
+     *
+     * @return true - if the deletion was successful,
+     *         false - if the deletion was unsuccessful
+     */
     public boolean delete(Integer id) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_USER_BY_ID);) {
@@ -192,6 +242,13 @@ public class UserDao {
         return delete(entity.getId());
     }
 
+    /**
+     * Create user
+     *
+     * @param entity - user entity for create
+     * @return true - if the creation was successful,
+     *         false - if the creation was unsuccessful
+     */
     public boolean create(User entity) {
         boolean res = false;
 
@@ -221,6 +278,14 @@ public class UserDao {
         return res;
     }
 
+    /**
+     * Update role user
+     *
+     * @param role - param for change user role
+     * @param id - user id
+     * @return true - if the update role was successful,
+     *         false - if the update role was unsuccessful
+     */
     public boolean updateRole(Integer role, Integer id) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_ROLE)) {
@@ -233,6 +298,14 @@ public class UserDao {
         }
     }
 
+    /**
+     * Update status user
+     *
+     * @param status - param for change user status
+     * @param id - user id
+     * @return true - if the update status was successful,
+     *         false - if the update status was unsuccessful
+     */
     public boolean updateStatus(boolean status, Integer id) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_STATUS)) {
@@ -245,6 +318,13 @@ public class UserDao {
         }
     }
 
+    /**
+     * Update user
+     *
+     * @param entity - update entity
+     * @return true - if the update entity was successful,
+     *         false - if the update entity was unsuccessful
+     */
     public boolean update(User entity) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_USER)) {

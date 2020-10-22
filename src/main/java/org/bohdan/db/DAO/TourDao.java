@@ -6,8 +6,6 @@ import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.db.bean.TourView;
-import org.bohdan.db.bean.UserRole;
-import org.bohdan.db.entity.Order;
 import org.bohdan.db.entity.Tour;
 
 import javax.sql.DataSource;
@@ -15,6 +13,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data access object for Tour entity, TourView bean
+ */
 public class TourDao {
 
     private static final Logger logger = Logger.getLogger(TourDao.class);
@@ -172,10 +173,22 @@ public class TourDao {
         }
     }
 
+    /**
+     * Calculating a percentage of the price
+     *
+     * @param price - main price
+     * @param discount - discount tour
+     * @return price
+     */
     public static float changePrice(float price, float discount) {
         return price - ((discount * price) / 100);
     }
 
+    /**
+     * Set filter for SQL code
+     *
+     * @param check - check 1 or 0
+     */
     public void setFilter(int check) {
         filter = FILTER_DATE_ADMIN;
         if (check == 1) {
@@ -184,6 +197,11 @@ public class TourDao {
         logger.info("Log: filter --> " + filter);
     }
 
+    /**
+     * Return count tours
+     *
+     * @return count tours
+     */
     public Integer findCountTours() {
         Integer count = null;
 
@@ -199,6 +217,11 @@ public class TourDao {
         return count;
     }
 
+    /**
+     * Return all tours
+     *
+     * @return list tours
+     */
     public List<Tour> findAllTour() {
         List<Tour> tours = new ArrayList<>();
 
@@ -214,6 +237,12 @@ public class TourDao {
         return tours;
     }
 
+    /**
+     * Return entity tour by id
+     *
+     * @param id - id tour
+     * @return tour entity
+     */
     public Tour findIDTour(Integer id) {
         Tour tour = null;
         try (Connection con = dataSource.getConnection();
@@ -229,6 +258,14 @@ public class TourDao {
         return tour;
     }
 
+    /**
+     * Return list tours by locale
+     *
+     * @param locale - locale
+     * @param start - start limit
+     * @param total - total limit
+     * @return list tours
+     */
     public List<TourView> findAllByLocale(String locale, int start, int total) {
         if (locale.equals("EN")) {
             return findAll(SQL_FIND_ALL_EN + filter, start, total);
@@ -239,6 +276,14 @@ public class TourDao {
         return null;
     }
 
+    /**
+     * Return list tours by locale
+     *
+     * @param sql - SQL code
+     * @param start - start limit
+     * @param total - total limit
+     * @return list tours
+     */
     private List<TourView> findAll(String sql, int start, int total) {
         List<TourView> tours = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
@@ -255,6 +300,13 @@ public class TourDao {
         return tours;
     }
 
+    /**
+     * Return tour by id
+     *
+     * @param locale - locale
+     * @param id - id tour
+     * @return TourView bean
+     */
     public TourView findByIdLocale(String locale, Integer id) {
         if (locale.equals("EN")) {
             return findById(SQL_FIND_ID_EN, id);
@@ -265,6 +317,13 @@ public class TourDao {
         return null;
     }
 
+    /**
+     * Return tour by id
+     *
+     * @param sql - SQL code
+     * @param id - id tour
+     * @return TourView bean
+     */
     private TourView findById(String sql, Integer id) {
         TourView tour = null;
         try (Connection con = dataSource.getConnection();
@@ -280,6 +339,15 @@ public class TourDao {
         return tour;
     }
 
+    /**
+     * Search tours by variable
+     *
+     * @param locale - locale
+     * @param var - name for search
+     * @param start - start limit
+     * @param total - total limit
+     * @return list tours bean
+     */
     public List<TourView> searchEntity(String locale, String var, int start, int total) {
         if (locale.equals("EN")) {
             return searchEntityByVar(SQL_FIND_BY_NAME_EN + filter, var, start, total);
@@ -290,6 +358,15 @@ public class TourDao {
         return null;
     }
 
+    /**
+     * Search tours by variable
+     *
+     * @param sql - SQL code by locale
+     * @param var - name for search
+     * @param start - start limit
+     * @param total - total limit
+     * @return list tours bean
+     */
     private List<TourView> searchEntityByVar(String sql, String var, int start, int total) {
         List<TourView> tours = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
@@ -307,6 +384,15 @@ public class TourDao {
         return tours;
     }
 
+    /**
+     * Search tours by type
+     *
+     * @param locale - locale
+     * @param var - type for search
+     * @param start - start limit
+     * @param total - total limit
+     * @return list tours bean
+     */
     public List<TourView> findAllByTypeLocale(String locale, String var, int start, int total) {
         if (locale.equals("EN")) {
             return findAllVarBy(SQL_FIND_BY_TYPE_EN + filter, var, start, total);
@@ -317,6 +403,15 @@ public class TourDao {
         return null;
     }
 
+    /**
+     * Search tours by country
+     *
+     * @param locale - locale
+     * @param var - country for search
+     * @param start - start limit
+     * @param total - total limit
+     * @return list tours bean
+     */
     public List<TourView> findAllByCountryLocale(String locale, String var, int start, int total) {
         if (locale.equals("EN")) {
             return findAllVarBy(SQL_FIND_BY_COUNTRY_EN + filter, var, start, total);
@@ -327,6 +422,15 @@ public class TourDao {
         return null;
     }
 
+    /**
+     * Search tours by variable
+     *
+     * @param sql - SQL code for locale
+     * @param variable - variable for search
+     * @param start - start limit
+     * @param total - total limit
+     * @return list tours bean
+     */
     private List<TourView> findAllVarBy(String sql, String variable, int start, int total) {
         List<TourView> tours = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
@@ -344,6 +448,17 @@ public class TourDao {
         return tours;
     }
 
+    /**
+     * Search tours by range
+     *
+     * @param by - method search
+     * @param locale - locale
+     * @param varFirst - first range
+     * @param varLast - last range
+     * @param start - start limit
+     * @param total - total limit
+     * @return list TourView bean
+     */
     public List<TourView> searchByRange(String by, String locale, String varFirst, String varLast,
                                         int start, int total) {
         if (by.equals("price")) {
@@ -358,6 +473,16 @@ public class TourDao {
         return null;
     }
 
+    /**
+     * Search tours by price
+     *
+     * @param locale - locale
+     * @param varFirst - first range
+     * @param varLast - last range
+     * @param start - start limit
+     * @param total - total limit
+     * @return list TourView bean
+     */
     private List<TourView> findAllByPriceLocale(String locale, String varFirst, String varLast, int start, int total) {
         if (locale.equals("EN")) {
             return findAllByRange(SQL_FIND_BY_PRICE_EN + filter, varFirst, varLast, start, total);
@@ -368,6 +493,16 @@ public class TourDao {
         return null;
     }
 
+    /**
+     * Search tours by count people
+     *
+     * @param locale - locale
+     * @param varFirst - first range
+     * @param varLast - last range
+     * @param start - start limit
+     * @param total - total limit
+     * @return list TourView bean
+     */
     private List<TourView> findAllByCountLocale(String locale, String varFirst, String varLast, int start, int total) {
         if (locale.equals("EN")) {
             return findAllByRange(SQL_FIND_BY_COUNT_EN + filter, varFirst, varLast, start, total);
@@ -378,6 +513,16 @@ public class TourDao {
         return null;
     }
 
+    /**
+     * Search tours by mark hotel
+     *
+     * @param locale - locale
+     * @param varFirst - first range
+     * @param varLast - last range
+     * @param start - start limit
+     * @param total - total limit
+     * @return list TourView bean
+     */
     private List<TourView> findAllByMarkLocale(String locale, String varFirst, String varLast, int start, int total) {
         if (locale.equals("EN")) {
             return findAllByRange(SQL_FIND_BY_MARK_EN + filter, varFirst, varLast, start, total);
@@ -388,6 +533,16 @@ public class TourDao {
         return null;
     }
 
+    /**
+     * Search tours by range
+     *
+     * @param sql - SQL code for locale
+     * @param varFirst - first range
+     * @param varLast - last range
+     * @param start - start limit
+     * @param total - total limit
+     * @return list TourView bean
+     */
     private List<TourView> findAllByRange(String sql, String varFirst, String varLast, int start, int total) {
         List<TourView> tours = new ArrayList<>();
         try (Connection con = dataSource.getConnection();
@@ -406,6 +561,13 @@ public class TourDao {
         return tours;
     }
 
+    /**
+     * Create tour
+     *
+     * @param entity - tour entity for create
+     * @return true - if the creation tour was successful,
+     *         false - if the creation tour was unsuccessful
+     */
     public boolean create(Tour entity) {
         boolean res = false;
         ResultSet rs = null;
@@ -427,6 +589,13 @@ public class TourDao {
         return res;
     }
 
+    /**
+     * Update tour
+     *
+     * @param entity - update tour entity
+     * @return true - if the update entity tour was successful,
+     *         false - if the update entity tour was unsuccessful
+     */
     public boolean update(Tour entity) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TOUR)) {
@@ -439,6 +608,14 @@ public class TourDao {
         }
     }
 
+    /**
+     * Update discount tour
+     *
+     * @param id - id tour entity
+     * @param discount - discount tour entity
+     * @return true - if the update status tour was successful,
+     *         false - if the update status tour was unsuccessful
+     */
     public boolean updateDiscount(float discount, Integer id) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TOUR_DISCOUNT)) {
@@ -458,6 +635,14 @@ public class TourDao {
         return delete(entity.getId());
     }
 
+    /**
+     * Delete tour by id
+     *
+     * @param id - id Tour for deletion
+     *
+     * @return true - if the deletion tour was successful,
+     *         false - if the deletion tour was unsuccessful
+     */
     public boolean delete(Integer id) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_DELETE_TOUR_BY_ID)) {

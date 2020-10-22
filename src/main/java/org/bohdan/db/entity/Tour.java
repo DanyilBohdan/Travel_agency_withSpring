@@ -2,6 +2,12 @@ package org.bohdan.db.entity;
 
 import java.util.Date;
 
+/**
+ * Tour entity.
+ *
+ * @author Bohdan Daniel
+ *
+ */
 public class Tour {
 
     private Integer id;

@@ -1,5 +1,11 @@
 package org.bohdan.db.entity;
 
+/**
+ * Country entity.
+ *
+ * @author Bohdan Daniel
+ *
+ */
 public class Country {
 
     private Integer id;
