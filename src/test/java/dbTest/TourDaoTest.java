@@ -100,7 +100,7 @@ public class TourDaoTest {
 
         Tour tour = createTour();
 
-        List<TourView> listToursExpected = tourDao.findAllByTypeLocale("EN", new TypeTourDao(connectionFactory).findAll().get(0).getName_en(), start, total);
+        List<TourView> listToursExpected = tourDao.findAllByTypeLocale("EN", new TypeTourDao(connectionFactory).findAll().get(0).getNameEn(), start, total);
         TourView tourExpected = listToursExpected.get(listToursExpected.size() - 1);
         Assert.assertEquals(tour.getId(), tourExpected.getId());
 
@@ -112,7 +112,7 @@ public class TourDaoTest {
 
         Tour tour = createTour();
 
-        List<TourView> listToursExpected = tourDao.findAllByCountryLocale("EN", new CountryDao(connectionFactory).findAll().get(0).getName_en(), start, total);
+        List<TourView> listToursExpected = tourDao.findAllByCountryLocale("EN", new CountryDao(connectionFactory).findAll().get(0).getNameEn(), start, total);
         TourView tourExpected = listToursExpected.get(listToursExpected.size() - 1);
         Assert.assertEquals(tour.getId(), tourExpected.getId());
 

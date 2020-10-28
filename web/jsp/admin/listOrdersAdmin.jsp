@@ -39,13 +39,13 @@
                     </summary>
                     <fieldset>
                         <fmt:message key="tour.price"/>: ${order.price}<br>
-                        <fmt:message key="tour.count_people"/>: ${order.count_people}<br>
-                        <fmt:message key="tour.mark_hotel"/>: ${order.start_date}<br>
+                        <fmt:message key="tour.count_people"/>: ${order.countPeople}<br>
+                        <fmt:message key="tour.mark_hotel"/>: ${order.startDate}<br>
                         <fmt:message key="tour.days"/>: ${order.days}<br>
                         <fmt:message key="tour.discount"/>:
                         <form action="controller" method="post">
                             <input type="hidden" name="command" value="updateDiscount">
-                            <input type="hidden" name="id" value="${order.tour_id}">
+                            <input type="hidden" name="id" value="${order.tourId}">
                             <input name="discount" value="${order.discount}" max="1" min="0"/>
                             <input type="submit" value="Save"/><br>
                         </form>
@@ -54,7 +54,7 @@
                 <div class="rightContainer">
                     <form action="controller" method="post">
                         <input type="hidden" name="command" value="updateStatusOrder">
-                        <input type="hidden" name="id" value="${order.order_id}">
+                        <input type="hidden" name="id" value="${order.orderId}">
                         <select name="selectStatus" onchange="submit()">
                             <option value="registered" ${order.status == 'registered' ? 'selected' : ''}>
                                 <fmt:message key="order.status.registered"/>
@@ -69,7 +69,7 @@
                     </form>
                     <form action="controller" method="post">
                         <input type="hidden" name="command" value="deleteOrder">
-                        <input type="hidden" name="id" value="${order.order_id}">
+                        <input type="hidden" name="id" value="${order.orderId}">
                         <button type="submit" class="btn btn-outline-danger">
                             Delete
                         </button>

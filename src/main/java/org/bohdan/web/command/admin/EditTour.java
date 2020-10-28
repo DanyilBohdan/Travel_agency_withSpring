@@ -37,8 +37,8 @@ public class EditTour extends Command {
             tourView.setId(id);
             String nameEN = req.getParameter("nameEN");
             String nameRU = req.getParameter("nameRU");
-            tourView.setName_en(nameEN);
-            tourView.setName_ru(nameRU);
+            tourView.setNameEn(nameEN);
+            tourView.setNameRu(nameRU);
             logger.debug("Log: name : " + nameEN + ", " + nameRU);
 
             String typeEN = req.getParameter("typeEN");
@@ -58,20 +58,20 @@ public class EditTour extends Command {
             String descriptionEN = req.getParameter("descriptionEN");
             String descriptionRU = req.getParameter("descriptionRU");
             logger.debug("Log: description : " + descriptionEN + ", " + descriptionRU);
-            tourView.setDesc_en(descriptionEN);
-            tourView.setDesc_ru(descriptionRU);
+            tourView.setDescEn(descriptionEN);
+            tourView.setDescRu(descriptionRU);
 
             int count_people = Integer.parseInt(req.getParameter("count_people"));
             logger.debug("Log: count_people : " + count_people);
-            tourView.setCount_people(count_people);
+            tourView.setCountPeople(count_people);
 
             int mark_hotel = Integer.parseInt(req.getParameter("mark_hotel"));
             logger.debug("Log: mark_hotel : " + mark_hotel);
-            tourView.setMark_hotel(mark_hotel);
+            tourView.setMarkHotel(mark_hotel);
 
             Date start_date = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("start_date")).getTime());
             logger.debug("Log: start_date : " + start_date);
-            tourView.setStart_date(start_date);
+            tourView.setStartDate(start_date);
 
             int days = Integer.parseInt(req.getParameter("days"));
             logger.debug("Log: days : " + days);

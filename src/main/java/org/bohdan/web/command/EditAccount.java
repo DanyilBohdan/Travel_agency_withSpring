@@ -79,7 +79,7 @@ public class EditAccount extends Command {
 
         User userOld = (User) session.getAttribute("user");
 
-        User user = User.createUser(username, password, login, phone, userOld.getStatus(), userOld.getRole_id());
+        User user = User.createUser(username, password, login, phone, userOld.getStatus(), userOld.getRoleId());
         user.setId(userOld.getId());
         logger.info("Log: New User --> " + user);
 

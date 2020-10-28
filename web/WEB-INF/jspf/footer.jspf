@@ -3,7 +3,9 @@ Footer (bottom area).
 ===========================================================================--%>
 
 <tr>
-    <td id="footer">&copy;VIP <b>Travel agency</b> (Java Training), 2020</td>
+    <td id="footer1">&copy;VIP <b>Travel agency</b> (Java Training), 2020</td>
+    <br/>
+    <td id="footer2"><b>Number phone admin:</b> (093) 643-60-49</td>
 </tr>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

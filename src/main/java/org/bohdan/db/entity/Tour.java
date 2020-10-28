@@ -12,46 +12,46 @@ public class Tour {
 
     private Integer id;
 
-    private String name_en;
+    private String nameEn;
 
-    private String name_ru;
+    private String nameRu;
     
-    private String desc_en;
+    private String descEn;
 
-    private String desc_ru;
+    private String descRu;
 
     private float price;
 
-    private int count_people;
+    private int countPeople;
 
-    private int mark_hotel;
+    private int markHotel;
 
-    private Date start_date;
+    private Date startDate;
 
     private int days;
 
     private float discount;
 
-    private int type_tour_id;
+    private int typeTourId;
 
-    private int country_id;
+    private int countryId;
 
-    public static Tour createTour(String name_en, String name_ru, String desc_en, String desc_ru,
-                                  float price, int count_people, int mark_hotel, Date start_date,
-                                  int days, float discount, int type_tour_id, int country_id) {
+    public static Tour createTour(String nameEn, String nameRu, String descEn, String descRu,
+                                  float price, int countPeople, int markHotel, Date startDate,
+                                  int days, float discount, int typeTourId, int countryId) {
         Tour tour = new Tour();
-        tour.setName_en(name_en);
-        tour.setName_ru(name_ru);
-        tour.setDesc_en(desc_en);
-        tour.setDesc_ru(desc_ru);
+        tour.setNameEn(nameEn);
+        tour.setNameRu(nameRu);
+        tour.setDescEn(descEn);
+        tour.setDescRu(descRu);
         tour.setPrice(price);
-        tour.setCount_people(count_people);
-        tour.setMark_hotel(mark_hotel);
-        tour.setStart_date(start_date);
+        tour.setCountPeople(countPeople);
+        tour.setMarkHotel(markHotel);
+        tour.setStartDate(startDate);
         tour.setDays(days);
         tour.setDiscount(discount);
-        tour.setType_tour_id(type_tour_id);
-        tour.setCountry_id(country_id);
+        tour.setTypeTourId(typeTourId);
+        tour.setCountryId(countryId);
         return tour;
     }
 
@@ -59,18 +59,18 @@ public class Tour {
     public String toString() {
         return "Tour{" +
                 "id=" + id +
-                ", name_en='" + name_en + '\'' +
-                ", name_ru='" + name_ru + '\'' +
-                ", desc_en='" + desc_en + '\'' +
-                ", desc_ru='" + desc_ru + '\'' +
+                ", nameEn='" + nameEn + '\'' +
+                ", nameRu='" + nameRu + '\'' +
+                ", descEn='" + descEn + '\'' +
+                ", descRu='" + descRu + '\'' +
                 ", price=" + price +
-                ", count_people=" + count_people +
-                ", mark_hotel=" + mark_hotel +
-                ", start_date=" + start_date +
+                ", countPeople=" + countPeople +
+                ", markHotel=" + markHotel +
+                ", startDate=" + startDate +
                 ", days=" + days +
                 ", discount=" + discount +
-                ", type_tour_id=" + type_tour_id +
-                ", country_id=" + country_id +
+                ", typeTourId=" + typeTourId +
+                ", countryId=" + countryId +
                 '}';
     }
 
@@ -82,36 +82,36 @@ public class Tour {
         this.id = id;
     }
 
-    public String getName_en() {
-        return name_en;
+    public String getNameEn() {
+        return nameEn;
     }
 
-    public void setName_en(String name_en) {
-        this.name_en = name_en;
+    public void setNameEn(String nameEn) {
+        this.nameEn = nameEn;
     }
 
-    public String getName_ru() {
-        return name_ru;
+    public String getNameRu() {
+        return nameRu;
     }
 
-    public void setName_ru(String name_ru) {
-        this.name_ru = name_ru;
+    public void setNameRu(String nameRu) {
+        this.nameRu = nameRu;
     }
 
-    public String getDesc_en() {
-        return desc_en;
+    public String getDescEn() {
+        return descEn;
     }
 
-    public void setDesc_en(String desc_en) {
-        this.desc_en = desc_en;
+    public void setDescEn(String descEn) {
+        this.descEn = descEn;
     }
 
-    public String getDesc_ru() {
-        return desc_ru;
+    public String getDescRu() {
+        return descRu;
     }
 
-    public void setDesc_ru(String desc_ru) {
-        this.desc_ru = desc_ru;
+    public void setDescRu(String descRu) {
+        this.descRu = descRu;
     }
 
     public float getPrice() {
@@ -122,28 +122,28 @@ public class Tour {
         this.price = price;
     }
 
-    public int getCount_people() {
-        return count_people;
+    public int getCountPeople() {
+        return countPeople;
     }
 
-    public void setCount_people(int count_people) {
-        this.count_people = count_people;
+    public void setCountPeople(int countPeople) {
+        this.countPeople = countPeople;
     }
 
-    public int getMark_hotel() {
-        return mark_hotel;
+    public int getMarkHotel() {
+        return markHotel;
     }
 
-    public void setMark_hotel(int mark_hotel) {
-        this.mark_hotel = mark_hotel;
+    public void setMarkHotel(int markHotel) {
+        this.markHotel = markHotel;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public int getDays() {
@@ -162,19 +162,19 @@ public class Tour {
         this.discount = discount;
     }
 
-    public int getType_tour_id() {
-        return type_tour_id;
+    public int getTypeTourId() {
+        return typeTourId;
     }
 
-    public void setType_tour_id(int type_tour_id) {
-        this.type_tour_id = type_tour_id;
+    public void setTypeTourId(int typeTourId) {
+        this.typeTourId = typeTourId;
     }
 
-    public int getCountry_id() {
-        return country_id;
+    public int getCountryId() {
+        return countryId;
     }
 
-    public void setCountry_id(int country_id) {
-        this.country_id = country_id;
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
     }
 }

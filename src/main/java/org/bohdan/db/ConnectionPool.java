@@ -14,13 +14,11 @@ import javax.sql.DataSource;
  *
  */
 
-public class ConnectionPool implements ConnectionFactory{
+public class ConnectionPool extends ConnectionFactory{
 
     private static final Logger logger = Logger.getLogger(ConnectionPool.class);
     private static final String DATASOURCE_NAME = "jdbc/travel_agencyDB";
     private static final String JNDI = "java:/comp/env";
-
-    private static DataSource dataSource;
 
     static {
         try {

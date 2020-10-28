@@ -21,18 +21,18 @@ public class TourView {
 
     private String description;
 
-    private int count_people;
+    private int countPeople;
 
-    private int mark_hotel;
+    private int markHotel;
 
-    private Date start_date;
+    private Date startDate;
 
     private int days;
 
     private float discount;
 
     public static TourView createTour(String name, String type, String country, String desc,
-                                      float price, int count_people, int mark_hotel, Date start_date,
+                                      float price, int countPeople, int markHotel, Date startDate,
                                       int days, float discount) {
         TourView tourView = new TourView();
         tourView.setName(name);
@@ -40,9 +40,9 @@ public class TourView {
         tourView.setCountry(country);
         tourView.setDescription(desc);
         tourView.setPrice(price);
-        tourView.setCount_people(count_people);
-        tourView.setMark_hotel(mark_hotel);
-        tourView.setStart_date(start_date);
+        tourView.setCountPeople(countPeople);
+        tourView.setMarkHotel(markHotel);
+        tourView.setStartDate(startDate);
         tourView.setDays(days);
         tourView.setDiscount(discount);
         return tourView;
@@ -97,28 +97,28 @@ public class TourView {
         this.description = description;
     }
 
-    public int getCount_people() {
-        return count_people;
+    public int getCountPeople() {
+        return countPeople;
     }
 
-    public void setCount_people(int count_people) {
-        this.count_people = count_people;
+    public void setCountPeople(int countPeople) {
+        this.countPeople = countPeople;
     }
 
-    public int getMark_hotel() {
-        return mark_hotel;
+    public int getMarkHotel() {
+        return markHotel;
     }
 
-    public void setMark_hotel(int mark_hotel) {
-        this.mark_hotel = mark_hotel;
+    public void setMarkHotel(int markHotel) {
+        this.markHotel = markHotel;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public int getDays() {
@@ -146,9 +146,9 @@ public class TourView {
                 ", country='" + country + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
-                ", count_people=" + count_people +
-                ", mark_hotel=" + mark_hotel +
-                ", start_date=" + start_date +
+                ", countPeople=" + countPeople +
+                ", markHotel=" + markHotel +
+                ", startDate=" + startDate +
                 ", days=" + days +
                 ", discount=" + discount +
                 '}';

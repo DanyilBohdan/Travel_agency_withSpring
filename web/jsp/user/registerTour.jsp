@@ -29,13 +29,13 @@
                 <label>${tour.description}</label><br>
 
                 <label><fmt:message key="tour.count_people"/>: </label>
-                <label>${tour.count_people}</label><br>
+                <label>${tour.countPeople}</label><br>
 
                 <label><fmt:message key="tour.mark_hotel"/>: </label>
-                <label>${tour.mark_hotel}</label><br>
+                <label>${tour.markHotel}</label><br>
 
                 <label><fmt:message key="tour.start_date"/>: </label>
-                <label>${tour.start_date}</label><br>
+                <label>${tour.startDate}</label><br>
 
                 <label><fmt:message key="tour.days"/>: </label>
                 <label>${tour.days}</label><br>
@@ -54,7 +54,7 @@
                         <label><fmt:message key="account.label.login"/>: </label>
                             ${user.login}<br>
                         <label><fmt:message key="account.label.phone_number"/>: </label>
-                            ${user.phone_number}<br>
+                            ${user.phoneNumber}<br>
                     </div>
                     <input type="hidden" name="command" value="registerTour"/>
                     <input type="hidden" name="id" value="${tour.id}">

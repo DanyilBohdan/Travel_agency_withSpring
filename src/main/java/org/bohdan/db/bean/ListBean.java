@@ -16,7 +16,7 @@ public class ListBean {
 
     public static TypeTour create(String name) {
         TypeTour typeTour = new TypeTour();
-        typeTour.setName_en(name);
+        typeTour.setNameEn(name);
         return typeTour;
     }
 

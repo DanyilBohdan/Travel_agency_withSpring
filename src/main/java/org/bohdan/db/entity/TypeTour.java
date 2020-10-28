@@ -10,14 +10,14 @@ public class TypeTour {
     
     private Integer id;
     
-    private String name_en;
+    private String nameEn;
 
-    private String name_ru;
+    private String nameRu;
 
-    public static TypeTour create(String name_en, String name_ru) {
+    public static TypeTour create(String nameEn, String nameRu) {
         TypeTour typeTour = new TypeTour();
-        typeTour.setName_en(name_en);
-        typeTour.setName_ru(name_ru);
+        typeTour.setNameEn(nameEn);
+        typeTour.setNameRu(nameRu);
         return typeTour;
     }
 
@@ -29,28 +29,28 @@ public class TypeTour {
         this.id = id;
     }
 
-    public String getName_en() {
-        return name_en;
+    public String getNameEn() {
+        return nameEn;
     }
 
-    public void setName_en(String name_en) {
-        this.name_en = name_en;
+    public void setNameEn(String nameEn) {
+        this.nameEn = nameEn;
     }
 
-    public String getName_ru() {
-        return name_ru;
+    public String getNameRu() {
+        return nameRu;
     }
 
-    public void setName_ru(String name_ru) {
-        this.name_ru = name_ru;
+    public void setNameRu(String nameRu) {
+        this.nameRu = nameRu;
     }
 
     @Override
     public String toString() {
         return "TypeTour{" +
                 "id=" + id +
-                ", name_en='" + name_en + '\'' +
-                ", name_ru='" + name_ru + '\'' +
+                ", name_en='" + nameEn + '\'' +
+                ", name_ru='" + nameRu + '\'' +
                 '}';
     }
 }

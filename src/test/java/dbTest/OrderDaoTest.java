@@ -70,16 +70,16 @@ public class OrderDaoTest {
         List<Order> listOrdersExpected = orderDao.findAll();
         Order orderExpected = listOrdersExpected.get(listOrdersExpected.size() - 1);
         Assert.assertEquals(orderExpected.getId(), order.getId());
-        deleteTour(order.getTour_id());
+        deleteTour(order.getTourId());
     }
 
     @Test
     public void findToursByIdUserTest() throws ParseException {
         Order order = createOrder();
-        List<OrderToursByIdUser> listTours = orderDao.findToursByIdUser(order.getUser_id());
-        Order orderExpected = orderDao.findEntityById(listTours.get(listTours.size() -1).getOrder_id());
-        Assert.assertEquals(orderExpected.getUser_id(), order.getUser_id());
-        deleteTour(order.getTour_id());
+        List<OrderToursByIdUser> listTours = orderDao.findToursByIdUser(order.getUserId());
+        Order orderExpected = orderDao.findEntityById(listTours.get(listTours.size() -1).getOrderId());
+        Assert.assertEquals(orderExpected.getUserId(), order.getUserId());
+        deleteTour(order.getTourId());
     }
 
     @Test
@@ -87,7 +87,7 @@ public class OrderDaoTest {
         List<OrderTours> listOrdersExpectedEN = orderDao.findAllOrdersLocale("EN");
         List<OrderTours> listOrdersExpectedRU = orderDao.findAllOrdersLocale("RU");
         for (int i = 0; i < listOrdersExpectedEN.size(); i++) {
-            Assert.assertEquals(listOrdersExpectedEN.get(i).getOrder_id(), listOrdersExpectedRU.get(i).getOrder_id());
+            Assert.assertEquals(listOrdersExpectedEN.get(i).getOrderId(), listOrdersExpectedRU.get(i).getOrderId());
         }
     }
 
@@ -98,6 +98,6 @@ public class OrderDaoTest {
 
         boolean check = orderDao.updateStatus("paid", order.getId());
         Assert.assertTrue(check);
-        deleteTour(order.getTour_id());
+        deleteTour(order.getTourId());
     }
 }

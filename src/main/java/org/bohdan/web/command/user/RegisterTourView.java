@@ -40,7 +40,7 @@ public class RegisterTourView extends Command {
 
             //check on count people
             Integer count_peopleForTour = new OrderDao(connectionPool).findCountOrderByIdTour(id);
-            if (count_peopleForTour >= tour.getCount_people()) {
+            if (count_peopleForTour >= tour.getCountPeople()) {
                 errorMessage = ResourceBundle.getBundle("resources", current).getString("registrationTour.noAvailable");
                 request.setAttribute("noAvailable", errorMessage);
                 logger.error("errorMessage --> " + errorMessage);
@@ -70,7 +70,7 @@ public class RegisterTourView extends Command {
     private boolean checkDate(List<OrderToursByIdUser> ordersUser, TourView tour) {
         boolean res = true;
 
-        Date startTour = tour.getStart_date();
+        Date startTour = tour.getStartDate();
         int daysTour = tour.getDays();
 
         Calendar c = Calendar.getInstance();
@@ -82,7 +82,7 @@ public class RegisterTourView extends Command {
                 daysTour + " -> lastDate --> " + lastDateTour);
 
         for (OrderToursByIdUser orderToursByIdUser : ordersUser) {
-            Date startOrder = orderToursByIdUser.getStart_date();
+            Date startOrder = orderToursByIdUser.getStartDate();
             int daysOrder = orderToursByIdUser.getDays();
             Calendar cOrder = Calendar.getInstance();
             cOrder.setTime(startOrder);

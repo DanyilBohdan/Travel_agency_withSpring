@@ -28,12 +28,14 @@
                 <div class="container">
                     <fmt:message key="account.label.username"/>: ${user.username}<br>
                     <fmt:message key="account.label.login"/>: ${user.login}<br>
-                    <fmt:message key="account.label.phone_number"/>: ${user.phone_number}<br>
+                    <fmt:message key="account.label.phone_number"/>: ${user.phoneNumber}<br>
                     <label><fmt:message key="account.label.status"/>:</label>
                     <form action="controller" method="post">
                         <input type="hidden" name="command" value="updateStatusUser">
                         <input type="hidden" name="id" value="${user.id}">
-                        <input type="submit" value="${user.status}">
+                        <c:if test="${user.role != 'admin'}">
+                            <input type="submit" value="${user.status}">
+                        </c:if>
                     </form>
                 </div>
                 <div class="container">

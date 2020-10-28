@@ -658,18 +658,18 @@ public class TourDao {
     private Tour mapTour(ResultSet rs) throws SQLException {
         Tour tour = new Tour();
         tour.setId(rs.getInt(Fields.ID));
-        tour.setName_en(rs.getString(Fields.NAME_EN));
-        tour.setName_ru(rs.getString(Fields.NAME_RU));
-        tour.setDesc_en(rs.getString(Fields.DESCRIPTION_EN));
-        tour.setDesc_ru(rs.getString(Fields.DESCRIPTION_RU));
-        tour.setCount_people(rs.getInt(Fields.COUNT_PEOPLE));
+        tour.setNameEn(rs.getString(Fields.NAME_EN));
+        tour.setNameRu(rs.getString(Fields.NAME_RU));
+        tour.setDescEn(rs.getString(Fields.DESCRIPTION_EN));
+        tour.setDescRu(rs.getString(Fields.DESCRIPTION_RU));
+        tour.setCountPeople(rs.getInt(Fields.COUNT_PEOPLE));
         tour.setPrice(changePrice(rs.getFloat(Fields.PRICE), rs.getFloat(Fields.DISCOUNT)));
-        tour.setMark_hotel(rs.getInt(Fields.MARK_HOTEL));
-        tour.setStart_date(rs.getDate(Fields.START_DATE));
+        tour.setMarkHotel(rs.getInt(Fields.MARK_HOTEL));
+        tour.setStartDate(rs.getDate(Fields.START_DATE));
         tour.setDays(rs.getInt(Fields.DAYS));
         tour.setDiscount(rs.getFloat(Fields.DISCOUNT));
-        tour.setType_tour_id(rs.getInt(Fields.TYPE_TOUR_ID));
-        tour.setCountry_id(rs.getInt(Fields.COUNTRY_ID));
+        tour.setTypeTourId(rs.getInt(Fields.TYPE_TOUR_ID));
+        tour.setCountryId(rs.getInt(Fields.COUNTRY_ID));
         return tour;
     }
 
@@ -681,27 +681,27 @@ public class TourDao {
         tourView.setCountry(rs.getString(Fields.COUNTRY));
         tourView.setPrice(changePrice(rs.getFloat(Fields.PRICE), rs.getFloat(Fields.DISCOUNT)));
         tourView.setDescription(rs.getString(Fields.DESCRIPTION));
-        tourView.setCount_people(rs.getInt(Fields.COUNT_PEOPLE));
-        tourView.setMark_hotel(rs.getInt(Fields.MARK_HOTEL));
-        tourView.setStart_date(rs.getDate(Fields.START_DATE));
+        tourView.setCountPeople(rs.getInt(Fields.COUNT_PEOPLE));
+        tourView.setMarkHotel(rs.getInt(Fields.MARK_HOTEL));
+        tourView.setStartDate(rs.getDate(Fields.START_DATE));
         tourView.setDays(rs.getInt(Fields.DAYS));
         tourView.setDiscount(rs.getFloat(Fields.DISCOUNT));
         return tourView;
     }
 
     private void setStmtTour(Tour entity, PreparedStatement statement) throws SQLException {
-        statement.setString(1, entity.getName_en());
-        statement.setString(2, entity.getName_ru());
-        statement.setString(3, entity.getDesc_en());
-        statement.setString(4, entity.getDesc_ru());
+        statement.setString(1, entity.getNameEn());
+        statement.setString(2, entity.getNameRu());
+        statement.setString(3, entity.getDescEn());
+        statement.setString(4, entity.getDescRu());
         statement.setFloat(5, entity.getPrice());
-        statement.setInt(6, entity.getCount_people());
-        statement.setInt(7, entity.getMark_hotel());
-        statement.setDate(8, (Date) entity.getStart_date());
+        statement.setInt(6, entity.getCountPeople());
+        statement.setInt(7, entity.getMarkHotel());
+        statement.setDate(8, (Date) entity.getStartDate());
         statement.setInt(9, entity.getDays());
         statement.setFloat(10, entity.getDiscount());
-        statement.setInt(11, entity.getType_tour_id());
-        statement.setInt(12, entity.getCountry_id());
+        statement.setInt(11, entity.getTypeTourId());
+        statement.setInt(12, entity.getCountryId());
     }
 
 }

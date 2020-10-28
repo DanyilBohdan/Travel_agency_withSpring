@@ -10,7 +10,7 @@ public class UserRole {
 
     private String login;
 
-    private String phone_number;
+    private String phoneNumber;
 
     private boolean status;
 
@@ -48,12 +48,12 @@ public class UserRole {
         this.login = login;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public boolean isStatus() {

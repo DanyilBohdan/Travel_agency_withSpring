@@ -50,7 +50,7 @@ public class CountryDaoTest {
             countryExpected = listCountry.get(listCountry.size()-1);
         }
         Assert.assertEquals(countryExpected.getId(), testCountry.getId());
-        Country countryDel = countryDao.findByName(testCountry.getName_en());
+        Country countryDel = countryDao.findByName(testCountry.getNameEn());
         boolean checkDel = countryDao.delete(countryDel);
         Assert.assertTrue(checkDel);
     }

@@ -26,9 +26,9 @@
             <div class="border border-secondary">
                 <form action="controller" method="post">
                     <label><fmt:message key="tour.create.nameEN"/>:</label>
-                    <input name="nameEN" value="${country.name_en}"/><br>
+                    <input name="nameEN" value="${country.nameEn}"/><br>
                     <label><fmt:message key="tour.create.nameRU"/>:</label>
-                    <input name="nameRU" value="${country.name_ru}"/><br>
+                    <input name="nameRU" value="${country.nameRu}"/><br>
                     <input type="hidden" name="command" value="editCountry">
                     <input type="hidden" name="id" value="${country.id}">
                     <button type="submit" class="btn btn-outline-dark">

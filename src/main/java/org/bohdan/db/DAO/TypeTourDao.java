@@ -55,8 +55,8 @@ public class TypeTourDao {
     private TypeTour mapTypeTour(ResultSet rs) throws SQLException {
         TypeTour typeTour = new TypeTour();
         typeTour.setId(rs.getInt(Fields.ID));
-        typeTour.setName_en(rs.getString(Fields.NAME_EN));
-        typeTour.setName_ru(rs.getString(Fields.NAME_RU));
+        typeTour.setNameEn(rs.getString(Fields.NAME_EN));
+        typeTour.setNameRu(rs.getString(Fields.NAME_RU));
         return typeTour;
     }
 
@@ -202,8 +202,8 @@ public class TypeTourDao {
         ResultSet rs;
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_INSERT_TYPE_TOUR, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, entity.getName_en());
-            statement.setString(2, entity.getName_ru());
+            statement.setString(1, entity.getNameEn());
+            statement.setString(2, entity.getNameRu());
             if (statement.executeUpdate() > 0) {
                 rs = statement.getGeneratedKeys();
                 if (rs.next()) {
@@ -227,8 +227,8 @@ public class TypeTourDao {
     public boolean update(TypeTour entity) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_TYPE_TOUR)) {
-            statement.setString(1, entity.getName_en());
-            statement.setString(2, entity.getName_ru());
+            statement.setString(1, entity.getNameEn());
+            statement.setString(2, entity.getNameRu());
             statement.setInt(3, entity.getId());
             return statement.executeUpdate() > 0;
         } catch (SQLException ex) {

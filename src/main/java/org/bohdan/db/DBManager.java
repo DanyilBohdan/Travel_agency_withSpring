@@ -14,7 +14,7 @@ import java.sql.*;
  *
  */
 
-public class DBManager implements ConnectionFactory{
+public class DBManager extends ConnectionFactory {
 
     private static final Logger logger = Logger.getLogger(DBManager.class);
     private static DataSource dataSource;

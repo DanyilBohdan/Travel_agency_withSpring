@@ -34,8 +34,8 @@ public class GetEditTourPage extends Command {
         if (tourOld == null) {
             return Path.ERROR_PAGE;
         }
-        TypeTour typeTour = new TypeTourDao(connectionPool).findEntityById(tourOld.getType_tour_id());
-        Country country = new CountryDao(connectionPool).findEntityById(tourOld.getCountry_id());
+        TypeTour typeTour = new TypeTourDao(connectionPool).findEntityById(tourOld.getTypeTourId());
+        Country country = new CountryDao(connectionPool).findEntityById(tourOld.getCountryId());
         if (typeTour == null || country == null) {
             return Path.ERROR_PAGE;
         }

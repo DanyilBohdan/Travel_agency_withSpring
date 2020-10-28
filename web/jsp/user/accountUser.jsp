@@ -38,7 +38,7 @@
             <div class="border border-secondary">
                 <label>
                     <fmt:message key="account.label.phone_number"/>:
-                </label> ${user.phone_number}
+                </label> ${user.phoneNumber}
             </div>
             <c:if test="${user.status} == false">
                 <div class="border border-secondary">
@@ -63,21 +63,21 @@
                     <div class="float-right ">
                         <form id="statusCanceled" action="controller" method="post">
                             <input type="hidden" name="command" value="statusCanceled"/>
-                            <input type="hidden" name="id" value="${order.order_id}"/>
+                            <input type="hidden" name="id" value="${order.orderId}"/>
                             <button type="submit" class="btn btn-outline-dark" name="canceled" value="canceled">
                                 <fmt:message key="account.label.canceled"/></button>
                         </form>
                     </div>
                     <fmt:message key="tour.name"/>: ${order.name}<br>
                     <fmt:message key="tour.price"/>: ${order.price}<br>
-                    <fmt:message key="tour.start_date"/>: ${order.start_date}<br>
+                    <fmt:message key="tour.start_date"/>: ${order.startDate}<br>
                     <fmt:message key="account.label.status"/>: ${order.status}<br>
                     <details>
                         <summary>
                             <fmt:message key="order.more"/>
                         </summary>
                         <fieldset>
-                            <fmt:message key="tour.count_people"/>: ${order.count_people}<br>
+                            <fmt:message key="tour.count_people"/>: ${order.countPeople}<br>
                             <fmt:message key="tour.days"/>: ${order.days}<br>
                             <fmt:message key="tour.discount"/>: ${order.discount}<br>
                         </fieldset>

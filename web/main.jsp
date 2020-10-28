@@ -69,9 +69,9 @@
                             <fmt:message key="tour.country"/>: ${tour.country}<br>
                             <fmt:message key="tour.type"/>: ${tour.type}<br>
                             <fmt:message key="tour.price"/>: ${tour.price}<br>
-                            <fmt:message key="tour.start_date"/>: ${tour.start_date}<br>
-                            <fmt:message key="tour.count_people"/>: ${tour.count_people}<br>
-                            <fmt:message key="tour.mark_hotel"/>: ${tour.mark_hotel}<br>
+                            <fmt:message key="tour.start_date"/>: ${tour.startDate}<br>
+                            <fmt:message key="tour.count_people"/>: ${tour.countPeople}<br>
+                            <fmt:message key="tour.mark_hotel"/>: ${tour.markHotel}<br>
                         </p>
                     </div>
                     <div class="card-footer bg-transparent border-dark">

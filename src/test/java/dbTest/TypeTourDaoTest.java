@@ -49,7 +49,7 @@ public class TypeTourDaoTest {
             typeTourExpected = listTypeTour.get(listTypeTour.size()-1);
         }
         Assert.assertEquals(typeTourExpected.getId(), testTypeTour.getId());
-        TypeTour typeTourDel = typeTourDao.findByName(testTypeTour.getName_en());
+        TypeTour typeTourDel = typeTourDao.findByName(testTypeTour.getNameEn());
         boolean checkDel = typeTourDao.delete(typeTourDel);
         Assert.assertTrue(checkDel);
     }

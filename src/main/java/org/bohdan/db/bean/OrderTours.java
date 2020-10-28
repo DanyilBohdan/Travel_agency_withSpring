@@ -9,9 +9,9 @@ import java.util.Date;
  */
 public class OrderTours {
 
-    private Integer order_id;
+    private Integer orderId;
 
-    private Integer tour_id;
+    private Integer tourId;
 
     private String name;
 
@@ -21,11 +21,11 @@ public class OrderTours {
 
     private float price;
 
-    private int count_people;
+    private int countPeople;
 
-    private int mark_hotel;
+    private int markHotel;
 
-    private Date start_date;
+    private Date startDate;
 
     private int days;
 
@@ -33,46 +33,46 @@ public class OrderTours {
 
     private String status;
 
-    private Date date_reg;
+    private Date dateReg;
 
     private String login;
 
-    public static OrderTours createTour(Integer order_id, Integer tour_id, String name, String type,
+    public static OrderTours createTour(Integer orderId, Integer tourId, String name, String type,
                                         String country, String status, String login,
-                                        float price, int count_people, int mark_hotel, Date start_date,
-                                        int days, float discount, Date date_reg) {
+                                        float price, int countPeople, int markHotel, Date startDate,
+                                        int days, float discount, Date dateReg) {
         OrderTours order = new OrderTours();
-        order.setOrder_id(order_id);
-        order.setTour_id(tour_id);
+        order.setOrderId(orderId);
+        order.setTourId(tourId);
         order.setName(name);
         order.setType(type);
         order.setCountry(country);
         order.setPrice(price);
-        order.setCount_people(count_people);
-        order.setMark_hotel(mark_hotel);
-        order.setStart_date(start_date);
+        order.setCountPeople(countPeople);
+        order.setMarkHotel(markHotel);
+        order.setStartDate(startDate);
         order.setDays(days);
         order.setDiscount(discount);
         order.setStatus(status);
-        order.setDate_reg(date_reg);
+        order.setDateReg(dateReg);
         order.setLogin(login);
         return order;
     }
 
-    public Integer getOrder_id() {
-        return order_id;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
-    public Integer getTour_id() {
-        return tour_id;
+    public Integer getTourId() {
+        return tourId;
     }
 
-    public void setTour_id(Integer tour_id) {
-        this.tour_id = tour_id;
+    public void setTourId(Integer tourId) {
+        this.tourId = tourId;
     }
 
     public String getName() {
@@ -107,28 +107,28 @@ public class OrderTours {
         this.price = price;
     }
 
-    public int getCount_people() {
-        return count_people;
+    public int getCountPeople() {
+        return countPeople;
     }
 
-    public void setCount_people(int count_people) {
-        this.count_people = count_people;
+    public void setCountPeople(int countPeople) {
+        this.countPeople = countPeople;
     }
 
-    public int getMark_hotel() {
-        return mark_hotel;
+    public int getMarkHotel() {
+        return markHotel;
     }
 
-    public void setMark_hotel(int mark_hotel) {
-        this.mark_hotel = mark_hotel;
+    public void setMarkHotel(int markHotel) {
+        this.markHotel = markHotel;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public int getDays() {
@@ -155,12 +155,12 @@ public class OrderTours {
         this.status = status;
     }
 
-    public Date getDate_reg() {
-        return date_reg;
+    public Date getDateReg() {
+        return dateReg;
     }
 
-    public void setDate_reg(Date date_reg) {
-        this.date_reg = date_reg;
+    public void setDateReg(Date dateReg) {
+        this.dateReg = dateReg;
     }
 
     public String getLogin() {

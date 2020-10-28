@@ -16,10 +16,10 @@ public class Validation {
             Pattern.compile("^[A-Za-z0-9]{4,20}$");
 
     public static final Pattern VALID_LATIN_REGEX =
-            Pattern.compile("^[a-zA-Z ]{4,}$");
+            Pattern.compile("^[a-zA-Z0-9-` ]{4,}$");
 
     public static final Pattern VALID_CYRILLIC_REGEX =
-            Pattern.compile("^[а-яА-Я ]{4,}$");
+            Pattern.compile("^[а-яА-Я0-9-`ё ]{4,}$");
 
     public static final Pattern VALID_FLOAT_REGEX =
             Pattern.compile("^\\d+(,\\d{3})*(\\.\\d{1,2})?$");

@@ -16,21 +16,21 @@ public class User {
 
     private String login;
 
-    private String phone_number;
+    private String phoneNumber;
 
     private boolean status;
 
-    private int role_id;
+    private int roleId;
 
     public static User createUser(String username, String password, String login,
-                                  String phone_number, boolean status, int role_id) {
+                                  String phoneNumber, boolean status, int roleId) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setLogin(login);
-        user.setPhone_number(phone_number);
+        user.setPhoneNumber(phoneNumber);
         user.setStatus(status);
-        user.setRole_id(role_id);
+        user.setRoleId(roleId);
         return user;
     }
 
@@ -74,12 +74,12 @@ public class User {
         this.status = status;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     @Override
@@ -89,15 +89,15 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + login + '\'' +
                 ", status='" + status + '\'' +
-                ", role_id=" + role_id +
+                ", role_id=" + roleId +
                 '}';
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

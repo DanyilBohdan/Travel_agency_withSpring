@@ -39,7 +39,7 @@
                     <label class="control-label" for="phone"><fmt:message key="account.label.phone_number"/></label>
                     <div class="controls">
                         <input type="text" id="phone" name="phone" placeholder="(123) 456-7890"
-                               class="input-xlarge" value="${user.phone_number}">
+                               class="input-xlarge" value="${user.phoneNumber}">
                         <p class="help-block"><fmt:message key="account.register.phone.help"/></p>
                     </div>
                 </div>

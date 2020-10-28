@@ -26,13 +26,13 @@
         <label>${tour.description}</label><br>
 
         <label><fmt:message key="tour.count_people"/>: </label>
-        <label>${tour.count_people}</label><br>
+        <label>${tour.countPeople}</label><br>
 
         <label><fmt:message key="tour.mark_hotel"/>: </label>
-        <label>${tour.mark_hotel}</label><br>
+        <label>${tour.markHotel}</label><br>
 
         <label><fmt:message key="tour.start_date"/>: </label>
-        <label>${tour.start_date}</label><br>
+        <label>${tour.startDate}</label><br>
 
         <label><fmt:message key="tour.days"/>: </label>
         <label>${tour.days}</label><br>

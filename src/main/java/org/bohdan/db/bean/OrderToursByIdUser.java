@@ -9,22 +9,23 @@ import java.util.Date;
  */
 public class OrderToursByIdUser {
 
-    private Integer order_id;
+    private Integer orderId;
 
-    private Integer tour_id;
+    private Integer tourId;
 
-    private Date start_date;
+    private Date startDate;
 
     private int days;
 
     private String status;
 
-    public static OrderToursByIdUser createTour(Integer order_id, Integer tour_id, String status, Date start_date, int days) {
+    public static OrderToursByIdUser createTour(Integer orderId, Integer tourId, String status,
+                                                Date startDate, int days) {
         OrderToursByIdUser order = new OrderToursByIdUser();
-        order.setOrder_id(order_id);
-        order.setTour_id(tour_id);
+        order.setOrderId(orderId);
+        order.setTourId(tourId);
         order.setStatus(status);
-        order.setStart_date(start_date);
+        order.setStartDate(startDate);
         order.setDays(days);
         return order;
     }
@@ -32,36 +33,36 @@ public class OrderToursByIdUser {
     @Override
     public String toString() {
         return "OrderToursByIdUser{" +
-                "order_id=" + order_id +
-                ", tour_id=" + tour_id +
-                ", start_date=" + start_date +
+                "order_id=" + orderId +
+                ", tour_id=" + tourId +
+                ", start_date=" + startDate +
                 ", days=" + days +
                 ", status='" + status + '\'' +
                 '}';
     }
 
-    public Integer getOrder_id() {
-        return order_id;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
-    public Integer getTour_id() {
-        return tour_id;
+    public Integer getTourId() {
+        return tourId;
     }
 
-    public void setTour_id(Integer tour_id) {
-        this.tour_id = tour_id;
+    public void setTourId(Integer tourId) {
+        this.tourId = tourId;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public int getDays() {

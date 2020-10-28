@@ -71,9 +71,9 @@ public class UserDao {
         user.setUsername(rs.getString(Fields.USERNAME));
         user.setPassword(rs.getString(Fields.PASSWORD));
         user.setLogin(rs.getString(Fields.LOGIN));
-        user.setPhone_number(rs.getString(Fields.PHONE_NUMBER));
+        user.setPhoneNumber(rs.getString(Fields.PHONE_NUMBER));
         user.setStatus(rs.getBoolean(Fields.STATUS));
-        user.setRole_id(rs.getInt(Fields.ROLE_ID));
+        user.setRoleId(rs.getInt(Fields.ROLE_ID));
         return user;
     }
 
@@ -83,7 +83,7 @@ public class UserDao {
         user.setUsername(rs.getString(Fields.USERNAME));
         user.setPassword(rs.getString(Fields.PASSWORD));
         user.setLogin(rs.getString(Fields.LOGIN));
-        user.setPhone_number(rs.getString(Fields.PHONE_NUMBER));
+        user.setPhoneNumber(rs.getString(Fields.PHONE_NUMBER));
         user.setStatus(rs.getBoolean(Fields.STATUS));
         user.setRole(rs.getString(Fields.NAME));
         return user;
@@ -259,9 +259,9 @@ public class UserDao {
             statement.setString(k++, entity.getUsername());
             statement.setString(k++, entity.getPassword());
             statement.setString(k++, entity.getLogin());
-            statement.setString(k++, entity.getPhone_number());
+            statement.setString(k++, entity.getPhoneNumber());
             statement.setBoolean(k++, entity.getStatus());
-            statement.setInt(k++, entity.getRole_id());
+            statement.setInt(k++, entity.getRoleId());
 
             if (statement.executeUpdate() > 0) {
                 rs = statement.getGeneratedKeys();
@@ -331,9 +331,9 @@ public class UserDao {
             statement.setString(1, entity.getUsername());
             statement.setString(2, entity.getPassword());
             statement.setString(3, entity.getLogin());
-            statement.setString(4, entity.getPhone_number());
+            statement.setString(4, entity.getPhoneNumber());
             statement.setBoolean(5, entity.getStatus());
-            statement.setInt(6, entity.getRole_id());
+            statement.setInt(6, entity.getRoleId());
             statement.setInt(7, entity.getId());
             return statement.executeUpdate() > 0;
         } catch (SQLException ex) {

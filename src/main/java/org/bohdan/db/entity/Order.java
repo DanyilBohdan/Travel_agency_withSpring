@@ -12,18 +12,18 @@ public class Order {
 
     private String status;
 
-    private Object date_reg;
+    private Object dateReg;
 
-    private int tour_id;
+    private int tourId;
 
-    private int user_id;
+    private int userId;
 
-    public static Order createOrderTour(String status, Object date_reg, int tour_id, int user_id) {
+    public static Order createOrderTour(String status, Object dateReg, int tourId, int userId) {
         Order orderTour = new Order();
         orderTour.setStatus(status);
-        orderTour.setDate_reg(date_reg);
-        orderTour.setTour_id(tour_id);
-        orderTour.setUser_id(user_id);
+        orderTour.setDateReg(dateReg);
+        orderTour.setTourId(tourId);
+        orderTour.setUserId(userId);
         return orderTour;
     }
 
@@ -32,8 +32,8 @@ public class Order {
         return "OrderTour{" +
                 "id=" + id +
                 ", status='" + status + '\'' +
-                ", tour_id=" + tour_id +
-                ", user_id=" + user_id +
+                ", tour_id=" + tourId +
+                ", user_id=" + userId +
                 '}';
     }
 
@@ -53,27 +53,27 @@ public class Order {
         this.status = status;
     }
 
-    public Object getDate_reg() {
-        return date_reg;
+    public Object getDateReg() {
+        return dateReg;
     }
 
-    public void setDate_reg(Object date_reg) {
-        this.date_reg = date_reg;
+    public void setDateReg(Object dateReg) {
+        this.dateReg = dateReg;
     }
 
-    public int getTour_id() {
-        return tour_id;
+    public int getTourId() {
+        return tourId;
     }
 
-    public void setTour_id(int tour_id) {
-        this.tour_id = tour_id;
+    public void setTourId(int tourId) {
+        this.tourId = tourId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

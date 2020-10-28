@@ -40,7 +40,7 @@
                 <div class="border border-secondary">
                     <label>
                         <fmt:message key="account.label.phone_number"/>:
-                    </label>${user.phone_number}
+                    </label>${user.phoneNumber}
                 </div>
                 <c:if test="${user.status} == false">
                     <div class="border border-secondary">

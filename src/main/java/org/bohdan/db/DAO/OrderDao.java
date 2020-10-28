@@ -124,22 +124,22 @@ public class OrderDao {
         Order order = new Order();
         order.setId(rs.getInt(Fields.ID));
         order.setStatus(rs.getString(Fields.STATUS));
-        order.setTour_id(rs.getInt(Fields.TOUR_ID));
-        order.setUser_id(rs.getInt(Fields.USER_ID));
+        order.setTourId(rs.getInt(Fields.TOUR_ID));
+        order.setUserId(rs.getInt(Fields.USER_ID));
         return order;
     }
 
     private OrderTours mapOrderTours(ResultSet rs) throws SQLException {
         OrderTours order = new OrderTours();
-        order.setOrder_id(rs.getInt(Fields.ID));
-        order.setTour_id(rs.getInt(Fields.TOUR_ID));
+        order.setOrderId(rs.getInt(Fields.ID));
+        order.setTourId(rs.getInt(Fields.TOUR_ID));
         order.setName(rs.getString(Fields.NAME));
         order.setType(rs.getString(Fields.TYPE));
         order.setCountry(rs.getString(Fields.COUNTRY));
         order.setPrice(TourDao.changePrice(rs.getFloat(Fields.PRICE), rs.getFloat(Fields.DISCOUNT)));
-        order.setMark_hotel(rs.getInt(Fields.MARK_HOTEL));
-        order.setCount_people(rs.getInt(Fields.COUNT_PEOPLE));
-        order.setStart_date(rs.getDate(Fields.START_DATE));
+        order.setMarkHotel(rs.getInt(Fields.MARK_HOTEL));
+        order.setCountPeople(rs.getInt(Fields.COUNT_PEOPLE));
+        order.setStartDate(rs.getDate(Fields.START_DATE));
         order.setDays(rs.getInt(Fields.DAYS));
         order.setDiscount(rs.getFloat(Fields.DISCOUNT));
         order.setStatus(rs.getString(Fields.STATUS));
@@ -149,9 +149,9 @@ public class OrderDao {
 
     private OrderToursByIdUser mapOrderToursByIdUser(ResultSet rs) throws SQLException {
         OrderToursByIdUser order = new OrderToursByIdUser();
-        order.setOrder_id(rs.getInt(Fields.ID));
-        order.setTour_id(rs.getInt(Fields.TOUR_ID));
-        order.setStart_date(rs.getDate(Fields.START_DATE));
+        order.setOrderId(rs.getInt(Fields.ID));
+        order.setTourId(rs.getInt(Fields.TOUR_ID));
+        order.setStartDate(rs.getDate(Fields.START_DATE));
         order.setDays(rs.getInt(Fields.DAYS));
         order.setStatus(rs.getString(Fields.STATUS));
         return order;
@@ -392,9 +392,9 @@ public class OrderDao {
              PreparedStatement statement = con.prepareStatement(SQL_INSERT_ORDER, Statement.RETURN_GENERATED_KEYS)) {
             int k = 1;
             statement.setString(k++, entity.getStatus());
-            statement.setObject(k++, entity.getDate_reg());
-            statement.setInt(k++, entity.getTour_id());
-            statement.setInt(k++, entity.getUser_id());
+            statement.setObject(k++, entity.getDateReg());
+            statement.setInt(k++, entity.getTourId());
+            statement.setInt(k++, entity.getUserId());
 
             if (statement.executeUpdate() > 0) {
                 rs = statement.getGeneratedKeys();
@@ -425,9 +425,9 @@ public class OrderDao {
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_ORDER)) {
             int k = 1;
             statement.setString(k++, entity.getStatus());
-            statement.setDate(k++, (Date) entity.getDate_reg());
-            statement.setInt(k++, entity.getTour_id());
-            statement.setInt(k++, entity.getUser_id());
+            statement.setDate(k++, (Date) entity.getDateReg());
+            statement.setInt(k++, entity.getTourId());
+            statement.setInt(k++, entity.getUserId());
             statement.setInt(k++, entity.getId());
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {

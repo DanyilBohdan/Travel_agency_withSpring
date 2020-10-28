@@ -56,8 +56,8 @@ public class CountryDao {
     private Country mapCountry(ResultSet rs) throws SQLException {
         Country country = new Country();
         country.setId(rs.getInt(Fields.ID));
-        country.setName_en(rs.getString(Fields.NAME_EN));
-        country.setName_ru(rs.getString(Fields.NAME_RU));
+        country.setNameEn(rs.getString(Fields.NAME_EN));
+        country.setNameRu(rs.getString(Fields.NAME_RU));
         return country;
     }
 
@@ -201,8 +201,8 @@ public class CountryDao {
         ResultSet rs;
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_INSERT_COUNTRY, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, entity.getName_en());
-            statement.setString(2, entity.getName_ru());
+            statement.setString(1, entity.getNameEn());
+            statement.setString(2, entity.getNameRu());
             if (statement.executeUpdate() > 0) {
                 rs = statement.getGeneratedKeys();
                 if (rs.next()) {
@@ -226,8 +226,8 @@ public class CountryDao {
     public boolean update(Country entity) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement statement = con.prepareStatement(SQL_UPDATE_COUNTRY)) {
-            statement.setString(1, entity.getName_en());
-            statement.setString(2, entity.getName_ru());
+            statement.setString(1, entity.getNameEn());
+            statement.setString(2, entity.getNameRu());
             statement.setInt(3, entity.getId());
             return statement.executeUpdate() > 0;
         } catch (SQLException ex) {
