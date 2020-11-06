@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Travel agency" />
         <module name="Travel_agency" />
+        <module name="Travel_agency_Spring" />
         <module name="Travelagency" />
       </profile>
     </annotationProcessing>
