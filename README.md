@@ -1,5 +1,8 @@
 # :musical_note: Завдання
+Spring framework homework
 
+Rework your pet project with Spring framework, using java configuration,
+DAO layer leave as is, without usage of ORM frameworks.
 
 # :musical_note: Туристична агенція
 
