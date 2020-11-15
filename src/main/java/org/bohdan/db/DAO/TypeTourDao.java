@@ -4,8 +4,9 @@ import org.bohdan.db.ConnectionFactory;
 import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
-import org.bohdan.db.bean.ListBean;
-import org.bohdan.db.entity.TypeTour;
+import org.bohdan.model.general.ListBean;
+import org.bohdan.model.TypeTour;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * Data access object for TypeTour entity, ListBean
  */
+@Repository
 public class TypeTourDao {
 
     private static final String SQL_FIND_ALL_TYPE_TOUR =

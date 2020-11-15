@@ -4,8 +4,9 @@ import org.bohdan.db.ConnectionFactory;
 import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
-import org.bohdan.db.bean.UserRole;
-import org.bohdan.db.entity.User;
+import org.bohdan.model.general.UserRole;
+import org.bohdan.model.User;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * Data access object for User entity, UserRole bean
  */
+@Repository
 public class UserDao {
 
     private static final String SQL_FIND_ALL_USER =

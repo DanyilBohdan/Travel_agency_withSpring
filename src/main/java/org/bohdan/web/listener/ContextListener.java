@@ -85,7 +85,7 @@ public class ContextListener implements ServletContextListener {
         logger.debug("Command container initialization started");
 
         try {
-            Class.forName("org.bohdan.web.command.CommandContainer");
+            Class.forName("org.bohdan.web.service.CommandContainer");
         } catch (ClassNotFoundException ex) {
             throw new RuntimeException(ex);
         }

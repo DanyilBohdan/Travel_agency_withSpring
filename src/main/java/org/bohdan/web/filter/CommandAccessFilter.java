@@ -2,7 +2,7 @@ package org.bohdan.web.filter;
 
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.entity.Role;
+import org.bohdan.model.Role;
 import org.bohdan.web.Path;
 
 import javax.servlet.*;

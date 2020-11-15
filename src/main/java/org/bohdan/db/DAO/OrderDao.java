@@ -4,9 +4,10 @@ import org.bohdan.db.ConnectionFactory;
 import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
-import org.bohdan.db.bean.OrderTours;
-import org.bohdan.db.bean.OrderToursByIdUser;
-import org.bohdan.db.entity.Order;
+import org.bohdan.model.general.OrderTours;
+import org.bohdan.model.general.OrderToursByIdUser;
+import org.bohdan.model.Order;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -16,6 +17,7 @@ import java.util.List;
 /**
  * Data access object for Order entity, OrderTours bean and OrderToursByIdUser bean
  */
+@Repository
 public class OrderDao {
 
     private static final String SQL_FIND_ALL_ORDER =

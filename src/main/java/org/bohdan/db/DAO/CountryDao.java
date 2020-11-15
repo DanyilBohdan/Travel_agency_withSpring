@@ -4,8 +4,9 @@ import org.bohdan.db.ConnectionFactory;
 import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
-import org.bohdan.db.bean.ListBean;
-import org.bohdan.db.entity.Country;
+import org.bohdan.model.general.ListBean;
+import org.bohdan.model.Country;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -16,6 +17,8 @@ import java.util.List;
 /**
  * Data access object for Country entity and ListBean
  */
+
+@Repository
 public class CountryDao {
 
     private static final String SQL_FIND_ALL_COUNTRY_TOUR =

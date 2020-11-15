@@ -1,6 +1,8 @@
 package org.bohdan.db;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -13,7 +15,7 @@ import javax.sql.DataSource;
  * @author Bohdan Daniel
  *
  */
-
+@Component
 public class ConnectionPool extends ConnectionFactory{
 
     private static final Logger logger = Logger.getLogger(ConnectionPool.class);
@@ -48,6 +50,7 @@ public class ConnectionPool extends ConnectionFactory{
     /**
      * @return Data Source
      */
+    @Bean
     public static DataSource getDataSource() {
         return dataSource;
     }

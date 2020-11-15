@@ -5,8 +5,9 @@ import org.bohdan.db.ConnectionFactory;
 import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
-import org.bohdan.db.bean.TourView;
-import org.bohdan.db.entity.Tour;
+import org.bohdan.model.general.TourView;
+import org.bohdan.model.Tour;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -16,6 +17,7 @@ import java.util.List;
 /**
  * Data access object for Tour entity, TourView bean
  */
+@Repository
 public class TourDao {
 
     private static final Logger logger = Logger.getLogger(TourDao.class);
