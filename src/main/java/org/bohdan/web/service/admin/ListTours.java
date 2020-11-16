@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,7 +46,8 @@ public class ListTours extends Command {
         request.setAttribute("typeTourOut", new TypeTourDao(connectionPool).findByLocale(lang));
         request.setAttribute("countryOut", new CountryDao(connectionPool).findByLocale(lang));
 
-        List<TourView> tours = SearchTour.execute(request, response, 1);
+        //List<TourView> tours = SearchTour.execute(request, response, 1);
+        List<TourView> tours = new ArrayList<>();
 
         logger.trace("Found in DB: tours --> " + tours);
 

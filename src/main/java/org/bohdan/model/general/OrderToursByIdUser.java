@@ -7,6 +7,7 @@ import java.util.Date;
  *
  * @author Bohdan Daniel
  */
+
 public class OrderToursByIdUser {
 
     private Integer orderId;

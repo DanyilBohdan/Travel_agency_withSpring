@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.model.general.TourView;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class SearchTour {
 
     private static final Logger logger = Logger.getLogger(SearchTour.class);
 
-    public static List<TourView> execute(HttpServletRequest request, HttpServletResponse response, int check) throws IOException, ServletException {
+    public static List<TourView> execute(HttpServletRequest request, int check) {
         try {
 
             ConnectionPool dataSource = ConnectionPool.getInstance();
@@ -72,7 +73,7 @@ public class SearchTour {
             switch (Objects.requireNonNull(method)) {
                 case "typeTour": {
                     String type = request.getParameter("searchType");
-                    if (type == null){
+                    if (type == null) {
                         type = (String) request.getSession().getAttribute("typeDef");
                     }
                     logger.debug("Log: type -->" + type);
@@ -86,7 +87,7 @@ public class SearchTour {
                 }
                 case "countryTour": {
                     String country = request.getParameter("searchCountry");
-                    if (country == null){
+                    if (country == null) {
                         country = (String) request.getSession().getAttribute("countryDef");
                     }
                     logger.debug("Log: country -->" + country);
@@ -100,7 +101,7 @@ public class SearchTour {
                 }
                 case "nameTour": {
                     String text = request.getParameter("searchText");
-                    if (text == null){
+                    if (text == null) {
                         text = (String) request.getSession().getAttribute("searchName");
                     }
                     logger.debug("Log: country -->" + text);
@@ -113,19 +114,19 @@ public class SearchTour {
                 }
                 case "rangeTour": {
                     String begin = request.getParameter("searchBegin");
-                    if (begin == null){
+                    if (begin == null) {
                         begin = (String) request.getSession().getAttribute("beginDef");
                     }
                     logger.debug("Log: begin -->" + begin);
 
                     String end = request.getParameter("searchEnd");
-                    if (end == null){
+                    if (end == null) {
                         end = (String) request.getSession().getAttribute("endDef");
                     }
                     logger.debug("Log: end -->" + end);
 
                     String select = request.getParameter("searchSelect");
-                    if (select == null){
+                    if (select == null) {
                         select = (String) request.getSession().getAttribute("selectDef");
                     }
                     logger.debug("Log: select -->" + select);

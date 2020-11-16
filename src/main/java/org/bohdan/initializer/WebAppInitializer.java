@@ -12,7 +12,7 @@ import javax.servlet.ServletRegistration;
 
 public class WebAppInitializer implements WebApplicationInitializer {
 
-    private static final String DISPATCHER_SERVLET_NAME= "dispatcher";
+    private static final String DISPATCHER_SERVLET_NAME= "Controller";
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
@@ -26,7 +26,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = servletContext
                 .addServlet(DISPATCHER_SERVLET_NAME, new DispatcherServlet(context));
 
-        dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
+        dispatcher.setLoadOnStartup(1);
     }
 }

@@ -1,5 +1,7 @@
 package org.bohdan.model;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 /**
@@ -8,6 +10,7 @@ import java.util.Date;
  * @author Bohdan Daniel
  *
  */
+
 public class Tour {
 
     private Integer id;

@@ -21,7 +21,6 @@
 <!--          Controller          -->
 <!--    <servlet>-->
 <!--        <servlet-name>Controller</servlet-name>-->
-<!--        <servlet-class>org.bohdan.web.controllers.Controller</servlet-class>-->
 <!--    </servlet>-->
 
 <!--    <servlet-mapping>-->

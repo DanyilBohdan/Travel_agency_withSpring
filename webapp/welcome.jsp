@@ -6,7 +6,7 @@
 <%@include file="WEB-INF/jspf/head.jspf" %>
 <body>
 <div class="container p-3 my-3 border">
-    <form method="post" action="controller">
+    <form method="post" action="controller/tour/view" >
         <input type="hidden" name="command" value="viewTours">
         <input type="hidden" name="lang" value="EN">
         <button type="submit" class="btn btn-outline-dark btn-lg btn-block">

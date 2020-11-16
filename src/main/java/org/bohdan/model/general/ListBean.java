@@ -1,6 +1,7 @@
 package org.bohdan.model.general;
 
 import org.bohdan.model.TypeTour;
+import org.springframework.stereotype.Component;
 
 /**
  * General class for displaying tables:

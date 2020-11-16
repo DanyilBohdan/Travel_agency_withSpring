@@ -1,11 +1,14 @@
 package org.bohdan.model;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Order entity.
  *
  * @author Bohdan Daniel
  *
  */
+
 public class Order {
 
     private Integer id;

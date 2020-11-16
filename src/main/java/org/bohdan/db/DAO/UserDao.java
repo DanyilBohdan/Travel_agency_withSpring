@@ -6,6 +6,7 @@ import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.model.general.UserRole;
 import org.bohdan.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -58,6 +59,7 @@ public class UserDao {
 
     private DataSource dataSource;
 
+    @Autowired
     public UserDao(ConnectionFactory connectionFactory) {
         if (connectionFactory.getClass() == ConnectionPool.class) {
             this.dataSource = ConnectionPool.getDataSource();

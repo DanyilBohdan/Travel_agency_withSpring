@@ -6,6 +6,7 @@ import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.model.general.ListBean;
 import org.bohdan.model.Country;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -47,6 +48,7 @@ public class CountryDao {
 
     private DataSource dataSource;
 
+    @Autowired
     public CountryDao(ConnectionFactory connectionFactory) {
         if (connectionFactory.getClass() == ConnectionPool.class) {
             this.dataSource = ConnectionPool.getDataSource();

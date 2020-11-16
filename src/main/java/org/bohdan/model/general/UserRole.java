@@ -1,5 +1,8 @@
 package org.bohdan.model.general;
 
+
+import org.springframework.stereotype.Component;
+
 public class UserRole {
 
     private Integer id;

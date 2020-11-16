@@ -1,11 +1,14 @@
 package org.bohdan.model;
 
+import org.springframework.stereotype.Component;
+
 /**
  * User entity.
  *
  * @author Bohdan Daniel
  *
  */
+
 public class User {
 
     private Integer id;

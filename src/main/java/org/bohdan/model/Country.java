@@ -1,11 +1,14 @@
 package org.bohdan.model;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Country entity.
  *
  * @author Bohdan Daniel
  *
  */
+
 public class Country {
 
     private Integer id;

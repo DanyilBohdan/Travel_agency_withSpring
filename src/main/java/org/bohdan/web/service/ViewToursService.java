@@ -2,9 +2,13 @@ package org.bohdan.web.service;
 
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.CountryDao;
+import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.model.general.TourView;
 import org.bohdan.web.Path;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,13 +23,24 @@ import java.util.List;
  *
  * @author Bohdan Daniel
  */
-public class ViewToursCommand extends Command {
 
-    private final static Logger logger = Logger.getLogger(ViewToursCommand.class);
+@Service
+public class ViewToursService {
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+    private final static Logger logger = Logger.getLogger(ViewToursService.class);
+
+    private TypeTourDao typeTourDao;
+    private CountryDao countryDao;
+    private TourDao tourDao;
+
+    @Autowired
+    public ViewToursService(TypeTourDao typeTourDao, CountryDao countryDao, TourDao tourDao) {
+        this.typeTourDao = typeTourDao;
+        this.countryDao = countryDao;
+        this.tourDao = tourDao;
+    }
+
+    public ModelAndView execute(HttpServletRequest request, String nameView) {
 
         HttpSession session = request.getSession();
 
@@ -41,22 +56,22 @@ public class ViewToursCommand extends Command {
         }
         logger.info("LOG: localeFinal = " + lang);
 
-        request.setAttribute("typeTourOut", new TypeTourDao(connectionPool).findByLocale(lang));
-        request.setAttribute("countryOut", new CountryDao(connectionPool).findByLocale(lang));
 
-        List<TourView> tours = SearchTour.execute(request, response, 0);
+        List<TourView> tours = SearchTour.execute(request, 0);
+        logger.trace("Found in DB: tours --> " + tours);
 
         logger.trace("Found in DB: tours --> " + tours);
 
-
         tours.sort((o1, o2) -> Float.compare(o2.getDiscount(), o1.getDiscount()));
 
-        request.setAttribute("tours", tours);
+        ModelAndView modelAndView = new ModelAndView(nameView);
 
-        request.setAttribute("commandPage", "viewTours");
+        modelAndView.addObject("tours", tours);
+
+        modelAndView.addObject("commandPage", "viewTours");
 
         logger.debug("Command finished");
 
-        return Path.PAGE_MAIN;
+        return modelAndView;
     }
 }

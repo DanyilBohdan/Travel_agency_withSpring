@@ -7,6 +7,7 @@ import org.bohdan.db.Fields;
 import org.bohdan.model.general.OrderTours;
 import org.bohdan.model.general.OrderToursByIdUser;
 import org.bohdan.model.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -113,6 +114,7 @@ public class OrderDao {
 
     private DataSource dataSource;
 
+    @Autowired
     public OrderDao(ConnectionFactory connectionFactory) {
         if (connectionFactory.getClass() == ConnectionPool.class) {
             this.dataSource = ConnectionPool.getDataSource();

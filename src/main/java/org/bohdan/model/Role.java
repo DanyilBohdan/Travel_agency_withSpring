@@ -1,11 +1,14 @@
 package org.bohdan.model;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Role entity.
  *
  * @author Bohdan Daniel
  *
  */
+
 public enum Role {
     USER, MANAGER, ADMIN;
 

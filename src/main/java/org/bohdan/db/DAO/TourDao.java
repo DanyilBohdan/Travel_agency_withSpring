@@ -7,6 +7,7 @@ import org.bohdan.db.DBManager;
 import org.bohdan.db.Fields;
 import org.bohdan.model.general.TourView;
 import org.bohdan.model.Tour;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -164,6 +165,7 @@ public class TourDao {
 
     private DataSource dataSource;
 
+    @Autowired
     public TourDao(ConnectionFactory connectionFactory) {
         if (connectionFactory.getClass() == ConnectionPool.class) {
             this.dataSource = ConnectionPool.getDataSource();
