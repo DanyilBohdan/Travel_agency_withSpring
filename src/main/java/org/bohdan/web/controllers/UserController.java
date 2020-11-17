@@ -24,6 +24,7 @@ public class UserController {
     private static final Logger logger = Logger.getLogger(UserController.class);
 
     private LoginService loginService;
+    private LogoutService logoutService;
     private AccountUserService accountUserService;
     private AccountAdminService accountAdminService;
     private AccountManagerService accountManagerService;
@@ -33,8 +34,9 @@ public class UserController {
     @Autowired
     public UserController(LoginService loginService, AccountUserService accountUserService,
                           AccountAdminService accountAdminService, AccountManagerService accountManagerService,
-                          RegisterUserService registerUserService, RegisterCheck registerCheck) {
+                          RegisterUserService registerUserService, RegisterCheck registerCheck, LogoutService logoutService) {
         this.loginService = loginService;
+        this.logoutService = logoutService;
         this.accountUserService = accountUserService;
         this.accountAdminService = accountAdminService;
         this.accountManagerService = accountManagerService;
@@ -47,7 +49,12 @@ public class UserController {
         return loginService.execute(request, Path.PAGE_LOGIN);
     }
 
-    @RequestMapping(value = "admin/account", method = RequestMethod.POST)
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    public ModelAndView logoutUser(HttpServletRequest request) throws IOException, ServletException {
+        return loginService.execute(request, Path.PAGE_LOGIN);
+    }
+
+    @RequestMapping(value = "admin/account", method = RequestMethod.GET)
     public ModelAndView accountAdmin(HttpServletRequest request) throws IOException, ServletException {
         return accountAdminService.execute(request, Path.ACCOUNT_ADMIN);
     }

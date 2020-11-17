@@ -13,7 +13,7 @@
             ${checkRegistration}
         </b>
     </label><br><br>
-    <form action="/tours/view" method="post">
+    <form action="/tours/view" method="get">
         <input type="hidden" name="command" value="viewTours">
         <button type="submit" class="btn btn-outline-dark">
             <fmt:message key="header.main"/>

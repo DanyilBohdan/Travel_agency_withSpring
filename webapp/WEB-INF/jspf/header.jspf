@@ -15,7 +15,7 @@
                 ===========================================================================--%>
                 <c:when test="${userRole.name == 'admin' }">
                     <li class="nav-item">
-                        <form id="mainAdmin" method="get" action="view">
+                        <form id="mainAdmin" method="get" action="/tours/admin/view">
                             <input type="hidden" name="command" value="listTours">
 
                             <a class="nav-link" href="#" onclick="document.getElementById('mainAdmin').submit()">
@@ -24,7 +24,7 @@
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form id="acAdmin" method="get" action="user/admin/account">
+                        <form id="acAdmin" method="get" action="/user/admin/account">
                             <input type="hidden" name="command" value="accountAdmin">
                             <a class="nav-link" href="#" onclick="document.getElementById('acAdmin').submit()">
                                 <b><fmt:message key="header.account"/></b>
@@ -37,7 +37,7 @@
                 ===========================================================================--%>
                 <c:when test="${userRole.name == 'manager' }">
                     <li class="nav-item">
-                        <form id="mainManager" method="get" action="view">
+                        <form id="mainManager" method="get" action="/orders/view">
                             <input type="hidden" name="command" value="listOrders">
                             <a class="nav-link" href="#" onclick="document.getElementById('mainManager').submit()">
                                 <b><fmt:message key="header.main"/></b>
@@ -45,7 +45,7 @@
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form id="acManager" method="get" action="user/manager/account">
+                        <form id="acManager" method="get" action="/user/manager/account">
                             <input type="hidden" name="command" value="accountManager">
                             <a class="nav-link" href="#" onclick="document.getElementById('acManager').submit()">
                                 <b><fmt:message key="header.account"/></b>

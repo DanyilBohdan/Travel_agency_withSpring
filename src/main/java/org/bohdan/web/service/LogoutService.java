@@ -2,6 +2,9 @@ package org.bohdan.web.service;
 
 import org.apache.log4j.Logger;
 import org.bohdan.web.Path;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,12 +18,16 @@ import java.io.IOException;
  *
  * @author Bohdan Daniel
  */
-public class LogoutCommand extends Command{
+@Service
+public class LogoutService {
 
-    private final static Logger logger = Logger.getLogger(LogoutCommand.class);
+    private final static Logger logger = Logger.getLogger(LogoutService.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    @Autowired
+    public LogoutService() {
+    }
+
+    public ModelAndView execute(HttpServletRequest request, String nameView) throws IOException, ServletException {
         logger.debug("Command starts");
 
         HttpSession sessionOld = request.getSession(false);
@@ -36,6 +43,6 @@ public class LogoutCommand extends Command{
         Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
 
         logger.debug("Command finished");
-        return Path.PAGE_LOGIN;
+        return new ModelAndView(nameView);
     }
 }
