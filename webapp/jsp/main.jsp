@@ -1,8 +1,7 @@
-<%@ page pageEncoding="UTF-8" %>
 <%@include file="../WEB-INF/jspf/directive/taglib.jspf" %>
 <%@include file="../WEB-INF/jspf/directive/page.jspf" %>
 <html>
-<c:set var="title" value="Main" scope="page"/>
+<c:set var="title" value="Main"/>
 <%@include file="../WEB-INF/jspf/head.jspf" %>
 <body>
 <div class="mainContainer">
@@ -11,7 +10,7 @@
     <div class="container p-3 my-3 border">
         <h1><fmt:message key="main.name"/></h1>
         <div class="container row">
-            <form class="form-inline" method="post" action="controller">
+            <form class="form-inline" method="get" action="view">
                 <input type="hidden" name="command" value="viewTours">
                 <input type="hidden" name="method" value="typeTour">
                 <select name="searchType" onchange="submit()">
@@ -20,7 +19,7 @@
                     </c:forEach>
                 </select>
             </form>
-            <form class="form-inline" method="post" action="controller">
+            <form class="form-inline" method="get" action="view">
                 <input type="hidden" name="command" value="viewTours">
                 <input type="hidden" name="method" value="countryTour">
                 <select name="searchCountry" onchange="submit()">
@@ -29,7 +28,7 @@
                     </c:forEach>
                 </select>
             </form>
-            <form class="form-inline" method="post" action="controller">
+            <form class="form-inline" method="get" action="view">
                 <input type="hidden" name="command" value="viewTours">
                 <input type="hidden" name="method" value="nameTour">
                 <input type="text" name="searchText" class="form-control" value="${searchName}"
@@ -38,7 +37,7 @@
             </form>
         </div>
         <div class="container">
-            <form class="form-inline" method="post" action="controller">
+            <form class="form-inline" method="get" action="view">
                 <input type="hidden" name="command" value="viewTours">
                 <input type="hidden" name="method" value="rangeTour">
                 <input type="text" name="searchBegin" placeholder="begin" value="${beginDef}">
@@ -55,7 +54,7 @@
             </form>
         </div>
         <div class="container">
-            <form class="form-inline" method="post" action="controller">
+            <form class="form-inline" method="get" action="view">
                 <input type="hidden" name="command" value="viewTours">
                 <button type="submit" class="btn-outline-dark"><fmt:message key="search.reset"/></button>
             </form>
@@ -75,7 +74,7 @@
                         </p>
                     </div>
                     <div class="card-footer bg-transparent border-dark">
-                        <form id="main" action="controller" method="post">
+                        <form id="main" action="view/tour" method="get">
                             <input type="hidden" name="command" value="viewTour">
                             <input type="hidden" name="id" value="${tour.id}">
                             <button type="submit" class="btn btn-outline-dark" style="horiz-align: center">
@@ -88,7 +87,7 @@
         </div>
         <c:forEach var="i" begin="1" end="${countPage}">
             <div class="btn-group mr-2" role="group" aria-label="First group">
-                <form action="controller" method="post">
+                <form action="view" method="get">
                     <input type="hidden" name="command" value="viewTours">
                     <input type="hidden" name="method" value="${methodDef}">
                     <button class="btn btn-secondary" type="submit" name="page" value="${i}">${i}</button>

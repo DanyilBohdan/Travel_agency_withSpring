@@ -7,7 +7,7 @@
 <div id="main-container">
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <div class="container register-form">
-        <form class="form-horizontal" action="controller" method="post">
+        <form class="form-horizontal" action="/user/registerActive" method="post">
             <input type="hidden" name="command" value="registerUser">
             <div class="container p-3 my-3 border">
                 <div id="legend">

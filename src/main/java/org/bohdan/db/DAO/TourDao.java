@@ -8,6 +8,7 @@ import org.bohdan.db.Fields;
 import org.bohdan.model.general.TourView;
 import org.bohdan.model.Tour;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -169,11 +170,11 @@ public class TourDao {
     public TourDao(ConnectionFactory connectionFactory) {
         if (connectionFactory.getClass() == ConnectionPool.class) {
             this.dataSource = ConnectionPool.getDataSource();
-            logger.debug("Log: --> connection ========== ConnectionPool");
+            logger.debug("Log: --> connection == ConnectionPool");
         }
         if (connectionFactory.getClass() == DBManager.class) {
             this.dataSource = DBManager.getDataSource();
-            logger.debug("Log: --> connection ========== DBManager");
+            logger.debug("Log: --> connection == DBManager");
         }
     }
 
@@ -271,10 +272,10 @@ public class TourDao {
      * @return list tours
      */
     public List<TourView> findAllByLocale(String locale, int start, int total) {
-        if (locale.equals("EN")) {
+        if (locale.equals("EN")|| locale.equals("en")) {
             return findAll(SQL_FIND_ALL_EN + filter, start, total);
         }
-        if (locale.equals("RU")) {
+        if (locale.equals("RU")|| locale.equals("ru")) {
             return findAll(SQL_FIND_ALL_RU + filter, start, total);
         }
         return null;
@@ -312,10 +313,10 @@ public class TourDao {
      * @return TourView bean
      */
     public TourView findByIdLocale(String locale, Integer id) {
-        if (locale.equals("EN")) {
+        if (locale.equals("EN") || locale.equals("en")) {
             return findById(SQL_FIND_ID_EN, id);
         }
-        if (locale.equals("RU")) {
+        if (locale.equals("RU") || locale.equals("ru")) {
             return findById(SQL_FIND_ID_RU, id);
         }
         return null;
@@ -353,10 +354,10 @@ public class TourDao {
      * @return list tours bean
      */
     public List<TourView> searchEntity(String locale, String var, int start, int total) {
-        if (locale.equals("EN")) {
+        if (locale.equals("EN") || locale.equals("en")) {
             return searchEntityByVar(SQL_FIND_BY_NAME_EN + filter, var, start, total);
         }
-        if (locale.equals("RU")) {
+        if (locale.equals("RU") || locale.equals("ru")) {
             return searchEntityByVar(SQL_FIND_BY_NAME_RU + filter, var, start, total);
         }
         return null;
@@ -398,10 +399,10 @@ public class TourDao {
      * @return list tours bean
      */
     public List<TourView> findAllByTypeLocale(String locale, String var, int start, int total) {
-        if (locale.equals("EN")) {
+        if (locale.equals("EN") || locale.equals("en")) {
             return findAllVarBy(SQL_FIND_BY_TYPE_EN + filter, var, start, total);
         }
-        if (locale.equals("RU")) {
+        if (locale.equals("RU") || locale.equals("ru")) {
             return findAllVarBy(SQL_FIND_BY_TYPE_RU + filter, var, start, total);
         }
         return null;
@@ -417,10 +418,10 @@ public class TourDao {
      * @return list tours bean
      */
     public List<TourView> findAllByCountryLocale(String locale, String var, int start, int total) {
-        if (locale.equals("EN")) {
+        if (locale.equals("EN") || locale.equals("en")) {
             return findAllVarBy(SQL_FIND_BY_COUNTRY_EN + filter, var, start, total);
         }
-        if (locale.equals("RU")) {
+        if (locale.equals("RU") || locale.equals("ru")) {
             return findAllVarBy(SQL_FIND_BY_COUNTRY_RU + filter, var, start, total);
         }
         return null;
@@ -488,10 +489,10 @@ public class TourDao {
      * @return list TourView bean
      */
     private List<TourView> findAllByPriceLocale(String locale, String varFirst, String varLast, int start, int total) {
-        if (locale.equals("EN")) {
+        if (locale.equals("EN") || locale.equals("en")) {
             return findAllByRange(SQL_FIND_BY_PRICE_EN + filter, varFirst, varLast, start, total);
         }
-        if (locale.equals("RU")) {
+        if (locale.equals("RU") || locale.equals("ru")) {
             return findAllByRange(SQL_FIND_BY_PRICE_RU + filter, varFirst, varLast, start, total);
         }
         return null;
@@ -508,10 +509,10 @@ public class TourDao {
      * @return list TourView bean
      */
     private List<TourView> findAllByCountLocale(String locale, String varFirst, String varLast, int start, int total) {
-        if (locale.equals("EN")) {
+        if (locale.equals("EN") || locale.equals("en")) {
             return findAllByRange(SQL_FIND_BY_COUNT_EN + filter, varFirst, varLast, start, total);
         }
-        if (locale.equals("RU")) {
+        if (locale.equals("RU") || locale.equals("ru")) {
             return findAllByRange(SQL_FIND_BY_COUNT_RU + filter, varFirst, varLast, start, total);
         }
         return null;
@@ -528,10 +529,10 @@ public class TourDao {
      * @return list TourView bean
      */
     private List<TourView> findAllByMarkLocale(String locale, String varFirst, String varLast, int start, int total) {
-        if (locale.equals("EN")) {
+        if (locale.equals("EN") || locale.equals("en")) {
             return findAllByRange(SQL_FIND_BY_MARK_EN + filter, varFirst, varLast, start, total);
         }
-        if (locale.equals("RU")) {
+        if (locale.equals("RU") || locale.equals("ru")) {
             return findAllByRange(SQL_FIND_BY_MARK_RU + filter, varFirst, varLast, start, total);
         }
         return null;

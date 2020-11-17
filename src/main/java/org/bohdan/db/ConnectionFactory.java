@@ -2,7 +2,6 @@ package org.bohdan.db;
 
 import javax.sql.DataSource;
 
-
 public abstract class ConnectionFactory {
     public static DataSource dataSource;
 

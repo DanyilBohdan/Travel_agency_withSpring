@@ -1,6 +1,7 @@
 package org.bohdan.web.service;
 
 import org.apache.log4j.Logger;
+import org.bohdan.db.ConnectionPool;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.TypeTourDao;
@@ -56,19 +57,21 @@ public class ViewToursService {
         }
         logger.info("LOG: localeFinal = " + lang);
 
+        logger.info("LOG: typeTourDao = " + typeTourDao.findByLocale(lang));
+        logger.info("LOG: countryDao = " + countryDao.findByLocale(lang));
 
-        List<TourView> tours = SearchTour.execute(request, 0);
-        logger.trace("Found in DB: tours --> " + tours);
+        request.setAttribute("typeTourOut", typeTourDao.findByLocale(lang));
+        request.setAttribute("countryOut", countryDao.findByLocale(lang));
 
-        logger.trace("Found in DB: tours --> " + tours);
+        List<TourView> tours = SearchTour.execute(request, tourDao,0);
+        logger.trace("Found in DB: tours --> " + tours + tourDao);
 
         tours.sort((o1, o2) -> Float.compare(o2.getDiscount(), o1.getDiscount()));
-
         ModelAndView modelAndView = new ModelAndView(nameView);
 
         modelAndView.addObject("tours", tours);
 
-        modelAndView.addObject("commandPage", "viewTours");
+        modelAndView.addObject("commandPage", "view");
 
         logger.debug("Command finished");
 

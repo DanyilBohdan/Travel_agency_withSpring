@@ -80,10 +80,10 @@ public class CountryDao {
      * @return list listBean entity
      */
     public List<ListBean> findByLocale(String locale) {
-        if (locale.equals("EN")) {
+        if (locale.equals("EN") || locale.equals("en")) {
             return findAllLocale(SQL_FIND_ALL_COUNTRY_TOUR_EN);
         }
-        if (locale.equals("RU")) {
+        if (locale.equals("RU") || locale.equals("ru")) {
             return findAllLocale(SQL_FIND_ALL_COUNTRY_TOUR_RU);
         }
         return null;

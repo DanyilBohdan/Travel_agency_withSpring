@@ -2,6 +2,9 @@ package org.bohdan.web.service;
 
 import org.apache.log4j.Logger;
 import org.bohdan.web.Path;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,12 +19,17 @@ import java.util.ResourceBundle;
  *
  * @author Bohdan Daniel
  */
-public class RegisterCheck extends Command{
+
+@Service
+public class RegisterCheck{
 
     private static final Logger logger = Logger.getLogger(RegisterCheck.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    @Autowired
+    public RegisterCheck() {
+    }
+
+    public ModelAndView execute(HttpServletRequest request, String nameView) throws IOException, ServletException {
 
         HttpSession session = request.getSession();
 
@@ -29,12 +37,14 @@ public class RegisterCheck extends Command{
         String lang = (String) session.getAttribute("defLocale");
         logger.debug("Log: check ----> " + check);
 
+        ModelAndView modelAndView = new ModelAndView(nameView);
+
         if (check.equals("true")) {
-            request.setAttribute("checkRegistration", ResourceBundle.getBundle("resources", new Locale(lang)).getString("registrationTour.successful"));
+            modelAndView.addObject("checkRegistration", ResourceBundle.getBundle("resources", new Locale(lang)).getString("registrationTour.successful"));
         } else {
-            request.setAttribute("checkRegistration", ResourceBundle.getBundle("resources", new Locale(lang)).getString("registrationTour.unsuccessful"));
+            modelAndView.addObject("checkRegistration", ResourceBundle.getBundle("resources", new Locale(lang)).getString("registrationTour.unsuccessful"));
         }
 
-        return Path.PAGE_REGISTER_CHECK;
+        return modelAndView;
     }
 }

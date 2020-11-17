@@ -6,10 +6,12 @@ import org.bohdan.model.Role;
 import org.bohdan.model.User;
 import org.bohdan.web.Path;
 import org.bohdan.web.Validation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
@@ -19,12 +21,20 @@ import java.io.IOException;
  *
  * @author Bohdan Daniel
  */
-public class LoginCommand extends Command {
 
-    private static final Logger logger = Logger.getLogger(LoginCommand.class);
+@Service
+public class LoginService {
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    private static final Logger logger = Logger.getLogger(LoginService.class);
+
+    private UserDao userDao;
+
+    @Autowired
+    public LoginService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public ModelAndView execute(HttpServletRequest request, String nameView) throws IOException, ServletException {
         logger.debug("Command starts");
 
         HttpSession session = request.getSession();
@@ -34,60 +44,61 @@ public class LoginCommand extends Command {
 
         String password = request.getParameter("password");
 
+        ModelAndView modelAndView = new ModelAndView(nameView);
         String errorMessage;
         String forward = Path.PAGE_LOGIN;
 
         boolean val = Validation.validateLogin(login);
         if (!val) {
             errorMessage = "Login must be: example@example.com";
-            request.setAttribute("errorVal", errorMessage);
+            modelAndView.addObject("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
-            return forward;
+            return modelAndView;
         }
 
         val = Validation.validatePassword(password);
         if (!val) {
             errorMessage = "Password must be: latin/number";
-            request.setAttribute("errorVal", errorMessage);
+            modelAndView.addObject("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
-            return Path.ERROR_PAGE;
+            return modelAndView;
         }
 
         if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
             errorMessage = "Login/password cannot be empty";
-            request.setAttribute("errorVal", errorMessage);
+            modelAndView.addObject("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
-            return forward;
+            return modelAndView;
         }
 
-        User user = new UserDao(connectionPool).findEntityByLogin(login);
+        User user = userDao.findEntityByLogin(login);
         logger.trace("Found in DB: user --> " + user);
 
         if (user == null || !password.equals(user.getPassword())) {
             errorMessage = "Cannot find user with such login/password";
-            request.setAttribute("errorVal", errorMessage);
+            modelAndView.addObject("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
-            return forward;
+            return modelAndView;
         }
         if (!user.getStatus()) {
             errorMessage = "Your account has been blocked!";
-            request.setAttribute("errorVal", errorMessage);
+            modelAndView.addObject("errorVal", errorMessage);
             logger.error("errorMessage --> " + errorMessage);
-            return forward;
+            return modelAndView;
         } else {
             Role role = Role.getRole(user);
             logger.trace("role --> " + role);
 
             if (role == Role.ADMIN) {
-                forward = Path.COMMAND_ACCOUNT_ADMIN;
+                modelAndView = new ModelAndView(Path.COMMAND_ACCOUNT_ADMIN);
             }
 
             if (role == Role.MANAGER) {
-                forward = Path.COMMAND_ACCOUNT_MANAGER;
+                modelAndView = new ModelAndView(Path.COMMAND_ACCOUNT_MANAGER);
             }
 
             if (role == Role.USER) {
-                forward = Path.COMMAND_ACCOUNT;
+                modelAndView = new ModelAndView(Path.COMMAND_ACCOUNT);
             }
 
             session.setAttribute("user", user);
@@ -105,6 +116,6 @@ public class LoginCommand extends Command {
         }
 
         logger.debug("Command finished");
-        return forward;
+        return modelAndView;
     }
 }

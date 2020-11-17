@@ -7,7 +7,7 @@
 <div id="main-container">
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <div class="container p-3 my-3 border">
-        <form id="login_form" action="controller" method="post">
+        <form id="login_form" action="/user/login" method="post">
             <input type="hidden" name="command" value="login"/>
             <div class="input-group mb-3">
                 <label>
@@ -24,7 +24,7 @@
             </div>
             <button type="submit" class="btn btn-outline-dark"><fmt:message key="login_jsp.button.login"/></button>
         </form>
-        <form id="register" action="controller" method="post">
+        <form id="register" action="/user/register" method="get">
             <input type="hidden" name="command" value="register">
             <button type="submit" class="btn btn-outline-dark"><fmt:message key="login_jsp.button.registration"/></button>
         </form>

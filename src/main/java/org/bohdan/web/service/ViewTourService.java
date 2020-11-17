@@ -4,6 +4,9 @@ import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.model.general.TourView;
 import org.bohdan.web.Path;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,12 +19,19 @@ import java.io.IOException;
  *
  * @author Bohdan Daniel
  */
-public class ViewTourCommand extends Command{
+@Service
+public class ViewTourService{
 
-    private static final Logger logger = Logger.getLogger(ViewTourCommand.class);
+    private static final Logger logger = Logger.getLogger(ViewTourService.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)
+    private TourDao tourDao;
+
+    @Autowired
+    public ViewTourService(TourDao tourDao) {
+        this.tourDao = tourDao;
+    }
+
+    public ModelAndView execute(HttpServletRequest request, String nameView)
             throws IOException, ServletException {
 
         HttpSession session = request.getSession();
@@ -31,10 +41,11 @@ public class ViewTourCommand extends Command{
         int id = Integer.parseInt(request.getParameter("id"));
         logger.trace("LOG: id_tour = " + id);
 
-        TourView tour = new TourDao(connectionPool).findByIdLocale(defLocale, id);
+        TourView tour = tourDao.findByIdLocale(defLocale, id);
 
-        request.setAttribute("tour", tour);
+        ModelAndView modelAndView = new ModelAndView(nameView);
+        modelAndView.addObject("tour", tour);
 
-        return Path.PAGE_VIEW_TOUR;
+        return modelAndView;
     }
 }

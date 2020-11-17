@@ -20,41 +20,38 @@
             </form>
         </div>
         <div class=" container float-left">
-            <form id="personalAcc" action="controller" method="post">
-                <input type="hidden" name="command" value="accountAdmin"/>
+            <div class="border border-secondary">
+                <label>
+                    <fmt:message key="account.label.username"/>:
+                </label>${user.username}
+            </div>
+            <div class="border border-secondary">
+                <label>
+                    <fmt:message key="account.label.login"/>:
+                </label>${user.login}
+            </div>
+            <div class="border border-secondary">
+                <label>
+                    <fmt:message key="account.label.password"/>:
+                </label>${user.password}
+            </div>
+            <div class="border border-secondary">
+                <label>
+                    <fmt:message key="account.label.phone_number"/>:
+                </label>${user.phoneNumber}
+            </div>
+            <c:if test="${user.status} == false">
                 <div class="border border-secondary">
                     <label>
-                        <fmt:message key="account.label.username"/>:
-                    </label>${user.username}
+                        <fmt:message key="account.label.status"/>:
+                    </label><fmt:message key="account.label.block"/>
                 </div>
-                <div class="border border-secondary">
-                    <label>
-                        <fmt:message key="account.label.login"/>:
-                    </label>${user.login}
-                </div>
-                <div class="border border-secondary">
-                    <label>
-                        <fmt:message key="account.label.password"/>:
-                    </label>${user.password}
-                </div>
-                <div class="border border-secondary">
-                    <label>
-                        <fmt:message key="account.label.phone_number"/>:
-                    </label>${user.phoneNumber}
-                </div>
-                <c:if test="${user.status} == false">
-                    <div class="border border-secondary">
-                        <label>
-                            <fmt:message key="account.label.status"/>:
-                        </label><fmt:message key="account.label.block"/>
-                    </div>
-                </c:if>
-                <div class="border border-secondary">
-                    <label>
-                        <fmt:message key="account.label.role"/>:
-                    </label>${userRole}
-                </div>
-            </form>
+            </c:if>
+            <div class="border border-secondary">
+                <label>
+                    <fmt:message key="account.label.role"/>:
+                </label>${userRole}
+            </div>
         </div>
         <div class="row">
             <form action="controller" method="post">

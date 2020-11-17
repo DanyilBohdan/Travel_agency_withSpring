@@ -15,7 +15,7 @@
                 ===========================================================================--%>
                 <c:when test="${userRole.name == 'admin' }">
                     <li class="nav-item">
-                        <form id="mainAdmin" method="post" action="controller">
+                        <form id="mainAdmin" method="get" action="view">
                             <input type="hidden" name="command" value="listTours">
 
                             <a class="nav-link" href="#" onclick="document.getElementById('mainAdmin').submit()">
@@ -24,7 +24,7 @@
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form id="acAdmin" method="post" action="controller">
+                        <form id="acAdmin" method="get" action="user/admin/account">
                             <input type="hidden" name="command" value="accountAdmin">
                             <a class="nav-link" href="#" onclick="document.getElementById('acAdmin').submit()">
                                 <b><fmt:message key="header.account"/></b>
@@ -37,7 +37,7 @@
                 ===========================================================================--%>
                 <c:when test="${userRole.name == 'manager' }">
                     <li class="nav-item">
-                        <form id="mainManager" method="post" action="controller">
+                        <form id="mainManager" method="get" action="view">
                             <input type="hidden" name="command" value="listOrders">
                             <a class="nav-link" href="#" onclick="document.getElementById('mainManager').submit()">
                                 <b><fmt:message key="header.main"/></b>
@@ -45,7 +45,7 @@
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form id="acManager" method="post" action="controller">
+                        <form id="acManager" method="get" action="user/manager/account">
                             <input type="hidden" name="command" value="accountManager">
                             <a class="nav-link" href="#" onclick="document.getElementById('acManager').submit()">
                                 <b><fmt:message key="header.account"/></b>
@@ -58,7 +58,7 @@
                 ===========================================================================--%>
                 <c:when test="${userRole.name == 'user'}">
                     <li class="nav-item">
-                        <form id="mainUser" method="post" action="controller">
+                        <form id="mainUser" method="get" action="/tours/view">
                             <input type="hidden" name="command" value="viewTours">
                             <a class="nav-link" href="#" onclick="document.getElementById('mainUser').submit()">
                                 <b><fmt:message key="header.main"/></b>
@@ -66,7 +66,7 @@
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form id="acUser" method="post" action="controller">
+                        <form id="acUser" method="get" action="/user/view/account">
                             <input type="hidden" name="command" value="accountUser">
                             <a class="nav-link" href="#" onclick="document.getElementById('acUser').submit()">
                                 <b><fmt:message key="header.account"/></b>
@@ -76,7 +76,7 @@
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item">
-                        <form id="mainCommon" method="post" action="controller">
+                        <form id="mainCommon" method="get" action="/tours/view">
                             <input type="hidden" name="command" value="viewTours">
                             <a class="nav-link" href="#" onclick="document.getElementById('mainCommon').submit()">
                                 <b><fmt:message key="header.main"/></b>
@@ -90,7 +90,7 @@
             <li class="nav-item">
                 <c:choose>
                     <c:when test="${not empty user}">
-                        <form id="logout" method="post" action="controller">
+                        <form id="logout" method="get" action="/user/logout">
                             <input type="hidden" name="command" value="logout">
                             <a class="nav-link" href="#" onclick="document.getElementById('logout').submit()">
                                 <span class="glyphicon glyphicon-log-out"></span>

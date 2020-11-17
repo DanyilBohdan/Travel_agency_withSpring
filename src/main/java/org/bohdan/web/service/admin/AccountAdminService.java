@@ -1,11 +1,11 @@
-package org.bohdan.web.service.user;
+package org.bohdan.web.service.admin;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.DAO.OrderDao;
-import org.bohdan.model.general.OrderTours;
-import org.bohdan.model.User;
 import org.bohdan.web.Path;
 import org.bohdan.web.service.Command;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,21 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
-import java.util.List;
 
 /**
- * View account user
+ * View account admin
  *
  * @author Bohdan Daniel
  */
-public class AccountUser extends Command {
+@Service
+public class AccountAdminService {
 
-    private static final Logger logger = Logger.getLogger(AccountUser.class);
+    private final static Logger logger = Logger.getLogger(AccountAdminService.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    @Autowired
+    public AccountAdminService() {
+    }
 
-        logger.debug("Command starts");
+    public ModelAndView execute(HttpServletRequest request, String nameView) throws IOException, ServletException {
 
         HttpSession session = request.getSession();
         String lang = request.getParameter("lang");
@@ -42,15 +43,11 @@ public class AccountUser extends Command {
         }
         logger.info("LOG: localeFinal = " + lang);
 
-        User user = (User) session.getAttribute("user");
+        ModelAndView modelAndView = new ModelAndView(nameView);
 
-        List<OrderTours> ordersUser = new OrderDao(connectionPool).findAllOrdersUsersLocale((String) session.getAttribute("defLocale"), user.getId());
-
-        request.setAttribute("orders", ordersUser);
-
-        request.setAttribute("commandPage", "accountUser");
+        modelAndView.addObject("commandPage", "/admin/account");
 
         logger.debug("Command finished");
-        return Path.ACCOUNT_USER;
+        return modelAndView;
     }
 }

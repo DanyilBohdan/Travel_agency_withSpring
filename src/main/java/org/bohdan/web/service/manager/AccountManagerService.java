@@ -1,8 +1,11 @@
-package org.bohdan.web.service.admin;
+package org.bohdan.web.service.manager;
 
 import org.apache.log4j.Logger;
 import org.bohdan.web.Path;
 import org.bohdan.web.service.Command;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,17 +15,20 @@ import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 
 /**
- * View account admin
+ * View account manager
  *
  * @author Bohdan Daniel
  */
-public class AccountAdmin extends Command {
+@Service
+public class AccountManagerService{
 
-    private final static Logger logger = Logger.getLogger(AccountAdmin.class);
+    private final static Logger logger = Logger.getLogger(AccountManagerService.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    @Autowired
+    public AccountManagerService() {
+    }
 
+    public ModelAndView execute(HttpServletRequest request, String nameView) throws IOException, ServletException {
         HttpSession session = request.getSession();
         String lang = request.getParameter("lang");
         logger.info("LOG: localeParam = " + lang);
@@ -36,8 +42,11 @@ public class AccountAdmin extends Command {
         }
         logger.info("LOG: localeFinal = " + lang);
 
-        request.setAttribute("commandPage", "accountAdmin");
+        ModelAndView modelAndView = new ModelAndView(nameView);
 
-        return Path.ACCOUNT_ADMIN;
+        modelAndView.addObject("commandPage", "/manager/account");
+
+        logger.debug("Command finished");
+        return modelAndView;
     }
 }

@@ -22,13 +22,11 @@ public class SearchTour {
 
     private static final Logger logger = Logger.getLogger(SearchTour.class);
 
-    public static List<TourView> execute(HttpServletRequest request, int check) {
+    public static List<TourView> execute(HttpServletRequest request, TourDao tour, int check) {
         try {
 
-            ConnectionPool dataSource = ConnectionPool.getInstance();
-
             List<TourView> tours = null;
-            TourDao tourDao = new TourDao(dataSource);
+            TourDao tourDao = tour;
 
             Integer count = tourDao.findCountTours();
             int countPage = (count / 6) + 1;
