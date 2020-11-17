@@ -1,12 +1,11 @@
 package org.bohdan.web.controllers;
 
 import org.apache.log4j.Logger;
-import org.bohdan.db.DAO.UserDao;
 import org.bohdan.web.Path;
-import org.bohdan.web.service.*;
-import org.bohdan.web.service.admin.AccountAdminService;
-import org.bohdan.web.service.manager.AccountManagerService;
-import org.bohdan.web.service.user.AccountUserService;
+import org.bohdan.web.services.*;
+import org.bohdan.web.services.admin.AccountAdminService;
+import org.bohdan.web.services.manager.AccountManagerService;
+import org.bohdan.web.services.user.AccountUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
