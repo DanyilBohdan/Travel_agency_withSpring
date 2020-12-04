@@ -3,7 +3,7 @@ package org.bohdan.web.filter;
 
 import org.apache.log4j.Logger;
 import org.bohdan.model.Role;
-import org.bohdan.web.Path;
+import org.bohdan.web.exception.AccessForbiddenException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +15,6 @@ import java.util.*;
  * Security filter.
  *
  * @author Bohdan Daniel
- *
  */
 public class CommandAccessFilter implements Filter {
 
@@ -26,7 +25,7 @@ public class CommandAccessFilter implements Filter {
     private static List<String> outOfControl = new ArrayList<String>();
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
         logger.debug("Filter initialization starts");
 
@@ -54,19 +53,16 @@ public class CommandAccessFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             String errorMessage = "You do not have permission to access the requested resource";
-
-            servletRequest.setAttribute("errorMessage", errorMessage);
             logger.trace("Set the request attribute: errorMessage --> " + errorMessage);
 
-            servletRequest.getRequestDispatcher(Path.ERROR_PAGE)
-                    .forward(servletRequest, servletResponse);
+            throw new AccessForbiddenException(errorMessage);
         }
     }
 
     private boolean accessAllowed(ServletRequest request) {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-        String commandName = request.getParameter("command");
+        String commandName = ((HttpServletRequest) request).getRequestURI();
         if (commandName == null || commandName.isEmpty()) {
             logger.error("log: commandName = " + commandName);
             return false;
@@ -103,7 +99,7 @@ public class CommandAccessFilter implements Filter {
      */
     private List<String> asList(String str) {
         List<String> list = new ArrayList<String>();
-        StringTokenizer st = new StringTokenizer(str);
+        StringTokenizer st = new StringTokenizer(str, ",");
         while (st.hasMoreTokens()) list.add(st.nextToken());
         return list;
     }

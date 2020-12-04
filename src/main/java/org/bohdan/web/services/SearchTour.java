@@ -17,11 +17,9 @@ public class SearchTour {
 
     private static final Logger logger = Logger.getLogger(SearchTour.class);
 
-    public static List<TourView> execute(HttpServletRequest request, TourDao tour, int check) {
+    public static List<TourView> execute(HttpServletRequest request, TourDao tourDao, int check) {
         try {
-
             List<TourView> tours = null;
-            TourDao tourDao = tour;
 
             Integer count = tourDao.findCountTours();
             int countPage = (count / 6) + 1;

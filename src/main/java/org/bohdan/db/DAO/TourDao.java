@@ -196,7 +196,7 @@ public class TourDao {
      */
     public void setFilter(int check) {
         filter = FILTER_DATE_ADMIN;
-        if (check == 1) {
+        if (check == 0) {
             filter = FILTER_LIMIT_DATE;
         }
         logger.info("Log: filter --> " + filter);

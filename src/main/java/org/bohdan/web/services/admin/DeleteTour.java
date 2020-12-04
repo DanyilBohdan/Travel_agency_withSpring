@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.web.Path;
 import org.bohdan.web.services.Command;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,20 +17,17 @@ import java.io.IOException;
  *
  * @author Bohdan Daniel
  */
-public class DeleteTour extends Command {
+
+public class DeleteTour {
 
     private static final Logger logger = Logger.getLogger(DeleteTour.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+    public String execute(int id, TourDao tourDao) {
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            boolean check = new TourDao(connectionPool).delete(id);
+            boolean check = tourDao.delete(id);
             logger.info("log: delete Tour = " + check);
 
             return Path.COMMAND_TOURS_ADMIN;
-
         } catch (Exception ex) {
             return Path.ERROR_PAGE;
         }

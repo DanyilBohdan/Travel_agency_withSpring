@@ -1,11 +1,9 @@
 package org.bohdan.web.controllers;
 
 import org.apache.log4j.Logger;
+import org.bohdan.model.User;
 import org.bohdan.web.Path;
 import org.bohdan.web.services.*;
-import org.bohdan.web.services.admin.AccountAdminService;
-import org.bohdan.web.services.manager.AccountManagerService;
-import org.bohdan.web.services.user.AccountUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -22,50 +21,36 @@ public class UserController {
 
     private static final Logger logger = Logger.getLogger(UserController.class);
 
-    private LoginService loginService;
-    private LogoutService logoutService;
-    private AccountUserService accountUserService;
-    private AccountAdminService accountAdminService;
-    private AccountManagerService accountManagerService;
-    private RegisterUserService registerUserService;
-    private RegisterCheck registerCheck;
+    private UserService userService;
 
     @Autowired
-    public UserController(LoginService loginService, AccountUserService accountUserService,
-                          AccountAdminService accountAdminService, AccountManagerService accountManagerService,
-                          RegisterUserService registerUserService, RegisterCheck registerCheck, LogoutService logoutService) {
-        this.loginService = loginService;
-        this.logoutService = logoutService;
-        this.accountUserService = accountUserService;
-        this.accountAdminService = accountAdminService;
-        this.accountManagerService = accountManagerService;
-        this.registerUserService = registerUserService;
-        this.registerCheck = registerCheck;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView loginUser(HttpServletRequest request) throws IOException, ServletException {
-        return loginService.execute(request, Path.PAGE_LOGIN);
+        return userService.login(request);
     }
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public ModelAndView logoutUser(HttpServletRequest request) throws IOException, ServletException {
-        return loginService.execute(request, Path.PAGE_LOGIN);
+        return userService.logout(request);
     }
 
     @RequestMapping(value = "admin/account", method = RequestMethod.GET)
     public ModelAndView accountAdmin(HttpServletRequest request) throws IOException, ServletException {
-        return accountAdminService.execute(request, Path.ACCOUNT_ADMIN);
+        return userService.accountAdminAndManager(request, Path.ACCOUNT_ADMIN);
     }
 
-    @RequestMapping(value = "manager/account", method = RequestMethod.POST)
+    @RequestMapping(value = "manager/account", method = RequestMethod.GET)
     public ModelAndView accountManager(HttpServletRequest request) throws IOException, ServletException {
-        return accountManagerService.execute(request, Path.ACCOUNT_MANAGER);
+        return userService.accountAdminAndManager(request, Path.ACCOUNT_MANAGER);
     }
 
-    @RequestMapping(value = "account", method = RequestMethod.POST)
+    @RequestMapping(value = "account", method = RequestMethod.GET)
     public ModelAndView accountUser(HttpServletRequest request) throws IOException, ServletException {
-        return accountUserService.execute(request, Path.ACCOUNT_USER);
+        return userService.accountUser(request);
     }
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
@@ -75,11 +60,27 @@ public class UserController {
 
     @RequestMapping(value = "registerActive", method = RequestMethod.POST)
     public ModelAndView registerUserActive(HttpServletRequest request) throws IOException, ServletException {
-        return registerUserService.execute(request, Path.PAGE_REGISTER_USER);
+        return userService.registerUser(request);
     }
 
     @RequestMapping(value = "registerCheck", method = RequestMethod.GET)
     public ModelAndView registerUserCheck(HttpServletRequest request) throws IOException, ServletException {
-        return registerCheck.execute(request, Path.PAGE_REGISTER_CHECK);
+        return userService.registerUserCheck(request);
+    }
+
+    @RequestMapping(value = "account/edit/view", method = RequestMethod.GET)
+    public ModelAndView editAccountView(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+
+        User user = (User) session.getAttribute("user");
+
+        request.setAttribute("user", user);
+
+        return new ModelAndView(Path.PAGE_EDIT_ACCOUNT);
+    }
+
+    @RequestMapping(value = "account/edit", method = RequestMethod.POST)
+    public ModelAndView editAccount(HttpServletRequest request) throws IOException, ServletException {
+        return userService.accountEdit(request);
     }
 }

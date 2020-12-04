@@ -15,7 +15,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
     private static final String DISPATCHER_SERVLET_NAME= "Controller";
 
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
+    public void onStartup(ServletContext servletContext)  {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.register(WebConfig.class);
 
@@ -26,7 +26,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = servletContext
                 .addServlet(DISPATCHER_SERVLET_NAME, new DispatcherServlet(context));
 
-        dispatcher.addMapping("/");
         dispatcher.setLoadOnStartup(1);
+        dispatcher.addMapping("/");
     }
 }

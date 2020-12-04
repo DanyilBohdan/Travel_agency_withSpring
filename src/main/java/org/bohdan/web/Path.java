@@ -27,20 +27,18 @@ public final class Path {
     public static final String ACCOUNT_USER = "user/accountUser";
 
     public static final String COMMAND_LIST_ORDERS = "redirect:/controller?command=listOrders";
-//    public static final String COMMAND_ACCOUNT_ADMIN = "redirect:/user?command=accountAdmin";
-//    public static final String COMMAND_ACCOUNT_MANAGER = "redirect:/controller?command=accountManager";
-//    public static final String COMMAND_ACCOUNT = "redirect:/controller?command=accountUser";
     public static final String COMMAND_ACCOUNT_ADMIN = "redirect:/user/admin/account";
     public static final String COMMAND_ACCOUNT_MANAGER = "redirect:/user/manager/account";
     public static final String COMMAND_ACCOUNT = "redirect:/user/account";
-    public static final String COMMAND_TOURS_ADMIN = "redirect:/controller?command=listTours";
+    public static final String COMMAND_TOURS_ADMIN = "redirect:/tours/admin/view";
     public static final String COMMAND_LIST_USER = "redirect:/controller?command=listUsers";
     public static final String COMMAND_LIST_TYPE = "redirect:/controller?command=listType";
     public static final String COMMAND_LIST_COUNTRY = "redirect:/controller?command=listCountry";
 
-    public static final String REGISTER_TOUR = "/jsp/user/registerTour.jsp";
+    public static final String REGISTER_TOUR = "user/registerTour";
 
-    public static final String ERROR_PAGE = "/jsp/error/error_page.jsp";
+    public static final String ERROR_PAGE = "error/error_page";
+    public static final String ERROR_EXCEPTION = "error/error_exception";
     public static final String REGISTER_CHECK_REDIRECT = "redirect:/user/registerCheck";
     public static final String PAGE_REGISTER_CHECK = "registerCheck";
 }

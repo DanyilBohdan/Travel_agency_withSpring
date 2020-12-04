@@ -9,6 +9,8 @@ import javax.servlet.ServletContextListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Context listener.
@@ -47,10 +49,12 @@ public class ContextListener implements ServletContextListener {
             logger.warn("'locales' init parameter is empty, the default encoding will be used");
         } else {
             List<String> locales = new ArrayList<String>();
-            StringTokenizer st = new StringTokenizer(localesValue);
-            while (st.hasMoreTokens()) {
-                String localeName = st.nextToken();
-                locales.add(localeName);
+            Pattern pattern = Pattern.compile("\\w{2,}");
+
+            Matcher matcher = pattern.matcher(localesValue);
+
+            while (matcher.find()){
+                locales.add(matcher.group());
             }
 
             logger.debug("Application attribute set: locales --> " + locales);
