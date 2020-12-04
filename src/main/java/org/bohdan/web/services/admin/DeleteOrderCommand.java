@@ -15,17 +15,15 @@ import java.io.IOException;
  *
  * @author Bohdan Daniel
  */
-public class DeleteOrder extends Command {
+public class DeleteOrderCommand {
 
-    private static final Logger logger = Logger.getLogger(DeleteOrder.class);
+    private static final Logger logger = Logger.getLogger(DeleteOrderCommand.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+    public String delete(HttpServletRequest request, OrderDao orderDao) {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             logger.info("log: delete Tour by ID = " + id);
-            boolean check = new OrderDao(connectionPool).delete(id);
+            boolean check = orderDao.delete(id);
             logger.info("log: delete Tour = " + check);
 
             return Path.COMMAND_LIST_ORDERS;

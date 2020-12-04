@@ -11,26 +11,12 @@
     <div class="container p-3 my-3 border">
         <h1><fmt:message key="account.admin.listTours"/></h1>
 
-        <form action="controller" method="get">
+        <form action="controller" method="/tours/admin/tour/createView">
             <input type="hidden" name="command" value="getCreateTour"/>
             <button type="submit" class="btn btn-outline-dark">
                 <fmt:message key="account.admin.createNewTour"/>
             </button>
         </form>
-        <div class="row">
-            <form action="controller" method="get">
-                <input type="hidden" name="command" value="listType"/>
-                <button type="submit" class="btn btn-outline-dark">
-                    <fmt:message key="account.admin.listTypeTour"/>
-                </button>
-            </form>
-            <form action="controller" method="get">
-                <input type="hidden" name="command" value="listCountry"/>
-                <button type="submit" class="btn btn-outline-dark">
-                    <fmt:message key="account.admin.listCountry"/>
-                </button>
-            </form>
-        </div>
         <div class="row">
             <form class="form-inline" method="get" action="/tours/admin/view">
                 <input type="hidden" name="command" value="listTours">

@@ -1,7 +1,6 @@
 package org.bohdan.web.controllers;
 
 import org.apache.log4j.Logger;
-import org.bohdan.web.services.CountryService;
 import org.bohdan.web.services.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,15 +15,11 @@ import java.io.IOException;
 @RequestMapping("tours")
 public class TourController {
 
-    private static final Logger logger = Logger.getLogger(TourController.class);
-
     private TourService tourService;
-    private CountryService countryService;
 
     @Autowired
-    public TourController(TourService tourService, CountryService countryService) {
+    public TourController(TourService tourService) {
         this.tourService = tourService;
-        this.countryService = countryService;
     }
 
     @RequestMapping(value = "view", method = RequestMethod.GET)

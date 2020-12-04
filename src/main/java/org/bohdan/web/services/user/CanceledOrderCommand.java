@@ -3,7 +3,6 @@ package org.bohdan.web.services.user;
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.web.Path;
-import org.bohdan.web.services.Command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,19 +14,18 @@ import java.io.IOException;
  *
  * @author Bohdan Daniel
  */
-public class CanceledOrder extends Command {
+public class CanceledOrderCommand {
 
-    private final static Logger logger = Logger.getLogger(CanceledOrder.class);
+    private final static Logger logger = Logger.getLogger(CanceledOrderCommand.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public String canceled(HttpServletRequest request, OrderDao orderDao) {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             logger.info("Log: id --> " + id);
             String canceled = request.getParameter("canceled");
             logger.info("Log: canceled --> " + canceled);
 
-            boolean check = new OrderDao(connectionPool).updateStatus(canceled, id);
+            boolean check = orderDao.updateStatus(canceled, id);
             logger.info("Log: check update status order --> " + check);
 
             return Path.COMMAND_ACCOUNT;
