@@ -4,7 +4,11 @@ import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.db.DAO.UserDao;
 import org.bohdan.web.Path;
 import org.bohdan.web.services.*;
-import org.bohdan.web.services.admin.AccountAdminAndManagerCommand;
+import org.bohdan.web.services.admin.*;
+import org.bohdan.web.services.common.EditAccountCommand;
+import org.bohdan.web.services.common.LoginCommand;
+import org.bohdan.web.services.common.LogoutCommand;
+import org.bohdan.web.services.common.RegisterUserCommand;
 import org.bohdan.web.services.user.AccountUserCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,6 +76,32 @@ public class UserServiceImpl implements UserService {
             throws IOException, ServletException {
         ModelAndView modelAndView = new ModelAndView(Path.ERROR_PAGE);
         return new EditAccountCommand().execute(request, modelAndView, userDao);
+    }
+
+    @Override
+    public ModelAndView listUsers(HttpServletRequest request)
+            throws IOException, ServletException {
+        ModelAndView modelAndView = new ModelAndView(Path.LIST_USERS_ADMIN);
+        return new ListUsersCommand().view(modelAndView, userDao);
+    }
+
+    @Override
+    public ModelAndView searchUser(HttpServletRequest request)
+            throws IOException, ServletException {
+        ModelAndView modelAndView = new ModelAndView(Path.LIST_USERS_ADMIN);
+        return new SearchUserCommand().search(request, modelAndView, userDao);
+    }
+
+    @Override
+    public ModelAndView updateRole(HttpServletRequest request)
+            throws IOException, ServletException {
+        return new ModelAndView(new UpdateRoleUserCommand().update(request, userDao));
+    }
+
+    @Override
+    public ModelAndView updateStatus(HttpServletRequest request)
+            throws IOException, ServletException {
+        return new ModelAndView(new UpdateStatusUserCommand().update(request, userDao));
     }
 
 }

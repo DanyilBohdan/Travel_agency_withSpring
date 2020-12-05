@@ -8,7 +8,7 @@
 <div class="mainContainer">
     <%@include file="/WEB-INF/jspf/header.jspf" %>
 
-    <form action="controller" method="post">
+    <form action="/order/register" method="post">
         <div class="container p-3 my-3 border">
                 <h5>
                     <fmt:message key="tour.title"/>

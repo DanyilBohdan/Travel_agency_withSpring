@@ -1,4 +1,4 @@
-package org.bohdan.web.services;
+package org.bohdan.web.services.common;
 
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.TourDao;

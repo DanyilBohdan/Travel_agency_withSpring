@@ -41,7 +41,7 @@
         <label>${tour.discount}</label><br>
         <br/>
         <c:if test="${not empty user}">
-            <form method="post" action="controller">
+            <form method="post" action="/order/register/view">
                 <input type="hidden" name="command" value="registerTourView">
                 <input type="hidden" name="id" value="${tour.id}">
                 <button type="submit" class="btn btn-outline-dark"><fmt:message key="login_jsp.button.registration"/></button>

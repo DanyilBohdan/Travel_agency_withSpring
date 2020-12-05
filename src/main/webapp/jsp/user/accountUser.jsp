@@ -61,7 +61,7 @@
             <c:forEach var="order" items="${orders}">
                 <div class="border border-secondary">
                     <div class="float-right ">
-                        <form id="statusCanceled" action="controller" method="post">
+                        <form id="statusCanceled" action="/order/canceled" method="post">
                             <input type="hidden" name="command" value="statusCanceled"/>
                             <input type="hidden" name="id" value="${order.orderId}"/>
                             <button type="submit" class="btn btn-outline-dark" name="canceled" value="canceled">

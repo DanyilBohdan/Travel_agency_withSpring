@@ -1,4 +1,4 @@
-package org.bohdan.web.services;
+package org.bohdan.web.services.common;
 
 import org.apache.log4j.Logger;
 import org.bohdan.web.Path;
@@ -13,11 +13,10 @@ import java.io.IOException;
  *
  * @author Bohdan Daniel
  */
-public class NoCommand extends Command{
+public class NoCommand {
 
     private final static Logger logger = Logger.getLogger(NoCommand.class);
 
-    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         logger.debug("Command starts");
 

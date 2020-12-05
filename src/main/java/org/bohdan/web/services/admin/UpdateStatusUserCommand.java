@@ -4,11 +4,9 @@ import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.UserDao;
 import org.bohdan.model.User;
 import org.bohdan.web.Path;
-import org.bohdan.web.services.Command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -16,19 +14,18 @@ import java.io.IOException;
  *
  * @author Bohdan Daniel
  */
-public class UpdateStatusUser extends Command {
+public class UpdateStatusUserCommand {
 
-    private final static Logger logger = Logger.getLogger(SearchUser.class);
+    private final static Logger logger = Logger.getLogger(SearchUserCommand.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public String update(HttpServletRequest request, UserDao userDao) throws IOException, ServletException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             logger.info("Log: id --> " + id);
-            User user = new UserDao(connectionPool).findEntityById(id);
+            User user = userDao.findEntityById(id);
             boolean status;
             status = !user.getStatus();
-            boolean check = new UserDao(connectionPool).updateStatus(status, id);
+            boolean check = userDao.updateStatus(status, id);
             logger.info("Log: check update user --> " + check);
 
             return Path.COMMAND_LIST_USER;

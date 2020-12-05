@@ -4,11 +4,10 @@ import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.web.Path;
 import org.bohdan.web.services.OrderService;
-import org.bohdan.web.services.admin.DeleteOrderCommand;
-import org.bohdan.web.services.admin.ListOrdersCommand;
-import org.bohdan.web.services.admin.UpdateDiscountOrderCommand;
-import org.bohdan.web.services.admin.UpdateStatusOrderCommand;
+import org.bohdan.web.services.admin.*;
 import org.bohdan.web.services.user.CanceledOrderCommand;
+import org.bohdan.web.services.user.RegisterTourCommand;
+import org.bohdan.web.services.user.RegisterTourViewCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,6 +46,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public ModelAndView searchByStatusOrder(HttpServletRequest request) throws IOException, ServletException {
+        ModelAndView modelAndView = new ModelAndView(Path.LIST_ORDERS_ADMIN);
+        return new SearchByStatusOrderCommand().search(request, modelAndView, orderDao);
+    }
+
+    @Override
     public ModelAndView canceledOrder(HttpServletRequest request) {
         return new ModelAndView(new CanceledOrderCommand().canceled(request, orderDao));
     }
@@ -54,5 +59,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public ModelAndView deleteOrder(HttpServletRequest request) {
         return new ModelAndView(new DeleteOrderCommand().delete(request, orderDao));
+    }
+
+    @Override
+    public ModelAndView registerView(HttpServletRequest request) throws IOException, ServletException {
+        ModelAndView modelAndView = new ModelAndView(Path.REGISTER_TOUR);
+        return new RegisterTourViewCommand().register(request, modelAndView, tourDao, orderDao);
+    }
+
+    @Override
+    public ModelAndView register(HttpServletRequest request) throws IOException, ServletException {
+        return new ModelAndView(new RegisterTourCommand().register(request, orderDao));
     }
 }

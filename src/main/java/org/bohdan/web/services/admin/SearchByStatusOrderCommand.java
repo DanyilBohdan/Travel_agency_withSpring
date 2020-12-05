@@ -3,12 +3,10 @@ package org.bohdan.web.services.admin;
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.model.general.OrderTours;
-import org.bohdan.web.Path;
-import org.bohdan.web.services.Command;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,27 +15,26 @@ import java.util.List;
  *
  * @author Bohdan Daniel
  */
-public class SearchByStatusOrder extends Command {
+public class SearchByStatusOrderCommand {
 
-    private static final Logger logger = Logger.getLogger(SearchByStatusOrder.class);
+    private static final Logger logger = Logger.getLogger(SearchByStatusOrderCommand.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)
+    public ModelAndView search(HttpServletRequest request, ModelAndView modelAndView, OrderDao orderDao)
             throws IOException, ServletException {
 
         String lang = (String) request.getSession().getAttribute("defLocale");
 
         String status = request.getParameter("searchStatus");
 
-        List<OrderTours> orders = new OrderDao(connectionPool).findFindByStatusOrdersUsersLocale(lang, status);
+        List<OrderTours> orders = orderDao.findFindByStatusOrdersUsersLocale(lang, status);
 
         logger.trace("Found in DB: orders --> " + orders);
 
-        request.setAttribute("orders", orders);
-        request.setAttribute("selectDef", status);
+        modelAndView.addObject("orders", orders);
+        modelAndView.addObject("selectDef", status);
 
         logger.debug("Command finished");
 
-        return Path.LIST_ORDERS_ADMIN;
+        return modelAndView;
     }
 }

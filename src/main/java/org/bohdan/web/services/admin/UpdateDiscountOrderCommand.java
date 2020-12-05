@@ -4,13 +4,9 @@ import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.web.Path;
 import org.bohdan.web.Validation;
-import org.bohdan.web.services.Command;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * Update discount order by id order

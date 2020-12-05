@@ -3,12 +3,7 @@ package org.bohdan.web.services.admin;
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.web.Path;
-import org.bohdan.web.services.Command;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * Delete order

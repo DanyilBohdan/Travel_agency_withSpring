@@ -14,7 +14,13 @@ public interface OrderService {
 
     ModelAndView updateDiscountOrder(HttpServletRequest request);
 
+    ModelAndView searchByStatusOrder(HttpServletRequest request) throws IOException, ServletException;
+
     ModelAndView canceledOrder(HttpServletRequest request);
 
     ModelAndView deleteOrder(HttpServletRequest request);
+
+    ModelAndView registerView(HttpServletRequest request) throws IOException, ServletException;
+
+    ModelAndView register(HttpServletRequest request) throws IOException, ServletException;
 }

@@ -3,7 +3,7 @@ package org.bohdan.web.filter;
 
 import org.apache.log4j.Logger;
 import org.bohdan.model.Role;
-import org.bohdan.web.exception.AccessForbiddenException;
+import org.bohdan.web.Path;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +55,10 @@ public class CommandAccessFilter implements Filter {
             String errorMessage = "You do not have permission to access the requested resource";
             logger.trace("Set the request attribute: errorMessage --> " + errorMessage);
 
-            throw new AccessForbiddenException(errorMessage);
+            servletRequest.setAttribute("errorMessage",errorMessage);
+            servletRequest.getRequestDispatcher(Path.ERROR_PAGE)
+                    .forward(servletRequest,servletResponse);
+//            throw new AccessForbiddenException(errorMessage);
         }
     }
 

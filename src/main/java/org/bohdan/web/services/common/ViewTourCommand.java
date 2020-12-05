@@ -1,9 +1,8 @@
-package org.bohdan.web.services;
+package org.bohdan.web.services.common;
 
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.model.general.TourView;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

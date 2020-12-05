@@ -5,9 +5,9 @@ import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.web.Path;
 import org.bohdan.web.services.TourService;
-import org.bohdan.web.services.ViewTourCommand;
-import org.bohdan.web.services.ViewToursCommand;
-import org.bohdan.web.services.admin.DeleteTour;
+import org.bohdan.web.services.common.ViewTourCommand;
+import org.bohdan.web.services.common.ViewToursCommand;
+import org.bohdan.web.services.admin.DeleteTourCommand;
 import org.bohdan.web.services.admin.TourCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,7 +64,7 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public String deleteTour(int id) {
-        return new DeleteTour().execute(id, tourDao);
+        return new DeleteTourCommand().execute(id, tourDao);
     }
 
     @Override

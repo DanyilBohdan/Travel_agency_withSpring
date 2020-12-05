@@ -61,21 +61,21 @@
         <init-param>
             <param-name>admin</param-name>
             <param-value>
-                /tours/admin/view,/tours/admin/tour/editView,/tours/admin/tour/edit,/tours/admin/tour/delete
-                /tours/admin/tour/createView,/user/admin/account,/user/admin/account,/user/admin/account
+                /tours/admin/view,/tours/admin/tour/editView,/tours/admin/tour/edit,/tours/admin/tour/delete,/tours/admin/tour/createView,/tours/admin/tour/create,/user/admin/account,/user/admin/account,/user/admin/account,/order/view,/order/view/update/status,/order/view/update/discount,/order/view/delete,/order/view/searchByStatus,/user/list,/user/list/search,/user/update/role,/user/update/status
             </param-value>
         </init-param>
         <init-param>
             <param-name>manager</param-name>
-            <param-value>/user/manager/account</param-value>
+            <param-value>/user/manager/account,/order/view,/order/view/update/status,/order/view/update/discount,/order/view/delete,/order/view/searchByStatus</param-value>
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <param-value>/user/account</param-value>
+            <param-value>/user/account,/order/canceled,/order/register/view,/order/register</param-value>
         </init-param>
         <init-param>
             <param-name>common</param-name>
-            <param-value>/user/login,/tours/view,/tours/view/tour,/user/logout,/user/account/edit/view,/user/account/edit</param-value>
+            <param-value>/user/login,/tours/view,/tours/view/tour,/user/logout,/user/account/edit/view,/user/account/edit
+            </param-value>
         </init-param>
         <init-param>
             <param-name>out-of-control</param-name>

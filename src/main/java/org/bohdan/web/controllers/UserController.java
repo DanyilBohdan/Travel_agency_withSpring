@@ -83,4 +83,24 @@ public class UserController {
     public ModelAndView editAccount(HttpServletRequest request) throws IOException, ServletException {
         return userService.accountEdit(request);
     }
+
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public ModelAndView listUsers(HttpServletRequest request) throws IOException, ServletException {
+        return userService.accountEdit(request);
+    }
+
+    @RequestMapping(value = "list/search", method = RequestMethod.GET)
+    public ModelAndView searchUsers(HttpServletRequest request) throws IOException, ServletException {
+        return userService.searchUser(request);
+    }
+
+    @RequestMapping(value = "update/role", method = RequestMethod.POST)
+    public ModelAndView updateRole(HttpServletRequest request) throws IOException, ServletException {
+        return userService.updateRole(request);
+    }
+
+    @RequestMapping(value = "update/status", method = RequestMethod.POST)
+    public ModelAndView updateStatus(HttpServletRequest request) throws IOException, ServletException {
+        return userService.updateStatus(request);
+    }
 }

@@ -57,7 +57,7 @@
             </form>
         </div>
         <div class="row">
-            <form action="controller" method="post">
+            <form action="/orders/view" method="get">
                 <input type="hidden" name="command" value="listOrders"/>
                 <button type="submit" class="btn btn-outline-dark"><fmt:message
                         key="account.admin.listOrders"/></button>

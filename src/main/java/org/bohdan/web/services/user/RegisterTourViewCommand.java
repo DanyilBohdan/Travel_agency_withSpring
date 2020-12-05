@@ -7,11 +7,10 @@ import org.bohdan.model.general.OrderToursByIdUser;
 import org.bohdan.model.general.TourView;
 import org.bohdan.model.User;
 import org.bohdan.web.Path;
-import org.bohdan.web.services.Command;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
@@ -20,12 +19,12 @@ import java.util.*;
  *
  * @author Bohdan Daniel
  */
-public class RegisterTourView extends Command {
+public class RegisterTourViewCommand {
 
-    private final static Logger logger = Logger.getLogger(RegisterTourView.class);
+    private final static Logger logger = Logger.getLogger(RegisterTourViewCommand.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)
+    public ModelAndView register(HttpServletRequest request, ModelAndView modelAndView,
+                          TourDao tourDao, OrderDao orderDao)
             throws IOException, ServletException {
         try {
             String lang = (String) request.getSession().getAttribute("defLocale");
@@ -36,34 +35,34 @@ public class RegisterTourView extends Command {
             String errorMessage;
 
             int id = Integer.parseInt(request.getParameter("id"));
-            TourView tour = new TourDao(connectionPool).findByIdLocale(lang, id);
+            TourView tour = tourDao.findByIdLocale(lang, id);
 
             //check on count people
-            Integer count_peopleForTour = new OrderDao(connectionPool).findCountOrderByIdTour(id);
+            Integer count_peopleForTour = orderDao.findCountOrderByIdTour(id);
             if (count_peopleForTour >= tour.getCountPeople()) {
                 errorMessage = ResourceBundle.getBundle("resources", current).getString("registrationTour.noAvailable");
-                request.setAttribute("noAvailable", errorMessage);
+                modelAndView.addObject("noAvailable", errorMessage);
                 logger.error("errorMessage --> " + errorMessage);
             } else {
 
                 //check on date
                 User user = (User) request.getSession().getAttribute("user");
-                List<OrderToursByIdUser> ordersUser = new OrderDao(connectionPool).findToursByIdUser(user.getId());
+                List<OrderToursByIdUser> ordersUser = orderDao.findToursByIdUser(user.getId());
 
                 if (!checkDate(ordersUser, tour)) {
                     errorMessage = ResourceBundle.getBundle("resources", current).getString("registrationTour.errorDate");
-                    request.setAttribute("noAvailable", errorMessage);
+                    modelAndView.addObject("noAvailable", errorMessage);
                     logger.error("errorMessage --> " + errorMessage);
                 }
             }
 
-            request.setAttribute("tour", tour);
+            modelAndView.addObject("tour", tour);
 
-            return Path.REGISTER_TOUR;
+            return modelAndView;
 
         } catch (Exception ex) {
             logger.error("Log: ex --> " + ex);
-            return Path.ERROR_PAGE;
+            return new ModelAndView(Path.ERROR_PAGE);
         }
     }
 

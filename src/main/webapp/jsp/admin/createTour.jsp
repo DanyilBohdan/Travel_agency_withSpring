@@ -8,7 +8,7 @@
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <div class="container p-3 my-3 border">
         <h2><fmt:message key="tour.create.newTour"/></h2>
-        <form action="controller" method="post">
+        <form action="/tours/admin/tour/create" method="post">
 
             <label><fmt:message key="tour.create.nameEN"/></label>
             <input name="nameEN" value="${tour.nameEN}"/><br>
@@ -18,7 +18,7 @@
             <label><fmt:message key="tour.create.typeEN"/></label>
             <select name="typeEN">
                 <c:forEach var="item" items="${typeTourOut}">
-                    <option  ${typeDef.nameEN == item.nameEN ? 'selected' : ''}>${item.nameEN}</option>
+                    <option  ${typeDef.nameEn == item.nameEn ? 'selected' : ''}>${item.nameEn}</option>
                 </c:forEach>
             </select><br>
             <label><fmt:message key="tour.create.typeRU"/></label>

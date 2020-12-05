@@ -9,7 +9,7 @@
 <%@include file="/WEB-INF/jspf/header.jspf" %>
 <div class="container p-3 my-3 border">
     <div class="container p-3 my-3 border">
-        <form class="form-inline" method="post" action="controller">
+        <form class="form-inline" method="post" action="/user/list/search">
             <input type="hidden" name="command" value="searchUser">
             <input type="text" name="searchText" class="form-control"
                    placeholder="<fmt:message key="search.placeholder"/>">
@@ -30,7 +30,7 @@
                     <fmt:message key="account.label.login"/>: ${user.login}<br>
                     <fmt:message key="account.label.phone_number"/>: ${user.phoneNumber}<br>
                     <label><fmt:message key="account.label.status"/>:</label>
-                    <form action="controller" method="post">
+                    <form action="/user/update/status" method="post">
                         <input type="hidden" name="command" value="updateStatusUser">
                         <input type="hidden" name="id" value="${user.id}">
                         <c:if test="${user.role != 'admin'}">
@@ -39,7 +39,7 @@
                     </form>
                 </div>
                 <div class="container">
-                    <form action="controller" method="post">
+                    <form action="/user/update/role" method="post">
                         <input type="hidden" name="command" value="updateRole">
                         <input type="hidden" name="id" value="${user.id}">
                         <label><fmt:message key="role"/> :</label>

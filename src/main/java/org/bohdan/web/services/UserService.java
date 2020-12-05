@@ -1,5 +1,7 @@
 package org.bohdan.web.services;
 
+import org.bohdan.web.Path;
+import org.bohdan.web.services.admin.ListUsersCommand;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -21,4 +23,12 @@ public interface UserService {
     ModelAndView registerUserCheck(HttpServletRequest request) throws IOException, ServletException;
 
     ModelAndView accountEdit(HttpServletRequest request) throws IOException, ServletException;
+
+    ModelAndView listUsers(HttpServletRequest request) throws IOException, ServletException;
+
+    ModelAndView searchUser(HttpServletRequest request) throws IOException, ServletException;
+
+    ModelAndView updateRole(HttpServletRequest request) throws IOException, ServletException;
+
+    ModelAndView updateStatus(HttpServletRequest request) throws IOException, ServletException;
 }

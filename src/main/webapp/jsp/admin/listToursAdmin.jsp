@@ -11,7 +11,7 @@
     <div class="container p-3 my-3 border">
         <h1><fmt:message key="account.admin.listTours"/></h1>
 
-        <form action="controller" method="/tours/admin/tour/createView">
+        <form action="/tours/admin/tour/createView" method="get">
             <input type="hidden" name="command" value="getCreateTour"/>
             <button type="submit" class="btn btn-outline-dark">
                 <fmt:message key="account.admin.createNewTour"/>
