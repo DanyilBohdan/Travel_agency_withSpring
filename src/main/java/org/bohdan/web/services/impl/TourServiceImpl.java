@@ -40,7 +40,7 @@ public class TourServiceImpl implements TourService {
     @Override
     public ModelAndView viewTour(HttpServletRequest request) throws IOException, ServletException {
         ModelAndView modelAndView = new ModelAndView(Path.PAGE_VIEW_TOUR);
-        modelAndView.addObject(new ViewTourCommand().execute(request, tourDao));
+        modelAndView.addObject("tour", new ViewTourCommand().execute(request, tourDao));
         return modelAndView;
     }
 

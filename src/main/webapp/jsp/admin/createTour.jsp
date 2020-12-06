@@ -31,7 +31,7 @@
             <label><fmt:message key="tour.create.countryEN"/></label>
             <select name="countryEN">
                 <c:forEach var="item" items="${countryOut}">
-                    <option ${countryDef.nameEN == item.nameEN ? 'selected' : ''}>${item.nameEN}</option>
+                    <option ${countryDef.nameEn == item.nameEn ? 'selected' : ''}>${item.nameEn}</option>
                 </c:forEach>
             </select><br>
             <label><fmt:message key="tour.create.countryRU"/></label>

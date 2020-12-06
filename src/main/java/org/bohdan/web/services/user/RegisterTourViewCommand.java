@@ -30,15 +30,17 @@ public class RegisterTourViewCommand {
             String lang = (String) request.getSession().getAttribute("defLocale");
             logger.debug("Log: lang -->" + lang);
 
-
             Locale current = new Locale(lang);
-            String errorMessage;
+            String errorMessage = null;
 
             int id = Integer.parseInt(request.getParameter("id"));
+            logger.info("LOG: id --> " + id);
             TourView tour = tourDao.findByIdLocale(lang, id);
+            logger.info("LOG: tour --> " + tour);
 
             //check on count people
             Integer count_peopleForTour = orderDao.findCountOrderByIdTour(id);
+            logger.info("LOG: count_peopleForTour --> " + count_peopleForTour);
             if (count_peopleForTour >= tour.getCountPeople()) {
                 errorMessage = ResourceBundle.getBundle("resources", current).getString("registrationTour.noAvailable");
                 modelAndView.addObject("noAvailable", errorMessage);
@@ -47,6 +49,7 @@ public class RegisterTourViewCommand {
 
                 //check on date
                 User user = (User) request.getSession().getAttribute("user");
+                logger.debug("LOG: user --> " + user);
                 List<OrderToursByIdUser> ordersUser = orderDao.findToursByIdUser(user.getId());
 
                 if (!checkDate(ordersUser, tour)) {

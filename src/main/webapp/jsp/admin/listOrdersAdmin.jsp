@@ -10,7 +10,7 @@
     <h1><fmt:message key="account.admin.listOrders"/></h1>
     <div class="container p-3 my-3 border">
         <div class="row">
-            <form class="form-inline" method="post" action="/order/view/searchByStatus">
+            <form class="form-inline" method="get" action="/order/view/searchByStatus">
                 <input type="hidden" name="command" value="searchByStatusOrder">
                 <select name="searchStatus" onchange="submit()">
                     <option value="registered" ${selectDef == "registered" ? 'selected' : ''}><fmt:message
@@ -21,7 +21,7 @@
                             key="order.status.canceled"/></option>
                 </select>
             </form>
-            <form action="/orders/view" method="post">
+            <form action="/order/view" method="get">
                 <input type="hidden" name="command" value="listOrders"/>
                 <button type="submit" class="btn btn-outline-dark"><fmt:message
                         key="search.reset"/></button>

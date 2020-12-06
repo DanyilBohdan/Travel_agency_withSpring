@@ -86,7 +86,7 @@ public class UserController {
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView listUsers(HttpServletRequest request) throws IOException, ServletException {
-        return userService.accountEdit(request);
+        return userService.listUsers(request);
     }
 
     @RequestMapping(value = "list/search", method = RequestMethod.GET)

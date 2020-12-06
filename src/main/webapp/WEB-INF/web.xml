@@ -70,7 +70,7 @@
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <param-value>/user/account,/order/canceled,/order/register/view,/order/register</param-value>
+            <param-value>/user/account,/order/canceled,/order/register/view,/order/register,/user/view/account</param-value>
         </init-param>
         <init-param>
             <param-name>common</param-name>

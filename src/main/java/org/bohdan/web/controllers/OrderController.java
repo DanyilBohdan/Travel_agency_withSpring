@@ -39,12 +39,12 @@ public class OrderController {
 
     @RequestMapping(value = "view/delete", method = RequestMethod.POST)
     public ModelAndView deleteOrder(HttpServletRequest request) throws IOException, ServletException {
-        return orderService.searchByStatusOrder(request);
+        return orderService.deleteOrder(request);
     }
 
     @RequestMapping(value = "view/searchByStatus", method = RequestMethod.GET)
-    public ModelAndView searchByStatusOrder(HttpServletRequest request) {
-        return orderService.deleteOrder(request);
+    public ModelAndView searchByStatusOrder(HttpServletRequest request) throws IOException, ServletException {
+        return orderService.searchByStatusOrder(request);
     }
 
     @RequestMapping(value = "canceled", method = RequestMethod.POST)
@@ -52,13 +52,13 @@ public class OrderController {
         return orderService.canceledOrder(request);
     }
 
-    @RequestMapping(value = "register/view", method = RequestMethod.POST)
-    public ModelAndView registerView(HttpServletRequest request) {
-        return orderService.updateDiscountOrder(request);
+    @RequestMapping(value = "register/view", method = RequestMethod.GET)
+    public ModelAndView registerView(HttpServletRequest request) throws IOException, ServletException {
+        return orderService.registerView(request);
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public ModelAndView register(HttpServletRequest request) {
-        return orderService.updateDiscountOrder(request);
+    public ModelAndView register(HttpServletRequest request) throws IOException, ServletException {
+        return orderService.register(request);
     }
 }
