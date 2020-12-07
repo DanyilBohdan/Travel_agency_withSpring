@@ -1,6 +1,9 @@
 package org.bohdan.model;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 /**
  * Role entity.
@@ -22,6 +25,10 @@ public enum Role {
     }
 
     public String getName() {
-        return name().toLowerCase();
+        return name();
+    }
+
+    public static SimpleGrantedAuthority getAuthorities(User user){
+        return new SimpleGrantedAuthority("ROLE_" + Role.getRole(user).getName().toUpperCase());
     }
 }

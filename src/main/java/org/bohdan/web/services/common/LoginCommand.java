@@ -26,12 +26,12 @@ public class LoginCommand {
 
     public ModelAndView execute(HttpServletRequest request, ModelAndView modelAndView, UserDao userDao)
             throws IOException, ServletException {
-        logger.debug("Command starts");
+        logger.info("Command starts");
 
         HttpSession session = request.getSession();
 
-        String login = request.getParameter("login");
-        logger.trace("Request parameter: login -->" + login);
+        String login = request.getParameter("username");
+        logger.info("Request parameter: login -->" + login);
 
         String password = request.getParameter("password");
 
@@ -61,7 +61,7 @@ public class LoginCommand {
         }
 
         User user = userDao.findEntityByLogin(login);
-        logger.trace("Found in DB: user --> " + user);
+        logger.info("Found in DB: user --> " + user);
 
         if (user == null || !password.equals(user.getPassword())) {
             errorMessage = "Cannot find user with such login/password";
@@ -91,20 +91,20 @@ public class LoginCommand {
             }
 
             session.setAttribute("user", user);
-            logger.trace("Set the session attribute: user --> " + user);
+            logger.info("Set the session attribute: user --> " + user);
 
             session.setAttribute("userRole", role);
-            logger.trace("Set the session attribute: userRole --> " + role);
+            logger.info("Set the session attribute: userRole --> " + role);
 
             logger.info("User " + user + " logged as " + role.toString().toLowerCase());
 
             String defLocale = (String) Config.get(session, "javax.servlet.jsp.jstl.fmt.locale");
-            logger.trace("LOG: defLocale = " + defLocale);
+            logger.info("LOG: defLocale = " + defLocale);
 
             session.setAttribute("localeDef", defLocale);
         }
 
-        logger.debug("Command finished");
+        logger.info("Command finished");
         return modelAndView;
     }
 }

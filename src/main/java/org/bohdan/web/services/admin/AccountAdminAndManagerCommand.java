@@ -34,9 +34,10 @@ public class AccountAdminAndManagerCommand {
         }
         logger.info("LOG: localeFinal = " + lang);
 
+
         modelAndView.addObject("commandPage", request.getRequestURI());
 
-        logger.debug("Command finished");
+        logger.info("Command finished");
         return modelAndView;
     }
 }

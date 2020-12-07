@@ -9,6 +9,7 @@ package org.bohdan.web;
 
 public final class Path {
 
+    public static final String PAGE_WELCOME = "welcome";
     public static final String PAGE_MAIN = "main";
     public static final String PAGE_LOGIN = "login";
     public static final String PAGE_REGISTER_USER = "common/register";
@@ -28,6 +29,12 @@ public final class Path {
     public static final String COMMAND_ACCOUNT_ADMIN = "redirect:/user/admin/account";
     public static final String COMMAND_ACCOUNT_MANAGER = "redirect:/user/manager/account";
     public static final String COMMAND_ACCOUNT = "redirect:/user/account";
+    public static final String REDIRECT_ACCOUNT_ADMIN = "/user/admin/account";
+    public static final String REDIRECT_ACCOUNT_MANAGER = "/user/manager/account";
+    public static final String REDIRECT_ACCOUNT = "/user/account";
+//    public static final String COMMAND_ACCOUNT_ADMIN = "admin/accountAdmin";
+//    public static final String COMMAND_ACCOUNT_MANAGER = "admin/accountManager";
+//    public static final String COMMAND_ACCOUNT = "user/accountUser";
     public static final String COMMAND_TOURS_ADMIN = "redirect:/tours/admin/view";
     public static final String COMMAND_LIST_USER = "redirect:/user/list";
 

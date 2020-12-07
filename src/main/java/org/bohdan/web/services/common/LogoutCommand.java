@@ -32,7 +32,7 @@ public class LogoutCommand {
         session.setAttribute("defLocale", lang);
         logger.info("log: lang ----------------> " + lang);
 
-        Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+        Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", "EN");
 
         logger.debug("Command finished");
         return Path.PAGE_LOGIN;

@@ -7,13 +7,13 @@
 <div id="main-container">
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <div class="container p-3 my-3 border">
-        <form id="login_form" action="/user/login" method="post">
+        <form id="login_form" action="/login" method="post">
             <input type="hidden" name="command" value="login"/>
             <div class="input-group mb-3">
                 <label>
-                    <fmt:message key="login_jsp.label.login"/>
+                    Login
                 </label>
-                <input type="text" name="login" placeholder="">
+                <input type="text" name="username" placeholder="">
             </div>
             <br/>
             <div class="input-group mb-3">

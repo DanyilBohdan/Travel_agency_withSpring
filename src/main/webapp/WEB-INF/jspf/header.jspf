@@ -1,6 +1,6 @@
 <%@ page import="org.bohdan.model.Role" %>
-<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
-<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+<%@include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+<%@include file="/WEB-INF/jspf/directive/page.jspf" %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#"><fmt:message key="main.name"/></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -13,13 +13,13 @@
                 <%--===========================================================================
                 This way we define the ADMIN MENU.
                 ===========================================================================--%>
-                <c:when test="${userRole.name == 'admin' }">
+                <c:when test="${userRole.name == 'ADMIN' }">
                     <li class="nav-item">
                         <form id="mainAdmin" method="get" action="/tours/admin/view">
                             <input type="hidden" name="command" value="listTours">
 
                             <a class="nav-link" href="#" onclick="document.getElementById('mainAdmin').submit()">
-                                <b><fmt:message key="header.main"/></b>
+                                <b>MAIN</b>
                             </a>
                         </form>
                     </li>
@@ -27,7 +27,7 @@
                         <form id="acAdmin" method="get" action="/user/admin/account">
                             <input type="hidden" name="command" value="accountAdmin">
                             <a class="nav-link" href="#" onclick="document.getElementById('acAdmin').submit()">
-                                <b><fmt:message key="header.account"/></b>
+                                <b>Account</b>
                             </a>
                         </form>
                     </li>
@@ -35,12 +35,12 @@
                 <%--===========================================================================
                 This way we define the MANAGER MENU.
                 ===========================================================================--%>
-                <c:when test="${userRole.name == 'manager' }">
+                <c:when test="${userRole.name == 'MANAGER' }">
                     <li class="nav-item">
                         <form id="mainManager" method="get" action="/orders/view">
                             <input type="hidden" name="command" value="listOrders">
                             <a class="nav-link" href="#" onclick="document.getElementById('mainManager').submit()">
-                                <b><fmt:message key="header.main"/></b>
+                                <b>MAIN</b>
                             </a>
                         </form>
                     </li>
@@ -48,7 +48,7 @@
                         <form id="acManager" method="get" action="/user/manager/account">
                             <input type="hidden" name="command" value="accountManager">
                             <a class="nav-link" href="#" onclick="document.getElementById('acManager').submit()">
-                                <b><fmt:message key="header.account"/></b>
+                                <b>Account</b>
                             </a>
                         </form>
                     </li>
@@ -56,12 +56,12 @@
                 <%--===========================================================================
                 This way we define the USER MENU.
                 ===========================================================================--%>
-                <c:when test="${userRole.name == 'user'}">
+                <c:when test="${userRole.name == 'USER'}">
                     <li class="nav-item">
                         <form id="mainUser" method="get" action="/tours/view">
                             <input type="hidden" name="command" value="viewTours">
                             <a class="nav-link" href="#" onclick="document.getElementById('mainUser').submit()">
-                                <b><fmt:message key="header.main"/></b>
+                                <b>MAIN</b>
                             </a>
                         </form>
                     </li>
@@ -69,7 +69,7 @@
                         <form id="acUser" method="get" action="/user/account">
                             <input type="hidden" name="command" value="accountUser">
                             <a class="nav-link" href="#" onclick="document.getElementById('acUser').submit()">
-                                <b><fmt:message key="header.account"/></b>
+                                <b>Account</b>
                             </a>
                         </form>
                     </li>
@@ -79,7 +79,7 @@
                         <form id="mainCommon" method="get" action="/tours/view">
                             <input type="hidden" name="command" value="viewTours">
                             <a class="nav-link" href="#" onclick="document.getElementById('mainCommon').submit()">
-                                <b><fmt:message key="header.main"/></b>
+                                <b>Main</b>
                             </a>
                         </form>
                     </li>
@@ -91,17 +91,16 @@
                 <c:choose>
                     <c:when test="${not empty user}">
                         <form id="logout" method="get" action="/user/logout">
-                            <input type="hidden" name="command" value="logout">
                             <a class="nav-link" href="#" onclick="document.getElementById('logout').submit()">
                                 <span class="glyphicon glyphicon-log-out"></span>
-                                <b><fmt:message key="header.logout"/></b>
+                                <b>LogOut</b>
                             </a>
                          </form>
                     </c:when>
                     <c:otherwise>
-                        <a class="nav-link" href="<c:url value="/jsp/login.jsp" />">
+                        <a class="nav-link" href="<c:url value="/jsp/login.jsp"/>">
                             <span class="glyphicon glyphicon-log-in"></span>
-                            <b><fmt:message key="header.signIn"/></b>
+                            <b>LogIn</b>
                         </a>
                     </c:otherwise>
                 </c:choose>

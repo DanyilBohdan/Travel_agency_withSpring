@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.bohdan</groupId>
-    <artifactId>Travel_agency</artifactId>
+    <artifactId>homework_7</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <name>Travel agency</name>
@@ -16,6 +16,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <springframework.version>5.3.1</springframework.version>
+        <springframework.security.version>5.3.6.RELEASE</springframework.security.version>
     </properties>
 
     <dependencies>
@@ -24,6 +25,19 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
             <version>${springframework.version}</version>
         </dependency>
 
@@ -50,7 +64,24 @@
             <artifactId>spring-web</artifactId>
             <version>${springframework.version}</version>
         </dependency>
-        <!--                            -->
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${springframework.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${springframework.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${springframework.security.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
@@ -87,6 +118,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.16</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 

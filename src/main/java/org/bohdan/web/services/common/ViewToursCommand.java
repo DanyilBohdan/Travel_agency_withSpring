@@ -38,15 +38,19 @@ public class ViewToursCommand {
             Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
         }
         logger.info("LOG: localeFinal = " + lang);
+        if (lang == null){
+            lang = "EN";
+        }
 
         modelAndView.addObject("typeTourOut", typeTourDao.findByLocale(lang));
         modelAndView.addObject("countryOut", countryDao.findByLocale(lang));
 
-        List<TourView> tours = SearchTour.execute(request, tourDao, check);
-        logger.trace("Found in DB: tours --> " + tours + tourDao);
+        List<TourView> tours = SearchTour.execute(request, tourDao, check, lang);
+        logger.info("Found in DB: tours --> " + tours + tourDao);
 
-        tours.sort((o1, o2) -> Float.compare(o2.getDiscount(), o1.getDiscount()));
-
+        if (tours.size() > 1) {
+            tours.sort((o1, o2) -> Float.compare(o2.getDiscount(), o1.getDiscount()));
+        }
         modelAndView.addObject("tours", tours);
 
         modelAndView.addObject("commandPage", "view");

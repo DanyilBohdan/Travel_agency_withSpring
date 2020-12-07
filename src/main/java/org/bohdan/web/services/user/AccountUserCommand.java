@@ -35,7 +35,9 @@ public class AccountUserCommand {
             Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
         }
         logger.info("LOG: localeFinal = " + lang);
-
+        if (lang == null){
+            lang = "EN";
+        }
         User user = (User) session.getAttribute("user");
 
         List<OrderTours> ordersUser = orderDao.findAllOrdersUsersLocale((String) session.getAttribute("defLocale"), user.getId());

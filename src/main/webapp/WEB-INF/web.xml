@@ -10,6 +10,20 @@
         <welcome-file>welcome.jsp</welcome-file>
     </welcome-file-list>
 
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanNames</param-name>
+            <param-value>springSecurityFilterChain</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 <!--          Init Data Source    -->
     <resource-ref>
         <description>MySQL DB Connection Pool</description>
@@ -26,7 +40,7 @@
 
     <context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
-        <param-value>en</param-value>
+        <param-value>EN</param-value>
     </context-param>
 
     <context-param>
@@ -55,38 +69,39 @@
     </filter-mapping>
     <!--=============================================================-->
 
-    <filter>
-        <filter-name>CommandAccessFilter</filter-name>
-        <filter-class>org.bohdan.web.filter.CommandAccessFilter</filter-class>
-        <init-param>
-            <param-name>admin</param-name>
-            <param-value>
-                /tours/admin/view,/tours/admin/tour/editView,/tours/admin/tour/edit,/tours/admin/tour/delete,/tours/admin/tour/createView,/tours/admin/tour/create,/user/admin/account,/user/admin/account,/user/admin/account,/order/view,/order/view/update/status,/order/view/update/discount,/order/view/delete,/order/view/searchByStatus,/user/list,/user/list/search,/user/update/role,/user/update/status
-            </param-value>
-        </init-param>
-        <init-param>
-            <param-name>manager</param-name>
-            <param-value>/user/manager/account,/order/view,/order/view/update/status,/order/view/update/discount,/order/view/delete,/order/view/searchByStatus</param-value>
-        </init-param>
-        <init-param>
-            <param-name>user</param-name>
-            <param-value>/user/account,/order/canceled,/order/register/view,/order/register,/user/view/account</param-value>
-        </init-param>
-        <init-param>
-            <param-name>common</param-name>
-            <param-value>/user/login,/tours/view,/tours/view/tour,/user/logout,/user/account/edit/view,/user/account/edit
-            </param-value>
-        </init-param>
-        <init-param>
-            <param-name>out-of-control</param-name>
-            <param-value>/,/welcome.jsp,/jsp/login.jsp,/user/register,/user/registerActive,/user/registerCheck,/user/login,/tours/view,/tours/view/tour</param-value>
-        </init-param>
-    </filter>
 
-    <filter-mapping>
-        <filter-name>CommandAccessFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+<!--    <filter>-->
+<!--        <filter-name>CommandAccessFilter</filter-name>-->
+<!--        <filter-class>org.bohdan.web.filter.CommandAccessFilter</filter-class>-->
+<!--        <init-param>-->
+<!--            <param-name>admin</param-name>-->
+<!--            <param-value>-->
+<!--                /tours/admin/view,/tours/admin/tour/editView,/tours/admin/tour/edit,/tours/admin/tour/delete,/tours/admin/tour/createView,/tours/admin/tour/create,/user/admin/account,/user/admin/account,/user/admin/account,/order/view,/order/view/update/status,/order/view/update/discount,/order/view/delete,/order/view/searchByStatus,/user/list,/user/list/search,/user/update/role,/user/update/status-->
+<!--            </param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>manager</param-name>-->
+<!--            <param-value>/user/manager/account,/order/view,/order/view/update/status,/order/view/update/discount,/order/view/delete,/order/view/searchByStatus</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>user</param-name>-->
+<!--            <param-value>/user/account,/order/canceled,/order/register/view,/order/register,/user/view/account</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>common</param-name>-->
+<!--            <param-value>/user/login,/tours/view,/tours/view/tour,/user/logout,/user/account/edit/view,/user/account/edit-->
+<!--            </param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>out-of-control</param-name>-->
+<!--            <param-value>/,/welcome.jsp,/jsp/login.jsp,/user/register,/user/registerActive,/user/registerCheck,/user/login,/tours/view,/tours/view/tour</param-value>-->
+<!--        </init-param>-->
+<!--    </filter>-->
+
+<!--    <filter-mapping>-->
+<!--        <filter-name>CommandAccessFilter</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--    </filter-mapping>-->
 
     <!--=============================================================-->
 

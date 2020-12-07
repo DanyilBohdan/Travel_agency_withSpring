@@ -22,7 +22,7 @@ public class ListOrdersCommand {
     public ModelAndView view(HttpServletRequest request, ModelAndView modelAndView, OrderDao orderDao)
             throws IOException, ServletException {
 
-        String lang = (String) request.getSession().getAttribute("defLocale");
+        String lang = (String) request.getSession().getAttribute("localeDef");
 
         List<OrderTours> orders = orderDao.findAllOrdersLocale(lang);
 

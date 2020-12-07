@@ -17,7 +17,7 @@ public class SearchTour {
 
     private static final Logger logger = Logger.getLogger(SearchTour.class);
 
-    public static List<TourView> execute(HttpServletRequest request, TourDao tourDao, int check) {
+    public static List<TourView> execute(HttpServletRequest request, TourDao tourDao, int check, String lang) {
         try {
             List<TourView> tours = null;
 
@@ -41,16 +41,14 @@ public class SearchTour {
                 pageId = pageId * total + 1;
             }
 
-            String lang = (String) request.getSession().getAttribute("defLocale");
-
             String method = request.getParameter("method");
-            logger.debug("Log: method -->" + method);
+            logger.info("Log: method -->" + method);
 
             tourDao.setFilter(check);
 
             if (method == null || method.equals("")) {
                 tours = tourDao.findAllByLocale(lang, pageId, total);
-                logger.trace("Found in DB: tours --> " + tours);
+                logger.info("Found in DB: tours --> " + tours);
                 request.setAttribute("methodDef", "");
                 request.getSession().setAttribute("beginDef", "");
                 request.getSession().setAttribute("endDef", "");
