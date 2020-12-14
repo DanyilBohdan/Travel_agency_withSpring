@@ -1,6 +1,8 @@
 package org.bohdan.web.services;
 
+import org.bohdan.model.User;
 import org.bohdan.model.general.OrderTours;
+import org.bohdan.model.general.TourView;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -13,7 +15,7 @@ public interface OrderService {
 
     List<OrderTours> viewOrders(HttpSession session) throws IOException, ServletException;
 
-    String updateStatusOrder(Integer id, String status) throws IOException, ServletException;
+    boolean updateStatusOrder(Integer id, String status) throws IOException, ServletException;
 
     ModelAndView updateDiscountOrder(HttpServletRequest request);
 
@@ -23,7 +25,7 @@ public interface OrderService {
 
     ModelAndView deleteOrder(HttpServletRequest request);
 
-    ModelAndView registerView(HttpServletRequest request) throws IOException, ServletException;
+    TourView registerView(String lang, Integer id, User user) throws IOException, ServletException;
 
     ModelAndView register(HttpServletRequest request) throws IOException, ServletException;
 }

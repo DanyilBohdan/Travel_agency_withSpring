@@ -2,6 +2,7 @@ package org.bohdan.web.controllers;
 
 import org.apache.log4j.Logger;
 import org.bohdan.model.User;
+import org.bohdan.model.general.OrderTours;
 import org.bohdan.web.Path;
 import org.bohdan.web.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("user")
@@ -23,9 +26,12 @@ public class UserController {
 
     private UserService userService;
 
+    private HttpSession session;
+
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, HttpSession session) {
         this.userService = userService;
+        this.session = session;
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
@@ -40,17 +46,70 @@ public class UserController {
 
     @RequestMapping(value = "admin/account", method = RequestMethod.GET)
     public ModelAndView accountAdmin(HttpServletRequest request) throws IOException, ServletException {
-        return userService.accountAdminAndManager(request, Path.ACCOUNT_ADMIN);
+        ModelAndView modelAndView = new ModelAndView(Path.ACCOUNT_ADMIN);
+        String lang = request.getParameter("lang");
+        logger.info("LOG: localeParam = " + lang);
+        if (lang != null && !lang.isEmpty()) {
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+            session.setAttribute("defLocale", lang);
+        } else {
+            lang = (String) session.getAttribute("defLocale");
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+        }
+        logger.info("LOG: localeFinal = " + lang);
+
+        modelAndView.addObject("commandPage", request.getRequestURI());
+
+        return modelAndView;
     }
 
     @RequestMapping(value = "manager/account", method = RequestMethod.GET)
-    public ModelAndView accountManager(HttpServletRequest request) throws IOException, ServletException {
-        return userService.accountAdminAndManager(request, Path.ACCOUNT_MANAGER);
+    public ModelAndView accountManager(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView(Path.ACCOUNT_MANAGER);
+        String lang = request.getParameter("lang");
+        logger.info("LOG: localeParam = " + lang);
+        if (lang != null && !lang.isEmpty()) {
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+            session.setAttribute("defLocale", lang);
+        } else {
+            lang = (String) session.getAttribute("defLocale");
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+        }
+        logger.info("LOG: localeFinal = " + lang);
+
+        modelAndView.addObject("commandPage", request.getRequestURI());
+
+        return modelAndView;
     }
 
     @RequestMapping(value = "account", method = RequestMethod.GET)
     public ModelAndView accountUser(HttpServletRequest request) throws IOException, ServletException {
-        return userService.accountUser(request);
+
+        String lang = request.getParameter("lang");
+
+        if (lang != null && !lang.isEmpty()) {
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+            session.setAttribute("defLocale", lang);
+        } else {
+            lang = (String) session.getAttribute("defLocale");
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", lang);
+        }
+        logger.info("LOG: localeFinal = " + lang);
+        if (lang == null){
+            lang = "EN";
+        }
+        User user = (User) session.getAttribute("user");
+        ModelAndView modelAndView = new ModelAndView(Path.ACCOUNT_USER);
+
+        List<OrderTours> ordersUser = userService.accountUser(lang, user);
+        logger.info("LOG: ordersUser ==> " + ordersUser);
+
+        modelAndView.addObject("orders", ordersUser);
+
+        modelAndView.addObject("commandPage", request.getRequestURI());
+
+        logger.debug("Command finished");
+        return modelAndView;
     }
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
@@ -70,7 +129,6 @@ public class UserController {
 
     @RequestMapping(value = "account/edit/view", method = RequestMethod.GET)
     public ModelAndView editAccountView(HttpServletRequest request) {
-        HttpSession session = request.getSession();
 
         User user = (User) session.getAttribute("user");
 
@@ -85,13 +143,22 @@ public class UserController {
     }
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public ModelAndView listUsers(HttpServletRequest request) throws IOException, ServletException {
-        return userService.listUsers(request);
+    public ModelAndView listUsers() {
+        ModelAndView modelAndView = new ModelAndView(Path.LIST_USERS_ADMIN);
+        modelAndView.addObject("users", userService.getListUsers());
+        return modelAndView;
     }
 
     @RequestMapping(value = "list/search", method = RequestMethod.GET)
     public ModelAndView searchUsers(HttpServletRequest request) throws IOException, ServletException {
-        return userService.searchUser(request);
+        String searchText = request.getParameter("searchText");
+        String searchSelect = request.getParameter("searchSelect");
+        ModelAndView modelAndView = new ModelAndView(Path.LIST_USERS_ADMIN);
+        modelAndView.addObject("users", userService.searchUser(searchSelect, searchText));
+
+        logger.debug("Command finished");
+
+        return modelAndView;
     }
 
     @RequestMapping(value = "update/role", method = RequestMethod.POST)

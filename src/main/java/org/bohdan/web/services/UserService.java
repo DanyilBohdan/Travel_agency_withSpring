@@ -1,12 +1,14 @@
 package org.bohdan.web.services;
 
-import org.bohdan.web.Path;
-import org.bohdan.web.services.admin.ListUsersCommand;
+import org.bohdan.model.User;
+import org.bohdan.model.general.OrderTours;
+import org.bohdan.model.general.UserRole;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 public interface UserService {
 
@@ -14,9 +16,7 @@ public interface UserService {
 
     ModelAndView logout(HttpServletRequest request) throws IOException, ServletException;
 
-    ModelAndView accountAdminAndManager(HttpServletRequest request, String viewName) throws IOException, ServletException;
-
-    ModelAndView accountUser(HttpServletRequest request) throws IOException, ServletException;
+    List<OrderTours> accountUser(String lang, User user) throws IOException, ServletException;
 
     ModelAndView registerUser(HttpServletRequest request) throws IOException, ServletException;
 
@@ -24,9 +24,9 @@ public interface UserService {
 
     ModelAndView accountEdit(HttpServletRequest request) throws IOException, ServletException;
 
-    ModelAndView listUsers(HttpServletRequest request) throws IOException, ServletException;
+    List<UserRole> getListUsers();
 
-    ModelAndView searchUser(HttpServletRequest request) throws IOException, ServletException;
+    List<UserRole> searchUser(String searchSelect, String searchText) throws IOException, ServletException;
 
     ModelAndView updateRole(HttpServletRequest request) throws IOException, ServletException;
 

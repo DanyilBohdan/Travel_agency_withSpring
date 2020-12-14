@@ -1,5 +1,8 @@
 package org.bohdan.web.services;
 
+import org.bohdan.model.Country;
+import org.bohdan.model.Tour;
+import org.bohdan.model.TypeTour;
 import org.bohdan.model.general.ListBean;
 import org.bohdan.model.general.TourView;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,16 +13,26 @@ import java.io.IOException;
 import java.util.List;
 
 public interface TourService {
-//    List<TourView> viewTours(HttpServletRequest request, String lang);
+    //    List<TourView> viewTours(HttpServletRequest request, String lang);
     List<TourView> viewTours(String lang);
 
     List<ListBean> getListCountry(String lang);
 
     List<ListBean> getListTypeTours(String lang);
 
-    ModelAndView viewTour(HttpServletRequest request) throws IOException, ServletException;
+    List<Country> getListCountry();
 
-    ModelAndView viewToursForAdmin(HttpServletRequest request);
+    List<TypeTour> getListTypeTours();
+
+    Country getCountryById(Integer id);
+
+    TypeTour getTypeTourById(Integer id);
+
+    Tour getTourById(Integer id);
+
+    TourView viewTour(String lang, Integer id);
+
+    List<TourView> viewToursForAdmin(String lang);
 
     ModelAndView editTourView(HttpServletRequest request);
 

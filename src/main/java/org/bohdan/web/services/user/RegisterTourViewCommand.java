@@ -23,17 +23,14 @@ public class RegisterTourViewCommand {
 
     private final static Logger logger = Logger.getLogger(RegisterTourViewCommand.class);
 
-    public ModelAndView register(HttpServletRequest request, ModelAndView modelAndView,
-                          TourDao tourDao, OrderDao orderDao)
+    public TourView register(String lang, Integer id, User user, TourDao tourDao, OrderDao orderDao)
             throws IOException, ServletException {
         try {
-            String lang = (String) request.getSession().getAttribute("defLocale");
             logger.debug("Log: lang -->" + lang);
 
             Locale current = new Locale(lang);
             String errorMessage = null;
 
-            int id = Integer.parseInt(request.getParameter("id"));
             logger.info("LOG: id --> " + id);
             TourView tour = tourDao.findByIdLocale(lang, id);
             logger.info("LOG: tour --> " + tour);
@@ -43,29 +40,27 @@ public class RegisterTourViewCommand {
             logger.info("LOG: count_peopleForTour --> " + count_peopleForTour);
             if (count_peopleForTour >= tour.getCountPeople()) {
                 errorMessage = ResourceBundle.getBundle("resources", current).getString("registrationTour.noAvailable");
-                modelAndView.addObject("noAvailable", errorMessage);
+//                modelAndView.addObject("noAvailable", errorMessage);
                 logger.error("errorMessage --> " + errorMessage);
             } else {
 
                 //check on date
-                User user = (User) request.getSession().getAttribute("user");
+
                 logger.debug("LOG: user --> " + user);
                 List<OrderToursByIdUser> ordersUser = orderDao.findToursByIdUser(user.getId());
 
                 if (!checkDate(ordersUser, tour)) {
                     errorMessage = ResourceBundle.getBundle("resources", current).getString("registrationTour.errorDate");
-                    modelAndView.addObject("noAvailable", errorMessage);
+//                    modelAndView.addObject("noAvailable", errorMessage);
                     logger.error("errorMessage --> " + errorMessage);
                 }
             }
 
-            modelAndView.addObject("tour", tour);
-
-            return modelAndView;
+            return tour;
 
         } catch (Exception ex) {
             logger.error("Log: ex --> " + ex);
-            return new ModelAndView(Path.ERROR_PAGE);
+            return null;
         }
     }
 

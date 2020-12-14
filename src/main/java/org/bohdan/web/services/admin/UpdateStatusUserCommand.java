@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class UpdateStatusUserCommand {
 
-    private final static Logger logger = Logger.getLogger(SearchUserCommand.class);
+    private final static Logger logger = Logger.getLogger(UpdateStatusUserCommand.class);
 
     public String update(HttpServletRequest request, UserDao userDao) throws IOException, ServletException {
         try {

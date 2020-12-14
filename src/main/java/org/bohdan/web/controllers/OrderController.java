@@ -1,10 +1,12 @@
 package org.bohdan.web.controllers;
 
 import org.apache.log4j.Logger;
+import org.bohdan.model.User;
 import org.bohdan.web.Path;
 import org.bohdan.web.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,7 +45,10 @@ public class OrderController {
         logger.info("Log: id ==> " + id);
         String status = request.getParameter("selectStatus");
         logger.info("Log: status ==> " + status);
-        return new ModelAndView(orderService.updateStatusOrder(id, status));
+        ModelAndView modelAndView = new ModelAndView(Path.COMMAND_LIST_ORDERS);
+        boolean check = orderService.updateStatusOrder(id, status);
+        logger.info("Log: check update status order --> " + check);
+        return modelAndView;
 
     }
 
@@ -80,7 +85,14 @@ public class OrderController {
 
     @RequestMapping(value = "register/view", method = RequestMethod.GET)
     public ModelAndView registerView(HttpServletRequest request) throws IOException, ServletException {
-        return orderService.registerView(request);
+        ModelAndView modelAndView = new ModelAndView(Path.REGISTER_TOUR);
+
+        String lang = (String) session.getAttribute("defLocale");
+        User user = (User) session.getAttribute("user");
+        int id = Integer.parseInt(request.getParameter("id"));
+        modelAndView.addObject("tour", orderService.registerView(lang, id, user));
+
+        return modelAndView;
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)

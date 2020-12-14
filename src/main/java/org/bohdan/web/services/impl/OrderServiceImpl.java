@@ -3,7 +3,9 @@ package org.bohdan.web.services.impl;
 import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.OrderDao;
 import org.bohdan.db.DAO.TourDao;
+import org.bohdan.model.User;
 import org.bohdan.model.general.OrderTours;
+import org.bohdan.model.general.TourView;
 import org.bohdan.web.Path;
 import org.bohdan.web.services.OrderService;
 import org.bohdan.web.services.admin.*;
@@ -41,10 +43,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public String updateStatusOrder(Integer id, String status) throws IOException, ServletException {
+    public boolean updateStatusOrder(Integer id, String status) throws IOException, ServletException {
         boolean check = orderDao.updateStatus(status, id);
         logger.info("Log: check update status order --> " + check);
-        return Path.COMMAND_LIST_ORDERS;
+        return check;
     }
 
     @Override
@@ -73,9 +75,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public ModelAndView registerView(HttpServletRequest request) throws IOException, ServletException {
-        ModelAndView modelAndView = new ModelAndView(Path.REGISTER_TOUR);
-        return new RegisterTourViewCommand().register(request, modelAndView, tourDao, orderDao);
+    public TourView registerView(String lang, Integer id, User user) throws IOException, ServletException {
+//        ModelAndView modelAndView = new ModelAndView(Path.REGISTER_TOUR);
+        return new RegisterTourViewCommand().register(lang, id, user, tourDao, orderDao);
     }
 
     @Override

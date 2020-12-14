@@ -1,8 +1,5 @@
 package org.bohdan.model.general;
 
-
-import org.springframework.stereotype.Component;
-
 public class UserRole {
 
     private Integer id;
@@ -18,6 +15,18 @@ public class UserRole {
     private boolean status;
 
     private String role;
+
+    public static UserRole create(Integer id, String username, String password, String login, String phoneNumber, boolean status, String role) {
+        UserRole userRole = new UserRole();
+        userRole.setId(id);
+        userRole.setUsername(username);
+        userRole.setPassword(password);
+        userRole.setLogin(login);
+        userRole.setPhoneNumber(phoneNumber);
+        userRole.setStatus(status);
+        userRole.setRole(role);
+        return userRole;
+    }
 
     public Integer getId() {
         return id;

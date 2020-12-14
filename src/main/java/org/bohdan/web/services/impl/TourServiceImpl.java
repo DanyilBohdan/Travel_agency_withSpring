@@ -5,24 +5,19 @@ import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.TypeTourDao;
 import org.bohdan.model.Country;
+import org.bohdan.model.Tour;
+import org.bohdan.model.TypeTour;
 import org.bohdan.model.general.ListBean;
 import org.bohdan.model.general.TourView;
 import org.bohdan.web.Path;
 import org.bohdan.web.services.TourService;
-import org.bohdan.web.services.common.SearchTour;
-import org.bohdan.web.services.common.ViewTourCommand;
-import org.bohdan.web.services.common.ViewToursCommand;
 import org.bohdan.web.services.admin.DeleteTourCommand;
 import org.bohdan.web.services.admin.TourCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.jstl.core.Config;
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -49,32 +44,56 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public List<ListBean> getListCountry(String lang){
+    public List<ListBean> getListCountry(String lang) {
         return countryDao.findByLocale(lang);
     }
 
     @Override
-    public List<ListBean> getListTypeTours(String lang){
+    public List<ListBean> getListTypeTours(String lang) {
         return typeTourDao.findByLocale(lang);
     }
 
-    @Override 
-    public ModelAndView viewTour(HttpServletRequest request) throws IOException, ServletException {
-        ModelAndView modelAndView = new ModelAndView(Path.PAGE_VIEW_TOUR);
-        modelAndView.addObject("tour", new ViewTourCommand().execute(request, tourDao));
-        return modelAndView;
+    @Override
+    public List<Country> getListCountry() {
+        return countryDao.findAll();
     }
 
     @Override
-    public ModelAndView viewToursForAdmin(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView(Path.LIST_TOURS_ADMIN);
-        return new ViewToursCommand().execute(request, modelAndView, typeTourDao, countryDao, tourDao, 1);
+    public List<TypeTour> getListTypeTours() {
+        return typeTourDao.findAll();
+    }
+
+    @Override
+    public TourView viewTour(String lang, Integer id) {
+        return tourDao.findByIdLocale(lang, id);
+    }
+
+    @Override
+    public List<TourView> viewToursForAdmin(String lang) {
+        tourDao.setFilter(1);
+        return tourDao.findAllByLocale(lang, 1, 6);
+        //return new ViewToursCommand().execute(request, modelAndView, typeTourDao, countryDao, tourDao, 1);
     }
 
     @Override
     public ModelAndView editTourView(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(Path.EDIT_TOUR);
         return new TourCommand().editTourView(request, modelAndView, tourDao, typeTourDao, countryDao);
+    }
+
+    @Override
+    public Country getCountryById(Integer id) {
+        return countryDao.findEntityById(id);
+    }
+
+    @Override
+    public TypeTour getTypeTourById(Integer id) {
+        return typeTourDao.findEntityById(id);
+    }
+
+    @Override
+    public Tour getTourById(Integer id) {
+        return tourDao.findIDTour(id);
     }
 
     @Override
