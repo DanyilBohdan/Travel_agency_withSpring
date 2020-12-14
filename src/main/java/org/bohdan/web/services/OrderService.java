@@ -1,20 +1,23 @@
 package org.bohdan.web.services;
 
+import org.bohdan.model.general.OrderTours;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 public interface OrderService {
 
-    ModelAndView viewOrders(HttpServletRequest request) throws IOException, ServletException;
+    List<OrderTours> viewOrders(HttpSession session) throws IOException, ServletException;
 
-    ModelAndView updateStatusOrder(HttpServletRequest request) throws IOException, ServletException;
+    String updateStatusOrder(Integer id, String status) throws IOException, ServletException;
 
     ModelAndView updateDiscountOrder(HttpServletRequest request);
 
-    ModelAndView searchByStatusOrder(HttpServletRequest request) throws IOException, ServletException;
+    List<OrderTours> searchByStatusOrder(String lang, String status) throws IOException, ServletException;
 
     ModelAndView canceledOrder(HttpServletRequest request);
 

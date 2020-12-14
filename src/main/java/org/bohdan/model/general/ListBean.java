@@ -16,10 +16,11 @@ public class ListBean {
 
     private String name;
 
-    public static TypeTour create(String name) {
-        TypeTour typeTour = new TypeTour();
-        typeTour.setNameEn(name);
-        return typeTour;
+    public static ListBean create(Integer id, String name) {
+        ListBean listBean = new ListBean();
+        listBean.setId(id);
+        listBean.setName(name);
+        return listBean;
     }
 
     public Integer getId() {

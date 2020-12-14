@@ -13,12 +13,9 @@
             <form class="form-inline" method="get" action="/order/view/searchByStatus">
                 <input type="hidden" name="command" value="searchByStatusOrder">
                 <select name="searchStatus" onchange="submit()">
-                    <option value="registered" ${selectDef == "registered" ? 'selected' : ''}><fmt:message
-                            key="order.status.registered"/></option>
-                    <option value="paid" ${selectDef == "paid" ? 'selected' : ''}><fmt:message
-                            key="order.status.paid"/></option>
-                    <option value="canceled" ${selectDef == "canceled" ? 'selected' : ''}><fmt:message
-                            key="order.status.canceled"/></option>
+                    <option value="registered" ${selectDef == "registered" ? 'selected' : ''}>registered</option>
+                    <option value="paid" ${selectDef == "paid" ? 'selected' : ''}>paid</option>
+                    <option value="canceled" ${selectDef == "canceled" ? 'selected' : ''}>canceled</option>
                 </select>
             </form>
             <form action="/order/view" method="get">

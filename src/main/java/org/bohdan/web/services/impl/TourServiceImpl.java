@@ -1,10 +1,15 @@
 package org.bohdan.web.services.impl;
 
+import org.apache.log4j.Logger;
 import org.bohdan.db.DAO.CountryDao;
 import org.bohdan.db.DAO.TourDao;
 import org.bohdan.db.DAO.TypeTourDao;
+import org.bohdan.model.Country;
+import org.bohdan.model.general.ListBean;
+import org.bohdan.model.general.TourView;
 import org.bohdan.web.Path;
 import org.bohdan.web.services.TourService;
+import org.bohdan.web.services.common.SearchTour;
 import org.bohdan.web.services.common.ViewTourCommand;
 import org.bohdan.web.services.common.ViewToursCommand;
 import org.bohdan.web.services.admin.DeleteTourCommand;
@@ -15,10 +20,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class TourServiceImpl implements TourService {
+
+    private static final Logger logger = Logger.getLogger(TourServiceImpl.class);
 
     private TypeTourDao typeTourDao;
     private CountryDao countryDao;
@@ -32,9 +42,20 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public ModelAndView viewTours(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView(Path.PAGE_MAIN);
-        return new ViewToursCommand().execute(request, modelAndView, typeTourDao, countryDao, tourDao, 0);
+    public List<TourView> viewTours(String lang) {
+//        List<TourView> tours = SearchTour.execute(request, tourDao, 0, lang);
+        tourDao.setFilter(0);
+        return tourDao.findAllByLocale(lang, 1, 6);
+    }
+
+    @Override
+    public List<ListBean> getListCountry(String lang){
+        return countryDao.findByLocale(lang);
+    }
+
+    @Override
+    public List<ListBean> getListTypeTours(String lang){
+        return typeTourDao.findByLocale(lang);
     }
 
     @Override 

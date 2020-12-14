@@ -28,7 +28,7 @@ public class OrderTours {
 
     private int markHotel;
 
-    private Date startDate;
+    private Object startDate;
 
     private int days;
 
@@ -36,14 +36,14 @@ public class OrderTours {
 
     private String status;
 
-    private Date dateReg;
+    private Object dateReg;
 
     private String login;
 
-    public static OrderTours createTour(Integer orderId, Integer tourId, String name, String type,
+    public static OrderTours createOrderTour(Integer orderId, Integer tourId, String name, String type,
                                         String country, String status, String login,
-                                        float price, int countPeople, int markHotel, Date startDate,
-                                        int days, float discount, Date dateReg) {
+                                        float price, int countPeople, int markHotel, Object startDate,
+                                        int days, float discount, Object dateReg) {
         OrderTours order = new OrderTours();
         order.setOrderId(orderId);
         order.setTourId(tourId);
@@ -126,11 +126,11 @@ public class OrderTours {
         this.markHotel = markHotel;
     }
 
-    public Date getStartDate() {
+    public Object getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Object startDate) {
         this.startDate = startDate;
     }
 
@@ -158,11 +158,11 @@ public class OrderTours {
         this.status = status;
     }
 
-    public Date getDateReg() {
+    public Object getDateReg() {
         return dateReg;
     }
 
-    public void setDateReg(Date dateReg) {
+    public void setDateReg(Object dateReg) {
         this.dateReg = dateReg;
     }
 

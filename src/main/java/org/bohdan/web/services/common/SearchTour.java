@@ -49,7 +49,7 @@ public class SearchTour {
             if (method == null || method.equals("")) {
                 tours = tourDao.findAllByLocale(lang, pageId, total);
                 logger.info("Found in DB: tours --> " + tours);
-                request.setAttribute("methodDef", "");
+                request.getSession().setAttribute("methodDef", "");
                 request.getSession().setAttribute("beginDef", "");
                 request.getSession().setAttribute("endDef", "");
                 request.getSession().setAttribute("selectDef", "");
