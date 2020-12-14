@@ -40,7 +40,7 @@ public class TourServiceImpl implements TourService {
     public List<TourView> viewTours(String lang) {
 //        List<TourView> tours = SearchTour.execute(request, tourDao, 0, lang);
         tourDao.setFilter(0);
-        return tourDao.findAllByLocale(lang, 1, 6);
+        return tourDao.findAllByLocale(lang, 0, 6);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class TourServiceImpl implements TourService {
     @Override
     public List<TourView> viewToursForAdmin(String lang) {
         tourDao.setFilter(1);
-        return tourDao.findAllByLocale(lang, 1, 6);
+        return tourDao.findAllByLocale(lang, 1, 20);
         //return new ViewToursCommand().execute(request, modelAndView, typeTourDao, countryDao, tourDao, 1);
     }
 

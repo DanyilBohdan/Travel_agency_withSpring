@@ -3,6 +3,8 @@ package org.bohdan.db;
 import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -13,7 +15,7 @@ import java.sql.*;
  * @author Bohdan Daniel
  *
  */
-
+@Component
 public class DBManager extends ConnectionFactory {
 
     private static final Logger logger = Logger.getLogger(DBManager.class);
@@ -35,6 +37,7 @@ public class DBManager extends ConnectionFactory {
     /**
      * @return Data Source
      */
+    @Bean
     public static DataSource getDataSource() {
         return dataSource;
     }

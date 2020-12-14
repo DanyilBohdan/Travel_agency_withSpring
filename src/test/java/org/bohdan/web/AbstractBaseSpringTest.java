@@ -1,7 +1,7 @@
 package org.bohdan.web;
 
+import org.apache.log4j.Logger;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,9 +12,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -23,19 +22,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
 @ContextConfiguration
-@TestPropertySource
+@TestPropertySource(properties = {"spring.config.location = classpath:context.xml"})
 public abstract class AbstractBaseSpringTest {
 
     @Autowired
     protected MockMvc mockMvc;
 
-    @Autowired
-    protected RestTemplate restTemplate;
-
     @Configuration
     @EnableWebMvc
+    @EnableTransactionManagement
     @ComponentScan("org.bohdan")
     protected static class TestContextConfiguration {
+
+        private static final Logger logger = Logger.getLogger(TestContextConfiguration.class);
 
         @Bean
         public MockMvc mockMvc(WebApplicationContext webApplicationContext) {
@@ -45,12 +44,6 @@ public abstract class AbstractBaseSpringTest {
                     .alwaysDo(print())
                     .build();
         }
-
-        @Bean
-        public RestTemplate restTemplate() {
-            return Mockito.mock(RestTemplate.class);
-        }
-
     }
 
 }

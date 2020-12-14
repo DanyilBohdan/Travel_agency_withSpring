@@ -56,8 +56,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderTours> searchByStatusOrder(String lang, String status) throws IOException, ServletException {
-
+    public List<OrderTours> searchByStatusOrder(String lang, String status) {
         List<OrderTours> orders = orderDao.findFindByStatusOrdersUsersLocale(lang, status);
         logger.info("Found in DB: orders --> " + orders);
 

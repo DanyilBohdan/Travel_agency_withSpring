@@ -49,7 +49,7 @@ public class OrderControllerTest {
         OrderTours second = OrderTours.createOrderTour(2, 2, "Test2", "testType2", "testCountry2",
                 "registered", "test2@gmail.com", 555, 3, 3, date, 2, 3, date);
 
-        session.setAttribute("localeDef", "EN");
+        when(session.getAttribute("localeDef")).thenReturn("EN");
         when(this.orderService.viewOrders(session))
                 .thenReturn(Arrays.asList(first, second));
 
