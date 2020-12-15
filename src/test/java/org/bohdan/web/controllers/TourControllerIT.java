@@ -13,7 +13,6 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -23,7 +22,7 @@ public class TourControllerIT extends AbstractBaseSpringTest {
     private TourService tourService;
 
     @Test
-    @Rollback
+    @Transactional(transactionManager = "jdbcTransactionManager")
     public void userDeletionWorksThroughAllLayers() throws Exception {
         List<TourView> tours = tourService.viewToursForAdmin("EN");
         int idForList = tours.size() - 1;

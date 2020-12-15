@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.support.JdbcTransactionManager;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
@@ -17,12 +19,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.sql.DataSource;
+
+import static org.bohdan.db.DBManager.getDataSource;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
 @ContextConfiguration
-@TestPropertySource(properties = {"spring.config.location = classpath:context.xml"})
 public abstract class AbstractBaseSpringTest {
 
     @Autowired
@@ -43,6 +47,14 @@ public abstract class AbstractBaseSpringTest {
                     .apply(SecurityMockMvcConfigurers.springSecurity())
                     .alwaysDo(print())
                     .build();
+        }
+
+        @Bean(name = "jdbcTransactionManager")
+        public static DataSourceTransactionManager transactionManager(){
+            JdbcTransactionManager transactionManager = new JdbcTransactionManager();
+
+            transactionManager.setDataSource(getDataSource());
+            return transactionManager;
         }
     }
 
