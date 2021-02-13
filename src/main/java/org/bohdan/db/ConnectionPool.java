@@ -15,6 +15,7 @@ import javax.sql.DataSource;
  * @author Bohdan Daniel
  *
  */
+@Component
 public class ConnectionPool extends ConnectionFactory{
 
     private static final Logger logger = Logger.getLogger(ConnectionPool.class);
@@ -49,6 +50,7 @@ public class ConnectionPool extends ConnectionFactory{
     /**
      * @return Data Source
      */
+    @Bean
     public static DataSource getDataSource() {
         return dataSource;
     }

@@ -13,6 +13,7 @@ import org.bohdan.web.Path;
 import org.bohdan.web.services.TourService;
 import org.bohdan.web.services.admin.DeleteTourCommand;
 import org.bohdan.web.services.admin.TourCommand;
+import org.bohdan.web.services.common.ViewToursCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,9 +26,9 @@ public class TourServiceImpl implements TourService {
 
     private static final Logger logger = Logger.getLogger(TourServiceImpl.class);
 
-    private TypeTourDao typeTourDao;
-    private CountryDao countryDao;
-    private TourDao tourDao;
+    private final TypeTourDao typeTourDao;
+    private final CountryDao countryDao;
+    private final TourDao tourDao;
 
     @Autowired
     public TourServiceImpl(TypeTourDao typeTourDao, CountryDao countryDao, TourDao tourDao) {
@@ -38,9 +39,9 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public List<TourView> viewTours(String lang) {
-//        List<TourView> tours = SearchTour.execute(request, tourDao, 0, lang);
+        //List<TourView> tours = SearchTour.execute(request, tourDao, 0, lang);
         tourDao.setFilter(0);
-        return tourDao.findAllByLocale(lang, 0, 6);
+        return tourDao.findAllByLocale(lang, 1, 20);
     }
 
     @Override

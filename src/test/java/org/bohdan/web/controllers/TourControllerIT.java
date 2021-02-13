@@ -5,7 +5,6 @@ import org.bohdan.web.AbstractBaseSpringTest;
 import org.bohdan.web.services.TourService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -20,6 +19,7 @@ public class TourControllerIT extends AbstractBaseSpringTest {
 
     @Autowired
     private TourService tourService;
+
 
     @Test
     @Transactional(transactionManager = "jdbcTransactionManager")
